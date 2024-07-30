@@ -3,10 +3,11 @@ import Space from '../model/Space.js';
 
 export default class View 
 {
-
+    // canvas
     canvasElement: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
-
+    // tracks
+    trackMode = false; 
 
     constructor(public space: Space) {   
         this.canvasElement = <HTMLCanvasElement>document.getElementById('canvas')!;
@@ -16,19 +17,27 @@ export default class View
     draw() {   
         const ctx = this.ctx;
         const space = this.space;
-        ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+        if (!this.trackMode) {
+            ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+        }
+
         ctx.save();
         ctx.translate(this.canvasElement.width / 2, this.canvasElement.height / 2);
         ctx.scale(1, -1);
+        // all planets
         for (const planet of space.planets) {    
             this.drawPlanet(planet);
-        }      
+        }
+        // selected planet
+        if (space.selectedPlanet) 
+            this.drawPlanet(space.selectedPlanet, true);    
+
         ctx.restore();
     }
 
 
-    drawPlanet(p: Planet) {
-        this.ctx.fillStyle = "red";
+    drawPlanet(p: Planet, selected = false) {
+        this.ctx.strokeStyle = selected ? "red" : "black";
 
         this.ctx.beginPath();
         

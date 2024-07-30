@@ -35,6 +35,20 @@ export default class Space
         }    
     }
 
+    selectedPlanet: Planet | null = null;
+
+    trySelectPlanet(x: number, y: number) {
+        for (let p of this.planets) {
+            let dd = (p.x - x)**2 + (p.y - y)**2; 
+            if (dd < 4) {
+                this.selectedPlanet = p;
+                return true;
+            }
+        }
+        this.selectedPlanet = null;
+        return false;
+    }
+
 
 }
 
