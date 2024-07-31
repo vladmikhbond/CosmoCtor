@@ -6,9 +6,20 @@
 <body>
 <h3 id="page-header">Cosmo Ctor</h3>
 <div>
+    <button id="hideButton">#</button>
     <div id="dashboard">
-        <button id="runButton"> >> </button>
-        <button id="trackButton">~</button>
+        <div>
+            <button id="runButton" class="dash-btn" style="margin-left: 30px"> ► </button>
+            <button id="trackButton" class="dash-btn" >Ꜿ</button>
+        </div>
+        <div>
+            X = <input id="x" class="dash-text" />
+            Y = <input id="y" class="dash-text" />
+        </div>
+        <div>
+            V = <input id="vx" class="dash-text" />
+            V = <input id="vy" class="dash-text" />
+        </div>
     </div>
     <canvas id="canvas" width="800" height="600" tabindex="0"></canvas>
 

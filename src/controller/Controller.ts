@@ -16,37 +16,51 @@ export default class Controller
 
     private bindHandlers() 
     {
-        // runButton click
+        // hideButton click
+        const hideButton = document.getElementById('hideButton')!;
+        const dashboard = document.getElementById('dashboard')!;
+        hideButton.addEventListener('click', () => {
+            if (dashboard.style.display == 'none')
+                dashboard.style.display = 'block';
+            else
+            dashboard.style.display = 'none';
+
+        });
+
+
+
+        // runButton click  ■►@∞
         const runButton = document.getElementById('runButton')!;
         runButton.addEventListener('click', () => {
             if (this.timer) {
                 clearInterval(this.timer);
                 this.timer = 0;
-                runButton.innerHTML = '>>'
+                runButton.innerHTML = '►'
             } else {
                 this.timer = setInterval(() => {
                     this.space.step();
                     this.view.draw(); 
                 }, 20);
-                runButton.innerHTML = '||'  
+                runButton.innerHTML = '■'  
             }  
         });
         
-        // trackButton click
+        // trackButton click  
         const trackButton = document.getElementById('trackButton')!;
         trackButton.addEventListener('click', () => {
             this.view.trackMode = !this.view.trackMode;
-            trackButton.innerHTML = this.view.trackMode ? '&nbsp;' : '~';      
+            trackButton.innerHTML = this.view.trackMode ? '·' : 'Ꜿ';     
         });
-
+        //·●◦
         // canvas mousedown - select planet
-        const canvas = this.view.canvasElement
+        const canvas = this.view.canvasElement;
         canvas.addEventListener('mousedown', (e: MouseEvent) => {
             let w = canvas.width / 2, h = canvas.height / 2;
             let x = e.offsetX - w, y = - e.offsetY + h;
             this.space.trySelectPlanet(x, y);
             this.view.draw();
         });
+        
         
     } 
     
