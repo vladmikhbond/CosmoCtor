@@ -4,9 +4,11 @@ export default class Planet {
     
     constructor(
         public name: string,
-        public m: number, public r:number,
+        public m: number, public r: number,
         public x: number, public y: number,
-        public vx: number, public vy: number, ) 
+        public vx: number, public vy: number, 
+        public color: string = 'black',
+    ) 
     { 
     }
 

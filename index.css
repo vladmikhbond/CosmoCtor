@@ -6,18 +6,26 @@
     font-weight: 800;
 }
 
+.dash-text {
+    width: 100px;
+}
+
 #dashboard, #hideButton {
     position: absolute;
     top: 61px;
     left: 10px;
-    background-color: rgba(255, 0, 0, 0.3);
+    background-color: rgb(117 190 218 / 50%);
 }
 
 
 #dashboard {
-    width: 450px;
-    height: 100px;
+    width: 300px;
+    height: 150px;
     border: solid black 1px;
+    font-family: monospace;
+    font-weight: 800;
+    color: white;
+    padding: 5px;
     
     z-index: 1;   
     display: 'block'; 

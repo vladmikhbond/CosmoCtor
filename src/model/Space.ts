@@ -40,7 +40,7 @@ export default class Space
     trySelectPlanet(x: number, y: number) {
         for (let p of this.planets) {
             let dd = (p.x - x)**2 + (p.y - y)**2; 
-            if (dd < 4) {
+            if (dd < 16) {
                 this.selectedPlanet = p;
                 return true;
             }

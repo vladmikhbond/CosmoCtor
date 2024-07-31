@@ -1,3 +1,4 @@
+import {page} from '../globals/globals.js';
 import Space from '../model/Space.js';
 import View from '../view/View.js';
 
@@ -16,46 +17,39 @@ export default class Controller
 
     private bindHandlers() 
     {
-        // hideButton click
-        const hideButton = document.getElementById('hideButton')!;
-        const dashboard = document.getElementById('dashboard')!;
-        hideButton.addEventListener('click', () => {
-            if (dashboard.style.display == 'none')
-                dashboard.style.display = 'block';
+        // hideButton_click
+        page.hideButton.addEventListener('click', () => {
+            if (page.dashboard.style.display == 'none')
+                page.dashboard.style.display = 'block';
             else
-            dashboard.style.display = 'none';
+            page.dashboard.style.display = 'none';
 
         });
 
-
-
-        // runButton click  ■►@∞
-        const runButton = document.getElementById('runButton')!;
-        runButton.addEventListener('click', () => {
+        // runButton_click
+        page.runButton.addEventListener('click', () => {
             if (this.timer) {
                 clearInterval(this.timer);
                 this.timer = 0;
-                runButton.innerHTML = '►'
+                page.runButton.innerHTML = '►'
             } else {
                 this.timer = setInterval(() => {
                     this.space.step();
                     this.view.draw(); 
                 }, 20);
-                runButton.innerHTML = '■'  
+                page.runButton.innerHTML = '■'  
             }  
         });
         
-        // trackButton click  
-        const trackButton = document.getElementById('trackButton')!;
-        trackButton.addEventListener('click', () => {
+        // trackButton_click  
+        page.trackButton.addEventListener('click', () => {
             this.view.trackMode = !this.view.trackMode;
-            trackButton.innerHTML = this.view.trackMode ? '·' : 'Ꜿ';     
+            page.trackButton.innerHTML = this.view.trackMode ? '·' : 'Ꜿ';     
         });
-        //·●◦
-        // canvas mousedown - select planet
-        const canvas = this.view.canvasElement;
-        canvas.addEventListener('mousedown', (e: MouseEvent) => {
-            let w = canvas.width / 2, h = canvas.height / 2;
+
+        // canvas_mousedown - select planet
+        page.canvas.addEventListener('mousedown', (e: MouseEvent) => {
+            let w = page.canvas.width / 2, h = page.canvas.height / 2;
             let x = e.offsetX - w, y = - e.offsetY + h;
             this.space.trySelectPlanet(x, y);
             this.view.draw();
