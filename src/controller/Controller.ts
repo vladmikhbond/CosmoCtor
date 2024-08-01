@@ -5,9 +5,9 @@ import View from '../view/View.js';
 
 export default class Controller 
 {
-    timer = 0;
+    stepTimer = 0;
     stepsCount = 0;
-    millisecs = Date.now();
+    timeStamp = Date.now();
     
     constructor(public space: Space, public view: View) 
     {
@@ -16,7 +16,7 @@ export default class Controller
 
     private bindHandlers() 
     {
-        // hideButton_click: 
+        // hideButton_click
         page.hideButton.addEventListener('click', () => {
             if (page.dashboard.style.display == 'none')
                 page.dashboard.style.display = 'block';
@@ -27,20 +27,20 @@ export default class Controller
 
         // runButton_click
         page.runButton.addEventListener('click', () => {
-            if (this.timer) {
-                clearInterval(this.timer);
-                this.timer = 0;
+            if (this.stepTimer) {
+                clearInterval(this.stepTimer);
+                this.stepTimer = 0;
                 page.runButton.innerHTML = '►'
             } else {
-                this.timer = setInterval(() => {
+                this.stepTimer = setInterval(() => {
                     this.space.step();
                     this.view.draw(); 
                     
                     // speedometer
                     this.stepsCount++;
                     if (this.stepsCount % 100 == 0) {
-                        let ms = Date.now() - this.millisecs; 
-                        this.millisecs = Date.now();
+                        let ms = Date.now() - this.timeStamp; 
+                        this.timeStamp = Date.now();
                         let stepsPerSec = 100 * 1000 / ms ;
                         page.stepsPerSecSpan.innerHTML = stepsPerSec.toFixed(0);
                     }
@@ -48,8 +48,6 @@ export default class Controller
                 page.runButton.innerHTML = '■'  
             }  
         });
-
-
         
         // trackButton_click  
         page.trackButton.addEventListener('click', () => {
@@ -89,7 +87,7 @@ export default class Controller
             this.view.draw();
         });
 
-        // miusButton_click: remove selected planet
+        // minusButton_click: remove selected planet
         page.minusButton.addEventListener('click', () => {        
             if (this.space.tryRemoveSelectedPlanet()) {
                 this.view.draw();
@@ -104,6 +102,19 @@ export default class Controller
             this.view.draw();
         });
         
+        // saveSceneButton_click: save planets array
+        page.saveSceneButton.addEventListener('click', () => { 
+            let json = JSON.stringify(this.space.planets);       
+            page.sceneArea.innerHTML = json;
+        });
+
+        // loadSceneButton_click: load planets array
+        page.loadSceneButton.addEventListener('click', () => { 
+            let json = page.sceneArea.value;      
+            this.space.planets = JSON.parse(json);
+            this.view.draw();
+        });
+
         
     } 
     

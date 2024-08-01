@@ -14,9 +14,7 @@ export const page = {
     saveButton: document.getElementById('saveButton')!,
     plusButton: document.getElementById('plusButton')!,
     minusButton: document.getElementById('minusButton')!,
-
-
-
+    //
     xText: <HTMLInputElement>document.getElementById('xText')!,
     yText: <HTMLInputElement>document.getElementById('yText')!,
     vxText: <HTMLInputElement>document.getElementById('vxText')!,
@@ -31,6 +29,6 @@ export const page = {
     stepsPerSecSpan: document.getElementById('stepsPerSecSpan')!,
     saveSceneButton: document.getElementById('saveSceneButton')!,
     loadSceneButton: document.getElementById('loadSceneButton')!,
-    sceneArea: document.getElementById('sceneArea')!,
+    sceneArea: <HTMLTextAreaElement>document.getElementById('sceneArea')!,
     
 }
