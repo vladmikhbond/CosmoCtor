@@ -5,8 +5,6 @@ export const glo =
     G: 0.001,          // стала тяжіння
 }
 
-export const STEP_PERIOD = 20;   // мінім. період одного кроку
-
 export const page = { 
     canvas: <HTMLCanvasElement>document.getElementById('canvas')!,
     hideButton: document.getElementById('hideButton')!,
@@ -19,17 +17,20 @@ export const page = {
 
 
 
-    xText: <HTMLInputElement>document.getElementById('x')!,
-    yText: <HTMLInputElement>document.getElementById('y')!,
-    vxText: <HTMLInputElement>document.getElementById('vx')!,
-    vyText: <HTMLInputElement>document.getElementById('vy')!,
+    xText: <HTMLInputElement>document.getElementById('xText')!,
+    yText: <HTMLInputElement>document.getElementById('yText')!,
+    vxText: <HTMLInputElement>document.getElementById('vxText')!,
+    vyText: <HTMLInputElement>document.getElementById('vyText')!,
     // ---
     nameSpan: document.getElementById('nameSpan')!,
-    nameText: <HTMLInputElement>document.getElementById('name')!,
-    colorText: <HTMLInputElement>document.getElementById('color')!,
-    massaText: <HTMLInputElement>document.getElementById('massa')!,
-    radiusText: <HTMLInputElement>document.getElementById('radius')!,
+    nameText: <HTMLInputElement>document.getElementById('nameText')!,
+    colorText: <HTMLInputElement>document.getElementById('colorText')!,
+    massaText: <HTMLInputElement>document.getElementById('massaText')!,
+    radiusText: <HTMLInputElement>document.getElementById('radiusText')!,
     //
     stepsPerSecSpan: document.getElementById('stepsPerSecSpan')!,
+    saveSceneButton: document.getElementById('saveSceneButton')!,
+    loadSceneButton: document.getElementById('loadSceneButton')!,
+    sceneArea: document.getElementById('sceneArea')!,
     
 }

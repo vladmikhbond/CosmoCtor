@@ -18,28 +18,32 @@
         </div>
         <hr>
         <div>
-            X: <input id="x" class="dash-text" title=""/>
-            Y: <input id="y" class="dash-text" title=""/>
+            X: <input id="xText" class="dash-text" title="X coordinate"/>
+            Y: <input id="yText" class="dash-text" title="Y coordinate"/>
         </div>
         <div>
-            V: <input id="vx" class="dash-text" title=""/>
-            V: <input id="vy" class="dash-text" title=""/>
+            V: <input id="vxText" class="dash-text" title="Vx velocity"/>
+            V: <input id="vyText" class="dash-text" title="Vy velocity"/>
         </div>
         <hr>
         <div>
-            N: <input id="name" class="dash-text" title=""/>
-            C: <input id="color" class="dash-text" title=""/>
+            N: <input id="nameText" class="dash-text" title="Name"/>
+            C: <input id="colorText" class="dash-text" title="Color"/>
         </div>
         <div>
-            M: <input id="massa" class="dash-text" />
-            R: <input id="radius" class="dash-text" />
+            M: <input id="massaText" class="dash-text" title="Massa"/>
+            R: <input id="radiusText" class="dash-text" title="Radius"/>
         </div>    
     </div>
 
     <canvas id="canvas" width="800" height="800" tabindex="0"></canvas>
 
     <div id="footer">
-       <span id="stepsPerSecSpan"></span>
+        <span id="stepsPerSecSpan"></span> steps/sec 
+        <button id="saveSceneButton" class="dash-btn" style="margin-left: 30px" title="Scene Saving">Save</button>
+        <button id="loadSceneButton" class="dash-btn" title="Scene Loading">Load</button>
+        <br>
+        <textarea id="sceneArea"></textarea>
     </div>
 </div>
 <script type="module" src="./js/main.js"></script>
