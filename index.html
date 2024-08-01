@@ -9,33 +9,38 @@
     <button id="hideButton">#</button>
     <div id="dashboard">
         <div>
-            <button id="runButton" class="dash-btn" style="margin-left: 30px"> ► </button>
-            <button id="trackButton" class="dash-btn" >Ꜿ</button>
-            <span id="nameSpan" class="dash-text"></span>
+            <button id="runButton" class="dash-btn" style="margin-left: 30px" title="Run/Stop"> ► </button>
+            <button id="trackButton" class="dash-btn" title="Planets/Tracks">T</button>
+            <span id="nameSpan" class="dash-text"></span> │
+            <button id="saveButton" class="dash-btn" title="Save params">S</button>
+            <button id="plusButton" class="dash-btn" title="Create new planet">+</button>
+            <button id="minusButton" class="dash-btn" title="Delete selected planet">-</button>
         </div>
         <hr>
         <div>
-            X: <input id="x" class="dash-text" />
-            Y: <input id="y" class="dash-text" />
+            X: <input id="x" class="dash-text" title=""/>
+            Y: <input id="y" class="dash-text" title=""/>
         </div>
         <div>
-            V: <input id="vx" class="dash-text" />
-            V: <input id="vy" class="dash-text" />
+            V: <input id="vx" class="dash-text" title=""/>
+            V: <input id="vy" class="dash-text" title=""/>
         </div>
         <hr>
         <div>
-            N: <input id="name" class="dash-text" />
-            C: <input id="color" class="dash-text" />
+            N: <input id="name" class="dash-text" title=""/>
+            C: <input id="color" class="dash-text" title=""/>
         </div>
         <div>
             M: <input id="massa" class="dash-text" />
             R: <input id="radius" class="dash-text" />
-        </div>
-
-        
+        </div>    
     </div>
+
     <canvas id="canvas" width="800" height="800" tabindex="0"></canvas>
 
+    <div id="footer">
+       <span id="stepsPerSecSpan"></span>
+    </div>
 </div>
 <script type="module" src="./js/main.js"></script>
 

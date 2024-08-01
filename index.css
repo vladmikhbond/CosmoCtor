@@ -4,6 +4,8 @@
 
 .dash-btn {
     font-weight: 800;
+    font-family: monospace;
+    font-size: larger;
 }
 
 .dash-text {

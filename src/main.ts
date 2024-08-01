@@ -5,7 +5,7 @@ import Space from './model/Space.js';
 import View from './view/View.js';
 
 let sun =   new Planet('Sun', 10**6, 7,     0, 0, 0, 0, 'yellow');
-let venus = new Planet('Venus', 10,  2,     200, 0,   0, (1000/200)**0.5, 'green');
+let venus = new Planet('Venus', 10,  2,     200, 0,   0, (1000/200)**0.5, 'yellow');
 let earth = new Planet('Earth', 10,  2,     300, 0,   0, (1000/300)**0.5, 'lightblue');
 
 let jupiter = new Planet('Jupiter', 100, 4, 500, 0,   0, (1000/500)**0.5, 'pink');

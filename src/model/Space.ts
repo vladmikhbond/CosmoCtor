@@ -1,12 +1,11 @@
 import Planet from './Planet.js';
+import {glo} from '../globals/globals.js';
 
 export default class Space 
 {
-    static G = 0.001;
-
     planets: Planet[];
 
-
+    selectedPlanet: Planet | null = null;
 
     constructor(...planets: Planet[]) { 
         this.planets = planets;
@@ -23,8 +22,8 @@ export default class Space
                 ax += p.m * (p.x - p0.x)/ rr / r;
                 ay += p.m * (p.y - p0.y)/ rr / r;
             }        
-            p0.ax = Space.G * ax;
-            p0.ay = Space.G * ay;
+            p0.ax = glo.G * ax;
+            p0.ay = glo.G * ay;
         }
         //
         for (let p of this.planets) {
@@ -35,7 +34,7 @@ export default class Space
         }    
     }
 
-    selectedPlanet: Planet | null = null;
+    
 
     trySelectPlanet(x: number, y: number) {
         for (let p of this.planets) {
@@ -49,6 +48,16 @@ export default class Space
         return false;
     }
 
-
+    tryRemoveSelectedPlanet() {
+        if (this.selectedPlanet) {
+            let index = this.planets.indexOf(this.selectedPlanet);
+            if (index !== -1) {
+                this.planets.splice(index, 1);
+                this.selectedPlanet = null;
+                return true;
+            }
+        }
+        return false;
+    }
 }
 

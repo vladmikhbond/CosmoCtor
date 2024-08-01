@@ -15,13 +15,15 @@ export default class View
     draw() {   
         const ctx = this.ctx;
         const space = this.space;
+        // track mode
         if (!this.trackMode) {
             ctx.fillStyle = 'darkblue';
             ctx.fillRect(0, 0, page.canvas.width, page.canvas.height);
         }
 
+        // transform
         ctx.save();
-        ctx.translate(page.canvas.width / 2, page.canvas.height / 2);
+        ctx.translate(page.canvas.width/2, page.canvas.height/2);
         ctx.scale(1, -1);
 
         // axes
@@ -31,12 +33,13 @@ export default class View
         ctx.lineTo(page.canvas.width, 0);
         ctx.moveTo(0, -page.canvas.height);
         ctx.lineTo(0, page.canvas.height);
-        ctx.stroke();
-        
+        ctx.stroke();  
+
         // all planets
         for (const planet of space.planets) {    
             this.drawPlanet(planet);
         }
+
         // selected planet
         if (space.selectedPlanet) {
             this.drawPlanet(space.selectedPlanet, true); 
@@ -62,9 +65,15 @@ export default class View
 
     drawPlanet(p: Planet, selected = false) {
         this.ctx.fillStyle = selected ? "red" : p.color;
-        this.ctx.beginPath();        
-        this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);   
-        this.ctx.fill();
+        if (!this.trackMode) {
+            this.ctx.beginPath();        
+            this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);   
+            this.ctx.fill();
+        }
+        else {
+            this.ctx.fillRect(p.x, p.y, 1, 1)
+        }
+
     } 
 
 
