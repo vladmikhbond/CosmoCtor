@@ -36,44 +36,67 @@ export default class View
         ctx.stroke();  
 
         // all planets
-        for (const planet of space.planets) {    
-            this.drawPlanet(planet);
-        }
-
-        // selected planet
-        if (space.selectedPlanet) {
-            this.drawPlanet(space.selectedPlanet, true); 
-            this.displaySelectedPlanet();   
+        for (const planet of space.planets) { 
+            if (planet != space.selectedPlanet)   
+                this.drawPlanet(planet);
+            else
+                this.drawSelectedPlanet(planet);
         }
         ctx.restore();
+        // selected planet on the dashboard
+        if (space.selectedPlanet) {
+            this.displaySelectedPlanet();   
+        }
+        
     }
 
+    // fill dashboard fields
+    //
     displaySelectedPlanet() {
-        let p = this.space.selectedPlanet!;
-        page.xText.value = p.x.toFixed(5);
-        page.yText.value = p.y.toFixed(5);
-        page.vxText.value = p.vx.toFixed(5);
-        page.vyText.value = p.vy.toFixed(5);
+        let planet = this.space.selectedPlanet!;
 
-        page.nameSpan.innerHTML = p.name;
-        page.nameText.value = p.name;
-        page.colorText.value = p.color;
-        page.massaText.value = p.m.toFixed(0);
-        page.radiusText.value = p.r.toFixed(0);       
+        page.xText.value = planet.x.toFixed(5);
+        page.yText.value = planet.y.toFixed(5);
+        page.vxText.value = planet.vx.toFixed(5);
+        page.vyText.value = planet.vy.toFixed(5);
+
+        page.nameSpan.innerHTML = planet.name;
+        page.nameText.value = planet.name;
+        page.colorText.value = planet.color;
+        page.massaText.value = planet.m.toFixed(0);
+        page.radiusText.value = planet.r.toFixed(0);       
     }
 
 
-    drawPlanet(p: Planet, selected = false) {
-        this.ctx.fillStyle = selected ? "red" : p.color;
-        if (!this.trackMode) {
-            this.ctx.beginPath();        
-            this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);   
-            this.ctx.fill();
+    drawPlanet(p: Planet, withVelo: boolean = false) {
+        this.ctx.fillStyle = p.color;
+        if (this.trackMode) 
+        {
+            this.ctx.fillRect(p.x, p.y, 1, 1);
+            return;
         }
-        else {
-            this.ctx.fillRect(p.x, p.y, 1, 1)
+        // planet body
+        this.ctx.beginPath();
+        this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        this.ctx.fill();
+        // planet velocity
+        if (withVelo) {
+            const k = 10;
+            this.ctx.strokeStyle = p.color;
+            this.ctx.beginPath();
+            this.ctx.moveTo(p.x, p.y);
+            this.ctx.lineTo(p.x + k * p.vx, p.y + k * p.vy);
+            this.ctx.stroke();
         }
+    } 
 
+    drawSelectedPlanet(p: Planet) {
+        // gray rect
+        this.ctx.strokeStyle = 'gray';
+        let r = p.r + 5;
+        this.ctx.strokeRect(p.x - r, p.y - r, r * 2, r * 2)
+        // planet
+        this.drawPlanet(p, true);        
     } 
 
 

@@ -11,7 +11,7 @@ export const page = {
     dashboard: document.getElementById('dashboard')!,
     runButton: document.getElementById('runButton')!,
     trackButton: document.getElementById('trackButton')!,
-    saveButton: document.getElementById('saveButton')!,
+    applyButton: document.getElementById('applyButton')!,
     plusButton: document.getElementById('plusButton')!,
     minusButton: document.getElementById('minusButton')!,
     //

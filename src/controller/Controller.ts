@@ -12,6 +12,7 @@ export default class Controller
     constructor(public space: Space, public view: View) 
     {
         this.bindHandlers();
+        this.bindDashboardHandlers();
     }
 
     private bindHandlers() 
@@ -25,6 +26,31 @@ export default class Controller
 
         });
 
+        // canvas_mousedown: select planet
+        page.canvas.addEventListener('mousedown', (e: MouseEvent) => {
+            let w = page.canvas.width / 2, h = page.canvas.height / 2;
+            let x = e.offsetX - w, y = - e.offsetY + h;
+            this.space.trySelectPlanet(x, y);
+            this.view.draw();
+        });
+        
+        // saveSceneButton_click: save planets array
+        page.saveSceneButton.addEventListener('click', () => { 
+            let json = JSON.stringify(this.space.planets);       
+            page.sceneArea.innerHTML = json;
+        });
+
+        // loadSceneButton_click: load planets array
+        page.loadSceneButton.addEventListener('click', () => { 
+            let json = page.sceneArea.value;      
+            this.space.planets = JSON.parse(json);
+            this.view.draw();
+        });
+        
+    } 
+    
+    private bindDashboardHandlers() 
+    {
         // runButton_click
         page.runButton.addEventListener('click', () => {
             if (this.stepTimer) {
@@ -55,35 +81,18 @@ export default class Controller
             page.trackButton.innerHTML = this.view.trackMode ? '·' : 'T';     
         });
 
-        // saveButton_click  
-        page.saveButton.addEventListener('click', () => {
-            let p = this.space.selectedPlanet;
-            if (p) {
-                p.x = +page.xText.value;
-                p.y = +page.yText.value;
-                p.vx = +page.vxText.value;
-                p.vy = +page.vyText.value;
-
-                p.m = +page.massaText.value;
-                p.r = +page.radiusText.value;
-                p.name = page.nameText.value;
-                p.color = page.colorText.value;                
-            }
-        });
 
         // plusButton_click: create new planet 
         page.plusButton.addEventListener('click', () => {
-            let p = new Planet(
-                page.nameText.value,
-                +page.massaText.value,
-                +page.radiusText.value,
-                +page.xText.value,
-                +page.yText.value,
-                +page.vxText.value,
-                +page.vyText.value,
-                page.colorText.value
-            );
-            this.space.planets.push(p);
+            // standard planet
+            let planet = Planet.getStandardPlanet();
+            // copy selected planet
+            if (this.space.selectedPlanet) {
+                planet = { ...this.space.selectedPlanet }; 
+                planet.y += 100;
+            }
+            this.space.planets.push(planet);
+            this.space.selectedPlanet = planet;            
             this.view.draw();
         });
 
@@ -94,30 +103,35 @@ export default class Controller
             }
         });
 
-        // canvas_mousedown: select planet
-        page.canvas.addEventListener('mousedown', (e: MouseEvent) => {
-            let w = page.canvas.width / 2, h = page.canvas.height / 2;
-            let x = e.offsetX - w, y = - e.offsetY + h;
-            this.space.trySelectPlanet(x, y);
-            this.view.draw();
-        });
-        
-        // saveSceneButton_click: save planets array
-        page.saveSceneButton.addEventListener('click', () => { 
-            let json = JSON.stringify(this.space.planets);       
-            page.sceneArea.innerHTML = json;
-        });
+        //
+        const handler = () => { Controller.applyParamsHandler(this); };
+        // applyButton_click  
+        page.applyButton.addEventListener('click', handler);
+        // textfields_changed
+        page.xText.addEventListener('change', handler);
+        page.yText.addEventListener('change', handler);
+        page.vxText.addEventListener('change', handler);
+        page.vyText.addEventListener('change', handler);
+        page.nameText.addEventListener('change', handler);
+        page.colorText.addEventListener('change', handler);
+        page.massaText.addEventListener('change', handler);
+        page.radiusText.addEventListener('change', handler);
+    }
 
-        // loadSceneButton_click: load planets array
-        page.loadSceneButton.addEventListener('click', () => { 
-            let json = page.sceneArea.value;      
-            this.space.planets = JSON.parse(json);
-            this.view.draw();
-        });
+    static applyParamsHandler(me: Controller) {
+        let planet = me.space.selectedPlanet;
+        if (planet) {
+            planet.x = +page.xText.value;
+            planet.y = +page.yText.value;
+            planet.vx = +page.vxText.value;
+            planet.vy = +page.vyText.value;
 
-        
-    } 
-    
-
+            planet.m = +page.massaText.value;
+            planet.r = +page.radiusText.value;
+            planet.name = page.nameText.value;
+            planet.color = page.colorText.value;
+            me.view.draw();              
+        }
+    }
    
 }

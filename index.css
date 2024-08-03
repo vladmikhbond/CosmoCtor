@@ -12,6 +12,12 @@
     width: 100px;
 }
 
+.dash-range {
+    width: 250px;
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
 #dashboard, #hideButton {
     position: absolute;
     top: 61px;

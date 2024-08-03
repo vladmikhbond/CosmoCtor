@@ -9,12 +9,13 @@
     <button id="hideButton">#</button>
     <div id="dashboard">
         <div>
-            <button id="runButton" class="dash-btn" style="margin-left: 30px" title="Run/Stop"> ► </button>
-            <button id="trackButton" class="dash-btn" title="Planets/Tracks">T</button>
-            <span id="nameSpan" class="dash-text"></span> │
-            <button id="saveButton" class="dash-btn" title="Save params">S</button>
-            <button id="plusButton" class="dash-btn" title="Create new planet">+</button>
-            <button id="minusButton" class="dash-btn" title="Delete selected planet">-</button>
+            <button id="runButton" class="dash-btn" style="margin-left: 30px" title="Run-Stop toggle"> ► </button>
+            <button id="trackButton" class="dash-btn" title="Planets-Tracks toggle">T</button>
+            │
+            <button id="applyButton" class="dash-btn" title="Apply params to selected planet">A</button>
+            <button id="plusButton" class="dash-btn" title="Create standard or copy selected planet">+</button>
+            <button id="minusButton" class="dash-btn" title="Remove selected planet">-</button>
+            <span id="nameSpan" class="dash-text"></span> 
         </div>
         <hr>
         <div>
@@ -28,11 +29,14 @@
         <hr>
         <div>
             N: <input id="nameText" class="dash-text" title="Name"/>
-            C: <input id="colorText" class="dash-text" title="Color"/>
+            M: <input id="massaText" class="dash-text" title="Massa"/>
         </div>
         <div>
-            M: <input id="massaText" class="dash-text" title="Massa"/>
             R: <input id="radiusText" class="dash-text" title="Radius"/>
+            C: <input id="colorText" class="dash-text" title="Color"/>
+        </div>    
+        <div>
+            <input type="range" class="dash-range" title="Radius"/>
         </div>    
     </div>
 
@@ -44,7 +48,9 @@
         <button id="saveSceneButton" class="dash-btn" style="margin-left: 30px" title="Scene Saving">Save</button>
         <button id="loadSceneButton" class="dash-btn" title="Scene Loading">Load</button>
         <br>
-        <textarea id="sceneArea"></textarea>
+        <textarea id="sceneArea">
+            [{"name":"Sun","m":1000000,"r":7,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow","ax":0,"ay":0},{"name":"Earth","m":10,"r":2,"x":300,"y":0,"vx":0,"vy":1.8257418583505538,"color":"lightblue","ax":0,"ay":0},{"name":"Venus","m":10,"r":2,"x":200,"y":0,"vx":0,"vy":2.23606797749979,"color":"yellow","ax":0,"ay":0},{"name":"Jupiter","m":100,"r":4,"x":500,"y":0,"vx":0,"vy":1.4142135623730951,"color":"pink","ax":0,"ay":0}]
+        </textarea>
     </div>
 </div>
 <script type="module" src="./js/main.js"></script>
