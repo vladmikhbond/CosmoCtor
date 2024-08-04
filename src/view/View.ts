@@ -15,11 +15,9 @@ export default class View
     draw() {   
         const ctx = this.ctx;
         const space = this.space;
-        // track mode
-        if (!this.trackMode) {
-            ctx.fillStyle = 'darkblue';
-            ctx.fillRect(0, 0, page.canvas.width, page.canvas.height);
-        }
+
+        ctx.fillStyle = 'darkblue';
+        ctx.fillRect(0, 0, page.canvas.width, page.canvas.height);
 
         // axes
         ctx.strokeStyle = 'gray';
@@ -76,8 +74,13 @@ export default class View
         this.ctx.fillStyle = p.color;
         if (this.trackMode) 
         {
-            this.ctx.fillRect(p.x, p.y, 1, 1);
-            return;
+            for (let i = 1, j = p.trackPointer; i < Planet.TRACK_LENGTH; i++) {
+                let o = p.track[j];
+                if (o) {
+                    this.ctx.fillRect(o.x, o.y, 1, 1);
+                }
+                j = (j + 1) % Planet.TRACK_LENGTH;
+            }
         }
         // planet body
         this.ctx.beginPath();
@@ -92,6 +95,7 @@ export default class View
             this.ctx.lineTo(p.x + k * p.vx, p.y + k * p.vy);
             this.ctx.stroke();
         }
+
     } 
 
     drawSelectedPlanet(p: Planet) {
