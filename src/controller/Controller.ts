@@ -59,15 +59,23 @@ export default class Controller
 
 
         // saveSceneButton_click: save planets array
-        page.saveSceneButton.addEventListener('click', () => { 
-            let json = JSON.stringify(this.space.planets);       
+        page.saveSceneButton.addEventListener('click', () => {
+            let objects = this.space.planets.map(p => { 
+                return {name:p.name, m:p.m, r:p.r, x:p.x, y:p.y, vx:p.vx, vy:p.vy, color:p.color};
+            });
+            let json = JSON.stringify(objects);       
             page.sceneArea.innerHTML = json;
         });
 
         // loadSceneButton_click: load planets array
         page.loadSceneButton.addEventListener('click', () => { 
             let json = page.sceneArea.value;      
-            this.space.planets = JSON.parse(json);
+            let objects: [] = JSON.parse(json);
+            
+            this.space.planets = objects.map(o => {
+                let p = new Planet(); 
+                Object.assign(p, o); 
+                return p;})             
             this.view.draw();
         });
         
@@ -111,7 +119,7 @@ export default class Controller
         page.plusButton.addEventListener('click', () => {
             // get standard or copy selected planet
             let planet = this.space.selectedPlanet ? 
-                { ...this.space.selectedPlanet } :
+                <Planet>{ ...this.space.selectedPlanet } :
                 Planet.getStandardPlanet();
             planet.y += page.canvas.height / 4 * glo.SCOPE;
 

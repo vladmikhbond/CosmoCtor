@@ -27,10 +27,7 @@ export default class Space
         }
         //
         for (let p of this.planets) {
-            p.vx += p.ax;
-            p.vy += p.ay;
-            p.x += p.vx;
-            p.y += p.vy;             
+            p.step();
         }    
     }
 
