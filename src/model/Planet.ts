@@ -1,7 +1,7 @@
 export default class Planet {
     
     static getStandardPlanet(): Planet {
-        return new Planet('Noname', 5,  5,   0, 400,   5, 5, 'white');
+        return new Planet('Noname', 5,  5,   0, 0,   5, 5, 'white');
     }
 
     ax = 0;

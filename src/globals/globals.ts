@@ -1,8 +1,9 @@
 
 export const glo = 
 {
-    STEP_PERIOD: 10,   // мінім. період одного кроку
+    STEP_PERIOD: 50,   // мінім. період одного кроку в мсек
     G: 0.001,          // стала тяжіння
+    SCOPE: 1,          // телескоп
 }
 
 export const page = { 
@@ -30,5 +31,6 @@ export const page = {
     saveSceneButton: document.getElementById('saveSceneButton')!,
     loadSceneButton: document.getElementById('loadSceneButton')!,
     sceneArea: <HTMLTextAreaElement>document.getElementById('sceneArea')!,
-    
+    scopeRange: <HTMLInputElement>document.getElementById('scopeRange')!,
+
 }

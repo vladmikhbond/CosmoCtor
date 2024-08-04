@@ -36,10 +36,11 @@ export default class Space
 
     
 
-    trySelectPlanet(x: number, y: number) {
+    trySelectPlanet(x: number, y: number) 
+    {    
         for (let p of this.planets) {
-            let dd = (p.x - x)**2 + (p.y - y)**2; 
-            if (dd < 16) {
+            let dist = Math.sqrt((p.x - x)**2 + (p.y - y)**2); 
+            if (dist < p.r) {
                 this.selectedPlanet = p;
                 return true;
             }

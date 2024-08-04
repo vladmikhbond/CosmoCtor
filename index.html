@@ -6,7 +6,7 @@
 <body>
 <h3 id="page-header">Cosmo Ctor</h3>
 <div>
-    <button id="hideButton">#</button>
+    <button id="hideButton" >≡</button>
     <div id="dashboard">
         <div>
             <button id="runButton" class="dash-btn" style="margin-left: 30px" title="Run-Stop toggle"> ► </button>
@@ -36,7 +36,7 @@
             C: <input id="colorText" class="dash-text" title="Color"/>
         </div>    
         <div>
-            <input type="range" class="dash-range" title="Radius"/>
+            <input type="range" id="scopeRange" min="-10" max="10" value="0" step="1" title="Телескоп"/>
         </div>    
     </div>
 
@@ -48,12 +48,11 @@
         <button id="saveSceneButton" class="dash-btn" style="margin-left: 30px" title="Scene Saving">Save</button>
         <button id="loadSceneButton" class="dash-btn" title="Scene Loading">Load</button>
         <br>
-        <textarea id="sceneArea">
-            [{"name":"Sun","m":1000000,"r":7,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow","ax":0,"ay":0},{"name":"Earth","m":10,"r":2,"x":300,"y":0,"vx":0,"vy":1.8257418583505538,"color":"lightblue","ax":0,"ay":0},{"name":"Venus","m":10,"r":2,"x":200,"y":0,"vx":0,"vy":2.23606797749979,"color":"yellow","ax":0,"ay":0},{"name":"Jupiter","m":100,"r":4,"x":500,"y":0,"vx":0,"vy":1.4142135623730951,"color":"pink","ax":0,"ay":0}]
+        <textarea id="sceneArea">[{"name":"Sun","m":1000000,"r":7,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow","ax":0,"ay":0},{"name":"Earth","m":10,"r":2,"x":300,"y":0,"vx":0,"vy":1.8257418583505538,"color":"lightblue","ax":0,"ay":0},{"name":"Venus","m":10,"r":2,"x":200,"y":0,"vx":0,"vy":2.23606797749979,"color":"yellow","ax":0,"ay":0},{"name":"Jupiter","m":100,"r":4,"x":500,"y":0,"vx":0,"vy":1.4142135623730951,"color":"pink","ax":0,"ay":0}]
         </textarea>
     </div>
 </div>
-<script type="module" src="./js/main.js"></script>
 
+<script type="module" src="./js/main.js"></script>
 </body>
 </html>

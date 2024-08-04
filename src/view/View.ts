@@ -1,4 +1,4 @@
-import {page} from '../globals/globals.js';
+import {glo, page} from '../globals/globals.js';
 import Planet from '../model/Planet.js';
 import Space from '../model/Space.js';
 
@@ -21,20 +21,24 @@ export default class View
             ctx.fillRect(0, 0, page.canvas.width, page.canvas.height);
         }
 
+        // axes
+        ctx.strokeStyle = 'gray';
+        let h = page.canvas.height / 2, w = page.canvas.width / 2;
+        ctx.beginPath();
+        // hor
+        ctx.moveTo(0, h);
+        ctx.lineTo(2*w, h);
+        // ver
+        ctx.moveTo(w, 0);
+        ctx.lineTo(w, 2*h);
+        ctx.stroke(); 
+
         // transform
         ctx.save();
         ctx.translate(page.canvas.width/2, page.canvas.height/2);
-        ctx.scale(1, -1);
+        ctx.scale(glo.SCOPE, -glo.SCOPE);
 
-        // axes
-        ctx.strokeStyle = 'gray';
-        ctx.beginPath();
-        ctx.moveTo(-page.canvas.width, 0);
-        ctx.lineTo(page.canvas.width, 0);
-        ctx.moveTo(0, -page.canvas.height);
-        ctx.lineTo(0, page.canvas.height);
-        ctx.stroke();  
-
+    
         // all planets
         for (const planet of space.planets) { 
             if (planet != space.selectedPlanet)   
@@ -52,7 +56,7 @@ export default class View
 
     // fill dashboard fields
     //
-    displaySelectedPlanet() {
+    private displaySelectedPlanet() {
         let planet = this.space.selectedPlanet!;
 
         page.xText.value = planet.x.toFixed(5);

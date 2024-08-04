@@ -26,14 +26,38 @@ export default class Controller
 
         });
 
+        //#region planet selection and dragging
+
+        let dragged = false, x0 = 0, y0 = 0; 
+
         // canvas_mousedown: select planet
         page.canvas.addEventListener('mousedown', (e: MouseEvent) => {
-            let w = page.canvas.width / 2, h = page.canvas.height / 2;
-            let x = e.offsetX - w, y = - e.offsetY + h;
-            this.space.trySelectPlanet(x, y);
+            let x = (e.offsetX - page.canvas.width / 2) / glo.SCOPE;
+            let y = -(e.offsetY - page.canvas.height / 2) / glo.SCOPE;
+
+            dragged = this.space.trySelectPlanet(x, y);
             this.view.draw();
+            if (dragged) {x0 = x; y0 = y;}
         });
         
+        page.canvas.addEventListener('mousemove', (e: MouseEvent) => {
+            if (dragged) {
+                let x = (e.offsetX - page.canvas.width / 2) / glo.SCOPE;
+                let y = -(e.offsetY - page.canvas.height / 2) / glo.SCOPE;
+                x0 = x; y0 = y;
+                this.space.selectedPlanet!.x = x;
+                this.space.selectedPlanet!.y = y;
+                this.view.draw();                
+            }
+        });
+        
+        page.canvas.addEventListener('mouseup', (e: MouseEvent) => {
+            dragged = false;
+        });
+        
+        //#endregion
+
+
         // saveSceneButton_click: save planets array
         page.saveSceneButton.addEventListener('click', () => { 
             let json = JSON.stringify(this.space.planets);       
@@ -78,19 +102,19 @@ export default class Controller
         // trackButton_click  
         page.trackButton.addEventListener('click', () => {
             this.view.trackMode = !this.view.trackMode;
-            page.trackButton.innerHTML = this.view.trackMode ? '·' : 'T';     
+            page.trackButton.innerHTML = this.view.trackMode ? '●' : 'T'; 
+            this.view.draw();    
         });
 
 
         // plusButton_click: create new planet 
         page.plusButton.addEventListener('click', () => {
-            // standard planet
-            let planet = Planet.getStandardPlanet();
-            // copy selected planet
-            if (this.space.selectedPlanet) {
-                planet = { ...this.space.selectedPlanet }; 
-                planet.y += 100;
-            }
+            // get standard or copy selected planet
+            let planet = this.space.selectedPlanet ? 
+                { ...this.space.selectedPlanet } :
+                Planet.getStandardPlanet();
+            planet.y += page.canvas.height / 4 * glo.SCOPE;
+
             this.space.planets.push(planet);
             this.space.selectedPlanet = planet;            
             this.view.draw();
@@ -105,6 +129,7 @@ export default class Controller
 
         //
         const handler = () => { Controller.applyParamsHandler(this); };
+
         // applyButton_click  
         page.applyButton.addEventListener('click', handler);
         // textfields_changed
@@ -116,6 +141,12 @@ export default class Controller
         page.colorText.addEventListener('change', handler);
         page.massaText.addEventListener('change', handler);
         page.radiusText.addEventListener('change', handler);
+
+        // telescope
+        page.scopeRange.addEventListener('change', () => {
+            glo.SCOPE = 1.2 ** page.scopeRange.valueAsNumber;
+            this.view.draw();
+        });
     }
 
     static applyParamsHandler(me: Controller) {
@@ -134,4 +165,5 @@ export default class Controller
         }
     }
    
+
 }
