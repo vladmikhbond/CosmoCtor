@@ -1,8 +1,8 @@
 import Planet from './Planet.js';
 
 export default class Track {
-    static MAX_LENGTH = 300;
-    static CUT_BEGIN = 290;
+    private static MAX_LENGTH = 300;
+    private static CUT_LENGTH = 150;
     
     points: {x:number, y:number}[];
 
@@ -13,7 +13,7 @@ export default class Track {
 
     addPoint(x: number, y: number) {
         if (this.points.length >= Track.MAX_LENGTH) {
-            this.points.splice(0, Track.CUT_BEGIN);
+            this.points.splice(0, Track.CUT_LENGTH);
         }
         this.points.push({x, y});
     }

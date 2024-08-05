@@ -1,5 +1,5 @@
-import Track from './Track.js';
 import { glo } from "../globals/globals.js";
+import Track from './Track.js';
 
 export default class Planet 
 {
