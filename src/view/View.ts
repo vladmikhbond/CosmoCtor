@@ -71,31 +71,37 @@ export default class View
 
 
     drawPlanet(p: Planet, withVelo: boolean = false) {
-        this.ctx.fillStyle = p.color;
+        this.ctx.fillStyle = p.color; 
+        this.ctx.strokeStyle = p.color;
+
+        // track
         if (this.trackMode) 
         {
-            for (let i = 1, j = p.trackPointer; i < Planet.TRACK_LENGTH; i++) {
-                let o = p.track[j];
-                if (o) {
-                    this.ctx.fillRect(o.x, o.y, 1, 1);
-                }
-                j = (j + 1) % Planet.TRACK_LENGTH;
+            this.ctx.beginPath();
+            let j = p.trackPointer;
+            this.ctx.moveTo(p.track[j].x, p.track[j].y);
+            for (let i = 0; i < Planet.TRACK_LENGTH; i++) {
+                if (!p.track[j]) 
+                    break;
+                this.ctx.lineTo(p.track[j].x, p.track[j].y);
+                j = (j - 1) % Planet.TRACK_LENGTH;
             }
+            this.ctx.stroke();
         }
-        // planet body
+
+        // body
         this.ctx.beginPath();
         this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         this.ctx.fill();
-        // planet velocity
+
+        // velocity
         if (withVelo) {
-            const k = 10;
-            this.ctx.strokeStyle = p.color;
+            const k = 10;           
             this.ctx.beginPath();
             this.ctx.moveTo(p.x, p.y);
             this.ctx.lineTo(p.x + k * p.vx, p.y + k * p.vy);
             this.ctx.stroke();
         }
-
     } 
 
     drawSelectedPlanet(p: Planet) {

@@ -4,6 +4,7 @@ export const glo =
     STEP_PERIOD: 10,   // мінім. період одного кроку в мсек
     G: 0.001,          // стала тяжіння
     SCOPE: 1,          // телескоп
+    stepsCount: 0
 }
 
 export const page = { 

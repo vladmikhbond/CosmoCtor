@@ -9,4 +9,5 @@ const space = new Space();
 const view = new View(space);
 new Controller(space, view);
 view.draw();
-// page.loadSceneButton.dispatchEvent(new MouseEvent('click'));
+// load 
+page.loadSceneButton.dispatchEvent(new MouseEvent('click'));

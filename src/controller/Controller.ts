@@ -6,7 +6,7 @@ import View from '../view/View.js';
 export default class Controller 
 {
     stepTimer = 0;
-    stepsCount = 0;
+
     timeStamp = Date.now();
     
     constructor(public space: Space, public view: View) 
@@ -28,7 +28,7 @@ export default class Controller
 
         //#region planet selection and dragging
 
-        let dragged = false, x0 = 0, y0 = 0; 
+        let dragged = false; 
 
         // canvas_mousedown: select planet
         page.canvas.addEventListener('mousedown', (e: MouseEvent) => {
@@ -37,14 +37,12 @@ export default class Controller
 
             dragged = this.space.trySelectPlanet(x, y);
             this.view.draw();
-            if (dragged) {x0 = x; y0 = y;}
         });
         
         page.canvas.addEventListener('mousemove', (e: MouseEvent) => {
             if (dragged) {
                 let x = (e.offsetX - page.canvas.width / 2) / glo.SCOPE;
                 let y = -(e.offsetY - page.canvas.height / 2) / glo.SCOPE;
-                x0 = x; y0 = y;
                 this.space.selectedPlanet!.x = x;
                 this.space.selectedPlanet!.y = y;
                 this.view.draw();                
@@ -95,8 +93,8 @@ export default class Controller
                     this.view.draw(); 
                     
                     // speedometer
-                    this.stepsCount++;
-                    if (this.stepsCount % 100 == 0) {
+                    glo.stepsCount++;
+                    if (glo.stepsCount % 100 == 0) {
                         let ms = Date.now() - this.timeStamp; 
                         this.timeStamp = Date.now();
                         let stepsPerSec = 100 * 1000 / ms ;

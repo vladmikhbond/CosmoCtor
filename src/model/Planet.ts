@@ -1,6 +1,8 @@
+import { glo } from "../globals/globals.js";
+
 export default class Planet 
 {
-    static TRACK_LENGTH = 2000;
+    static TRACK_LENGTH = 300;
 
     static getStandardPlanet(): Planet {
         return new Planet('Noname', 5,  5,   0, 0,   5, 5, 'white');
@@ -22,9 +24,10 @@ export default class Planet
     }
 
     step() {
-        this.trackPointer = (this.trackPointer + 1) % Planet.TRACK_LENGTH;
-        this.track[this.trackPointer] = {x: this.x, y: this.y};
-
+        if (glo.stepsCount % 10 == 0) {
+            this.trackPointer = (this.trackPointer + 1) % Planet.TRACK_LENGTH;
+            this.track[this.trackPointer] = {x: this.x, y: this.y};
+        }
         this.vx += this.ax;
         this.vy += this.ay;
         this.x += this.vx;
