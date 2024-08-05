@@ -28,7 +28,8 @@ export default class Space
         //
         for (let p of this.planets) {
             p.step();
-        }    
+        }
+        glo.stepsCount++;    
     }
 
     

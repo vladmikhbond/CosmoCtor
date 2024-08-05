@@ -13,6 +13,7 @@ export const page = {
     dashboard: document.getElementById('dashboard')!,
     planetBoard: document.getElementById('planetBoard')!,
     runButton: document.getElementById('runButton')!,
+    stepButton: document.getElementById('stepButton')!,
     trackButton: document.getElementById('trackButton')!,
     applyButton: document.getElementById('applyButton')!,
     plusButton: document.getElementById('plusButton')!,

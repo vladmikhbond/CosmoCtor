@@ -5,6 +5,8 @@ import View from '../view/View.js';
 
 export default class Controller 
 {
+    static DISPLAY_PER_STEPS = 500 / glo.STEP_PERIOD | 0; // to display 2 times per second
+
     stepTimer = 0;
 
     timeStamp = Date.now();
@@ -84,29 +86,34 @@ export default class Controller
     {
         // runButton_click
         page.runButton.addEventListener('click', () => {
-            if (this.stepTimer) {
-                clearInterval(this.stepTimer);
-                this.stepTimer = 0;
-                page.runButton.innerHTML = '►'
-            } else {
+            if (!this.stepTimer) {
                 this.stepTimer = setInterval(() => {
                     this.space.step();
                     this.view.draw(); 
-                    
-                    // speedometer
-                    glo.stepsCount++;
-                    if (glo.stepsCount % 100 == 0) {
+                                        
+                    if (glo.stepsCount % Controller.DISPLAY_PER_STEPS == 0) {
+                        // speedometer
                         let ms = Date.now() - this.timeStamp; 
                         this.timeStamp = Date.now();
-                        let stepsPerSec = 100 * 1000 / ms ;
-                        page.stepsPerSecSpan.innerHTML = stepsPerSec.toFixed(0);
-                        page.stepsCountSpan.innerHTML = glo.stepsCount.toString();
+                        let stepsPerSec = Controller.DISPLAY_PER_STEPS * 1000 / ms ;
+                        // footer 
+                        this.view.displayFooter(stepsPerSec);
                     }
                 }, glo.STEP_PERIOD);
-                page.runButton.innerHTML = '■'  
             }  
         });
         
+        // stepButton_click
+        page.stepButton.addEventListener('click', () => {
+            if (this.stepTimer) {
+                clearInterval(this.stepTimer);
+                this.stepTimer = 0;
+            }
+            this.space.step();
+            this.view.draw(); 
+        });
+
+
         // trackButton_click  
         page.trackButton.addEventListener('click', () => {
             this.view.trackMode = !this.view.trackMode;

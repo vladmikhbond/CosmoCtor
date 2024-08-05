@@ -52,23 +52,6 @@ export default class View
         
     }
 
-    // fill dashboard fields
-    //
-    private displaySelectedPlanet() {
-        let planet = this.space.selectedPlanet!;
-
-        page.xText.value = planet.x.toFixed(5);
-        page.yText.value = planet.y.toFixed(5);
-        page.vxText.value = planet.vx.toFixed(5);
-        page.vyText.value = planet.vy.toFixed(5);
-
-        page.nameText.value = planet.name;
-        page.colorText.value = planet.color;
-        page.massaText.value = planet.m.toFixed(0);
-        page.radiusText.value = planet.r.toFixed(0);       
-    }
-
-
     drawPlanet(planet: Planet, withVelo: boolean = false) {
         this.ctx.fillStyle = planet.color; 
         this.ctx.strokeStyle = planet.color;
@@ -112,6 +95,29 @@ export default class View
         this.drawPlanet(p, true);        
     } 
 
+    // display to panelBoard
+    //
+    private displaySelectedPlanet() {
+        let planet = this.space.selectedPlanet!;
+
+        page.xText.value = planet.x.toFixed(5);
+        page.yText.value = planet.y.toFixed(5);
+        page.vxText.value = planet.vx.toFixed(5);
+        page.vyText.value = planet.vy.toFixed(5);
+
+        page.nameText.value = planet.name;
+        page.colorText.value = planet.color;
+        page.massaText.value = planet.m.toFixed(0);
+        page.radiusText.value = planet.r.toFixed(0);       
+    }
+
+
+    // display to footer
+    //
+    displayFooter(stepsPerSec: number) {
+        page.stepsPerSecSpan.innerHTML = stepsPerSec.toFixed(0);
+        page.stepsCountSpan.innerHTML = glo.stepsCount.toString();       
+    }
 
 
 }
