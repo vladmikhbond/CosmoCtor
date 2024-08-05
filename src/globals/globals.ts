@@ -11,6 +11,7 @@ export const page = {
     canvas: <HTMLCanvasElement>document.getElementById('canvas')!,
     hideButton: document.getElementById('hideButton')!,
     dashboard: document.getElementById('dashboard')!,
+    planetBoard: document.getElementById('planetBoard')!,
     runButton: document.getElementById('runButton')!,
     trackButton: document.getElementById('trackButton')!,
     applyButton: document.getElementById('applyButton')!,
@@ -22,12 +23,12 @@ export const page = {
     vxText: <HTMLInputElement>document.getElementById('vxText')!,
     vyText: <HTMLInputElement>document.getElementById('vyText')!,
     // ---
-    nameSpan: document.getElementById('nameSpan')!,
     nameText: <HTMLInputElement>document.getElementById('nameText')!,
     colorText: <HTMLInputElement>document.getElementById('colorText')!,
     massaText: <HTMLInputElement>document.getElementById('massaText')!,
     radiusText: <HTMLInputElement>document.getElementById('radiusText')!,
     //
+    stepsCountSpan: document.getElementById('stepsCountSpan')!,
     stepsPerSecSpan: document.getElementById('stepsPerSecSpan')!,
     saveSceneButton: document.getElementById('saveSceneButton')!,
     loadSceneButton: document.getElementById('loadSceneButton')!,

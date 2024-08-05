@@ -36,6 +36,7 @@ export default class Controller
             let y = -(e.offsetY - page.canvas.height / 2) / glo.SCOPE;
 
             dragged = this.space.trySelectPlanet(x, y);
+            page.planetBoard.style.display = dragged ? 'block' : 'none';
             this.view.draw();
         });
         
@@ -99,6 +100,7 @@ export default class Controller
                         this.timeStamp = Date.now();
                         let stepsPerSec = 100 * 1000 / ms ;
                         page.stepsPerSecSpan.innerHTML = stepsPerSec.toFixed(0);
+                        page.stepsCountSpan.innerHTML = glo.stepsCount.toString();
                     }
                 }, glo.STEP_PERIOD);
                 page.runButton.innerHTML = '■'  

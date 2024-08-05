@@ -1,8 +1,9 @@
+import Track from './Track.js';
 import { glo } from "../globals/globals.js";
 
 export default class Planet 
 {
-    static TRACK_LENGTH = 300;
+    static TRACK_INTERVAL = 5;
 
     static getStandardPlanet(): Planet {
         return new Planet('Noname', 5,  5,   0, 0,   5, 5, 'white');
@@ -10,8 +11,8 @@ export default class Planet
 
     ax = 0;
     ay = 0;
-    track: {x:number, y:number}[] = new Array(Planet.TRACK_LENGTH).fill(null);
-    trackPointer = -1;
+    track: Track;
+   
     
     constructor(
         public name: string = 'Noname',
@@ -21,17 +22,19 @@ export default class Planet
         public color: string = 'white',
     ) 
     { 
+        this.track = new Track(this);
     }
 
     step() {
-        if (glo.stepsCount % 10 == 0) {
-            this.trackPointer = (this.trackPointer + 1) % Planet.TRACK_LENGTH;
-            this.track[this.trackPointer] = {x: this.x, y: this.y};
-        }
         this.vx += this.ax;
         this.vy += this.ay;
         this.x += this.vx;
-        this.y += this.vy;             
+        this.y += this.vy;
+
+        // add point to track
+        if (glo.stepsCount % Planet.TRACK_INTERVAL == 0) {
+            this.track.addPoint(this.x, this.y)
+        }
     }
     
     

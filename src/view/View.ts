@@ -39,10 +39,10 @@ export default class View
     
         // all planets
         for (const planet of space.planets) { 
-            if (planet != space.selectedPlanet)   
-                this.drawPlanet(planet);
-            else
+            if (planet === space.selectedPlanet)   
                 this.drawSelectedPlanet(planet);
+            else
+                this.drawPlanet(planet);
         }
         ctx.restore();
         // selected planet on the dashboard
@@ -62,7 +62,6 @@ export default class View
         page.vxText.value = planet.vx.toFixed(5);
         page.vyText.value = planet.vy.toFixed(5);
 
-        page.nameSpan.innerHTML = planet.name;
         page.nameText.value = planet.name;
         page.colorText.value = planet.color;
         page.massaText.value = planet.m.toFixed(0);
@@ -70,36 +69,36 @@ export default class View
     }
 
 
-    drawPlanet(p: Planet, withVelo: boolean = false) {
-        this.ctx.fillStyle = p.color; 
-        this.ctx.strokeStyle = p.color;
+    drawPlanet(planet: Planet, withVelo: boolean = false) {
+        this.ctx.fillStyle = planet.color; 
+        this.ctx.strokeStyle = planet.color;
 
         // track
         if (this.trackMode) 
         {
             this.ctx.beginPath();
-            let j = p.trackPointer;
-            this.ctx.moveTo(p.track[j].x, p.track[j].y);
-            for (let i = 0; i < Planet.TRACK_LENGTH; i++) {
-                if (!p.track[j]) 
-                    break;
-                this.ctx.lineTo(p.track[j].x, p.track[j].y);
-                j = (j - 1) % Planet.TRACK_LENGTH;
+            let len = planet.track.points.length;
+            let point = planet.track.points[len - 1];
+            this.ctx.moveTo(point.x, point.y);
+            // for (let i = 1; i < planet.track.points.length; i++) {
+            for (let i = len - 1; i > 0; i--) {
+                let point = planet.track.points[i];
+                this.ctx.lineTo(point.x, point.y);
             }
             this.ctx.stroke();
         }
 
         // body
         this.ctx.beginPath();
-        this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        this.ctx.arc(planet.x, planet.y, planet.r, 0, Math.PI * 2);
         this.ctx.fill();
 
         // velocity
         if (withVelo) {
             const k = 10;           
             this.ctx.beginPath();
-            this.ctx.moveTo(p.x, p.y);
-            this.ctx.lineTo(p.x + k * p.vx, p.y + k * p.vy);
+            this.ctx.moveTo(planet.x, planet.y);
+            this.ctx.lineTo(planet.x + k * planet.vx, planet.y + k * planet.vy);
             this.ctx.stroke();
         }
     } 
