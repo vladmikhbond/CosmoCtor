@@ -15,6 +15,7 @@
             |
             <button id="saveSceneButton" class="dash-btn" title="Scene Saving">Save</button>
             <button id="loadSceneButton" class="dash-btn" title="Scene Loading">Load</button>    
+            
         </div>
         <hr>
         <div>
@@ -44,18 +45,23 @@
         <button id="applyButton" class="dash-btn" title="Apply params to selected planet">Apply</button>
         <button id="plusButton" class="dash-btn" title="Create standard or copy selected planet">+</button>
         <button id="minusButton" class="dash-btn" title="Remove selected planet">-</button>
+        |
+        <input id="vRocketText" class="dash-text" title="Rocket velocity %" style="width: 20px;"/> %
+        <button id="rocketButton" class="dash-btn" title="Planets-Tracks toggle">R</button> 
+        |
+    
     </div>
 
 
     <canvas id="canvas" width="800" height="800" tabindex="0"></canvas>
 
     <div id="footer">
-        Steps: <span id="stepsCountSpan"></span> 
-        Steps/sec: <span id="stepsPerSecSpan"></span> 
+        Total: <span id="stepsCountSpan"></span> |  
+        Engine speed: <span id="stepsPerSecSpan"></span> 
     
         <br>
-        <!-- <textarea id="sceneArea">[{"name":"Sun","m":1000000,"r":7,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow","ax":0,"ay":0},{"name":"Earth","m":10,"r":2,"x":300,"y":0,"vx":0,"vy":1.8257418583505538,"color":"lightblue","ax":0,"ay":0},{"name":"Venus","m":10,"r":2,"x":200,"y":0,"vx":0,"vy":2.23606797749979,"color":"yellow","ax":0,"ay":0},{"name":"Jupiter","m":100,"r":4,"x":500,"y":0,"vx":0,"vy":1.4142135623730951,"color":"pink","ax":0,"ay":0}] -->
-        <textarea id="sceneArea">[{"name":"Sun","m":1000000,"r":7,"x":-30,"y":1,"vx":-0.00006,"vy":2,"color":"yellow"},{"name":"Earth","m":10,"r":2,"x":-299.3645568780885,"y":5.580218409266264,"vx":-0.036234673629708086,"vy":-1.8288470899290739,"color":"lightblue"},{"name":"Venus","m":10,"r":2,"x":-157.15687200586007,"y":-123.22016041534818,"vx":1.3684835553169354,"vy":-1.7582755000671488,"color":"yellow"},{"name":"Jupi","m":100,"r":4,"x":474.5563149925032,"y":-156.4974563642428,"vx":0.44696212429857424,"vy":1.3411320118899308,"color":"pink"},{"name":"Sun","m":1000000,"r":7,"x":31,"y":1,"vx":-0.00006,"vy":-2,"color":"yellow"}]
+        <!-- <textarea id="sceneArea">[{"name":"Sun","m":1000000,"r":7,"x":-30,"y":1,"vx":-0.00006,"vy":2,"color":"yellow"},{"name":"Earth","m":10,"r":2,"x":-299.3645568780885,"y":5.580218409266264,"vx":-0.036234673629708086,"vy":-1.8288470899290739,"color":"lightblue"},{"name":"Venus","m":10,"r":2,"x":-157.15687200586007,"y":-123.22016041534818,"vx":1.3684835553169354,"vy":-1.7582755000671488,"color":"yellow"},{"name":"Jupi","m":100,"r":4,"x":474.5563149925032,"y":-156.4974563642428,"vx":0.44696212429857424,"vy":1.3411320118899308,"color":"pink"},{"name":"Sun","m":1000000,"r":7,"x":31,"y":1,"vx":-0.00006,"vy":-2,"color":"yellow"}] -->
+        <textarea id="sceneArea">[{"name":"Sun","m":1000000,"r":7,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow","ax":0,"ay":0},{"name":"Earth","m":10,"r":2,"x":300,"y":0,"vx":0,"vy":1.8257418583505538,"color":"lightblue","ax":0,"ay":0},{"name":"Venus","m":10,"r":2,"x":200,"y":0,"vx":0,"vy":2.23606797749979,"color":"yellow","ax":0,"ay":0},{"name":"Jupiter","m":100,"r":4,"x":500,"y":0,"vx":0,"vy":1.4142135623730951,"color":"pink","ax":0,"ay":0}]
         
         </textarea>
     </div>

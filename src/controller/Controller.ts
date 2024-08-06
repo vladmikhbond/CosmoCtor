@@ -1,5 +1,6 @@
 import {page, glo} from '../globals/globals.js';
 import Planet from '../model/Planet.js';
+import Rocket from '../model/Rocket.js';
 import Space from '../model/Space.js';
 import View from '../view/View.js';
 
@@ -15,6 +16,7 @@ export default class Controller
     {
         this.bindHandlers();
         this.bindDashboardHandlers();
+        this.bindPlanetBoardHandlers();
     }
 
     private bindHandlers() 
@@ -28,7 +30,7 @@ export default class Controller
 
         });
 
-        //#region planet selection and dragging
+        // #region planet selection and dragging
 
         let dragged = false; 
 
@@ -122,12 +124,21 @@ export default class Controller
         });
 
 
+        // telescope
+        page.scopeRange.addEventListener('change', () => {
+            glo.SCOPE = 1.2 ** page.scopeRange.valueAsNumber;
+            this.view.draw();
+        });
+    }
+
+    private bindPlanetBoardHandlers() 
+    {
         // plusButton_click: create new planet 
         page.plusButton.addEventListener('click', () => {
             // get standard or copy selected planet
             let planet = this.space.selectedPlanet ? 
                 <Planet>{ ...this.space.selectedPlanet } :
-                Planet.getStandardPlanet();
+                new Planet();
             planet.y += page.canvas.height / 4 * glo.SCOPE;
 
             this.space.planets.push(planet);
@@ -140,6 +151,14 @@ export default class Controller
             if (this.space.tryRemoveSelectedPlanet()) {
                 this.view.draw();
             }
+        });
+
+
+        // rocketButton_click  
+        page.rocketButton.addEventListener('click', () => {
+            let v = +page.vRocketText.value / 100;
+            let rocket = new Rocket(v, this.space.selectedPlanet!)
+            this.space.planets.push(rocket);      
         });
 
         //
@@ -156,12 +175,6 @@ export default class Controller
         page.colorText.addEventListener('change', handler);
         page.massaText.addEventListener('change', handler);
         page.radiusText.addEventListener('change', handler);
-
-        // telescope
-        page.scopeRange.addEventListener('change', () => {
-            glo.SCOPE = 1.2 ** page.scopeRange.valueAsNumber;
-            this.view.draw();
-        });
     }
 
     static applyParamsHandler(me: Controller) {
@@ -180,5 +193,6 @@ export default class Controller
         }
     }
    
+    
 
 }

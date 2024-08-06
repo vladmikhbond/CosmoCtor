@@ -5,9 +5,9 @@ export default class Planet
 {
     static TRACK_INTERVAL = 5;
 
-    static getStandardPlanet(): Planet {
-        return new Planet('Noname', 5,  5,   0, 0,   5, 5, 'white');
-    }
+    // static getStandardPlanet(): Planet {
+    //     return new Planet('Noname', 5,  5,   0, 0,   5, 5, 'white');
+    // }
 
     ax = 0;
     ay = 0;

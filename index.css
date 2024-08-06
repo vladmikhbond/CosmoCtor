@@ -25,7 +25,7 @@
     width: 50px;
     display:inline-block;
     text-align: right;
-    margin-right: 2px;
+    margin-right: 4px;
 }
 
 #scopeRange {
@@ -48,7 +48,7 @@
 
 #dashboard {
     width: 300px;
-    height: 155px;
+    height: 75px;
     border: solid black 1px;
     font-family: monospace;
     font-weight: 800;
@@ -63,8 +63,8 @@
 #planetBoard {
     position: absolute;
     top: 61px;
-    left: 725px;
-    width: 270px;
+    left: 722px;
+    width: 275px;
     height: 130px;
     border: solid black 1px;
     font-family: monospace;

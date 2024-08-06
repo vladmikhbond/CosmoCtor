@@ -15,6 +15,7 @@ export const page = {
     runButton: document.getElementById('runButton')!,
     stepButton: document.getElementById('stepButton')!,
     trackButton: document.getElementById('trackButton')!,
+    rocketButton: document.getElementById('rocketButton')!,
     applyButton: document.getElementById('applyButton')!,
     plusButton: document.getElementById('plusButton')!,
     minusButton: document.getElementById('minusButton')!,
@@ -23,6 +24,7 @@ export const page = {
     yText: <HTMLInputElement>document.getElementById('yText')!,
     vxText: <HTMLInputElement>document.getElementById('vxText')!,
     vyText: <HTMLInputElement>document.getElementById('vyText')!,
+    vRocketText: <HTMLInputElement>document.getElementById('vRocketText')!,
     // ---
     nameText: <HTMLInputElement>document.getElementById('nameText')!,
     colorText: <HTMLInputElement>document.getElementById('colorText')!,

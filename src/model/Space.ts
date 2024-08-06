@@ -38,7 +38,7 @@ export default class Space
     {    
         for (let p of this.planets) {
             let dist = Math.sqrt((p.x - x)**2 + (p.y - y)**2); 
-            if (dist < p.r) {
+            if (dist <= 5) {
                 this.selectedPlanet = p;
                 return true;
             }
