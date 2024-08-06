@@ -1,5 +1,6 @@
 import {glo, page} from '../globals/globals.js';
 import Planet from '../model/Planet.js';
+import Rocket from '../model/Rocket.js';
 import Space from '../model/Space.js';
 
 export default class View 
@@ -53,36 +54,51 @@ export default class View
     }
 
     drawPlanet(planet: Planet, withVelo: boolean = false) {
-        this.ctx.fillStyle = planet.color; 
-        this.ctx.strokeStyle = planet.color;
+        const ctx = this.ctx;
+        ctx.fillStyle = planet.color; 
+        ctx.strokeStyle = planet.color;
 
         // track
         if (this.trackMode) 
         {
-            this.ctx.beginPath();
+            ctx.lineWidth = 1;
+            ctx.beginPath();
             let len = planet.track.points.length;
             let point = planet.track.points[len - 1];
-            this.ctx.moveTo(point.x, point.y);
-            // for (let i = 1; i < planet.track.points.length; i++) {
+            ctx.moveTo(point.x, point.y);
             for (let i = len - 1; i > 0; i--) {
                 let point = planet.track.points[i];
-                this.ctx.lineTo(point.x, point.y);
+                ctx.lineTo(point.x, point.y);
             }
-            this.ctx.stroke();
+            ctx.stroke();
         }
 
-        // body
-        this.ctx.beginPath();
-        this.ctx.arc(planet.x, planet.y, planet.r, 0, Math.PI * 2);
-        this.ctx.fill();
-
+        // body        
+        if (planet instanceof Rocket) {
+            const LEN = 2;
+            let points = planet.track.points;
+            if (points.length > LEN) {
+                let point = points[points.length - LEN];
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(planet.x, planet.y);
+                ctx.lineTo(point.x, point.y);
+                ctx.stroke();
+            }           
+        } else {
+            ctx.beginPath();
+            ctx.arc(planet.x, planet.y, planet.r, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    
         // velocity
         if (withVelo) {
-            const k = 10;           
-            this.ctx.beginPath();
-            this.ctx.moveTo(planet.x, planet.y);
-            this.ctx.lineTo(planet.x + k * planet.vx, planet.y + k * planet.vy);
-            this.ctx.stroke();
+            const k = 10;
+            ctx.lineWidth = 1;           
+            ctx.beginPath();
+            ctx.moveTo(planet.x, planet.y);
+            ctx.lineTo(planet.x + k * planet.vx, planet.y + k * planet.vy);
+            ctx.stroke();
         }
     } 
 

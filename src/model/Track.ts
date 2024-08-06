@@ -1,8 +1,8 @@
 import Planet from './Planet.js';
 
 export default class Track {
-    private static MAX_LENGTH = 300;
-    private static CUT_LENGTH = 150;
+    private static MAX_LENGTH = 500;
+    private static CUT_LENGTH = 100;
     
     points: {x:number, y:number}[];
 
