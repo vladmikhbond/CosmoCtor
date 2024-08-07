@@ -15,3 +15,17 @@ class Track
 Ракета керується з рахунок доданої щвидкості від v% до -v%
 На старті Ракета віддаляється від планети вперед або назад, залежно від знаку доданої швидкості.
 Відстань така, щоб 
+
+
+
+select {
+    width: 60px;
+    padding: 2px;
+    font-size: 14px;
+}
+<select>
+   <option value="option1">Опція 1</option>
+   <option value="option2">Опція 2</option>
+   <option value="option3">Опція 3</option>
+   <option value="option4">Опція 4</option>
+</select>

@@ -77,9 +77,28 @@
     display: none; 
 }
 
-
-
 #sceneArea {
     margin-top: 4px;
     width: 187px;
+}
+
+select {
+    width: 80px;
+    padding: 2px;
+    font-size: 14px;
+}
+
+#actionDiv {
+    position: absolute;
+    top: 205px;
+    left: 722px;
+    width: 275px;
+    height: 50px;
+    border: solid black 1px;
+    font-family: monospace;
+    font-weight: 800;
+    color: white;
+    padding: 5px;
+    background-color: rgb(117 190 218 / 50%);
+    display: none; 
 }

@@ -12,30 +12,41 @@ export const page = {
     hideButton: document.getElementById('hideButton')!,
     dashboard: document.getElementById('dashboard')!,
     planetBoard: document.getElementById('planetBoard')!,
+
+    // on dashboard
     runButton: document.getElementById('runButton')!,
     stepButton: document.getElementById('stepButton')!,
     trackButton: document.getElementById('trackButton')!,
-    rocketButton: document.getElementById('rocketButton')!,
-    applyButton: document.getElementById('applyButton')!,
-    plusButton: document.getElementById('plusButton')!,
-    minusButton: document.getElementById('minusButton')!,
+    saveSceneButton: document.getElementById('saveSceneButton')!,
+    loadSceneButton: document.getElementById('loadSceneButton')!,
     //
-    xText: <HTMLInputElement>document.getElementById('xText')!,
-    yText: <HTMLInputElement>document.getElementById('yText')!,
-    vxText: <HTMLInputElement>document.getElementById('vxText')!,
-    vyText: <HTMLInputElement>document.getElementById('vyText')!,
-    vRocketText: <HTMLInputElement>document.getElementById('vRocketText')!,
-    // ---
+    scopeRange: <HTMLInputElement>document.getElementById('scopeRange')!,
+    //
+    stepsCountSpan: document.getElementById('stepsCountSpan')!,
+    stepsPerSecSpan: document.getElementById('stepsPerSecSpan')!,
+
+    // on planet board
     nameText: <HTMLInputElement>document.getElementById('nameText')!,
     colorText: <HTMLInputElement>document.getElementById('colorText')!,
     massaText: <HTMLInputElement>document.getElementById('massaText')!,
     radiusText: <HTMLInputElement>document.getElementById('radiusText')!,
+    // hr
+    xText: <HTMLInputElement>document.getElementById('xText')!,
+    yText: <HTMLInputElement>document.getElementById('yText')!,
+    vxText: <HTMLInputElement>document.getElementById('vxText')!,
+    vyText: <HTMLInputElement>document.getElementById('vyText')!,
+    // hr
+    plusButton: document.getElementById('plusButton')!,
+    minusButton: document.getElementById('minusButton')!,
+    actionSelect: <HTMLSelectElement>document.getElementById('actionSelect')!,
     //
-    stepsCountSpan: document.getElementById('stepsCountSpan')!,
-    stepsPerSecSpan: document.getElementById('stepsPerSecSpan')!,
-    saveSceneButton: document.getElementById('saveSceneButton')!,
-    loadSceneButton: document.getElementById('loadSceneButton')!,
+    actionDiv: document.getElementById('actionDiv')!,
+    field1: <HTMLInputElement>document.getElementById('field1')!,
+    field2: <HTMLInputElement>document.getElementById('field2')!,
+    okButton: document.getElementById('okButton')!,
+
+    // on footer
     sceneArea: <HTMLTextAreaElement>document.getElementById('sceneArea')!,
-    scopeRange: <HTMLInputElement>document.getElementById('scopeRange')!,
+    
 
 }
