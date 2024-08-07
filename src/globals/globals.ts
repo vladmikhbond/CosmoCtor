@@ -41,6 +41,8 @@ export const page = {
     actionSelect: <HTMLSelectElement>document.getElementById('actionSelect')!,
     //
     actionDiv: document.getElementById('actionDiv')!,
+    span1: <HTMLSpanElement>document.getElementById('span1')!,
+    span2: <HTMLSpanElement>document.getElementById('span2')!,
     field1: <HTMLInputElement>document.getElementById('field1')!,
     field2: <HTMLInputElement>document.getElementById('field2')!,
     okButton: document.getElementById('okButton')!,

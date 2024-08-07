@@ -150,6 +150,7 @@ export default class Controller {
             }
         });
 
+//#region Action
 
         page.actionSelect.addEventListener('change', () => {
             switch (page.actionSelect.value) {
@@ -157,6 +158,8 @@ export default class Controller {
                     page.actionDiv.style.display='none';
                     break;
                 case 'rocketOption':
+                    page.span1.innerHTML = 'Velo ';
+                    page.span2.innerHTML = 'Time ';                    
                     page.actionDiv.style.display='block';
                     break;
                 case 'nebulaOption':
@@ -171,13 +174,19 @@ export default class Controller {
             switch (page.actionSelect.value) {
                 case 'rocketOption':
                     let velo = +page.field1.value / 100;
-                    let rocket = new Rocket(velo, this.space.selectedPlanet!)
-                    this.space.planets.push(rocket);
+                    let time = +page.field2.value * 1000;
+                    let rocket = new Rocket(velo, this.space.selectedPlanet!);
+                    setTimeout(() => {
+                        this.space.planets.push(rocket);
+                    }, time);
                     break;
+                    
                 case 'nebulaOption':
                     break;
             }
         });
+
+//#endregion
 
         // textfields_changed
         const handler = () => { Controller.applyParamsHandler(this); };
