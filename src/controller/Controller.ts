@@ -150,7 +150,7 @@ export default class Controller {
             }
         });
 
-//#region Action
+//#region Actions
 
         page.actionSelect.addEventListener('change', () => {
             switch (page.actionSelect.value) {
@@ -158,8 +158,16 @@ export default class Controller {
                     page.actionDiv.style.display='none';
                     break;
                 case 'rocketOption':
+                    if (this.space.selectedPlanet!.v < 0.01) {
+                        alert("Forbidden");
+                        page.actionSelect.value = 'nothingOption';
+                        page.actionDiv.style.display='none';
+                        break;
+                    }
                     page.span1.innerHTML = 'Velo ';
-                    page.span2.innerHTML = 'Time ';                    
+                    page.span2.innerHTML = 'Time '; 
+                    page.field1.value = '20';
+                    page.field2.value = '0';  
                     page.actionDiv.style.display='block';
                     break;
                 case 'nebulaOption':

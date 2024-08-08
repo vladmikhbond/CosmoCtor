@@ -11,8 +11,9 @@ export default class Space
         this.planets = planets;
     }
 
-    step() {
-        // count acceleration for each planet
+    step() 
+    {
+        // count acceleration for all planets
         for (let p0 of this.planets) {
             let ax = 0, ay = 0;
             for (let p of this.planets) {
@@ -25,10 +26,37 @@ export default class Space
             p0.ax = glo.G * ax;
             p0.ay = glo.G * ay;
         }
-        //
+   
+        // do steps for all planets
         for (let p of this.planets) {
             p.step();
         }
+
+        // mergers
+        let planets = this.planets.sort((a:Planet, b:Planet) => b.m - a.m);
+
+        for (let i = 0; i < planets.length - 1; i++) {
+            let big = this.planets[i];
+            for (let j = i + 1; j < planets.length; j++) {
+                let small = this.planets[j];
+                if (small.m == 0)
+                    continue;
+                let near = (big.x - small.x)**2 + (big.y - small.y)**2 < (big.r + small.r)**2;
+                if (near) {
+                    let m = big.m + small.m;
+                    let vx = (big.m * big.vx + small.m * small.vx) / m;
+                    let vy = (big.m * big.vy + small.m * small.vy) / m;
+                    big.vx = vx;
+                    big.vy = vy;
+                    big.m = m;
+                    big.r = (big.r ** 2 + small.r ** 2)**0.5;
+                    small.m = 0; 
+                }
+            }    
+        }
+        this.planets = this.planets.filter(p => p.m > 0);
+        
+        //
         glo.stepsCount++;    
     }
 
@@ -37,8 +65,9 @@ export default class Space
     trySelectPlanet(x: number, y: number) 
     {    
         for (let p of this.planets) {
-            let dist = Math.sqrt((p.x - x)**2 + (p.y - y)**2); 
-            if (dist <= 5) {
+            let dist = Math.sqrt((p.x - x)**2 + (p.y - y)**2);
+            let r = Math.max(p.r, 5); 
+            if (dist <= r) {
                 this.selectedPlanet = p;
                 return true;
             }

@@ -5,10 +5,6 @@ export default class Planet
 {
     static TRACK_INTERVAL = 5;
 
-    // static getStandardPlanet(): Planet {
-    //     return new Planet('Noname', 5,  5,   0, 0,   5, 5, 'white');
-    // }
-
     ax = 0;
     ay = 0;
     track: Track;
@@ -35,6 +31,10 @@ export default class Planet
         if (glo.stepsCount % Planet.TRACK_INTERVAL == 0) {
             this.track.addPoint(this.x, this.y)
         }
+    }
+
+    get v(): number {
+        return (this.vx ** 2 + this.vy ** 2) ** 0.5;
     }
     
     
