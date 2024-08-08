@@ -49,7 +49,7 @@ export default class Space
                     big.vx = vx;
                     big.vy = vy;
                     big.m = m;
-                    big.r = (big.r ** 2 + small.r ** 2)**0.5;
+                    big.r = Math.sqrt(big.r ** 2 + small.r ** 2);
                     small.m = 0; 
                 }
             }    
@@ -78,14 +78,19 @@ export default class Space
 
     tryRemoveSelectedPlanet() {
         if (this.selectedPlanet) {
-            let index = this.planets.indexOf(this.selectedPlanet);
-            if (index !== -1) {
-                this.planets.splice(index, 1);
-                this.selectedPlanet = null;
-                return true;
-            }
+            this.removePlanet(this.selectedPlanet);
+            this.selectedPlanet = null;
         }
         return false;
     }
+
+    removePlanet(planet: Planet) {
+        let index = this.planets.indexOf(planet);
+        if (index !== -1) {
+            this.planets.splice(index, 1); 
+            return true;
+        }
+    }
+
 }
 

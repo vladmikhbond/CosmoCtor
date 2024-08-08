@@ -3,20 +3,26 @@ import Space from "./Space.js";
 
 export default class Nebula
 {
-    N: number;
+
      
-    constructor(s: Space, p: Planet) 
+    constructor(space: Space, n: number) 
     { 
-        this.N = p.m / 0.001 | 0;
+        let planet = space.selectedPlanet;
         
-        for (let i = 0; i < this.N; i++) {
-            let x = p.x + Math.random() * 2 * p.r - p.r;
-            let y = p.y + Math.random() * 2 * p.r - p.r;
+        if (!planet) 
+            return;
+        let r = planet.r / Math.sqrt(n);
+        let m = planet.m / 100;
+        let nebulaR = planet.r * 3 * 10;
+        for (let i = 0; i < n; i++) {
+            let x = planet.x + Math.random() * 2 * nebulaR - nebulaR;
+            let y = planet.y + Math.random() * 2 * nebulaR - nebulaR;
             let vx = Math.random() * 2 - 1;
             let vy = Math.random() * 2 - 1;
-            let q = new Planet("", 0.001, 0.5, x, y, vx, vy, p.color );
-            s.planets.push(q);
+            let q = new Planet("", m, r, x, y, vx, vy, planet.color );
+            space.planets.push(q);
         }
+        space.tryRemoveSelectedPlanet();
     }
 
 }

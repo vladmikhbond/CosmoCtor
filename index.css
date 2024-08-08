@@ -63,7 +63,7 @@
 #planetBoard {
     position: absolute;
     top: 61px;
-    right: 30px;
+    left: 720px;
     width: 275px;
     height: 130px;
     border: solid black 1px;
@@ -91,7 +91,7 @@ select {
 #actionDiv {
     position: absolute;
     top: 205px;
-    right: 30px;
+    left: 720px;
     width: 145px;
     height: 75px;
     border: solid black 1px;

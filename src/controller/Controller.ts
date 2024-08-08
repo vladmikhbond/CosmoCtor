@@ -1,4 +1,5 @@
 import { page, glo } from '../globals/globals.js';
+import Nebula from '../model/Nebula.js';
 import Planet from '../model/Planet.js';
 import Rocket from '../model/Rocket.js';
 import Space from '../model/Space.js';
@@ -172,24 +173,33 @@ export default class Controller {
                     break;
                 case 'nebulaOption':
                     page.actionDiv.style.display='block';
+                    page.span1.innerHTML = 'Number ';
+                    page.span2.innerHTML = 'Time '; 
+                    page.field1.value = '100';
+                    page.field2.value = '0';  
+                    page.actionDiv.style.display='block';
                     break;
                 }
         });
 
-        // okButton_click  
-        page.okButton.addEventListener('click', () => {
-
+        // actionButton_click  
+        page.actionButton.addEventListener('click', () => {
+            let timeout = +page.field2.value * 1000;
+            let planet = this.space.selectedPlanet!;
             switch (page.actionSelect.value) {
                 case 'rocketOption':
                     let velo = +page.field1.value / 100;
-                    let time = +page.field2.value * 1000;
-                    let rocket = new Rocket(velo, this.space.selectedPlanet!);
                     setTimeout(() => {
-                        this.space.planets.push(rocket);
-                    }, time);
-                    break;
-                    
+                        Controller.doRocket(velo, planet, this.space);
+                        this.view.draw(); 
+                    }, timeout);
+                    break;                    
                 case 'nebulaOption':
+                    let n = +page.field1.value;
+                    setTimeout(() => {
+                        Controller.doNebula(n, planet, this.space);
+                        this.view.draw();                        
+                    }, timeout);
                     break;
             }
         });
@@ -226,5 +236,35 @@ export default class Controller {
     }
 
 
+    static doNebula(n: number, planet: Planet, space: Space) 
+    {      
+        let r = planet.r / Math.sqrt(n);
+        let m = planet.m / 100;
+        let v = 0.5;
+        let nebulaR = planet.r * 30;
+        for (let i = 0; i < n; i++) {
+            let z = Math.random() * nebulaR;
+            let theta = Math.random() * 2 * Math.PI;
+            let rx = z * Math.cos(theta);
+            let ry = z * Math.sin(theta);
+            let x = planet.x + rx;
+            let y = planet.y + ry;
+
+            let vx = planet.vx + (Math.random() * v) * (Math.cos(theta + Math.PI / 2));
+            let vy = planet.vy + (Math.random() * v) * (Math.sin(theta + Math.PI / 2));
+            let q = new Planet("", m, r, x, y, vx, vy, planet.color );
+            space.planets.push(q);
+        }
+        space.removePlanet(planet);
+    }
+
+    static doRocket(velo: number, planet: Planet, space: Space) 
+    {
+        let rocket = new Rocket(velo, planet);
+        space.planets.push(rocket);
+    }
 
 }
+
+
+

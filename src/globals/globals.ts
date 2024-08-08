@@ -1,7 +1,7 @@
 
 export const glo = 
 {
-    STEP_PERIOD: 10,   // мінім. період одного кроку в мсек
+    STEP_PERIOD: 1,   // мінім. період одного кроку в мсек
     G: 0.001,          // стала тяжіння
     SCOPE: 1,          // телескоп
     stepsCount: 0
@@ -45,7 +45,7 @@ export const page = {
     span2: <HTMLSpanElement>document.getElementById('span2')!,
     field1: <HTMLInputElement>document.getElementById('field1')!,
     field2: <HTMLInputElement>document.getElementById('field2')!,
-    okButton: document.getElementById('okButton')!,
+    actionButton: document.getElementById('actionButton')!,
 
     // on footer
     sceneArea: <HTMLTextAreaElement>document.getElementById('sceneArea')!,
