@@ -130,9 +130,8 @@ export default class Controller {
         page.canvas.addEventListener('keydown', (e: KeyboardEvent) => {
             switch (e.key) {
                 case 'Delete':
-                    if (this.space.tryRemoveSelectedPlanet()) {
-                        this.view.draw();
-                    }                
+                    this.space.tryRemoveSelectedPlanet()
+                    this.view.draw();               
                     break;
             };
         });
