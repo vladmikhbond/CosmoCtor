@@ -34,8 +34,8 @@ export default class Controller {
 
         // canvas_mousedown: select planet
         page.canvas.addEventListener('mousedown', (e: MouseEvent) => {
-            let x = (e.offsetX - page.canvas.width / 2) / glo.SCOPE;
-            let y = -(e.offsetY - page.canvas.height / 2) / glo.SCOPE;
+            let x = (e.offsetX - glo.shiftX) / glo.scale;
+            let y = -(e.offsetY - glo.shiftY) / glo.scale;
 
             dragged = this.space.trySelectPlanet(x, y);
             page.planetBoard.style.display = dragged ? 'block' : 'none';
@@ -45,8 +45,9 @@ export default class Controller {
 
         page.canvas.addEventListener('mousemove', (e: MouseEvent) => {
             if (dragged) {
-                let x = (e.offsetX - page.canvas.width / 2) / glo.SCOPE;
-                let y = -(e.offsetY - page.canvas.height / 2) / glo.SCOPE;
+                let x = (e.offsetX - glo.shiftX) / glo.scale;
+                let y = -(e.offsetY - glo.shiftY) / glo.scale;
+                
                 this.space.selectedPlanet!.x = x;
                 this.space.selectedPlanet!.y = y;
                 this.view.draw();
@@ -125,7 +126,7 @@ export default class Controller {
 
         // telescope
         page.scopeRange.addEventListener('change', () => {
-            glo.SCOPE = 1.2 ** page.scopeRange.valueAsNumber;
+            glo.scale = 1.2 ** page.scopeRange.valueAsNumber;
             this.view.draw();
         });
 
@@ -150,7 +151,7 @@ export default class Controller {
             let planet = this.space.selectedPlanet ?
                 <Planet>{ ...this.space.selectedPlanet } :
                 new Planet();
-            planet.y += page.canvas.height / 4 * glo.SCOPE;
+            planet.y += page.canvas.height / 4 * glo.scale;
 
             this.space.planets.push(planet);
             this.space.selectedPlanet = planet;

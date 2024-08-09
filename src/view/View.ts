@@ -34,8 +34,8 @@ export default class View
 
         // transform
         ctx.save();
-        ctx.translate(page.canvas.width/2, page.canvas.height/2);
-        ctx.scale(glo.SCOPE, -glo.SCOPE);
+        ctx.translate(glo.shiftX, glo.shiftY);
+        ctx.scale(glo.scale, -glo.scale);
 
     
         // all planets

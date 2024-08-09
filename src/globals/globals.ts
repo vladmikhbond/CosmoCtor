@@ -1,14 +1,24 @@
+const _canvas = <HTMLCanvasElement>document.getElementById('canvas')!;
 
 export const glo = 
 {
-    STEP_PERIOD: 10,   // мінім. період одного кроку в мсек
-    G: 0.001,          // стала тяжіння
-    SCOPE: 1,          // телескоп
-    stepsCount: 0
+    STEP_PERIOD: 10,      // мінім. період одного кроку в мсек
+    G: 0.001,             // стала тяжіння
+    scale: 1,             // телескоп
+    shiftX: _canvas.width / 2,
+    shiftY: _canvas.height / 2,
+    stepsCount: 0,        // кількість кроків
+
+    retransform(x: number, y:number) {
+        let x1 = (x - this.shiftX) / this.scale;
+        let y1 = (y - this.shiftY) / this.scale;        
+        return {x: x1, y: y1};
+    }
 }
 
+
 export const page = { 
-    canvas: <HTMLCanvasElement>document.getElementById('canvas')!,
+    canvas: _canvas,
     hideButton: document.getElementById('hideButton')!,
     dashboard: document.getElementById('dashboard')!,
     planetBoard: document.getElementById('planetBoard')!,
