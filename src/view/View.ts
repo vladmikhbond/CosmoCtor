@@ -128,11 +128,13 @@ export default class View
     }
 
 
-    // display to footer
+    // display the footer
     //
-    displayFooter(stepsPerSec: number) {
+    displayFooter(stepsPerSec: number, planetsCount: number) 
+    {
         page.stepsPerSecSpan.innerHTML = stepsPerSec.toFixed(0);
-        page.stepsCountSpan.innerHTML = glo.stepsCount.toString();       
+        page.stepsCountSpan.innerHTML = glo.stepsCount.toString(); 
+        page.planetsCount.innerHTML = planetsCount.toString();      
     }
 
 

@@ -98,7 +98,7 @@ export default class Controller {
                         this.timeStamp = Date.now();
                         let stepsPerSec = Controller.DISPLAY_PER_STEPS * 1000 / ms;
                         // footer 
-                        this.view.displayFooter(stepsPerSec);
+                        this.view.displayFooter(stepsPerSec, this.space.planets.length);
                     }
                 }, glo.STEP_PERIOD);
             }
@@ -128,7 +128,20 @@ export default class Controller {
             glo.SCOPE = 1.2 ** page.scopeRange.valueAsNumber;
             this.view.draw();
         });
+
+        // canvas_keydown
+        page.canvas.addEventListener('keydown', (e: KeyboardEvent) => {
+            switch (e.key) {
+                case 'Delete':
+                    if (this.space.tryRemoveSelectedPlanet()) {
+                        this.view.draw();
+                    }                
+                    break;
+        });
     }
+
+
+
 
     private bindPlanetBoardHandlers() {
         // plusButton_click: create new planet 

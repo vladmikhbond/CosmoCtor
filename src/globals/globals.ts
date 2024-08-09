@@ -24,6 +24,7 @@ export const page = {
     //
     stepsCountSpan: document.getElementById('stepsCountSpan')!,
     stepsPerSecSpan: document.getElementById('stepsPerSecSpan')!,
+    planetsCount: document.getElementById('planetsCount')!,
 
     // on planet board
     nameText: <HTMLInputElement>document.getElementById('nameText')!,
