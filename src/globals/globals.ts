@@ -11,7 +11,7 @@ export const glo =
 
     retransform(x: number, y:number) {
         let x1 = (x - this.shiftX) / this.scale;
-        let y1 = (y - this.shiftY) / this.scale;        
+        let y1 = -(y - this.shiftY) / this.scale;        
         return {x: x1, y: y1};
     }
 }

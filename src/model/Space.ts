@@ -11,6 +11,21 @@ export default class Space
         this.planets = planets;
     }
 
+    massCenter(): [number, number] {
+        let mx = 0; 
+        let my = 0;
+        let m = 0;
+        
+        for (let p of this.planets) {
+            m += p.m;
+            mx += p.x * p.m;
+            my += p.y * p.m;
+        }
+        if (m == 0)
+            return [0, 0];
+        return [mx / m, my / m];
+    }
+
     step() 
     {
         // count acceleration for all planets
@@ -56,7 +71,11 @@ export default class Space
         }
         this.planets = this.planets.filter(p => p.m > 0);
         
-        //
+        // correct the origin
+        let mc = this.massCenter();
+        planets.forEach(p => {p.x -= mc[0]; p.y -= mc[1];});
+        
+        // incremetn step counter
         glo.stepsCount++;    
     }
 

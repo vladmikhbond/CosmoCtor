@@ -34,10 +34,8 @@ export default class Controller {
 
         // canvas_mousedown: select planet
         page.canvas.addEventListener('mousedown', (e: MouseEvent) => {
-            let x = (e.offsetX - glo.shiftX) / glo.scale;
-            let y = -(e.offsetY - glo.shiftY) / glo.scale;
-
-            dragged = this.space.trySelectPlanet(x, y);
+            let point = glo.retransform(e.offsetX, e.offsetY);
+            dragged = this.space.trySelectPlanet(point.x, point.y);
             page.planetBoard.style.display = dragged ? 'block' : 'none';
             page.actionDiv.style.display = 'none';
             this.view.draw();
@@ -45,11 +43,9 @@ export default class Controller {
 
         page.canvas.addEventListener('mousemove', (e: MouseEvent) => {
             if (dragged) {
-                let x = (e.offsetX - glo.shiftX) / glo.scale;
-                let y = -(e.offsetY - glo.shiftY) / glo.scale;
-                
-                this.space.selectedPlanet!.x = x;
-                this.space.selectedPlanet!.y = y;
+                let point = glo.retransform(e.offsetX, e.offsetY);               
+                this.space.selectedPlanet!.x = point.x;
+                this.space.selectedPlanet!.y = point.y;
                 this.view.draw();
             }
         });
@@ -138,6 +134,7 @@ export default class Controller {
                         this.view.draw();
                     }                
                     break;
+            };
         });
     }
 
