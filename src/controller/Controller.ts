@@ -208,6 +208,8 @@ export default class Controller {
                     let n = +page.field1.value;
                     setTimeout(() => {
                         Controller.doNebula(n, planet, this.space);
+                        // this.space.tryRemoveSelectedPlanet();
+                        // new Nebula(n, planet, this.space);
                         this.view.draw();                        
                     }, timeout);
                     break;
