@@ -69,6 +69,8 @@ export default class Space
                 }
             }    
         }
+
+        // remove mergered planets
         this.planets = this.planets.filter(p => p.m > 0);
         
         // correct the origin

@@ -6,9 +6,11 @@ export default class Nebula
 {
 
      
-    constructor(n: number, planet: Planet, space: Space)
+    constructor(n: number, nebulaR: number, space: Space)
     { 
-        let nebulaR = 400;
+        let planet = space.selectedPlanet!;
+        space.tryRemoveSelectedPlanet();
+
         type Piece = {x: number, y: number, ax: number, ay: number, angle: number, r: number};
         
         // static pieces
@@ -35,15 +37,22 @@ export default class Nebula
             p0.ay *= glo.G;
         }
         // velo
+        let m = planet.m / n;
+        let r = planet.r / n**0.5;
+
         for (let i = 0; i < n; i++) {
-            let p = pieces[i];
-            let a = Math.sqrt(p.ax**2 + p.ay**2);
-            let v = Math.sqrt(a * p.r);     
-            let vx = v * (Math.cos(p.angle + Math.PI / 2));
-            let vy = v * (Math.sin(p.angle + Math.PI / 2));
-            let planet = new Planet("", 10, 1, p.x, p.y, vx, vy, "white");
-            space.planets.push(planet);
+            let piece = pieces[i];
+            let a = Math.sqrt(piece.ax**2 + piece.ay**2);
+            let v = 1 * Math.sqrt(a * piece.r);     
+            let vx = v * (Math.cos(piece.angle + Math.PI / 2));
+            let vy = v * (Math.sin(piece.angle + Math.PI / 2));
+
+            space.planets.push(new Planet(`x`+i, m, r, 
+                piece.x + planet.x, piece.y + planet.y, 
+                vx, vy, planet.color));
         }
+
+        space.step();  
     }
 
 }

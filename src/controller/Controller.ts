@@ -30,30 +30,42 @@ export default class Controller {
 
         // #region planet selection and dragging
 
-        let dragged = false;
+        let planetDragged = false;
+        let cursor: {x: number, y: number} | null = null;
+        
 
         // canvas_mousedown: select planet
         page.canvas.addEventListener('mousedown', (e: MouseEvent) => {
-            let point = glo.retransform(e.offsetX, e.offsetY);
-            dragged = this.space.trySelectPlanet(point.x, point.y);
-            page.planetBoard.style.display = dragged ? 'block' : 'none';
-            page.actionDiv.style.display = 'none';
+            cursor = glo.retransform(e.offsetX, e.offsetY);
+            planetDragged = this.space.trySelectPlanet(cursor.x, cursor.y);
+            if (planetDragged) {
+                page.planetBoard.style.display = 'block';
+                page.actionSelect.value = 'nothingOption';
+            } else {
+                page.planetBoard.style.display = 'none';
+                page.actionDiv.style.display = 'none';
+            }
             this.view.draw();
         });
 
         page.canvas.addEventListener('mousemove', (e: MouseEvent) => {
-            if (dragged) {
-                let point = glo.retransform(e.offsetX, e.offsetY);               
+            let point = glo.retransform(e.offsetX, e.offsetY); 
+            if (planetDragged) {                              
                 this.space.selectedPlanet!.x = point.x;
                 this.space.selectedPlanet!.y = point.y;
+                this.view.draw();
+            } else if (cursor != null) {
+                glo.shiftX += (point.x - cursor.x) * glo.scale; 
+                glo.shiftY -= (point.y - cursor.y) * glo.scale;
+                cursor = point;
                 this.view.draw();
             }
         });
 
         page.canvas.addEventListener('mouseup', (e: MouseEvent) => {
-            dragged = false;
+            planetDragged = false;
+            cursor = null;
         });
-
         //#endregion
 
 
@@ -138,9 +150,8 @@ export default class Controller {
     }
 
 
-
-
-    private bindPlanetBoardHandlers() {
+    private bindPlanetBoardHandlers() 
+    {
         // plusButton_click: create new planet 
         page.plusButton.addEventListener('click', () => {
             // get standard or copy selected planet
@@ -185,7 +196,7 @@ export default class Controller {
                     page.actionDiv.style.display='block';
                     page.span1.innerHTML = 'Number ';
                     page.span2.innerHTML = 'Time '; 
-                    page.field1.value = '100';
+                    page.field1.value = '1000';
                     page.field2.value = '0';  
                     page.actionDiv.style.display='block';
                     break;
@@ -207,9 +218,11 @@ export default class Controller {
                 case 'nebulaOption':
                     let n = +page.field1.value;
                     setTimeout(() => {
-                        Controller.doNebula(n, planet, this.space);
-                        // this.space.tryRemoveSelectedPlanet();
-                        // new Nebula(n, planet, this.space);
+                       // this.space.tryRemoveSelectedPlanet();
+                       
+                        
+                        new Nebula(n, 400, this.space);
+                        
                         this.view.draw();                        
                     }, timeout);
                     break;
@@ -248,27 +261,27 @@ export default class Controller {
     }
 
 
-    static doNebula(n: number, planet: Planet, space: Space) 
-    {      
-        let r = planet.r / Math.sqrt(n);
-        let m = planet.m / 100;
-        let v = 0.5;
-        let nebulaR = planet.r * 30;
-        for (let i = 0; i < n; i++) {
-            let z = Math.random() * nebulaR;
-            let theta = Math.random() * 2 * Math.PI;
-            let rx = z * Math.cos(theta);
-            let ry = z * Math.sin(theta);
-            let x = planet.x + rx;
-            let y = planet.y + ry;
+    // static doNebula(n: number, planet: Planet, space: Space) 
+    // {      
+    //     let r = planet.r / Math.sqrt(n);
+    //     let m = planet.m / 100;
+    //     let v = 0.5;
+    //     let nebulaR = planet.r * 30;
+    //     for (let i = 0; i < n; i++) {
+    //         let z = Math.random() * nebulaR;
+    //         let theta = Math.random() * 2 * Math.PI;
+    //         let rx = z * Math.cos(theta);
+    //         let ry = z * Math.sin(theta);
+    //         let x = planet.x + rx;
+    //         let y = planet.y + ry;
 
-            let vx = planet.vx + (Math.random() * v) * (Math.cos(theta + Math.PI / 2));
-            let vy = planet.vy + (Math.random() * v) * (Math.sin(theta + Math.PI / 2));
-            let q = new Planet("", m, r, x, y, vx, vy, planet.color );
-            space.planets.push(q);
-        }
-        space.removePlanet(planet);
-    }
+    //         let vx = planet.vx + (Math.random() * v) * (Math.cos(theta + Math.PI / 2));
+    //         let vy = planet.vy + (Math.random() * v) * (Math.sin(theta + Math.PI / 2));
+    //         let q = new Planet("", m, r, x, y, vx, vy, planet.color );
+    //         space.planets.push(q);
+    //     }
+    //     space.removePlanet(planet);
+    // }
 
     static doRocket(velo: number, planet: Planet, space: Space) 
     {
