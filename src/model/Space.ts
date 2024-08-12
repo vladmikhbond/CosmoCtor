@@ -85,7 +85,7 @@ export default class Space
 
     trySelectPlanet(x: number, y: number) 
     {    
-        for (let p of this.planets) {
+        for (let p of this.planets.reverse()) {
             let dist = Math.sqrt((p.x - x)**2 + (p.y - y)**2);
             let r = Math.max(p.r, 5) / glo.scale; 
             if (dist <= r) {

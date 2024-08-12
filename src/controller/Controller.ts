@@ -6,7 +6,7 @@ import Space from '../model/Space.js';
 import View from '../view/View.js';
 
 export default class Controller {
-    static DISPLAY_PER_STEPS = 500 / glo.STEP_PERIOD | 0; // to display 2 times per second
+    static DISPLAY_INTERVAL = 500 / glo.STEP_PERIOD | 0; // to display 2 times per second
 
     stepTimer = 0;
 
@@ -57,24 +57,31 @@ export default class Controller {
                     this.space.step();
                     this.view.draw();
 
-                    if (glo.stepsCount % Controller.DISPLAY_PER_STEPS == 0) {
+                    if (glo.stepsCount % Controller.DISPLAY_INTERVAL == 0) {
                         // speedometer
-                        let ms = Date.now() - this.timeStamp;
+                        let milliseconds = Date.now() - this.timeStamp;
                         this.timeStamp = Date.now();
-                        let stepsPerSec = Controller.DISPLAY_PER_STEPS * 1000 / ms;
+                        let stepsPerSec = Controller.DISPLAY_INTERVAL * 1000 / milliseconds;
                         // footer 
                         this.view.displayFooter(stepsPerSec, this.space.planets.length);
                     }
                 }, glo.STEP_PERIOD);
+                page.runButton.innerHTML = '■';
+                page.runButton.style.backgroundColor = 'coral';
+            } else {
+                clearInterval(this.stepTimer);
+                this.stepTimer = 0;
+                page.runButton.innerHTML = '►';
+                page.runButton.style.backgroundColor = 'aquamarine';
             }
         });
 
         // stepButton_click
         page.stepButton.addEventListener('click', () => {
-            if (this.stepTimer) {
-                clearInterval(this.stepTimer);
-                this.stepTimer = 0;
-            }
+            // if (this.stepTimer) {
+            //     clearInterval(this.stepTimer);
+            //     this.stepTimer = 0;
+            // }
             this.space.step();
             this.view.draw();
         });
@@ -92,34 +99,39 @@ export default class Controller {
             if (page.actionSelect.value == 'planetOption') 
             {
                 // get standard or copy selected planet
-                let planet = this.space.selectedPlanet ?
-                    <Planet>{ ...this.space.selectedPlanet } :
-                    new Planet();
-                planet.y += page.canvas.height / 4 * glo.scale;
+                let planet = new Planet();
 
+                if (this.space.selectedPlanet) {
+                    planet = <Planet>{ ...this.space.selectedPlanet };
+                    planet.y += page.canvas.height / 4 * glo.scale;
+                }
                 this.space.planets.push(planet);
                 this.space.selectedPlanet = planet;
-                
+     
             }
             else if (page.actionSelect.value == 'rocketOption') 
             {
-                if (this.space.selectedPlanet) {
+                if (this.space.selectedPlanet && this.space.selectedPlanet.v > 0.01) {
                     page.span1.innerHTML = 'Velo ';
                     page.span2.innerHTML = 'Time '; 
-                    page.field1.value = (this.space.selectedPlanet.v).toString();
+                    page.field1.value = '1';
                     page.field2.value = '0';  
-                    page.actionDiv.style.display='block';                    
+                    page.actionBoard.style.display='block';                    
+                } else {
+                    alert('Select a moving planet before.');
                 }
             }
             else if (page.actionSelect.value == 'nebulaOption') 
             {
                 if (this.space.selectedPlanet) {
-                    page.actionDiv.style.display='block';
+                    page.actionBoard.style.display='block';
                     page.span1.innerHTML = 'Number ';
-                    page.span2.innerHTML = 'Time '; 
+                    page.span2.innerHTML = 'Radius '; 
                     page.field1.value = '1000';
-                    page.field2.value = '0';  
-                    page.actionDiv.style.display='block';
+                    page.field2.value = '400';  
+                    page.actionBoard.style.display='block';
+                } else {
+                    alert('Select a planet before.');
                 }
             }
             this.view.draw();                
@@ -134,23 +146,20 @@ export default class Controller {
             {
                 let velo = +page.field1.value;
                 setTimeout(() => {
-                    // Controller.doRocket(velo, planet, this.space);
                     let rocket = new Rocket(velo, planet);
                     this.space.planets.push(rocket);
-
                     this.view.draw(); 
                 }, timeout);
-                page.actionDiv.style.display = 'none';
+                page.actionBoard.style.display = 'none';
             } 
             else if (page.actionSelect.value === 'nebulaOption') 
             {
                 let n = +page.field1.value;
-                setTimeout(() => {
-                    new Nebula(n, 400, this.space);                       
-                    this.view.draw();                        
-                }, timeout);
+                let R = +page.field2.value;
+                new Nebula(n, R, this.space);                       
+                this.view.draw();                        
             }
-            page.actionDiv.style.display = 'none';
+            page.actionBoard.style.display = 'none';
         });
 
 

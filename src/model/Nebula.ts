@@ -17,13 +17,13 @@ export default class Nebula
         let pieces: Array<Piece> = [];
 
         for (let i = 0; i < n; i++) {
-            let rad = Math.random() * nebulaR;
-            let theta = Math.random() * 2 * Math.PI;
-            pieces.push({
-                x: rad * Math.cos(theta),
-                y: rad * Math.sin(theta),
-                ax:0, ay: 0, angle: theta, r: rad});
+            let r = Math.random() * nebulaR;
+            let angle = Math.random() * 2 * Math.PI;
+            let x = r * Math.cos(angle);
+            let y = r * Math.sin(angle);
+            pieces.push({x, y, ax: 0, ay: 0, angle, r}); 
         }
+        
         // count acceleration 
         for (let p0 of pieces) {
             for (let p of pieces) {
@@ -44,15 +44,16 @@ export default class Nebula
             let piece = pieces[i];
             let a = Math.sqrt(piece.ax**2 + piece.ay**2);
             let v = 1 * Math.sqrt(a * piece.r);     
-            let vx = v * (Math.cos(piece.angle + Math.PI / 2));
-            let vy = v * (Math.sin(piece.angle + Math.PI / 2));
+            let vx = planet.vx + v * (Math.cos(piece.angle + Math.PI / 2));
+            let vy = planet.vy + v * (Math.sin(piece.angle + Math.PI / 2));
 
             space.planets.push(new Planet(`x`+i, m, r, 
-                piece.x + planet.x, piece.y + planet.y, 
+                piece.x + planet.x, 
+                piece.y + planet.y, 
                 vx, vy, planet.color));
         }
 
-        space.step();  
+        space.step();
     }
 
 }

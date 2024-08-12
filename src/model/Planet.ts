@@ -12,9 +12,9 @@ export default class Planet
     
     constructor(
         public name: string = 'Noname',
-        public m: number = 5, public r: number = 5,
+        public m: number = 1000, public r: number = 10,
         public x: number = 0, public y: number = 0,
-        public vx: number = 5, public vy: number = 5, 
+        public vx: number = 0, public vy: number = 0, 
         public color: string = 'white',
     ) 
     { 

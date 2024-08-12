@@ -51,7 +51,7 @@ export const page = {
     minusButton: document.getElementById('minusButton')!,
     actionSelect: <HTMLSelectElement>document.getElementById('actionSelect')!,
     //
-    actionDiv: document.getElementById('actionDiv')!,
+    actionBoard: document.getElementById('actionBoard')!,
     span1: <HTMLSpanElement>document.getElementById('span1')!,
     span2: <HTMLSpanElement>document.getElementById('span2')!,
     field1: <HTMLInputElement>document.getElementById('field1')!,

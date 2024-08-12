@@ -21,6 +21,11 @@
     text-align: right;
 }
 
+.action-text{
+    width: 70px;
+    text-align: right;
+}
+
 .dash-label {
     width: 50px;
     display:inline-block;
@@ -60,7 +65,7 @@
     display: 'block'; 
 }
 
-#actionDiv {
+#actionBoard {
     position: absolute;
     top: 175px;
     left: 10px;
