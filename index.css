@@ -48,7 +48,7 @@
 
 #dashboard {
     width: 300px;
-    height: 75px;
+    height: 100px;
     border: solid black 1px;
     font-family: monospace;
     font-weight: 800;
@@ -59,6 +59,22 @@
     z-index: 1;   
     display: 'block'; 
 }
+
+#actionDiv {
+    position: absolute;
+    top: 175px;
+    left: 10px;
+    width: 145px;
+    height: 75px;
+    border: solid black 1px;
+    font-family: monospace;
+    font-weight: 800;
+    color: white;
+    padding: 5px;
+    background-color: rgb(117 190 218 / 50%);
+    display: none; 
+}
+
 
 #planetBoard {
     position: absolute;
@@ -88,17 +104,3 @@ select {
     font-size: 14px;
 }
 
-#actionDiv {
-    position: absolute;
-    top: 205px;
-    left: 720px;
-    width: 145px;
-    height: 75px;
-    border: solid black 1px;
-    font-family: monospace;
-    font-weight: 800;
-    color: white;
-    padding: 5px;
-    background-color: rgb(117 190 218 / 50%);
-    display: none; 
-}

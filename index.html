@@ -23,7 +23,16 @@
 
         <div>
             <input type="range" id="scopeRange" min="-10" max="10" value="0" step="1" title="Телескоп"/>
-        </div>    
+        </div> 
+        <div>
+            <select id="actionSelect">
+                <option value="planetOption">Planet</option>
+                <option value="rocketOption">Rocket</option>
+                <option value="nebulaOption">Nebula</option>
+            </select>    
+            <button id="plusButton" class="dash-btn" title="Create standard or copy selected planet">+</button>
+            <button id="minusButton" class="dash-btn" title="Remove selected planet">-</button>
+        </div>
     </div>
 
     <div id="planetBoard">
@@ -44,14 +53,6 @@
             <span class="dash-label">Vx</span><input id="vxText" class="dash-text" title="Vx velocity"/>
             <span class="dash-label">Vy</span><input id="vyText" class="dash-text" title="Vy velocity"/>
         </div>
-        <hr>
-        <button id="plusButton" class="dash-btn" title="Create standard or copy selected planet">+</button>
-        <button id="minusButton" class="dash-btn" title="Remove selected planet">-</button>
-        <select id="actionSelect">
-            <option value="nothingOption">Nothing</option>
-            <option value="rocketOption">Rocket</option>
-            <option value="nebulaOption">Nebula</option>
-         </select>    
     </div>
     
     <div id="actionDiv">

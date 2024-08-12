@@ -15,9 +15,7 @@ export default class Controller {
     constructor(public space: Space, public view: View) {
         this.bindClickEvents();
         this.bindMouseEvents();
-
         this.bindChangeEvents();
-        this.bindActionHandlers();
     }
 
     private bindClickEvents() 
@@ -28,7 +26,6 @@ export default class Controller {
                 page.dashboard.style.display = 'block';
             else
                 page.dashboard.style.display = 'none';
-
         });
 
         // saveSceneButton: save space.planets
@@ -92,22 +89,75 @@ export default class Controller {
 
         // plusButton_click: create new planet 
         page.plusButton.addEventListener('click', () => {
-            // get standard or copy selected planet
-            let planet = this.space.selectedPlanet ?
-                <Planet>{ ...this.space.selectedPlanet } :
-                new Planet();
-            planet.y += page.canvas.height / 4 * glo.scale;
+            if (page.actionSelect.value == 'planetOption') 
+            {
+                // get standard or copy selected planet
+                let planet = this.space.selectedPlanet ?
+                    <Planet>{ ...this.space.selectedPlanet } :
+                    new Planet();
+                planet.y += page.canvas.height / 4 * glo.scale;
 
-            this.space.planets.push(planet);
-            this.space.selectedPlanet = planet;
-            this.view.draw();
+                this.space.planets.push(planet);
+                this.space.selectedPlanet = planet;
+                
+            }
+            else if (page.actionSelect.value == 'rocketOption') 
+            {
+                if (this.space.selectedPlanet) {
+                    page.span1.innerHTML = 'Velo ';
+                    page.span2.innerHTML = 'Time '; 
+                    page.field1.value = '20';
+                    page.field2.value = '0';  
+                    page.actionDiv.style.display='block';                    
+                }
+            }
+            else if (page.actionSelect.value == 'nebulaOption') 
+            {
+                if (this.space.selectedPlanet) {
+                    page.actionDiv.style.display='block';
+                    page.span1.innerHTML = 'Number ';
+                    page.span2.innerHTML = 'Time '; 
+                    page.field1.value = '1000';
+                    page.field2.value = '0';  
+                    page.actionDiv.style.display='block';
+                }
+            }
+            this.view.draw();                
         });
+
+        // actionButton_click  
+        page.actionButton.addEventListener('click', () => {
+            let timeout = +page.field2.value * 1000;
+            let planet = this.space.selectedPlanet!;
+
+            if (page.actionSelect.value === 'rocketOption') 
+            {
+                let velo = +page.field1.value / 100;
+                setTimeout(() => {
+                    // Controller.doRocket(velo, planet, this.space);
+                    let rocket = new Rocket(velo, planet);
+                    this.space.planets.push(rocket);
+
+                    this.view.draw(); 
+                }, timeout);
+                page.actionDiv.style.display = 'none';
+            } 
+            else if (page.actionSelect.value === 'nebulaOption') 
+            {
+                let n = +page.field1.value;
+                setTimeout(() => {
+                    new Nebula(n, 400, this.space);                       
+                    this.view.draw();                        
+                }, timeout);
+            }
+            page.actionDiv.style.display = 'none';
+        });
+
 
         // minusButton_click: remove selected planet
         page.minusButton.addEventListener('click', () => {
-            if (this.space.tryRemoveSelectedPlanet()) {
-                this.view.draw();
-            }
+            this.space.tryRemoveSelectedPlanet();
+            this.view.draw();
         });
 
 
@@ -124,10 +174,9 @@ export default class Controller {
             planetDragged = this.space.trySelectPlanet(cursor.x, cursor.y);
             if (planetDragged) {
                 page.planetBoard.style.display = 'block';
-                page.actionSelect.value = 'nothingOption';
             } else {
                 page.planetBoard.style.display = 'none';
-                page.actionDiv.style.display = 'none';
+                // page.actionDiv.style.display = 'none';
             }
             this.view.draw();
         });
@@ -185,65 +234,6 @@ export default class Controller {
         });
     }
 
-
-    private bindActionHandlers() 
-    {
-        page.actionSelect.addEventListener('change', () => {
-            switch (page.actionSelect.value) {
-                case 'nothingOption':
-                    page.actionDiv.style.display='none';
-                    break;
-                case 'rocketOption':
-                    if (this.space.selectedPlanet!.v < 0.01) {
-                        alert("Forbidden");
-                        page.actionSelect.value = 'nothingOption';
-                        page.actionDiv.style.display='none';
-                        break;
-                    }
-                    page.span1.innerHTML = 'Velo ';
-                    page.span2.innerHTML = 'Time '; 
-                    page.field1.value = '20';
-                    page.field2.value = '0';  
-                    page.actionDiv.style.display='block';
-                    break;
-                case 'nebulaOption':
-                    page.actionDiv.style.display='block';
-                    page.span1.innerHTML = 'Number ';
-                    page.span2.innerHTML = 'Time '; 
-                    page.field1.value = '1000';
-                    page.field2.value = '0';  
-                    page.actionDiv.style.display='block';
-                    break;
-                }
-        });
-
-        // actionButton_click  
-        page.actionButton.addEventListener('click', () => {
-            let timeout = +page.field2.value * 1000;
-            let planet = this.space.selectedPlanet!;
-
-            switch (page.actionSelect.value) {
-                case 'rocketOption':
-                    let velo = +page.field1.value / 100;
-                    setTimeout(() => {
-                        // Controller.doRocket(velo, planet, this.space);
-                        let rocket = new Rocket(velo, planet);
-                        this.space.planets.push(rocket);
-
-                        this.view.draw(); 
-                    }, timeout);
-                    break;                    
-                case 'nebulaOption':
-                    let n = +page.field1.value;
-                    setTimeout(() => {
-                        new Nebula(n, 400, this.space);                       
-                        this.view.draw();                        
-                    }, timeout);
-                    break;
-            }
-        });
-
-    }
 
     static applyParamsHandler(me: Controller) {
         let planet = me.space.selectedPlanet;
