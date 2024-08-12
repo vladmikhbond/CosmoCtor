@@ -74,8 +74,8 @@ export default class Space
         this.planets = this.planets.filter(p => p.m > 0);
         
         // correct the origin
-        let mc = this.massCenter();
-        planets.forEach(p => {p.x -= mc[0]; p.y -= mc[1];});
+        // let mc = this.massCenter();
+        // planets.forEach(p => {p.x -= mc[0]; p.y -= mc[1];});
         
         // incremetn step counter
         glo.stepsCount++;    
