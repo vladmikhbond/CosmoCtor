@@ -106,7 +106,7 @@ export default class Controller {
                 if (this.space.selectedPlanet) {
                     page.span1.innerHTML = 'Velo ';
                     page.span2.innerHTML = 'Time '; 
-                    page.field1.value = '20';
+                    page.field1.value = (this.space.selectedPlanet.v).toString();
                     page.field2.value = '0';  
                     page.actionDiv.style.display='block';                    
                 }
@@ -132,7 +132,7 @@ export default class Controller {
 
             if (page.actionSelect.value === 'rocketOption') 
             {
-                let velo = +page.field1.value / 100;
+                let velo = +page.field1.value;
                 setTimeout(() => {
                     // Controller.doRocket(velo, planet, this.space);
                     let rocket = new Rocket(velo, planet);
