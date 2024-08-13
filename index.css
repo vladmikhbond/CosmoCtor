@@ -21,13 +21,8 @@
     text-align: right;
 }
 
-.action-text{
-    width: 70px;
-    text-align: right;
-}
-
 .dash-label {
-    width: 50px;
+    width: 55px;
     display:inline-block;
     text-align: right;
     margin-right: 4px;
@@ -53,7 +48,7 @@
 
 #dashboard {
     width: 300px;
-    height: 100px;
+    height: 112px;
     border: solid black 1px;
     font-family: monospace;
     font-weight: 800;
@@ -65,38 +60,38 @@
     display: 'block'; 
 }
 
-#actionBoard {
-    position: absolute;
-    top: 175px;
-    left: 10px;
-    width: 145px;
-    height: 75px;
-    border: solid black 1px;
-    font-family: monospace;
-    font-weight: 800;
-    color: white;
-    padding: 5px;
-    background-color: rgb(117 190 218 / 50%);
-    display: none; 
-}
-
 
 #planetBoard {
     position: absolute;
     top: 61px;
-    left: 720px;
-    width: 275px;
-    height: 130px;
+    left: 695px;
+    width: 300px;
+    height: 112px;
+    border: solid black 1px;
+    font-family: monospace;
+    font-weight: 800;
+    color: white;
+    padding: 5px;
+    background-color: rgb(117 190 218 / 50%);  
+    display: none; 
+}
+
+#actionBoard {
+    position: absolute;
+    top: 186px;
+    left: 695px;
+    width: 300px;
+    height: 64px;
     border: solid black 1px;
     font-family: monospace;
     font-weight: 800;
     color: white;
     padding: 5px;
     background-color: rgb(117 190 218 / 50%);
-
-    z-index: 1;   
     display: none; 
 }
+
+
 
 #sceneArea {
     margin-top: 4px;

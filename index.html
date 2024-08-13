@@ -24,10 +24,11 @@
         <div>
             <input type="range" id="scopeRange" min="-10" max="10" value="0" step="1" title="Телескоп"/>
         </div> 
+        <hr>
         <div>
             <button id="planetButton" class="dash-btn" title="Create standard or copy selected planet">Planet</button>
-            <button id="rocketButton" class="dash-btn" title="Create standard or copy selected planet">Rocket</button>
-            <button id="nebulaButton" class="dash-btn" title="Create standard or copy selected planet">Nebula</button>
+            <button id="rocketButton" class="dash-btn" >Rocket</button>
+            <button id="nebulaButton" class="dash-btn" >Nebula</button>
             &nbsp;
             <button id="delButton" class="dash-btn" title="Remove selected planet">Del</button>
         </div>
@@ -35,31 +36,28 @@
 
     <div id="planetBoard">
         <div> 
-            <span class="dash-label">Name</span><input id="nameText" class="dash-text" title="Name"/>
-            <span class="dash-label">Massa</span><input id="massaText" class="dash-text" title="Massa"/>
+            <span class="dash-label">Name </span>  <input id="nameText" class="dash-text" title="Name"/>
+            <span class="dash-label">Massa </span>  <input id="massaText" class="dash-text" title="Massa"/>
         </div>
         <div>
-            <span class="dash-label">Radius</span><input id="radiusText" class="dash-text" title="Radius"/>
-            <span class="dash-label">Color</span><input id="colorText" class="dash-text" title="Color"/>
+            <span class="dash-label">Radius </span>  <input id="radiusText" class="dash-text" title="Radius"/>
+            <span class="dash-label">Color </span>  <input id="colorText" class="dash-text" title="Color"/>
         </div>       
         <hr>
         <div>
-            <span class="dash-label">X</span><input id="xText" class="dash-text" title="X coordinate"/>
-            <span class="dash-label">Y</span><input id="yText" class="dash-text" title="Y coordinate"/>
+            <span class="dash-label">X </span>  <input id="xText" class="dash-text" title="X coordinate"/>
+            <span class="dash-label">Y </span>  <input id="yText" class="dash-text" title="Y coordinate"/>
         </div>
         <div>
-            <span class="dash-label">Vx</span><input id="vxText" class="dash-text" title="Vx velocity"/>
-            <span class="dash-label">Vy</span><input id="vyText" class="dash-text" title="Vy velocity"/>
+            <span class="dash-label">Vx </span>  <input id="vxText" class="dash-text" title="Vx velocity"/>
+            <span class="dash-label">Vy </span>  <input id="vyText" class="dash-text" title="Vy velocity"/>
         </div>
     </div>
     
     <div id="actionBoard">
-        <span id="span1" class="dash-label"></span>
-        <input id="field1" class="action-text"/>
-        <br>
-        <span id="span2" class="dash-label"></span>
-        <input id="field2" class="action-text"/>
-        <br>
+        <span id="span1" class="dash-label"></span>  <input id="field1" class="dash-text"/>
+        <span id="span2" class="dash-label"></span>  <input id="field2" class="dash-text"/>
+        <hr>
         <button id="okButton" class="dash-btn"">OK</button> 
         <button id="cancelButton" class="dash-btn"">Cancel</button> 
     </div>

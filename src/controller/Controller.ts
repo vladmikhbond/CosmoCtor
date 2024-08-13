@@ -90,20 +90,23 @@ export default class Controller {
             this.view.draw();
         });
 
+        // get standard or copy selected planet
+        //
         page.planetButton.addEventListener('click', () => {
-            // get standard or copy selected planet
+            
             let planet = new Planet();
-
-            if (this.space.selectedPlanet) {
-                planet = <Planet>{ ...this.space.selectedPlanet };
-                // planet.y += page.canvas.height / 4 * glo.scale;
+            if (this.space.selectedPlanet) {                
+                Object.assign(planet, this.space.selectedPlanet);
             }
             this.space.planets.push(planet);
             this.space.selectedPlanet = planet;
             this.view.draw();          
         });
 
-        let mode = 0;
+        enum CreateMode { Planet, Rocket, Nebula };
+
+        let mode: CreateMode = CreateMode.Planet;
+        
 
         page.rocketButton.addEventListener('click', () => {
             if (this.space.selectedPlanet && this.space.selectedPlanet.v > 0.01) {
@@ -113,7 +116,7 @@ export default class Controller {
                 page.field2.value = '0';  
                 page.actionBoard.style.display='block';                    
                 this.view.draw();
-                mode = 1;
+                mode = CreateMode.Rocket;
             } else {
                 alert('Select a moving planet before.');
             }
@@ -125,11 +128,11 @@ export default class Controller {
                 page.actionBoard.style.display='block';
                 page.span1.innerHTML = 'Number ';
                 page.span2.innerHTML = 'Radius '; 
-                page.field1.value = '1000';
+                page.field1.value = '2000';
                 page.field2.value = '400';  
                 page.actionBoard.style.display='block';
                 this.view.draw();
-                mode = 2;
+                mode = CreateMode.Nebula;
             } else {
                 alert('Select a planet before.');
             }
@@ -140,7 +143,7 @@ export default class Controller {
             let timeout = +page.field2.value * 1000;
             let planet = this.space.selectedPlanet!;
 
-            if (mode === 1) 
+            if (mode === CreateMode.Rocket) 
             {
                 let velo = +page.field1.value;
                 setTimeout(() => {
@@ -150,7 +153,7 @@ export default class Controller {
                 }, timeout);
                 page.actionBoard.style.display = 'none';
             } 
-            else if (mode === 2) 
+            else if (mode === CreateMode.Nebula) 
             {
                 let n = +page.field1.value;
                 let R = +page.field2.value;
