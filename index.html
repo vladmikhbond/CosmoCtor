@@ -25,13 +25,11 @@
             <input type="range" id="scopeRange" min="-10" max="10" value="0" step="1" title="Телескоп"/>
         </div> 
         <div>
-            <select id="actionSelect">
-                <option value="planetOption">Planet</option>
-                <option value="rocketOption">Rocket</option>
-                <option value="nebulaOption">Nebula</option>
-            </select>    
-            <button id="plusButton" class="dash-btn" title="Create standard or copy selected planet">+</button>
-            <button id="minusButton" class="dash-btn" title="Remove selected planet">-</button>
+            <button id="planetButton" class="dash-btn" title="Create standard or copy selected planet">Planet</button>
+            <button id="rocketButton" class="dash-btn" title="Create standard or copy selected planet">Rocket</button>
+            <button id="nebulaButton" class="dash-btn" title="Create standard or copy selected planet">Nebula</button>
+            &nbsp;
+            <button id="delButton" class="dash-btn" title="Remove selected planet">Del</button>
         </div>
     </div>
 
@@ -62,7 +60,8 @@
         <span id="span2" class="dash-label"></span>
         <input id="field2" class="action-text"/>
         <br>
-        <button id="actionButton" class="dash-btn"">Action</button> 
+        <button id="okButton" class="dash-btn"">OK</button> 
+        <button id="cancelButton" class="dash-btn"">Cancel</button> 
     </div>
 
 

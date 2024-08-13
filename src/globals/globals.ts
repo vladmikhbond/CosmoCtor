@@ -47,16 +47,19 @@ export const page = {
     vxText: <HTMLInputElement>document.getElementById('vxText')!,
     vyText: <HTMLInputElement>document.getElementById('vyText')!,
     // hr
-    plusButton: document.getElementById('plusButton')!,
-    minusButton: document.getElementById('minusButton')!,
-    actionSelect: <HTMLSelectElement>document.getElementById('actionSelect')!,
+    planetButton: document.getElementById('planetButton')!,
+    rocketButton: document.getElementById('rocketButton')!,
+    nebulaButton: document.getElementById('nebulaButton')!,
+    delButton: document.getElementById('delButton')!,
     //
     actionBoard: document.getElementById('actionBoard')!,
     span1: <HTMLSpanElement>document.getElementById('span1')!,
     span2: <HTMLSpanElement>document.getElementById('span2')!,
     field1: <HTMLInputElement>document.getElementById('field1')!,
     field2: <HTMLInputElement>document.getElementById('field2')!,
-    actionButton: document.getElementById('actionButton')!,
+    okButton: document.getElementById('okButton')!,
+    cancelButton: document.getElementById('cancelButton')!,
+    
 
     // on footer
     sceneArea: <HTMLTextAreaElement>document.getElementById('sceneArea')!,

@@ -35,8 +35,10 @@ export default class Space
                 if (p == p0) continue;
                 let rr = (p.x - p0.x)**2 + (p.y - p0.y)**2;
                 let r = Math.sqrt(rr);
-                ax += p.m * (p.x - p0.x)/ rr / r;
-                ay += p.m * (p.y - p0.y)/ rr / r;
+                if (rr) { 
+                    ax += p.m * (p.x - p0.x) / rr / r;
+                    ay += p.m * (p.y - p0.y) / rr / r;
+                }
             }        
             p0.ax = glo.G * ax;
             p0.ay = glo.G * ay;
