@@ -3,7 +3,7 @@ const _canvas = <HTMLCanvasElement>document.getElementById('canvas')!;
 export const glo = 
 {
     STEP_PERIOD: 10,      // мінім. період одного кроку в мсек
-    G: 0.001,             // стала тяжіння
+    G: 1,             // стала тяжіння
     scale: 1,             // телескоп
     shiftX: _canvas.width / 2,
     shiftY: _canvas.height / 2,

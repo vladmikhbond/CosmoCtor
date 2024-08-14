@@ -61,22 +61,19 @@ export default class Controller {
                 Object.assign(p, o);
                 return p;
             })
+            this.stopTimer();
             this.view.draw();
         });
 
         // runButton_click
         page.runButton.addEventListener('click', () => {
             if (!this.stepTimer) {
-                this.stepTimer = setInterval(() => {
-                    this.step();
-                }, glo.STEP_PERIOD);
-                page.runButton.innerHTML = '■';
+                this.startTimer();
             } else {
-                clearInterval(this.stepTimer);
-                this.stepTimer = 0;
-                page.runButton.innerHTML = '►';
+                this.stopTimer();    
             }
         });
+
 
         // stepButton_click
         page.stepButton.addEventListener('click', () => {
@@ -262,6 +259,19 @@ export default class Controller {
             planet.color = page.colorText.value;
             me.view.draw();
         }
+    }
+
+    startTimer() {
+        this.stepTimer = setInterval(() => {
+            this.step();
+        }, glo.STEP_PERIOD);
+        page.runButton.innerHTML = '■';
+    }
+
+    stopTimer() {
+        clearInterval(this.stepTimer);
+        this.stepTimer = 0;
+        page.runButton.innerHTML = '►';
     }
 
 }
