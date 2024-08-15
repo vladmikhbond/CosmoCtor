@@ -6,9 +6,7 @@ import Space from '../model/Space.js';
 import View from '../view/View.js';
 
 export default class Controller {
-    static DISPLAY_INTERVAL = 500 / glo.STEP_PERIOD | 0; // to display 2 times per second
-
-    stepTimer = 0;
+        stepTimer = 0;
 
     timeStamp = Date.now();
 
@@ -21,14 +19,8 @@ export default class Controller {
     private step() {
         this.space.step();
         this.view.draw();
-
-        if (glo.stepsCount % Controller.DISPLAY_INTERVAL == 0) {
-            // speedometer
-            let milliseconds = Date.now() - this.timeStamp;
-            this.timeStamp = Date.now();
-            let stepsPerSec = Controller.DISPLAY_INTERVAL * 1000 / milliseconds;
-            // footer 
-            this.view.displayFooter(stepsPerSec, this.space.planets.length);
+        if (glo.stepsCount % View.DISPLAY_INTERVAL == 0) {
+            this.view.displayFooter(this.space.planets.length);
         }
     }
 
@@ -78,6 +70,7 @@ export default class Controller {
         // stepButton_click
         page.stepButton.addEventListener('click', () => {
             this.step();
+            this.view.displayFooter(this.space.planets.length);
         });
 
         // trackButton_click  
@@ -272,6 +265,7 @@ export default class Controller {
         clearInterval(this.stepTimer);
         this.stepTimer = 0;
         page.runButton.innerHTML = '►';
+        this.view.displayFooter(this.space.planets.length);
     }
 
 }

@@ -127,11 +127,18 @@ export default class View
         page.radiusText.value = planet.r.toFixed(0);       
     }
 
-
     // display the footer
     //
-    displayFooter(stepsPerSec: number, planetsCount: number) 
+    static DISPLAY_INTERVAL = 500 / glo.STEP_PERIOD | 0; // to display 2 times per second
+    timeStamp = Date.now();
+
+    displayFooter(planetsCount: number) 
     {
+        // speedometer
+        let milliseconds = Date.now() - this.timeStamp;
+        this.timeStamp = Date.now();
+        let stepsPerSec = View.DISPLAY_INTERVAL * 1000 / milliseconds;
+        // display
         page.stepsPerSecSpan.innerHTML = stepsPerSec.toFixed(0);
         page.stepsCountSpan.innerHTML = glo.stepsCount.toString(); 
         page.planetsCount.innerHTML = planetsCount.toString();      
