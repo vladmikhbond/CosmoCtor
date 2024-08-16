@@ -104,3 +104,7 @@ select {
     font-size: 14px;
 }
 
+#sceneArea{
+    width: 1000px;
+    height: 100px;
+}
