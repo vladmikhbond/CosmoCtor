@@ -1,4 +1,9 @@
---------------------------One Star
+
+
+
+[{"name":"Noname","m":10,"r":5,"x":0,"y":0,"vx":-4,"vy":1,"color":"white"},{"name":"Sun","m":10000,"r":10,"x":300,"y":0,"vx":0,"vy":2.5,"color":"aquamarine"},{"name":"Sun","m":10000,"r":10,"x":-300,"y":0,"vx":0,"vy":-2.5,"color":"red"}]
+
+[{"n--------------------------One Star
 [{"name":"Sun","m":1000,"r":20,"x":-2,"y":3,"vx":0,"vy":0,"color":"yellow"}]
 
 --------------------------Binary Star
@@ -9,11 +14,6 @@
 
 --------------------------3 body with equals masses
 [{"name":"Sun","m":10000,"r":10,"x":-222,"y":180,"vx":5,"vy":-1.5,"color":"red"},{"name":"Sun","m":10000,"r":10,"x":-242,"y":-170,"vx":-4,"vy":-1,"color":"yellow"},{"name":"Sun","m":10000,"r":10,"x":326,"y":1,"vx":-1,"vy":2.5,"color":"aquamarine"}]
-
-
-
-[{"name":"Noname","m":10,"r":5,"x":0,"y":0,"vx":-4,"vy":1,"color":"white"},{"name":"Sun","m":10000,"r":10,"x":300,"y":0,"vx":0,"vy":2.5,"color":"aquamarine"},{"name":"Sun","m":10000,"r":10,"x":-300,"y":0,"vx":0,"vy":-2.5,"color":"red"}]
-
-[{"name":"Noname","m":10,"r":5,"x":0,"y":0,"vx":-2.5,"vy":2.5,"color":"white"},{"name":"Sun","m":10000,"r":10,"x":300,"y":0,"vx":0,"vy":2.5,"color":"aquamarine"},{"name":"Sun","m":10000,"r":10,"x":-300,"y":0,"vx":0,"vy":-2.5,"color":"red"}]
+ame":"Noname","m":10,"r":5,"x":0,"y":0,"vx":-2.5,"vy":2.5,"color":"white"},{"name":"Sun","m":10000,"r":10,"x":300,"y":0,"vx":0,"vy":2.5,"color":"aquamarine"},{"name":"Sun","m":10000,"r":10,"x":-300,"y":0,"vx":0,"vy":-2.5,"color":"red"}]
 
 [{"name":"Noname","m":10,"r":5,"x":467,"y":2,"vx":0,"vy":-3,"color":"white"},{"name":"Sun","m":10000,"r":10,"x":300,"y":0,"vx":0,"vy":2.5,"color":"aquamarine"},{"name":"Sun","m":10000,"r":10,"x":-300,"y":0,"vx":0,"vy":-2.5,"color":"red"}]

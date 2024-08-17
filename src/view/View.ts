@@ -123,7 +123,7 @@ export default class View
 
         page.nameText.value = planet.name;
         page.colorText.value = planet.color;
-        page.massaText.value = planet.m.toFixed(0);
+        page.massaText.value = planet.m.toFixed(3);
         page.radiusText.value = planet.r.toFixed(0);       
     }
 
