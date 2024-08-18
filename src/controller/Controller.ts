@@ -216,14 +216,14 @@ export default class Controller {
         // textfields_changed
         const handler = () => { Controller.applyParamsHandler(this); };
 
-        page.xText.addEventListener('blur', handler);
-        page.yText.addEventListener('blur', handler);
-        page.vxText.addEventListener('blur', handler);
-        page.vyText.addEventListener('blur', handler);
-        page.nameText.addEventListener('blur', handler);
-        page.colorText.addEventListener('blur', handler);
-        page.massaText.addEventListener('blur', handler);
-        page.radiusText.addEventListener('blur', handler);
+        page.xText.addEventListener('change', handler);
+        page.yText.addEventListener('change', handler);
+        page.vxText.addEventListener('change', handler);
+        page.vyText.addEventListener('change', handler);
+        page.nameText.addEventListener('change', handler);
+        page.colorText.addEventListener('change', handler);
+        page.massaText.addEventListener('change', handler);
+        page.radiusText.addEventListener('change', handler);
 
         
 
