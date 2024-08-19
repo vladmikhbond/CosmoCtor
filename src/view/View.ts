@@ -5,6 +5,7 @@ import Space from '../model/Space.js';
 
 export default class View 
 {
+    
     ctx: CanvasRenderingContext2D;
     // tracks
     trackMode = false; 
@@ -111,6 +112,18 @@ export default class View
         this.drawPlanet(p, true);        
     } 
 
+    drawXY(point: { x: number; y: number; }) {
+        let left = 0;
+        let top = page.canvas.height - 20;
+        
+        this.ctx.fillStyle = 'darkblue';
+        this.ctx.fillRect(left, top, 100, 20);
+        
+        this.ctx.font = '14px';
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillText(`${point.x}   ${point.y}`, left + 5, top + 15);
+    }
+
     // display to panelBoard
     //
     private displaySelectedPlanet() {
@@ -143,6 +156,5 @@ export default class View
         page.stepsCountSpan.innerHTML = glo.stepsCount.toString(); 
         page.planetsCount.innerHTML = planetsCount.toString();      
     }
-
 
 }

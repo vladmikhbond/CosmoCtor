@@ -196,6 +196,7 @@ export default class Controller {
                 cursor = point;
                 this.view.draw();
             }
+            this.view.drawXY(point);
         });
 
         page.canvas.addEventListener('mouseup', (e: MouseEvent) => {
