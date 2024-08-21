@@ -1,4 +1,6 @@
 import { page, glo } from '../globals/globals.js';
+import { data } from './data.js';
+
 import Nebula from '../model/Nebula.js';
 import Planet from '../model/Planet.js';
 import Rocket from '../model/Rocket.js';
@@ -14,13 +16,15 @@ export default class Controller {
         this.bindClickEvents();
         this.bindMouseEvents();
         this.bindChangeEvents();
+        this.bindMenuEvents();
+        
     }
 
     private step() {
         this.space.step();
         this.view.draw();
         if (glo.stepsCount % View.DISPLAY_INTERVAL == 0) {
-            this.view.displayFooter(this.space.planets.length);
+            this.view.displayFooter();
         }
     }
 
@@ -70,7 +74,7 @@ export default class Controller {
         // stepButton_click
         page.stepButton.addEventListener('click', () => {
             this.step();
-            this.view.displayFooter(this.space.planets.length);
+            this.view.displayFooter();
         });
 
         // trackButton_click  
@@ -173,7 +177,7 @@ export default class Controller {
         
         // canvas_mousedown: select planet
         page.canvas.addEventListener('mousedown', (e: MouseEvent) => {
-            cursor = glo.retransform(e.offsetX, e.offsetY);
+            cursor = glo.retransformXY(e.offsetX, e.offsetY);
             planetDragged = this.space.trySelectPlanet(cursor.x, cursor.y);
             if (planetDragged) {
                 page.planetBoard.style.display = 'block';
@@ -182,21 +186,26 @@ export default class Controller {
                 // page.actionDiv.style.display = 'none';
             }
             this.view.draw();
+            this.view.displaySelectedPlanet();
         });
 
         page.canvas.addEventListener('mousemove', (e: MouseEvent) => {
-            let point = glo.retransform(e.offsetX, e.offsetY); 
+            let point = glo.retransformXY(e.offsetX, e.offsetY); 
             if (planetDragged) {                              
                 this.space.selectedPlanet!.x = point.x;
                 this.space.selectedPlanet!.y = point.y;
                 this.view.draw();
+                this.view.displaySelectedPlanet();
             } else if (cursor != null) {
                 glo.shiftX += (point.x - cursor.x) * glo.scale; 
                 glo.shiftY -= (point.y - cursor.y) * glo.scale;
                 cursor = point;
-                this.view.draw();
+                this.view.drawXY(point);
             }
-            this.view.drawXY(point);
+            // draw cursor coords
+            if (!this.stepTimer) {
+                this.view.drawXY(point);
+            }
         });
 
         page.canvas.addEventListener('mouseup', (e: MouseEvent) => {
@@ -268,7 +277,39 @@ export default class Controller {
         clearInterval(this.stepTimer);
         this.stepTimer = 0;
         page.runButton.innerHTML = '►';
-        this.view.displayFooter(this.space.planets.length);
+        this.view.displayFooter();
+    }
+
+
+    private bindMenuEvents()  {
+
+        for (let task of data) {
+            let btn = document.createElement('Button');
+            btn.innerHTML = task.name;
+            btn.title = task.title;
+            
+            btn.addEventListener('click', () => {
+                this.space.planets = task.planets.map(o => {
+                    let p = new Planet();
+                    Object.assign(p, o);
+                    return p;
+                })
+                if (page.conditionDiv.style.display != 'block') {
+                    page.conditionDiv.innerHTML = task.html;
+                    page.conditionDiv.style.display = 'block';
+                    this.stopTimer();
+                    this.view.draw();
+                    btn.style.backgroundColor = 'lightblue';
+                } else {
+                    page.conditionDiv.style.display = 'none';
+                    btn.style.backgroundColor = 'buttonface';
+                }
+
+            })
+
+            page.menuDiv.appendChild(btn); 
+
+        }
     }
 
 }

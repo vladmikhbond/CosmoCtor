@@ -47,10 +47,11 @@ export default class View
                 this.drawPlanet(planet);
         }
         ctx.restore();
-        // selected planet on the dashboard
-        if (space.selectedPlanet) {
-            this.displaySelectedPlanet();   
-        }
+
+        // // present selected planet on the planetboard
+        // if (this.space.selectedPlanet  ) {
+        //     this.displaySelectedPlanet();   
+        // }
         
     }
 
@@ -113,20 +114,20 @@ export default class View
     } 
 
     drawXY(point: { x: number; y: number; }) {
-        let left = 0;
-        let top = page.canvas.height - 20;
+        let left = 310;
+        let top = 5;
         
         this.ctx.fillStyle = 'darkblue';
-        this.ctx.fillRect(left, top, 100, 20);
+        this.ctx.fillRect(left, top, 150, 20);
         
         this.ctx.font = '14px';
-        this.ctx.fillStyle = 'white';
-        this.ctx.fillText(`${point.x}   ${point.y}`, left + 5, top + 15);
+        this.ctx.fillStyle = 'lightgray';
+        this.ctx.fillText(`x: ${point.x.toFixed(2)}   y: ${point.y.toFixed(2)}`, left + 5, top + 15);
     }
 
     // display to panelBoard
     //
-    private displaySelectedPlanet() {
+    displaySelectedPlanet() {
         let planet = this.space.selectedPlanet!;
 
         page.xText.value = planet.x.toFixed(5);
@@ -145,8 +146,9 @@ export default class View
     static DISPLAY_INTERVAL = 500 / glo.STEP_PERIOD | 0; // to display 2 times per second
     timeStamp = Date.now();
 
-    displayFooter(planetsCount: number) 
+    displayFooter() 
     {
+        let planetsCount = this.space.planets.length;
         // speedometer
         let milliseconds = Date.now() - this.timeStamp;
         this.timeStamp = Date.now();
