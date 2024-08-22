@@ -295,13 +295,18 @@ export default class Controller {
                     return p;
                 })
                 if (page.conditionDiv.style.display != 'block') {
-                    page.conditionDiv.innerHTML = task.html;
+                    // page.conditionDiv.innerHTML = task.html;
+                    (<HTMLDivElement>(page.conditionDiv.firstElementChild)).innerHTML = task.cond;
+                    page.helpDiv.innerHTML = task.help;
                     page.conditionDiv.style.display = 'block';
                     this.stopTimer();
                     this.view.draw();
                     btn.style.backgroundColor = 'lightblue';
+                    (new Function("","MathJax.typeset()"))();
+                    
                 } else {
                     page.conditionDiv.style.display = 'none';
+                    page.helpDiv.style.display = 'none';
                     btn.style.backgroundColor = 'buttonface';
                 }
 

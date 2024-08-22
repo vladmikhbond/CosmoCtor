@@ -5,15 +5,36 @@ body {
 #conditionDiv {
     position: absolute;
     z-index: 2;
+    display: none;
 
     top: 61px;
-    left: 30px;
-    width: 960px;
-    height: 300px;
+    left: 20px;
+    width: 450px;
+    height: 100px;
     background-color: white;
     border: solid black 1px;
-    display: none;
+    padding: 10px;
+    background-color: #f0f0f0;
+    box-shadow: 10px 10px 15px rgba(135, 130, 130, 0.5);
 }
+
+#helpDiv {
+    position: absolute;
+    z-index: 2;
+    display: none;
+
+    top: 165px;
+    left: 20px;
+    width: 450px;
+    height: 400px;
+    background-color: white;
+    border: solid black 1px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    box-shadow: 10px 10px 15px rgba(135, 130, 130, 0.5);
+
+}
+
 
 #menuDiv {
     border: solid black 1px;

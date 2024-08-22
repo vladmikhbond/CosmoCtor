@@ -1,14 +1,19 @@
 ﻿<!DOCTYPE html>
 <html>
     <head>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>    
         <link rel="stylesheet" href="./index.css" />
     </head>
 <body">
-
 <div id="menuDiv">
     <span>Cosmo Ctor</span>
 </div>
-<div id="conditionDiv"></div>
+<div id="conditionDiv">
+    <div></div>
+    <button id="helpButton">Help</button>
+</div>
+<div id="helpDiv"></div>
 <div>
     <button id="hideButton" >≡</button>
     <div id="dashboard">
@@ -81,6 +86,15 @@
 </div>
 
 <script type="module" src="./js/main.js"></script>
+<script>
+    helpButton.addEventListener('click', function() {
+        if (helpDiv.style.display != 'block') {
+            helpDiv.style.display = 'block';
+        } else {
+            helpDiv.style.display = 'none';
+        }
+    });
+</script>
 </body>
 </html>
 
