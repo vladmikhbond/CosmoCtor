@@ -39,6 +39,7 @@ body {
 #openHelpButton, #closeHelpButton {
     margin-top: 10px;
 }
+
 #menuDiv {
     border: solid black 1px;
     margin-bottom: 5px;
@@ -48,13 +49,22 @@ body {
 
 #menuDiv span {
     color: red;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 800;
+    
 
 }
 
 #menuDiv button {
-   margin-left: 10px;
+    width: 30px; /* Ширина кнопки */
+    height: 30px; /* Висота кнопки */
+    background-image: url('/assets/task1.png'); /* Шлях до локального зображення */
+    background-size:contain;
+    border: none; /* Прибрати бордер */
+
+    cursor: pointer; /* Курсор при наведенні */
+
+   margin-left: 8px;
 }
 
 
@@ -69,6 +79,7 @@ body {
     padding-top: -5px;
     height: 24px;
     border: none;
+
 }
 
 .dash-btn {

@@ -1,6 +1,6 @@
 export const data = [
     {   
-        name: 'З + П_кр',
+        name: 'task1',
         title: 'Зірка з планетою на круговій орбіті',
         planets: [{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
                   {"name":"Earth","m":10,"r":8,"x":400,"y":0,"vx":0,"vy":0,"color":"lightblue"}],
@@ -15,7 +15,7 @@ export const data = [
     },
 
     {   
-        name: 'З + П_ел',
+        name: 'task2',
         title: 'Зірка з планетою на еліптичній орбіті',
         planets: [{"name":"Sun","m":10000,"r":20,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
                   {"name":"Earth","m":1,"r":6,"x":300,"y":0,"vx":0,"vy":5.164,"color":"lightblue"}],
@@ -38,7 +38,7 @@ export const data = [
     },
 
     {   
-        name: 'З + З',
+        name: 'task3',
         title: 'Подвійна зірка',
         planets: [{"name":"Sun1","m":10000,"r":6,"x":-300,"y":0,"vx":0,"vy":0.617,"color":"yellow"},
                   {"name":"Sun2","m":10000,"r":6,"x": 300,"y":0,"vx":0,"vy":-0.617,"color":"aquamarine"}],

@@ -285,7 +285,7 @@ export default class Controller {
 
         for (let task of data) {
             let btn = document.createElement('Button');
-            btn.innerHTML = task.name;
+            btn.style.backgroundImage = `url('/assets/${task.name}.png')`;
             btn.title = task.title;
             
             btn.addEventListener('click', () => {
