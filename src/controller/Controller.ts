@@ -293,23 +293,21 @@ export default class Controller {
                     let p = new Planet();
                     Object.assign(p, o);
                     return p;
-                })
-                if (page.conditionDiv.style.display != 'block') {
-                    // page.conditionDiv.innerHTML = task.html;
-                    (<HTMLDivElement>(page.conditionDiv.firstElementChild)).innerHTML = task.cond;
-                    page.helpDiv.innerHTML = task.help;
-                    page.conditionDiv.style.display = 'block';
-                    this.stopTimer();
-                    this.view.draw();
-                    btn.style.backgroundColor = 'lightblue';
-                    (new Function("","MathJax.typeset()"))();
-                    
-                } else {
-                    page.conditionDiv.style.display = 'none';
-                    page.helpDiv.style.display = 'none';
-                    btn.style.backgroundColor = 'buttonface';
-                }
+                });
 
+                page.conditionDiv.style.display = 'block';
+                (<HTMLDivElement>(page.conditionDiv.firstElementChild)).innerHTML = task.cond;
+                page.conditionDiv.style.height = page.openHelpButton.offsetTop + 10 + 'px';
+
+                page.helpDiv.style.display = 'block';
+                (<HTMLDivElement>(page.helpDiv.firstElementChild)).innerHTML = task.help;
+                page.helpDiv.style.height = page.closeHelpButton.offsetTop + 50 + 'px';
+                page.helpDiv.style.top = page.conditionDiv.offsetTop + page.conditionDiv.clientHeight + 'px';
+                page.helpDiv.style.display = 'none';
+                
+                this.stopTimer();
+                this.view.draw();
+                (new Function("","MathJax.typeset()"))();            
             })
 
             page.menuDiv.appendChild(btn); 

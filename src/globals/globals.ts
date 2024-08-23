@@ -21,6 +21,8 @@ export const page = {
     menuDiv: <HTMLDivElement>document.getElementById('menuDiv')!,
     conditionDiv: <HTMLDivElement>document.getElementById('conditionDiv')!,
     helpDiv: <HTMLDivElement>document.getElementById('helpDiv')!,
+    openHelpButton: <HTMLButtonElement>document.getElementById('openHelpButton')!,
+    closeHelpButton: <HTMLButtonElement>document.getElementById('closeHelpButton')!,
     canvas: _canvas,
     hideButton: document.getElementById('hideButton')!,
     dashboard: document.getElementById('dashboard')!,

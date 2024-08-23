@@ -11,9 +11,13 @@
 </div>
 <div id="conditionDiv">
     <div></div>
-    <button id="helpButton">Help</button>
+    <button onclick="conditionDiv.style.display = 'none';"> X </button>
+    <button id="openHelpButton" onclick="helpDiv.style.display = 'block';">Help</button>
 </div>
-<div id="helpDiv"></div>
+<div id="helpDiv">
+    <div></div>
+    <button id="closeHelpButton" onclick="helpDiv.style.display = 'none';"> X </button>
+</div>
 <div>
     <button id="hideButton" >≡</button>
     <div id="dashboard">
@@ -86,15 +90,6 @@
 </div>
 
 <script type="module" src="./js/main.js"></script>
-<script>
-    helpButton.addEventListener('click', function() {
-        if (helpDiv.style.display != 'block') {
-            helpDiv.style.display = 'block';
-        } else {
-            helpDiv.style.display = 'none';
-        }
-    });
-</script>
 </body>
 </html>
 

@@ -6,6 +6,8 @@ body {
     position: absolute;
     z-index: 2;
     display: none;
+    
+    text-align: center;
 
     top: 61px;
     left: 20px;
@@ -23,19 +25,20 @@ body {
     z-index: 2;
     display: none;
 
-    top: 165px;
+    top: 185px;
     left: 20px;
     width: 450px;
-    height: 400px;
+    height: 600px;
     background-color: white;
     border: solid black 1px;
     padding: 10px;
     background-color: #f0f0f0;
     box-shadow: 10px 10px 15px rgba(135, 130, 130, 0.5);
-
 }
 
-
+#openHelpButton, #closeHelpButton {
+    margin-top: 10px;
+}
 #menuDiv {
     border: solid black 1px;
     margin-bottom: 5px;
