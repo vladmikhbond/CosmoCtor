@@ -5,7 +5,7 @@ export default class Rocket extends Planet
     constructor(k_velo: number, p: Planet) 
     { 
         let k = Math.sign(k_velo) * 2;
-        
+     
         let pv = p.v;
         let startX = p.x + k * p.r * p.vx / pv;
         let startY = p.y + k * p.r * p.vy / pv;
