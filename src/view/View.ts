@@ -146,7 +146,7 @@ export default class View
     static DISPLAY_INTERVAL = 500 / glo.STEP_PERIOD | 0; // to display 2 times per second
     timeStamp = Date.now();
 
-    displayFooter() 
+    displayInfo() 
     {
         let planetsCount = this.space.planets.length;
         // speedometer

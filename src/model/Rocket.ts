@@ -2,18 +2,29 @@ import Planet from "./Planet.js";
 
 export default class Rocket extends Planet
 {
-    constructor(k_velo: number, p: Planet) 
-    { 
-        let k = Math.sign(k_velo) * 2;
-     
+    constructor(velo: number, p: Planet) 
+    {   
+        // e - одиничний вектор
+        let ex = 1, ey = 0;
         let pv = p.v;
-        let startX = p.x + k * p.r * p.vx / pv;
-        let startY = p.y + k * p.r * p.vy / pv;
-        
+        if (pv) {
+            ex = p.vx / pv;
+            ey = p.vy / pv;
+        }
 
-        super('rocket' + p.name,   0.001, 1,            // name, m, r
-            startX,   startY, // x, y
-            p.vx * k_velo,         p.vy * k_velo,       // vx, vy
+        
+        
+        // радіус рокети
+        let r = 1;
+        // коорд ракети
+        let x = p.x - (p.r + r + 1) * ey;
+        let y = p.y + (p.r + r + 1) * ex;
+        // до швидкісті докладається швидкість планети 
+        velo += p.v;
+         
+        super('rocket' + p.name,   0.001, r,            // name, m, r
+            x,   y, // x, y
+            velo * ex,  velo * ey,       // vx, vy
             'white');  
     }
 

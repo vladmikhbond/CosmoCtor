@@ -21,14 +21,6 @@ export default class Controller {
         
     }
 
-    private step() {
-        this.space.step();
-        this.view.draw();
-        if (glo.stepsCount % View.DISPLAY_INTERVAL == 0) {
-            this.view.displayFooter();
-        }
-    }
-
     private bindClickEvents() 
     {
         // hideButton
@@ -75,7 +67,7 @@ export default class Controller {
         // stepButton_click
         page.stepButton.addEventListener('click', () => {
             this.step();
-            this.view.displayFooter();
+            this.view.displayInfo();
         });
 
         // trackButton_click  
@@ -104,7 +96,7 @@ export default class Controller {
         
 
         page.rocketButton.addEventListener('click', () => {
-            if (this.space.selectedPlanet && this.space.selectedPlanet.v > 0.01) {
+            if (this.space.selectedPlanet) {
                 page.span1.innerHTML = 'Velo ';
                 page.span2.innerHTML = 'Time '; 
                 page.field1.value = '1';
@@ -318,6 +310,19 @@ export default class Controller {
         }
     }
 
+    private step() {
+        this.space.step();
+        this.view.draw();
+        if (glo.stepsCount % View.DISPLAY_INTERVAL == 0) {
+            this.view.displayInfo();
+            // виділену планету поглинули
+            if (this.space.planets.filter(p => p == this.space.selectedPlanet).length == 0) {
+                page.planetBoard.style.display = 'none';
+            }
+        }
+    }
+
+
     private startTimer() {
         this.stepTimer = setInterval(() => {
             this.step();
@@ -329,7 +334,7 @@ export default class Controller {
         clearInterval(this.stepTimer);
         this.stepTimer = 0;
         page.runButton.innerHTML = '►';
-        this.view.displayFooter();
+        this.view.displayInfo();
     }
 
 
