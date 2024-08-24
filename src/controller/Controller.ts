@@ -14,7 +14,8 @@ export default class Controller {
 
     constructor(public space: Space, public view: View) {
         this.bindClickEvents();
-        this.bindMouseEvents();
+        this.canvasMouseEvents();
+        this.helpDivMouseEvents();
         this.bindChangeEvents();
         this.bindMenuEvents();
         
@@ -167,10 +168,9 @@ export default class Controller {
             this.view.draw();
         });
 
-
     }
 
-    private bindMouseEvents() {
+    private canvasMouseEvents() {
 
         let planetDragged = false;
         let cursor: {x: number, y: number} | null = null;
@@ -215,6 +215,61 @@ export default class Controller {
    
     }
 
+    private helpDivMouseEvents() {
+
+        let cursor: {x: number, y: number} | null = null;
+        
+        page.helpDiv.addEventListener('mousedown', (e: MouseEvent) => {
+            cursor = {x: e.screenX, y: e.screenY};
+        });
+
+        page.helpDiv.addEventListener('mousemove', (e: MouseEvent) => { 
+            if (cursor) {                              
+                let dx = e.screenX - cursor.x;
+                let dy = e.screenY - cursor.y;
+                let style = window.getComputedStyle(page.helpDiv);
+
+                let left = parseFloat(style.left) + dx;
+                page.helpDiv.style.left = left + 'px';
+
+                let top = parseFloat(style.top) + dy;
+                page.helpDiv.style.top = top + 'px';
+
+                cursor = {x: e.screenX, y: e.screenY};
+            }    
+        });
+
+        page.helpDiv.addEventListener('mouseup', (e: MouseEvent) => {
+            cursor = null;
+        });
+   
+
+        page.conditionDiv.addEventListener('mousedown', (e: MouseEvent) => {
+            cursor = {x: e.screenX, y: e.screenY};
+        });
+
+        page.conditionDiv.addEventListener('mousemove', (e: MouseEvent) => { 
+            if (cursor) {                              
+                let dx = e.screenX - cursor.x;
+                let dy = e.screenY - cursor.y;
+                let style = window.getComputedStyle(page.conditionDiv);
+
+                let left = parseFloat(style.left) + dx;
+                page.conditionDiv.style.left = left + 'px';
+
+                let top = parseFloat(style.top) + dy;
+                page.conditionDiv.style.top = top + 'px';
+
+                cursor = {x: e.screenX, y: e.screenY};
+            }    
+        });
+
+        page.conditionDiv.addEventListener('mouseup', (e: MouseEvent) => {
+            cursor = null;
+        });
+
+    }
+
     private bindChangeEvents() {
         // telescope
         page.scopeRange.addEventListener('change', () => {
@@ -234,9 +289,6 @@ export default class Controller {
         page.colorText.addEventListener('change', handler);
         page.massaText.addEventListener('change', handler);
         page.radiusText.addEventListener('change', handler);
-
-        
-
 
         // canvas_keydown
         page.canvas.addEventListener('keydown', (e: KeyboardEvent) => {
