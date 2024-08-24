@@ -318,14 +318,14 @@ export default class Controller {
         }
     }
 
-    startTimer() {
+    private startTimer() {
         this.stepTimer = setInterval(() => {
             this.step();
         }, glo.STEP_PERIOD);
         page.runButton.innerHTML = '■';
     }
 
-    stopTimer() {
+    private stopTimer() {
         clearInterval(this.stepTimer);
         this.stepTimer = 0;
         page.runButton.innerHTML = '►';
@@ -336,33 +336,31 @@ export default class Controller {
     private bindMenuEvents()  {
 
         for (let task of data) {
-            let btn = document.createElement('Button');
-            btn.style.backgroundImage = `url('/assets/${task.name}.png')`;
-            btn.title = task.title;
+            let menuButton = document.createElement('Button');
+            menuButton.style.backgroundImage = `url('/assets/${task.name}.png')`;
+            menuButton.title = task.title;
             
-            btn.addEventListener('click', () => {
+            menuButton.addEventListener('click', () => {
                 this.space.planets = task.planets.map(o => {
                     let p = new Planet();
                     Object.assign(p, o);
                     return p;
                 });
 
+                (<HTMLDivElement>page.conditionDiv.firstElementChild).innerHTML = task.cond;
                 page.conditionDiv.style.display = 'block';
-                (<HTMLDivElement>(page.conditionDiv.firstElementChild)).innerHTML = task.cond;
-                page.conditionDiv.style.height = page.openHelpButton.offsetTop + 10 + 'px';
 
-                page.helpDiv.style.display = 'block';
-                (<HTMLDivElement>(page.helpDiv.firstElementChild)).innerHTML = task.help;
-                page.helpDiv.style.height = page.closeHelpButton.offsetTop + 50 + 'px';
+                (<HTMLDivElement>page.helpDiv.firstElementChild).innerHTML = task.help;
                 page.helpDiv.style.top = page.conditionDiv.offsetTop + page.conditionDiv.clientHeight + 'px';
                 page.helpDiv.style.display = 'none';
-                
+
                 this.stopTimer();
                 this.view.draw();
+                // Математичні формули у динамічному контенті
                 (new Function("","MathJax.typeset()"))();            
             })
 
-            page.menuDiv.appendChild(btn); 
+            page.menuDiv.appendChild(menuButton); 
 
         }
     }

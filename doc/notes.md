@@ -1,7 +1,7 @@
 TODO:
 звуки 
-з+з
-картинки
+
+поєднати conditionDiv & helpDiv
 анімація
 
 

@@ -10,9 +10,8 @@ body {
     text-align: center;
 
     top: 61px;
-    left: 20px;
+    left: 324px;
     width: 450px;
-    height: 100px;
     background-color: white;
     border: solid black 1px;
     padding: 10px;
@@ -26,9 +25,8 @@ body {
     display: none;
 
     top: 185px;
-    left: 20px;
+    left: 324px;
     width: 450px;
-    height: 600px;
     background-color: white;
     border: solid black 1px;
     padding: 10px;
@@ -56,15 +54,13 @@ body {
 }
 
 #menuDiv button {
-    width: 30px; /* Ширина кнопки */
-    height: 30px; /* Висота кнопки */
-    background-image: url('/assets/task1.png'); /* Шлях до локального зображення */
+    width: 30px; 
+    height: 30px; 
     background-size:contain;
-    border: none; /* Прибрати бордер */
+    border: none; 
+    cursor: pointer; 
 
-    cursor: pointer; /* Курсор при наведенні */
-
-   margin-left: 8px;
+    margin-left: 8px;
 }
 
 
