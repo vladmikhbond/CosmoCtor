@@ -26,6 +26,7 @@ export default class Controller {
                 page.planetBoard.style.display = 'block';
             } else {
                 page.planetBoard.style.display = 'none';
+                page.actionBoard.style.display = 'none';
             }
         })
         
@@ -94,6 +95,8 @@ export default class Controller {
             let planet = new Planet();
             if (this.space.selectedPlanet) {                
                 Object.assign(planet, this.space.selectedPlanet);
+                planet.x = this.space.selectedPlanet.x - 50;
+                planet.y = this.space.selectedPlanet.y + 50;                
             }
             this.space.planets.push(planet);
             this.space.selectedPlanet = planet;
@@ -336,6 +339,7 @@ export default class Controller {
         this.view.draw();
         if (glo.stepsCount % View.DISPLAY_INTERVAL == 0) {
             this.view.displayInfo();
+            this.displaySelectedPlanet();
         }
     }
 
