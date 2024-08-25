@@ -46,13 +46,7 @@ export default class View
             else
                 this.drawPlanet(planet);
         }
-        ctx.restore();
-
-        // // present selected planet on the planetboard
-        // if (this.space.selectedPlanet  ) {
-        //     this.displaySelectedPlanet();   
-        // }
-        
+        ctx.restore();        
     }
 
     drawPlanet(planet: Planet, withVelo: boolean = false) {
@@ -127,23 +121,8 @@ export default class View
         this.ctx.fillText(`x: ${point.x.toFixed(2)}   y: ${point.y.toFixed(2)}`, left + 5, top + 15);
     }
 
-    // display to panelBoard
-    //
-    displaySelectedPlanet() {
-        let planet = this.space.selectedPlanet!;
-
-        page.xText.value = planet.x.toFixed(5);
-        page.yText.value = planet.y.toFixed(5);
-        page.vxText.value = planet.vx.toFixed(5);
-        page.vyText.value = planet.vy.toFixed(5);
-
-        page.nameText.value = planet.name;
-        page.colorText.value = planet.color;
-        page.massaText.value = planet.m.toFixed(3);
-        page.radiusText.value = planet.r.toFixed(0);       
-    }
-
-    // display the footer
+   
+    // display the info
     //
     static DISPLAY_INTERVAL = 500 / glo.STEP_PERIOD | 0; // 2 times per second
     timeStamp = Date.now();

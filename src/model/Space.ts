@@ -1,13 +1,30 @@
 import Planet from './Planet.js';
 import {glo} from '../globals/globals.js';
 
-export default class Space 
+export default class Space extends EventTarget 
 {
+    // Метод для виклику події
+    emit(eventName: string, detail: Planet|null) {
+      const event = new CustomEvent<Planet|null>(eventName, {detail});
+      this.dispatchEvent(event);
+    }
+
     planets: Planet[];
 
-    selectedPlanet: Planet | null = null;
+    private _selectedPlanet: Planet | null = null;
+
+    get selectedPlanet(): Planet | null {
+        return this._selectedPlanet;
+    }
+
+    set selectedPlanet(planet: Planet | null) {
+        this._selectedPlanet = planet;
+        this.emit('selectPlanetEvent', planet);
+       
+    }
 
     constructor(...planets: Planet[]) { 
+        super();
         this.planets = planets;
     }
 
@@ -74,12 +91,11 @@ export default class Space
 
         // remove mergered planets
         this.planets = this.planets.filter(p => p.m > 0);
+        if (this.selectedPlanet && this.planets.indexOf(this.selectedPlanet) === -1){
+            this.selectedPlanet = null;
+        }
         
-        // correct the origin
-        // let mc = this.massCenter();
-        // planets.forEach(p => {p.x -= mc[0]; p.y -= mc[1];});
-        
-        // incremetn step counter
+        // step counter
         glo.stepsCount++;    
     }
 
@@ -99,23 +115,23 @@ export default class Space
         return false;
     }
 
-    removeSelectedPlanet() {
-        if (this.selectedPlanet) {
-            return this.removePlanet(this.selectedPlanet);
+    removeSelectedPlanet(): boolean {
+        if (this._selectedPlanet) {
+            return this.removePlanet(this._selectedPlanet);
         }
         return false;
     }
 
-    removePlanet(planet: Planet) {
+    removePlanet(planet: Planet): boolean {
         let index = this.planets.indexOf(planet);
-        if (index !== -1) {
-            this.planets.splice(index, 1); 
-            if (planet == this.selectedPlanet) {
+        if (index !== -1) {            
+            if (planet == this._selectedPlanet) {
                 this.selectedPlanet = null;                
             }
+            this.planets.splice(index, 1); 
             return true;
         }
-        
+        return false;
     }
 
 }

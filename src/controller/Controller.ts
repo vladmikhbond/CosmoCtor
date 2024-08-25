@@ -18,6 +18,16 @@ export default class Controller {
         this.helpDivMouseEvents();
         this.bindChangeEvents();
         this.bindMenuEvents();
+
+        this.space.addEventListener('selectPlanetEvent', e => {
+            let p = <Planet|null>(<CustomEvent>e).detail;
+            if (p) {
+                this.displaySelectedPlanet(); 
+                page.planetBoard.style.display = 'block';
+            } else {
+                page.planetBoard.style.display = 'none';
+            }
+        })
         
     }
 
@@ -161,6 +171,24 @@ export default class Controller {
 
     }
 
+    // display to panelBoard
+    //
+    displaySelectedPlanet() {
+        let planet = this.space.selectedPlanet!;
+
+        page.xText.value = planet.x.toFixed(5);
+        page.yText.value = planet.y.toFixed(5);
+        page.vxText.value = planet.vx.toFixed(5);
+        page.vyText.value = planet.vy.toFixed(5);
+
+        page.nameText.value = planet.name;
+        page.colorText.value = planet.color;
+        page.massaText.value = planet.m.toFixed(3);
+        page.radiusText.value = planet.r.toFixed(0);       
+    }
+
+
+
     private canvasMouseEvents() {
 
         let planetDragged = false;
@@ -170,14 +198,8 @@ export default class Controller {
         page.canvas.addEventListener('mousedown', (e: MouseEvent) => {
             cursor = glo.retransformXY(e.offsetX, e.offsetY);
             planetDragged = this.space.trySelectPlanet(cursor.x, cursor.y);
-            if (planetDragged) {
-                page.planetBoard.style.display = 'block';
-            } else {
-                page.planetBoard.style.display = 'none';
-                // page.actionDiv.style.display = 'none';
-            }
             this.view.draw();
-            this.view.displaySelectedPlanet();
+            this.displaySelectedPlanet();
         });
 
         page.canvas.addEventListener('mousemove', (e: MouseEvent) => {
@@ -186,7 +208,7 @@ export default class Controller {
                 this.space.selectedPlanet!.x = point.x;
                 this.space.selectedPlanet!.y = point.y;
                 this.view.draw();
-                this.view.displaySelectedPlanet();
+                this.displaySelectedPlanet();
             } else if (cursor != null) {
                 glo.shiftX += (point.x - cursor.x) * glo.scale; 
                 glo.shiftY -= (point.y - cursor.y) * glo.scale;
@@ -314,10 +336,6 @@ export default class Controller {
         this.view.draw();
         if (glo.stepsCount % View.DISPLAY_INTERVAL == 0) {
             this.view.displayInfo();
-            // виділену планету поглинули
-            if (this.space.planets.filter(p => p == this.space.selectedPlanet).length == 0) {
-                page.planetBoard.style.display = 'none';
-            }
         }
     }
 
