@@ -77,16 +77,25 @@ export default class View
 
         // body        
         if (planet instanceof Rocket) {
-            const LEN = 2;
-            let points = planet.track.points;
-            if (points.length > LEN) {
-                let point = points[points.length - LEN];
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.moveTo(planet.x, planet.y);
-                ctx.lineTo(point.x, point.y);
-                ctx.stroke();
-            }           
+            let e = planet.e();
+            let x = planet.x + 5 * e[0];
+            let y = planet.y + 5 * e[1];
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(planet.x, planet.y);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+             
+            // const LEN = 2;
+            // let points = planet.track.points;
+            // if (points.length > LEN) {
+            //     let point = points[points.length - LEN];
+            //     ctx.lineWidth = 2;
+            //     ctx.beginPath();
+            //     ctx.moveTo(planet.x, planet.y);
+            //     ctx.lineTo(point.x, point.y);
+            //     ctx.stroke();
+            // }           
         } else {
             ctx.beginPath();
             ctx.arc(planet.x, planet.y, planet.r, 0, Math.PI * 2);
@@ -113,7 +122,7 @@ export default class View
         this.drawPlanet(p, true);        
     } 
 
-    drawXY(point: { x: number; y: number; }) {
+    drawCursorCoords(point: { x: number; y: number; }) {
         let left = 310;
         let top = 5;
         
@@ -143,7 +152,7 @@ export default class View
 
     // display the footer
     //
-    static DISPLAY_INTERVAL = 500 / glo.STEP_PERIOD | 0; // to display 2 times per second
+    static DISPLAY_INTERVAL = 500 / glo.STEP_PERIOD | 0; // 2 times per second
     timeStamp = Date.now();
 
     displayInfo() 

@@ -192,11 +192,11 @@ export default class Controller {
                 glo.shiftX += (point.x - cursor.x) * glo.scale; 
                 glo.shiftY -= (point.y - cursor.y) * glo.scale;
                 cursor = point;
-                this.view.drawXY(point);
+                this.view.drawCursorCoords(point);
             }
             // draw cursor coords
             if (!this.stepTimer) {
-                this.view.drawXY(point);
+                this.view.drawCursorCoords(point);
             }
         });
 

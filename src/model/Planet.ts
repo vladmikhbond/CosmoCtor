@@ -34,9 +34,19 @@ export default class Planet
     }
 
     get v(): number {
-        return (this.vx ** 2 + this.vy ** 2) ** 0.5;
+        return Math.sqrt(this.vx ** 2 + this.vy ** 2);
     }
-    
+    // e - одиничний вектор швидкості
+    e(): [number, number] {
+            
+            let ex = 1, ey = 0;
+            let pv = this.v;
+            if (pv) {
+                ex = this.vx / pv;
+                ey = this.vy / pv;
+            }
+        return[ex, ey];
+    }
     
 }
 
