@@ -75,28 +75,21 @@ export default class View
             ctx.stroke();
         }
 
-        // body        
-        if (planet instanceof Rocket) {
+        // rocket
+        if (planet instanceof Rocket) 
+        {
+            const ROCKET_LEN = 5;
             let e = planet.e();
-            let x = planet.x + 5 * e[0];
-            let y = planet.y + 5 * e[1];
-            ctx.lineWidth = 2;
+            let x = planet.x + ROCKET_LEN * e[0];
+            let y = planet.y + ROCKET_LEN * e[1];
+            ctx.lineWidth = 3;
             ctx.beginPath();
             ctx.moveTo(planet.x, planet.y);
             ctx.lineTo(x, y);
-            ctx.stroke();
-             
-            // const LEN = 2;
-            // let points = planet.track.points;
-            // if (points.length > LEN) {
-            //     let point = points[points.length - LEN];
-            //     ctx.lineWidth = 2;
-            //     ctx.beginPath();
-            //     ctx.moveTo(planet.x, planet.y);
-            //     ctx.lineTo(point.x, point.y);
-            //     ctx.stroke();
-            // }           
-        } else {
+            ctx.stroke();        
+        } 
+        else  // planet
+        {            
             ctx.beginPath();
             ctx.arc(planet.x, planet.y, planet.r, 0, Math.PI * 2);
             ctx.fill();

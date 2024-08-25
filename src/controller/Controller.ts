@@ -92,8 +92,7 @@ export default class Controller {
 
         enum CreateMode { Planet, Rocket, Nebula };
 
-        let mode: CreateMode = CreateMode.Planet;
-        
+        let mode: CreateMode = CreateMode.Planet;        
 
         page.rocketButton.addEventListener('click', () => {
             if (this.space.selectedPlanet) {
@@ -154,9 +153,9 @@ export default class Controller {
             page.actionBoard.style.display = 'none';
         });
 
-        // minusButton_click: remove selected planet
+        // delButton_click: remove selected planet
         page.delButton.addEventListener('click', () => {
-            this.space.tryRemoveSelectedPlanet();
+            this.space.removeSelectedPlanet();
             this.view.draw();
         });
 
@@ -286,7 +285,7 @@ export default class Controller {
         page.canvas.addEventListener('keydown', (e: KeyboardEvent) => {
             switch (e.key) {
                 case 'Delete':
-                    this.space.tryRemoveSelectedPlanet()
+                    this.space.removeSelectedPlanet()
                     this.view.draw();               
                     break;
             };
@@ -321,6 +320,7 @@ export default class Controller {
             }
         }
     }
+
 
 
     private startTimer() {

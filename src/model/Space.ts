@@ -99,10 +99,9 @@ export default class Space
         return false;
     }
 
-    tryRemoveSelectedPlanet() {
+    removeSelectedPlanet() {
         if (this.selectedPlanet) {
-            this.removePlanet(this.selectedPlanet);
-            this.selectedPlanet = null;
+            return this.removePlanet(this.selectedPlanet);
         }
         return false;
     }
@@ -111,8 +110,12 @@ export default class Space
         let index = this.planets.indexOf(planet);
         if (index !== -1) {
             this.planets.splice(index, 1); 
+            if (planet == this.selectedPlanet) {
+                this.selectedPlanet = null;                
+            }
             return true;
         }
+        
     }
 
 }

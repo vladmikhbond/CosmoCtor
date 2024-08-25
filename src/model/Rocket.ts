@@ -7,7 +7,7 @@ export default class Rocket extends Planet
         // e - одиничний вектор
         let [ex, ey] = planet.e();
            
-        // радіус рокети
+        // радіус ракети
         let r = 1;
         // коорд ракети
         let x = planet.x - (planet.r + r + 1) * ey;

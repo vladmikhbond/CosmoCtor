@@ -36,6 +36,7 @@ export default class Planet
     get v(): number {
         return Math.sqrt(this.vx ** 2 + this.vy ** 2);
     }
+    
     // e - одиничний вектор швидкості
     e(): [number, number] {
             

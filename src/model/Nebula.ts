@@ -9,7 +9,7 @@ export default class Nebula
     constructor(n: number, nebulaR: number, space: Space)
     { 
         let planet = space.selectedPlanet!;
-        space.tryRemoveSelectedPlanet();
+        space.removeSelectedPlanet();
 
         type Piece = {x: number, y: number, ax: number, ay: number, angle: number, r: number};
         
