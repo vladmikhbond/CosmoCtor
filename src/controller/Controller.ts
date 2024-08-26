@@ -68,6 +68,7 @@ export default class Controller {
         // runButton_click
         page.runButton.addEventListener('click', () => {
             if (!this.stepTimer) {
+                page.saveSceneButton.dispatchEvent(new Event("click"));
                 this.startTimer();
             } else {
                 this.stopTimer();    
