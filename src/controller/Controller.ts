@@ -32,7 +32,7 @@ export default class Controller {
         
     }
 
-    private bindClickEvents() // ==========================================
+    private bindClickEvents() 
     {
         // hideButton
         page.hideButton.addEventListener('click', () => {
@@ -75,7 +75,6 @@ export default class Controller {
             }
         });
 
-
         // stepButton_click
         page.stepButton.addEventListener('click', () => {
             this.step();
@@ -85,7 +84,7 @@ export default class Controller {
         // trackButton_click  
         page.trackButton.addEventListener('click', () => {
             this.view.trackMode = !this.view.trackMode;
-            page.trackButton.innerHTML = this.view.trackMode ? '●' : 'T';
+            page.trackButton.innerHTML = this.view.trackMode ? '●' : 'O';
             this.view.draw();
         });
 
@@ -174,25 +173,7 @@ export default class Controller {
         });
 
     }
-
-    // // display to panelBoard
-    // //
-    // displaySelectedPlanet() {
-    //     let planet = this.space.selectedPlanet!;
-
-    //     page.xText.value = planet.x.toFixed(5);
-    //     page.yText.value = planet.y.toFixed(5);
-    //     page.vxText.value = planet.vx.toFixed(5);
-    //     page.vyText.value = planet.vy.toFixed(5);
-
-    //     page.nameText.value = planet.name;
-    //     page.colorText.value = planet.color;
-    //     page.massaText.value = planet.m.toFixed(3);
-    //     page.radiusText.value = planet.r.toFixed(0);       
-    // }
-
-
-
+    
     private canvasMouseEvents() {
 
         let isPlanetDragging = false;
@@ -226,7 +207,7 @@ export default class Controller {
                 cursor = point;
                 this.view.draw();
             }
-            
+
             // draw cursor coords
             if (!this.stepTimer) {
                 this.view.drawCursorCoords(point);
@@ -326,6 +307,38 @@ export default class Controller {
         });
     }
 
+    private bindMenuEvents()  {
+
+        for (let task of data) {
+            let menuButton = document.createElement('Button');
+            menuButton.style.backgroundImage = `url('/assets/${task.name}.png')`;
+            menuButton.title = task.title;
+            
+            menuButton.addEventListener('click', () => {
+                this.space.planets = task.planets.map(o => {
+                    let p = new Planet();
+                    Object.assign(p, o);
+                    return p;
+                });
+
+                (<HTMLDivElement>page.conditionDiv.firstElementChild).innerHTML = task.cond;
+                page.conditionDiv.style.display = 'block';
+
+                (<HTMLDivElement>page.helpDiv.firstElementChild).innerHTML = task.help;
+                page.helpDiv.style.top = page.conditionDiv.offsetTop + page.conditionDiv.clientHeight + 'px';
+                page.helpDiv.style.display = 'none';
+
+                this.stopTimer();
+                this.view.draw();
+                // Математичні формули у динамічному контенті
+                (new Function("","MathJax.typeset()"))();            
+            })
+
+            page.menuDiv.appendChild(menuButton); 
+
+        }
+    }
+
 
     static applyParamsHandler(me: Controller) {
         let planet = me.space.selectedPlanet;
@@ -368,38 +381,7 @@ export default class Controller {
     }
 
 
-    private bindMenuEvents()  {
-
-        for (let task of data) {
-            let menuButton = document.createElement('Button');
-            menuButton.style.backgroundImage = `url('/assets/${task.name}.png')`;
-            menuButton.title = task.title;
-            
-            menuButton.addEventListener('click', () => {
-                this.space.planets = task.planets.map(o => {
-                    let p = new Planet();
-                    Object.assign(p, o);
-                    return p;
-                });
-
-                (<HTMLDivElement>page.conditionDiv.firstElementChild).innerHTML = task.cond;
-                page.conditionDiv.style.display = 'block';
-
-                (<HTMLDivElement>page.helpDiv.firstElementChild).innerHTML = task.help;
-                page.helpDiv.style.top = page.conditionDiv.offsetTop + page.conditionDiv.clientHeight + 'px';
-                page.helpDiv.style.display = 'none';
-
-                this.stopTimer();
-                this.view.draw();
-                // Математичні формули у динамічному контенті
-                (new Function("","MathJax.typeset()"))();            
-            })
-
-            page.menuDiv.appendChild(menuButton); 
-
-        }
-    }
-
+ 
 }
 
 

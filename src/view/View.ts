@@ -8,7 +8,7 @@ export default class View
     
     ctx: CanvasRenderingContext2D;
     // tracks
-    trackMode = false; 
+    trackMode = true; 
 
     constructor(public space: Space) {   
         this.ctx = page.canvas.getContext("2d")!;                 
