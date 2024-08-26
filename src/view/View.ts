@@ -140,4 +140,20 @@ export default class View
         page.planetsCount.innerHTML = planetsCount.toString();      
     }
 
+    // display to panelBoard
+    //
+    displaySelectedPlanet() {
+        let planet = this.space.selectedPlanet!;
+
+        page.xText.value = planet.x.toFixed(5);
+        page.yText.value = planet.y.toFixed(5);
+        page.vxText.value = planet.vx.toFixed(5);
+        page.vyText.value = planet.vy.toFixed(5);
+
+        page.nameText.value = planet.name;
+        page.colorText.value = planet.color;
+        page.massaText.value = planet.m.toFixed(3);
+        page.radiusText.value = planet.r.toFixed(0);       
+    }
+
 }

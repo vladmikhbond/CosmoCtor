@@ -22,7 +22,7 @@ export default class Controller {
         this.space.addEventListener('selectPlanetEvent', e => {
             let p = <Planet|null>(<CustomEvent>e).detail;
             if (p) {
-                this.displaySelectedPlanet(); 
+                this.view.displaySelectedPlanet(); 
                 page.planetBoard.style.display = 'block';
             } else {
                 page.planetBoard.style.display = 'none';
@@ -32,7 +32,7 @@ export default class Controller {
         
     }
 
-    private bindClickEvents() 
+    private bindClickEvents() // ==========================================
     {
         // hideButton
         page.hideButton.addEventListener('click', () => {
@@ -89,7 +89,7 @@ export default class Controller {
             this.view.draw();
         });
 
-        // get standard or copy selected planet
+        // Get standard or copy selected planet
         //
         page.planetButton.addEventListener('click', () => {
             
@@ -118,7 +118,7 @@ export default class Controller {
                 this.view.draw();
                 mode = CreateMode.Rocket;
             } else {
-                alert('Select a moving planet before.');
+                alert('Select planet before.');
             }
         
         });
@@ -175,50 +175,58 @@ export default class Controller {
 
     }
 
-    // display to panelBoard
-    //
-    displaySelectedPlanet() {
-        let planet = this.space.selectedPlanet!;
+    // // display to panelBoard
+    // //
+    // displaySelectedPlanet() {
+    //     let planet = this.space.selectedPlanet!;
 
-        page.xText.value = planet.x.toFixed(5);
-        page.yText.value = planet.y.toFixed(5);
-        page.vxText.value = planet.vx.toFixed(5);
-        page.vyText.value = planet.vy.toFixed(5);
+    //     page.xText.value = planet.x.toFixed(5);
+    //     page.yText.value = planet.y.toFixed(5);
+    //     page.vxText.value = planet.vx.toFixed(5);
+    //     page.vyText.value = planet.vy.toFixed(5);
 
-        page.nameText.value = planet.name;
-        page.colorText.value = planet.color;
-        page.massaText.value = planet.m.toFixed(3);
-        page.radiusText.value = planet.r.toFixed(0);       
-    }
+    //     page.nameText.value = planet.name;
+    //     page.colorText.value = planet.color;
+    //     page.massaText.value = planet.m.toFixed(3);
+    //     page.radiusText.value = planet.r.toFixed(0);       
+    // }
 
 
 
     private canvasMouseEvents() {
 
-        let planetDragged = false;
+        let isPlanetDragging = false;
         let cursor: {x: number, y: number} | null = null;
         
         // canvas_mousedown: select planet
         page.canvas.addEventListener('mousedown', (e: MouseEvent) => {
             cursor = glo.retransformXY(e.offsetX, e.offsetY);
-            planetDragged = this.space.trySelectPlanet(cursor.x, cursor.y);
+            isPlanetDragging = this.space.trySelectPlanet(cursor.x, cursor.y);
             this.view.draw();
-            this.displaySelectedPlanet();
+            this.view.displaySelectedPlanet();
         });
 
         page.canvas.addEventListener('mousemove', (e: MouseEvent) => {
             let point = glo.retransformXY(e.offsetX, e.offsetY); 
-            if (planetDragged) {                              
-                this.space.selectedPlanet!.x = point.x;
-                this.space.selectedPlanet!.y = point.y;
+            if (isPlanetDragging) 
+            { 
+                // dragging a planet                             
+                this.space.selectedPlanet!.x += point.x - cursor!.x;
+                this.space.selectedPlanet!.y += point.y - cursor!.y;
+                cursor = point;
                 this.view.draw();
-                this.displaySelectedPlanet();
-            } else if (cursor != null) {
+                this.view.displaySelectedPlanet();
+
+            } 
+            else if (cursor != null) 
+            {
+                // shifting the space
                 glo.shiftX += (point.x - cursor.x) * glo.scale; 
                 glo.shiftY -= (point.y - cursor.y) * glo.scale;
                 cursor = point;
-                this.view.drawCursorCoords(point);
+                this.view.draw();
             }
+            
             // draw cursor coords
             if (!this.stepTimer) {
                 this.view.drawCursorCoords(point);
@@ -226,7 +234,7 @@ export default class Controller {
         });
 
         page.canvas.addEventListener('mouseup', (e: MouseEvent) => {
-            planetDragged = false;
+            isPlanetDragging = false;
             cursor = null;
         });
    
@@ -340,10 +348,9 @@ export default class Controller {
         this.view.draw();
         if (glo.stepsCount % View.DISPLAY_INTERVAL == 0) {
             this.view.displayInfo();
-            this.displaySelectedPlanet();
+            this.view.displaySelectedPlanet();
         }
     }
-
 
 
     private startTimer() {
