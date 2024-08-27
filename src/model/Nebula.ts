@@ -47,7 +47,7 @@ export default class Nebula
             let vx = planet.vx + v * (Math.cos(piece.angle + Math.PI / 2));
             let vy = planet.vy + v * (Math.sin(piece.angle + Math.PI / 2));
 
-            space.planets.push(new Planet(`x`+i, m, r, 
+            space.planets.push(new Planet(`_`+i, m, r, 
                 piece.x + planet.x, 
                 piece.y + planet.y, 
                 vx, vy, planet.color));

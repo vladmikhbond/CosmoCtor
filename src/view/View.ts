@@ -72,7 +72,7 @@ export default class View
         // rocket
         if (planet instanceof Rocket) 
         {
-            const ROCKET_LEN = 5;
+            const ROCKET_LEN = 9;
             let e = planet.e();
             let x = planet.x + ROCKET_LEN * e[0];
             let y = planet.y + ROCKET_LEN * e[1];

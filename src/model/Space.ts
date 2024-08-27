@@ -10,29 +10,6 @@ export default class Space extends EventTarget
     }
 
     planets: Planet[];
-    
-//#region copy & restore
-
-    // planetDatas: any;
-    
-    // copyPlanets() {
-    //     this.planetDatas = [];
-    //     for (let p of this.planets) {
-    //         let copy = { ...p };
-    //         this.planetDatas.push(copy);
-    //     }
-    // }
-    
-    // restorePlanets() {
-    //     this.planets = [];
-    //     for (let planetData of this.planetDatas) {
-    //         let planet = new Planet();
-    //         Object.assign(planet, planetData); 
-    //         this.planets.push(planet);
-    //     }
-    // }
-
-//#endregion copy & restore
 
     private _selectedPlanet: Planet | null = null;
 
@@ -42,14 +19,12 @@ export default class Space extends EventTarget
 
     set selectedPlanet(planet: Planet | null) {
         this._selectedPlanet = planet;
-        this.emit('selectPlanetEvent', planet);
-       
+        this.emit('selectPlanetEvent', planet);       
     }
 
     constructor(...planets: Planet[]) { 
         super();
-        this.planets = planets;
-        
+        this.planets = planets;  
     }
 
     massCenter(): [number, number] {

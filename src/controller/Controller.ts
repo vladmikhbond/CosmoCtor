@@ -1,5 +1,5 @@
 import { page, glo } from '../globals/globals.js';
-import { data } from './data.js';
+import { data, serialization, deserialization} from './data/data.js';
 
 import Nebula from '../model/Nebula.js';
 import Planet from '../model/Planet.js';
@@ -44,23 +44,27 @@ export default class Controller {
 
         // saveSceneButton: save space.planets
         page.saveSceneButton.addEventListener('click', () => {
-            let objects = this.space.planets.map(p => {
-                return { name: p.name, m: p.m, r: p.r, x: p.x, y: p.y, vx: p.vx, vy: p.vy, color: p.color };
-            });
-            let json = JSON.stringify(objects);
+            // let objects = this.space.planets
+            //     .filter(p => p instanceof Planet)
+            //     .map(p => {
+            //         return { name: p.name, m: p.m, r: p.r, x: p.x, y: p.y, vx: p.vx, vy: p.vy, color: p.color };
+            //     });
+            // let json = JSON.stringify(objects);
+            let json = serialization(this.space.planets);
             page.sceneArea.innerHTML = json;
         });
 
         // loadSceneButton: load space.planets
         page.loadSceneButton.addEventListener('click', () => {
-            let json = page.sceneArea.value;
-            let objects: [] = JSON.parse(json);
+            // let json = page.sceneArea.value;
+            // let objects: [] = JSON.parse(json);
 
-            this.space.planets = objects.map(o => {
-                let p = new Planet();
-                Object.assign(p, o);
-                return p;
-            })
+            // this.space.planets = objects.map(o => {
+            //     let p = new Planet();
+            //     Object.assign(p, o);
+            //     return p;
+            // })
+            this.space.planets = deserialization(page.sceneArea.value);
             this.stopTimer();
             this.view.draw();
         });
