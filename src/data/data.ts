@@ -1,4 +1,4 @@
-import Planet from "../../model/Planet.js";
+import Planet from "../model/Planet.js";
 
 export const data = [
     {   
@@ -115,24 +115,3 @@ export const data = [
 ]
 
 
-// serialize real planets only
-//
-export function serialization(planets: Planet[]): string 
-{
-    let objects = planets
-        .filter(p => !p.name.startsWith('_'))
-        .map(p => {
-            return { name: p.name, m: p.m, r: p.r, x: p.x, y: p.y, vx: p.vx, vy: p.vy, color: p.color };
-        });
-    return JSON.stringify(objects);
-}
-
-export function deserialization(json: string): Planet[] 
-{
-    let objects:[] = JSON.parse(json);
-    return objects.map(o => {
-        let p = new Planet();
-        Object.assign(p, o);
-        return p;
-    })
-}

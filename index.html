@@ -31,7 +31,10 @@
         </div>
 
         <div>
-            <input type="range" id="scopeRange" min="-10" max="10" value="0" step="1" title="Телескоп"/>
+            <input type="range" id="scopeRange" min="-15" max="1" value="0" step="1" title="Телескоп" list="markers"/>
+            <datalist id="markers" >
+                <option value="0" ></option>
+            </datalist>
         </div> 
         Total: <span id="stepsCountSpan"></span> |  
         Speed: <span id="stepsPerSecSpan"></span> |
@@ -80,10 +83,10 @@
     <div id="footer">
         <textarea id="sceneArea">
             [{"name":"Sun","m":1000,"r":20,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
-            {"name":"Earth","m":0.001,"r":7,"x":300,"y":0,"vx":0,"vy":1.826,"color":"lightblue"},
-            {"name":"Mars","m":0.001,"r":6,"x":353.23,"y":186.88,"vx":-0.7398,"vy":1.3989,"color":"orange"}]
-                        
-        </textarea>
+            {"name":"Mars","m":0.001,"r":6,"x":347.30075,"y":197.6644,"vx":-0.78795,"vy":1.3726,"color":"orange"},
+            {"name":"Earth","m":0.001,"r":7,"x":300,"y":0,"vx":0,"vy":1.826,"color":"lightblue"}]
+                                
+        </textarea> 
     </div>
 </div>
 

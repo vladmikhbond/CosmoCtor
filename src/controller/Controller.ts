@@ -1,5 +1,6 @@
 import { page, glo } from '../globals/globals.js';
-import { data, serialization, deserialization} from './data/data.js';
+import {data} from '../data/data.js';
+import { serialization, deserialization} from '../serialize/serialize.js';
 
 import Nebula from '../model/Nebula.js';
 import Planet from '../model/Planet.js';
@@ -115,7 +116,7 @@ export default class Controller {
             if (this.space.selectedPlanet) {
                 page.span1.innerHTML = 'Velo ';
                 page.span2.innerHTML = 'Time '; 
-                page.field1.value = '1';
+                page.field1.value = '';
                 page.field2.value = '0';  
                 page.actionBoard.style.display='block';                    
                 this.view.draw();
