@@ -60,8 +60,10 @@ export const page = {
     actionBoard: document.getElementById('actionBoard')!,
     span1: <HTMLSpanElement>document.getElementById('span1')!,
     span2: <HTMLSpanElement>document.getElementById('span2')!,
+    span3: <HTMLSpanElement>document.getElementById('span3')!,
     field1: <HTMLInputElement>document.getElementById('field1')!,
     field2: <HTMLInputElement>document.getElementById('field2')!,
+    field3: <HTMLInputElement>document.getElementById('field3')!,
     okButton: document.getElementById('okButton')!,
     cancelButton: document.getElementById('cancelButton')!,
     

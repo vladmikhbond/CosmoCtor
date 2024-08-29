@@ -1,5 +1,7 @@
 import Planet from './Planet.js';
 import {glo} from '../globals/globals.js';
+import Rocket from './Rocket.js';
+import Nebula from './Nebula.js';
 
 export default class Space extends EventTarget 
 {
@@ -10,6 +12,8 @@ export default class Space extends EventTarget
     }
 
     planets: Planet[];
+
+    starters: {kind: number, param1: number, param2: number, startStep: number, planet:Planet }[] = [];
 
     private _selectedPlanet: Planet | null = null;
 
@@ -94,7 +98,21 @@ export default class Space extends EventTarget
             this.selectedPlanet = null;
         }
         
-        // step counter
+        // check starters 
+        for (let starter of this.starters) {
+            if (starter.startStep == glo.stepsCount) {          
+                if (starter.kind == 1) {
+                    // rocket
+                    let rocket = new Rocket(starter.param1, starter.planet);
+                    this.planets.push(rocket);
+                } else if (starter.kind == 2) {
+                    // nebula
+                    new Nebula(starter.param1, starter.param2, starter.planet, this); 
+                } 
+            }
+        }
+
+        // increment step counter
         glo.stepsCount++;    
     }
 

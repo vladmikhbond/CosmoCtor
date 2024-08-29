@@ -45,26 +45,12 @@ export default class Controller {
 
         // saveSceneButton: save space.planets
         page.saveSceneButton.addEventListener('click', () => {
-            // let objects = this.space.planets
-            //     .filter(p => p instanceof Planet)
-            //     .map(p => {
-            //         return { name: p.name, m: p.m, r: p.r, x: p.x, y: p.y, vx: p.vx, vy: p.vy, color: p.color };
-            //     });
-            // let json = JSON.stringify(objects);
             let json = serialization(this.space.planets);
             page.sceneArea.innerHTML = json;
         });
 
         // loadSceneButton: load space.planets
         page.loadSceneButton.addEventListener('click', () => {
-            // let json = page.sceneArea.value;
-            // let objects: [] = JSON.parse(json);
-
-            // this.space.planets = objects.map(o => {
-            //     let p = new Planet();
-            //     Object.assign(p, o);
-            //     return p;
-            // })
             this.space.planets = deserialization(page.sceneArea.value);
             this.stopTimer();
             this.view.draw();
@@ -114,56 +100,43 @@ export default class Controller {
 
         page.rocketButton.addEventListener('click', () => {
             if (this.space.selectedPlanet) {
+                page.span1.style.display = page.field1.style.display = 'inline';
+                page.span2.style.display = page.field2.style.display = 'none';
+                page.span3.style.display = page.field3.style.display = 'inline';
+
                 page.span1.innerHTML = 'Velo ';
-                page.span2.innerHTML = 'Time '; 
-                page.field1.value = '';
-                page.field2.value = '0';  
+                page.span3.innerHTML = 'Time '; 
                 page.actionBoard.style.display='block';                    
                 this.view.draw();
                 mode = CreateMode.Rocket;
-            } else {
-                alert('Select planet before.');
             }
         
         });
 
         page.nebulaButton.addEventListener('click', () => {
             if (this.space.selectedPlanet) {
-                page.actionBoard.style.display='block';
+                page.span1.style.display = page.field1.style.display = 'inline';
+                page.span2.style.display = page.field2.style.display = 'inline';
+                page.span3.style.display = page.field3.style.display = 'inline';
+
                 page.span1.innerHTML = 'Number ';
                 page.span2.innerHTML = 'Radius '; 
-                page.field1.value = '2000';
-                page.field2.value = '400';  
+                page.span3.innerHTML = 'Time&nbsp;&nbsp;';  
                 page.actionBoard.style.display='block';
                 this.view.draw();
                 mode = CreateMode.Nebula;
-            } else {
-                alert('Select a planet before.');
-            }
+            } 
         });
         
         // actionButton_click  
         page.okButton.addEventListener('click', () => {
-            let timeout = +page.field2.value * 1000;
-            let planet = this.space.selectedPlanet!;
-
-            if (mode === CreateMode.Rocket) 
-            {
-                let velo = +page.field1.value;
-                setTimeout(() => {
-                    let rocket = new Rocket(velo, planet);
-                    this.space.planets.push(rocket);
-                    this.view.draw(); 
-                }, timeout);
-                page.actionBoard.style.display = 'none';
-            } 
-            else if (mode === CreateMode.Nebula) 
-            {
-                let n = +page.field1.value;
-                let R = +page.field2.value;
-                new Nebula(n, R, this.space);                       
-                this.view.draw();                        
-            }
+            this.space.starters.push({
+                kind: mode, 
+                param1:+page.field1.value, 
+                param2:+page.field2.value, 
+                startStep:+page.field3.value + glo.stepsCount, 
+                planet: this.space.selectedPlanet! 
+            });
             page.actionBoard.style.display = 'none';
         });
 

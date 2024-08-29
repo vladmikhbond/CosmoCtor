@@ -4,11 +4,9 @@ import Space from "./Space.js";
 
 export default class Nebula
 {
-
-     
-    constructor(n: number, nebulaR: number, space: Space)
+ 
+    constructor(n: number, nebulaR: number, planet: Planet, space: Space)
     { 
-        let planet = space.selectedPlanet!;
         space.removeSelectedPlanet();
 
         type Piece = {x: number, y: number, ax: number, ay: number, angle: number, r: number};
@@ -52,8 +50,9 @@ export default class Nebula
                 piece.y + planet.y, 
                 vx, vy, planet.color));
         }
+        // 
+        space.removePlanet(planet);
 
-        space.step();
     }
 
 }
