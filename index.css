@@ -6,36 +6,35 @@ body {
     position:fixed;
     z-index: 2;
     display: none;
-    
-    text-align: center;
+
 
     top: 61px;
     left: 324px;
     width: 450px;
-    background-color: white;
     border: solid black 1px;
-    padding: 10px;
-    background-color:lightcyan;
+    /* padding: 10px; */
+    background-color:darkblue;
     box-shadow: 10px 10px 15px rgba(135, 130, 130, 0.5);
 }
 
+#condDiv, #helpDiv, #solvDiv  {
+    text-align: left;
+    padding: 10px;
+    margin:2px;
+}
+
+
+
 #condDiv {
     background-color: greenyellow;
-    text-align: left;
 }
 
 #helpDiv {
     background-color: yellow;
-    text-align: left;
 }
 
 #solvDiv {
     background-color:lightpink;
-    text-align: left;
-}
-
-#openHelpButton, #closeHelpButton {
-    margin-top: 10px;
 }
 
 #menuDiv {

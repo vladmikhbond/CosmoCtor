@@ -8,8 +8,9 @@ import Rocket from '../model/Rocket.js';
 import Space from '../model/Space.js';
 import View from '../view/View.js';
 
-export default class Controller {
-        stepTimer = 0;
+export default class Controller 
+{
+    stepTimer = 0;
 
     timeStamp = Date.now();
 
@@ -276,7 +277,7 @@ export default class Controller {
         });
 
         page.closeTaskButton.addEventListener('click', () => {
-            page.condDiv.style.display = 'none';
+            page.taskDiv.style.display = 'none';
         });
 
         // Створює кнопки завдання і саджає не кожну свій обробник.
@@ -295,7 +296,8 @@ export default class Controller {
 
                 (<HTMLDivElement>page.condDiv.firstElementChild).innerHTML = task.cond;
                 (<HTMLDivElement>page.helpDiv.firstElementChild).innerHTML = task.help;
-                page.solvDiv.innerHTML = task.solv;
+                (<HTMLDivElement>page.solvDiv.firstElementChild).innerHTML = task.solv;
+                //page.solvDiv.innerHTML = task.solv;
 
                 page.helpDiv.style.display = 'none';
                 page.solvDiv.style.display = 'none';
