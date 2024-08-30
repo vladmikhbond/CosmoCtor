@@ -19,10 +19,16 @@ export const glo =
 
 export const page = { 
     menuDiv: <HTMLDivElement>document.getElementById('menuDiv')!,
-    conditionDiv: <HTMLDivElement>document.getElementById('conditionDiv')!,
+    taskDiv: <HTMLDivElement>document.getElementById('taskDiv')!,
+    condDiv: <HTMLDivElement>document.getElementById('condDiv')!,
     helpDiv: <HTMLDivElement>document.getElementById('helpDiv')!,
+    solvDiv: <HTMLDivElement>document.getElementById('solvDiv')!,
+
     openHelpButton: <HTMLButtonElement>document.getElementById('openHelpButton')!,
-    closeHelpButton: <HTMLButtonElement>document.getElementById('closeHelpButton')!,
+    openSolvButton: <HTMLButtonElement>document.getElementById('openSolvButton')!,
+    closeTaskButton: <HTMLButtonElement>document.getElementById('closeTaskButton')!,
+
+
     canvas: _canvas,
     hideButton: document.getElementById('hideButton')!,
     dashboard: document.getElementById('dashboard')!,
@@ -56,7 +62,8 @@ export const page = {
     rocketButton: document.getElementById('rocketButton')!,
     nebulaButton: document.getElementById('nebulaButton')!,
     delButton: document.getElementById('delButton')!,
-    //
+
+    // action
     actionBoard: document.getElementById('actionBoard')!,
     span1: <HTMLSpanElement>document.getElementById('span1')!,
     span2: <HTMLSpanElement>document.getElementById('span2')!,

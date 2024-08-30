@@ -9,15 +9,21 @@
 <div id="menuDiv">
     <span>Cosmos Ctor</span>
 </div>
-<div id="conditionDiv">
-    <div></div>
-    <button onclick="conditionDiv.style.display = 'none';"> X </button>
-    <button id="openHelpButton" onclick="helpDiv.style.display = 'block';">Help</button>
+<div id="taskDiv">
+    
+    <div id="condDiv">  
+        <div></div>
+        <button id="openHelpButton" >Help</button>
+    </div>
+    <div id="helpDiv">
+        <div></div>
+        <button id="openSolvButton" >Solve</button>
+    </div>
+    <div id="solvDiv"> </div>
+    <button id="closeTaskButton" style="position: absolute; top: 0; right: 0;"> X </button>
 </div>
-<div id="helpDiv">
-    <div></div>
-    <button id="closeHelpButton" onclick="helpDiv.style.display = 'none';"> X </button>
-</div>
+
+
 <div>
     <button id="hideButton" >≡</button>
     <div id="dashboard">
@@ -84,9 +90,8 @@
 
     <div id="footer">
         <textarea id="sceneArea">
-            [{"name":"Sun","m":1000,"r":20,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
-            {"name":"Mars","m":0.001,"r":6,"x":400,"y":0,"vx":0,"vy":1.5811,"color":"orange"},
-            {"name":"Earth","m":0.001,"r":7,"x":300,"y":0,"vx":0,"vy":1.826,"color":"lightblue"}]
+            []  
+
                                 
         </textarea> 
     </div>

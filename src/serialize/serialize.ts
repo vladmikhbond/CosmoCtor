@@ -1,7 +1,9 @@
-// serialize true planets only (not rockets, not nebulas)
+
+import {PlanetData} from '../data/data.js';
 
 import Planet from "../model/Planet.js";
 
+// Serialize true planets only (not rockets, not nebulas)
 //
 export function serialization(planets: Planet[]): string 
 {
@@ -24,7 +26,12 @@ export function serialization(planets: Planet[]): string
 
 export function deserialization(json: string): Planet[] 
 {
-    let objects:[] = JSON.parse(json);
+    let datas: PlanetData[] = JSON.parse(json);
+    return planetsFromData(datas);
+}
+
+export function planetsFromData(objects: PlanetData[]): Planet[] 
+{
     return objects.map(o => {
         let p = new Planet();
         Object.assign(p, o);

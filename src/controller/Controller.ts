@@ -1,6 +1,6 @@
 import { page, glo } from '../globals/globals.js';
 import {data} from '../data/data.js';
-import { serialization, deserialization} from '../serialize/serialize.js';
+import { serialization, deserialization, planetsFromData} from '../serialize/serialize.js';
 
 import Nebula from '../model/Nebula.js';
 import Planet from '../model/Planet.js';
@@ -16,9 +16,9 @@ export default class Controller {
     constructor(public space: Space, public view: View) {
         this.bindClickEvents();
         this.canvasMouseEvents();
-        this.helpDivMouseEvents();
+        this.taskDivMouseEvents();
         this.bindChangeEvents();
-        this.bindMenuEvents();
+        this.bindTaskEvents();
 
         this.space.addEventListener('selectPlanetEvent', e => {
             let p = <Planet|null>(<CustomEvent>e).detail;
@@ -199,56 +199,31 @@ export default class Controller {
    
     }
 
-    private helpDivMouseEvents() {
+    private taskDivMouseEvents() {
 
         let cursor: {x: number, y: number} | null = null;
-        
-        page.helpDiv.addEventListener('mousedown', (e: MouseEvent) => {
-            cursor = {x: e.screenX, y: e.screenY};
-        });
-
-        page.helpDiv.addEventListener('mousemove', (e: MouseEvent) => { 
-            if (cursor) {                              
-                let dx = e.screenX - cursor.x;
-                let dy = e.screenY - cursor.y;
-                let style = window.getComputedStyle(page.helpDiv);
-
-                let left = parseFloat(style.left) + dx;
-                page.helpDiv.style.left = left + 'px';
-
-                let top = parseFloat(style.top) + dy;
-                page.helpDiv.style.top = top + 'px';
-
-                cursor = {x: e.screenX, y: e.screenY};
-            }    
-        });
-
-        page.helpDiv.addEventListener('mouseup', (e: MouseEvent) => {
-            cursor = null;
-        });
    
-
-        page.conditionDiv.addEventListener('mousedown', (e: MouseEvent) => {
+        page.taskDiv.addEventListener('mousedown', (e: MouseEvent) => {
             cursor = {x: e.screenX, y: e.screenY};
         });
 
-        page.conditionDiv.addEventListener('mousemove', (e: MouseEvent) => { 
+        page.taskDiv.addEventListener('mousemove', (e: MouseEvent) => { 
             if (cursor) {                              
                 let dx = e.screenX - cursor.x;
                 let dy = e.screenY - cursor.y;
-                let style = window.getComputedStyle(page.conditionDiv);
+                let style = window.getComputedStyle(page.taskDiv);
 
                 let left = parseFloat(style.left) + dx;
-                page.conditionDiv.style.left = left + 'px';
+                page.taskDiv.style.left = left + 'px';
 
                 let top = parseFloat(style.top) + dy;
-                page.conditionDiv.style.top = top + 'px';
+                page.taskDiv.style.top = top + 'px';
 
                 cursor = {x: e.screenX, y: e.screenY};
             }    
         });
 
-        page.conditionDiv.addEventListener('mouseup', (e: MouseEvent) => {
+        page.taskDiv.addEventListener('mouseup', (e: MouseEvent) => {
             cursor = null;
         });
 
@@ -285,29 +260,49 @@ export default class Controller {
         });
     }
 
-    private bindMenuEvents()  {
+    private bindTaskEvents()  
+    {
+        let solvPlanets: Planet[];
+        
+        page.openHelpButton.addEventListener('click', () => {
+            page.helpDiv.style.display='block'; 
+            page.openHelpButton.style.display='none';
+        });
 
+        page.openSolvButton.addEventListener('click', () => {
+            page.solvDiv.style.display='block'; 
+            page.openSolvButton.style.display='none';
+            this.space.planets = solvPlanets;
+        });
+
+        page.closeTaskButton.addEventListener('click', () => {
+            page.condDiv.style.display = 'none';
+        });
+
+        // Створює кнопки завдання і саджає не кожну свій обробник.
         for (let task of data) {
             let menuButton = document.createElement('Button');
-            menuButton.style.backgroundImage = `url('/assets/${task.name}.png')`;
+            menuButton.style.backgroundImage = `url('/assets/${task.id}.png')`;
             menuButton.title = task.title;
             
+            // Обробник натискання на кнопку завдання
             menuButton.addEventListener('click', () => {
-                this.space.planets = task.planets.map(o => {
-                    let p = new Planet();
-                    Object.assign(p, o);
-                    return p;
-                });
+                this.space.planets = planetsFromData(task.planets);
+                solvPlanets = planetsFromData(task.solvPlanets);
 
-                (<HTMLDivElement>page.conditionDiv.firstElementChild).innerHTML = task.cond;
-                page.conditionDiv.style.display = 'block';
+                page.openHelpButton.style.display = page.openSolvButton.style.display = 'block';
+                page.taskDiv.style.display = 'block';
 
+                (<HTMLDivElement>page.condDiv.firstElementChild).innerHTML = task.cond;
                 (<HTMLDivElement>page.helpDiv.firstElementChild).innerHTML = task.help;
-                page.helpDiv.style.top = page.conditionDiv.offsetTop + page.conditionDiv.clientHeight + 'px';
+                page.solvDiv.innerHTML = task.solv;
+
                 page.helpDiv.style.display = 'none';
+                page.solvDiv.style.display = 'none';
 
                 this.stopTimer();
                 this.view.draw();
+
                 // Математичні формули у динамічному контенті
                 (new Function("","MathJax.typeset()"))();            
             })

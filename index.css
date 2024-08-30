@@ -2,8 +2,8 @@ body {
     width: 1000px;
 }
 
-#conditionDiv {
-    position: absolute;
+#taskDiv {
+    position:fixed;
     z-index: 2;
     display: none;
     
@@ -15,23 +15,23 @@ body {
     background-color: white;
     border: solid black 1px;
     padding: 10px;
-    background-color: #f0f0f0;
+    background-color:lightcyan;
     box-shadow: 10px 10px 15px rgba(135, 130, 130, 0.5);
 }
 
-#helpDiv {
-    position: absolute;
-    z-index: 2;
-    display: none;
+#condDiv {
+    background-color: greenyellow;
+    text-align: left;
+}
 
-    top: 185px;
-    left: 324px;
-    width: 450px;
-    background-color: white;
-    border: solid black 1px;
-    padding: 10px;
-    background-color: #f0f0f0;
-    box-shadow: 10px 10px 15px rgba(135, 130, 130, 0.5);
+#helpDiv {
+    background-color: yellow;
+    text-align: left;
+}
+
+#solvDiv {
+    background-color:lightpink;
+    text-align: left;
 }
 
 #openHelpButton, #closeHelpButton {
