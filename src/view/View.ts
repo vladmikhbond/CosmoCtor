@@ -37,7 +37,6 @@ export default class View
         ctx.save();
         ctx.translate(glo.shiftX, glo.shiftY);
         ctx.scale(glo.scale, -glo.scale);
-
     
         // all planets
         for (const planet of space.planets) { 
@@ -46,6 +45,15 @@ export default class View
             else
                 this.drawPlanet(planet);
         }
+        
+        // center of mass
+        if (this.trackMode) {
+            ctx.fillStyle = 'red';
+            let [cx, cy] = this.space.massCenter()
+            ctx.fillRect(cx-3, cy-1, 6, 2);
+            ctx.fillRect(cx-1, cy-3, 2, 6);
+        }
+
         ctx.restore();        
     }
 
