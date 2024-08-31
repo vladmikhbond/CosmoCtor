@@ -263,7 +263,7 @@ export default class Controller
 
     private bindTaskEvents()  
     {
-        let solvPlanets: Planet[];
+        let finalPlanets: Planet[];
         
         page.openHelpButton.addEventListener('click', () => {
             page.helpDiv.style.display='block'; 
@@ -273,7 +273,7 @@ export default class Controller
         page.openSolvButton.addEventListener('click', () => {
             page.solvDiv.style.display='block'; 
             page.openSolvButton.style.display='none';
-            this.space.planets = solvPlanets;
+            this.space.planets = finalPlanets;
         });
 
         page.closeTaskButton.addEventListener('click', () => {
@@ -289,7 +289,7 @@ export default class Controller
             // Обробник натискання на кнопку завдання
             menuButton.addEventListener('click', () => {
                 this.space.planets = planetsFromData(task.planets);
-                solvPlanets = planetsFromData(task.solvPlanets);
+                finalPlanets = planetsFromData(task.final);
 
                 page.openHelpButton.style.display = page.openSolvButton.style.display = 'block';
                 page.taskDiv.style.display = 'block';
