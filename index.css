@@ -13,6 +13,7 @@ body {
     border: solid black 1px;
     background-color:darkblue;
     box-shadow: 10px 10px 15px rgba(135, 130, 130, 0.5);
+    user-select: none; /* Стандартний синтаксис */
 }
 
 #condDiv, #helpDiv, #solvDiv  {
