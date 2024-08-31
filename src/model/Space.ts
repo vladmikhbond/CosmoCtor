@@ -5,12 +5,20 @@ import Nebula from './Nebula.js';
 
 export default class Space extends EventTarget 
 {
-    // Метод для виклику події
-    emit(eventName: string, detail: any) {
-      const event = new CustomEvent<Planet|null>(eventName, {detail});
+    // Метод для виклику події 'selectPlanetEvent'
+    //
+    emitSelectPlanetEvent(detail: any) {
+      const event = new CustomEvent<Planet|null>('selectPlanetEvent', {detail});
       this.dispatchEvent(event);
     }
 
+    // Метод для виклику події 'mergePlanetEvent'
+    //
+    mergePlanetEvent(detail: any) {
+        const event = new CustomEvent<Planet>('mergePlanetEvent', {detail});
+        this.dispatchEvent(event);
+    }
+  
     planets: Planet[];
 
     starters: {kind: number, param1: number, param2: number, startStep: number, planet:Planet }[] = [];
@@ -23,7 +31,7 @@ export default class Space extends EventTarget
 
     set selectedPlanet(planet: Planet | null) {
         this._selectedPlanet = planet;
-        this.emit('selectPlanetEvent', planet);       
+        this.emitSelectPlanetEvent(planet);       
     }
 
     constructor(...planets: Planet[]) { 
@@ -88,6 +96,7 @@ export default class Space extends EventTarget
                     big.m = m;
                     big.r = Math.sqrt(big.r ** 2 + small.r ** 2);
                     small.m = 0; 
+                    this.mergePlanetEvent(big); 
                 }
             }    
         }

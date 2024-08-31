@@ -5,6 +5,15 @@ import Space from '../model/Space.js';
 
 export default class View 
 {
+    anime (planet: Planet) {
+        
+        let oldColor = planet.color;
+        planet.color = 'red';
+        setTimeout(() => {
+            planet.color = oldColor;
+        }, 300); 
+        
+    }
     
     ctx: CanvasRenderingContext2D;
     // tracks
@@ -45,7 +54,7 @@ export default class View
             else
                 this.drawPlanet(planet);
         }
-        
+
         // center of mass
         if (this.trackMode) {
             ctx.fillStyle = 'red';

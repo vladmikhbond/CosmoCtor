@@ -3,7 +3,7 @@ body {
 }
 
 #taskDiv {
-    position:fixed;
+    position: absolute;
     z-index: 2;
     display: none;
 
@@ -48,12 +48,11 @@ body {
 }
 
 #menuDiv button {
-    width: 30px; 
-    height: 30px; 
+    width: 36px; 
+    height: 36px; 
     background-size:contain;
     border: none; 
     cursor: pointer; 
-
     margin-left: 8px;
 }
 
@@ -69,7 +68,6 @@ body {
     padding-top: -5px;
     height: 24px;
     border: none;
-
 }
 
 .dash-btn {

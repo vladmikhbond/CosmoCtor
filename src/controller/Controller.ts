@@ -22,14 +22,19 @@ export default class Controller
         this.bindTaskEvents();
 
         this.space.addEventListener('selectPlanetEvent', e => {
-            let p = <Planet|null>(<CustomEvent>e).detail;
-            if (p) {
+            let planet = <Planet|null>(<CustomEvent>e).detail;
+            if (planet) {
                 this.view.displaySelectedPlanet(); 
                 page.planetBoard.style.display = 'block';
             } else {
                 page.planetBoard.style.display = 'none';
                 page.actionBoard.style.display = 'none';
             }
+        })
+        
+        this.space.addEventListener('mergePlanetEvent', e => {            
+            let planet = <Planet>(<CustomEvent>e).detail;
+            this.view.anime(planet);
         })
         
     }
