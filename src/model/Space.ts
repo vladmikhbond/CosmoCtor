@@ -6,7 +6,7 @@ import Nebula from './Nebula.js';
 export default class Space extends EventTarget 
 {
     // Метод для виклику події
-    emit(eventName: string, detail: Planet|null) {
+    emit(eventName: string, detail: any) {
       const event = new CustomEvent<Planet|null>(eventName, {detail});
       this.dispatchEvent(event);
     }
