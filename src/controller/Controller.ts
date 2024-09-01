@@ -1,12 +1,13 @@
 import { page, glo } from '../globals/globals.js';
 import {data} from '../data/data.js';
-import { serialization, deserialization, planetsFromData} from '../serialize/serialize.js';
+import { serialization, deserialization} from '../serialize/serialize.js';
 
 import Nebula from '../model/Nebula.js';
 import Planet from '../model/Planet.js';
 import Rocket from '../model/Rocket.js';
 import Space from '../model/Space.js';
 import View from '../view/View.js';
+import { Starter } from '../model/Starter.js';
 
 export default class Controller 
 {
@@ -270,7 +271,7 @@ export default class Controller
 
     private bindTaskEvents()  
     {
-        let finalPlanets: Planet[];
+        let final: {planets: Planet[], starters: Starter[]};
         
         page.openHelpButton.addEventListener('click', () => {
             page.helpDiv.style.display='block'; 
@@ -280,7 +281,12 @@ export default class Controller
         page.openSolvButton.addEventListener('click', () => {
             page.solvDiv.style.display='block'; 
             page.openSolvButton.style.display='none';
-            this.space.planets = finalPlanets;
+            this.space.planets = final.planets;
+            this.space.starters = final.starters;
+             
+            glo.stepsCount = 0;
+            this.stopTimer();
+            this.view.draw();           
         });
 
         page.closeTaskButton.addEventListener('click', () => {
@@ -295,8 +301,10 @@ export default class Controller
             
             // Обробник натискання на кнопку завдання
             menuButton.addEventListener('click', () => {
-                this.space.planets = planetsFromData(task.planets);
-                finalPlanets = planetsFromData(task.final);
+                let o = deserialization(task.planets);
+                this.space.planets = o.planets;
+                this.space.starters = o.starters;
+                final = deserialization(task.final);
 
                 page.openHelpButton.style.display = page.openSolvButton.style.display = 'block';
                 page.taskDiv.style.display = 'block';
@@ -309,6 +317,7 @@ export default class Controller
                 page.helpDiv.style.display = 'none';
                 page.solvDiv.style.display = 'none';
 
+                glo.stepsCount = 0;
                 this.stopTimer();
                 this.view.draw();
 

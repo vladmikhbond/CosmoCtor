@@ -1,34 +1,21 @@
 import Planet from "../model/Planet.js";
-
-export type PlanetData = {
-    name: string;
-    m: number;
-    r: number;
-    x: number;
-    y: number;
-    vx: number;
-    vy: number;
-    color: string;
-}
-
 type TaskData = {
     id: string;
     title: string;
-    planets: PlanetData[];
+    planets: string;
     cond: string;
     help: string;
     solv: string;
-    final: PlanetData[];
+    final: string ;
 }
-
 
 export const data: TaskData[] = [
     {   
 id: 'task1',
 title: 'Зірка з планетою на круговій орбіті',
 planets: 
-[{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
-            {"name":"Earth","m":10,"r":8,"x":400,"y":0,"vx":0,"vy":0,"color":"lightblue"}],
+`[{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
+            {"name":"Earth","m":10,"r":8,"x":400,"y":0,"vx":0,"vy":0,"color":"lightblue"}]`,
 cond: 
 `Є система «зірка-планета» і планета знаходиться на заданій відстані від зірки. 
 Надайте планеті таку швидкість, щоб вона почала рухатись навколо зірки по круговій орбіті.`,
@@ -44,8 +31,8 @@ solv:
 <p>З вихідних даних \\( M = 10^4, G = 1, r=400 \\) обчислюємо швидкість планети: \\(v = 5\\).
 <p>В моделі швидкості задаються x і y компонентами, тому в заданому положенні планети v = (0, 5).`,
 final: 
-[{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
- {"name":"Earth","m":10,"r":8,"x":400,"y":0,"vx":0,"vy":5,"color":"lightblue"}],
+`[{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
+ {"name":"Earth","m":10,"r":8,"x":400,"y":0,"vx":0,"vy":5,"color":"lightblue"}]`,
     },
 
 
@@ -53,8 +40,8 @@ final:
 id: 'task2',
 title: 'Зірка з планетою на еліптичній орбіті',
 planets: 
-[{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
-    {"name":"Earth","m":10,"r":8,"x":400,"y":0,"vx":0,"vy":5,"color":"lightblue"}],
+`[{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
+    {"name":"Earth","m":10,"r":8,"x":400,"y":0,"vx":0,"vy":5,"color":"lightblue"}]`,
 cond: 
 `Є система «зірка-планета» і планета знаходиться на заданій відстані від зірки. 
 Надайте планеті таку швидкість, щоб вона почала рухатись навколо зірки по еліпсу з великою віссю d.`,
@@ -77,15 +64,15 @@ solv:
 <p>\\( M = 10^4;    G = 1;    r_a=300;    d=400.   v_a≈ 3.162  \\)
 `,
 final: 
-[{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
-    {"name":"Earth","m":10,"r":8,"x":400,"y":0,"vx":0,"vy":3.162,"color":"lightblue"}],
+`[{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
+    {"name":"Earth","m":10,"r":8,"x":400,"y":0,"vx":0,"vy":3.162,"color":"lightblue"}]`,
     },
 
     {   
 id: 'task3',
 title: 'Подвійна зірка',
-planets: [{"name":"Sun1","m":10000,"r":20,"x":-300,"y":0,"vx":0,"vy":0,"color":"yellow"},
-                  {"name":"Sun2","m":10000,"r":20,"x": 300,"y":0,"vx":0,"vy":0,"color":"coral"}],
+planets: `[{"name":"Sun1","m":10000,"r":20,"x":-300,"y":0,"vx":0,"vy":0,"color":"yellow"},
+                  {"name":"Sun2","m":10000,"r":20,"x": 300,"y":0,"vx":0,"vy":0,"color":"coral"}]`,
 cond: 
 `Створити систему подвійної зірки.Обидві зірки мають однакові маси m, відстанню між їх центрами – r.
 Обрати таку швидкість окремих зірок, яка забезпечить існування системи подвійної зірки.`, 
@@ -106,8 +93,8 @@ solv:
 <p>Приклад. \\( m=10000;  r=600;  v ≈ 2.888 \\) `, 
 
 final: 
-[{"name":"Sun1","m":10000,"r":20,"x":-300,"y":0,"vx":0,"vy":-2.888,"color":"yellow"},
-    {"name":"Sun2","m":10000,"r":20,"x": 300,"y":0,"vx":0,"vy":2.888,"color":"coral"}],
+`[{"name":"Sun1","m":10000,"r":20,"x":-300,"y":0,"vx":0,"vy":-2.888,"color":"yellow"},
+    {"name":"Sun2","m":10000,"r":20,"x": 300,"y":0,"vx":0,"vy":2.888,"color":"coral"}]`,
 
     },
 
@@ -115,9 +102,9 @@ final:
     {   
 id: 'task4',
 title: 'Зірка - планета - супутник',
-planets: [{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
+planets: `[{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
             {"name":"Earth","m":10,"r":5,"x":400,"y":0,"vx":0,"vy":0,"color":"lightblue"},
-            {"name":"Moon","m":0.1,"r":2,"x":410,"y":0,"vx":0,"vy":0,"color":"white"}] ,
+            {"name":"Moon","m":0.1,"r":2,"x":410,"y":0,"vx":0,"vy":0,"color":"white"}]` ,
 cond: 
 `Створити систему зірка-планета-супутник. Планета обертається навкруги зірки, а супутник - навкруги планети.`,
 help: 
@@ -130,17 +117,17 @@ solv:
 `При визначенні швидкості супутника врахуємо, що планета, на відміну від зірки, рухається.
 <p> \\( v_s=\\sqrt{{G m_p}\\over r_s} + v_p  \\)
 <p>Приклад. \\( M=10000;  m_p=100;   m_s=0.1;  \\) \\(   r_p=400; r_s=10;   v_p=5;   v_s=1+5=6 \\)`,
-final: [{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
+final: `[{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
     {"name":"Earth","m":10,"r":5,"x":400,"y":0,"vx":0,"vy":5,"color":"lightblue"},
-    {"name":"Moon","m":0.1,"r":2,"x":410,"y":0,"vx":0,"vy":6,"color":"white"}]  
+    {"name":"Moon","m":0.1,"r":2,"x":410,"y":0,"vx":0,"vy":6,"color":"white"}]`  
    
     },
 
     {   
 id: 'task5',
 title: 'Перша космічна швидкість',
-planets: [{"name":"Earth","m":10000,"r":300,"x":0,"y":0,"vx":0,"vy":0,"color":"green"},
-    {"name":"Noname","m":0.001,"r":5,"x":0,"y":320,"vx":5,"vy":0,"color":"white"}],
+planets: `[{"name":"Earth","m":10000,"r":300,"x":0,"y":0,"vx":0,"vy":0,"color":"green"},
+    {"name":"Noname","m":0.001,"r":5,"x":0,"y":320,"vx":5,"vy":0,"color":"white"}]`,
 cond: 
 `Задана планета і висота над поверхнею планети. 
 З цієї висоти робить горизонтальний постріл гармата, яку зобразив Ньютон в книзі «Трактат про систему світу». 
@@ -154,16 +141,16 @@ help:
 solv:
 `Приклад. \\( M= 10^4;   r=300;  h=20;  v=5.590 \\).`,
 final:
-       [{"name":"Earth","m":10000,"r":300,"x":0,"y":0,"vx":0,"vy":0,"color":"green"},
-        {"name":"Noname","m":0.001,"r":5,"x":0,"y":320,"vx":5.590,"vy":0,"color":"white"}],
+       `[{"name":"Earth","m":10000,"r":300,"x":0,"y":0,"vx":0,"vy":0,"color":"green"},
+        {"name":"Noname","m":0.001,"r":5,"x":0,"y":320,"vx":5.590,"vy":0,"color":"white"}]`,
     },
 
     {   
 id: 'taskX',
 title: 'Ракета від Землі до Сонця',
 planets: 
-[{"name":"Sun","m":1000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
-    {"name":"Earth","m":0.01,"r":8,"x":400,"y":0,"vx":0,"vy":1.581,"color":"lightblue"}],
+`[{"name":"Sun","m":1000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
+    {"name":"Earth","m":0.01,"r":8,"x":400,"y":0,"vx":0,"vy":1.581,"color":"lightblue"}]`,
    
 cond: 
 `Планета обертається навкруги центральної зірки по круговій орбіті.
@@ -174,24 +161,26 @@ help:
 Тоді ракета має рухатися по еліпсу з великою віссю \\( d=r_a+r_p \\) ,  де \\( r_a=S,   r_p=2R  \\)
 `,
 solv: 
-`Спершу треба визначитись, в афелії чи перигелії знаходиться ракета під час старту. 
-Якщо S > 2R, це афелій.
-\\( v_a=\\sqrt{{2GMr_p} \\over d r_a } + v_{планети}\\)   
-Приклад. \\( M= 1000;   S=400;  R=25;  v=-0.836 \\)
+`Спершу треба з'ясувати, в афелії чи перигелії знаходиться ракета підчас старту. 
+<p>Якщо S > 2R, це афелій.
+<p>\\( v_a=\\sqrt{{2GMr_p} \\over d r_a } + v_{планети}\\)   
+<p>Приклад. \\( M= 1000;   S=400;  R=25;  v=-0.836 \\)
 `,
-final:     [{"name":"Sun","m":1000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
-    {"name":"Earth","m":0.01,"r":8,"x":400,"y":0,"vx":0,"vy":1.581,"color":"lightblue"}],
+final: 
+    `{"planets":[{"name":"Earth","m":0.01,"r":8,"x":400,"y":0,"vx":0,"vy":1.581,"color":"lightblue"},
+    {"name":"Sun","m":1000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"}],
+    "starters":[{"kind":1,"param1":-0.836,"param2":0,"startStep":0,"planetName":"Earth"}]}`,
    
     },
 
     // {   
     //     id: 'taskX',
     //     title: '',
-    //     planets: [],
+    //     planets: ``,
     //     cond: `Чисте небо - робіть, що хочте.`,
     //     help: ``,
     //     solv: ``,
-    //     final: [],
+    //     final: ``,
     // },
 
 

@@ -1,9 +1,19 @@
-
-import {PlanetData} from '../data/data.js';
-
 import Planet from "../model/Planet.js";
 import Space from '../model/Space.js';
 import { Starter } from '../model/Starter.js';
+
+export type PlanetData = {
+    name: string;
+    m: number;
+    r: number;
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    color: string;
+}
+
+export type TaskData = {planets: Planet[], starters: Starter[]};
 
 // Serialize true planets only (not rockets, not nebulas)
 //
@@ -27,19 +37,19 @@ export function serialization(space: Space): string
     return json.replaceAll('},', '},\n');
 }
 
-export function deserialization(json: string)
+export function deserialization(json: string): TaskData
 {
     let x: any = JSON.parse(json);
     if (!("planets" in x)) {
         json = `{"planets":  ${json} , "starters":[]}`;
     }
 
-    let o: {planets: PlanetData[]; starters: Starter[]} = JSON.parse(json);
+    let o: TaskData = JSON.parse(json);
     return {planets: planetsFromData(o.planets), 
             starters: o.starters};
 }
 
-export function planetsFromData(objects: PlanetData[]): Planet[] 
+function planetsFromData(objects: PlanetData[]): Planet[] 
 {
     return objects.map(o => {
         let p = new Planet();
