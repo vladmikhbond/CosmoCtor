@@ -2,9 +2,11 @@ import Planet from './Planet.js';
 import {glo} from '../globals/globals.js';
 import Rocket from './Rocket.js';
 import Nebula from './Nebula.js';
+import { Starter } from './Starter.js';
 
 export default class Space extends EventTarget 
 {
+
     // Метод для виклику події 'selectPlanetEvent'
     //
     emitSelectPlanetEvent(detail: any) {
@@ -21,7 +23,7 @@ export default class Space extends EventTarget
   
     planets: Planet[];
 
-    starters: {kind: number, param1: number, param2: number, startStep: number, planet:Planet }[] = [];
+    starters: Starter[] = [];
 
     private _selectedPlanet: Planet | null = null;
 
@@ -32,6 +34,11 @@ export default class Space extends EventTarget
     set selectedPlanet(planet: Planet | null) {
         this._selectedPlanet = planet;
         this.emitSelectPlanetEvent(planet);       
+    }
+
+    planetByName(name: string): Planet | null {
+        let filtered = this.planets.filter(p => p.name == name);
+        return filtered.length == 0 ? null : filtered[0];
     }
 
     constructor(...planets: Planet[]) { 
@@ -109,14 +116,18 @@ export default class Space extends EventTarget
         
         // check starters 
         for (let starter of this.starters) {
-            if (starter.startStep == glo.stepsCount) {          
+            if (!starter.planetName)
+                continue;
+            let planet = this.planetByName(starter.planetName)!;
+
+            if (starter.startStep == glo.stepsCount && planet) {          
                 if (starter.kind == 1) {
                     // rocket
-                    let rocket = new Rocket(starter.param1, starter.planet);
+                    let rocket = new Rocket(starter.param1, planet);
                     this.planets.push(rocket);
                 } else if (starter.kind == 2) {
                     // nebula
-                    new Nebula(starter.param1, starter.param2, starter.planet, this); 
+                    new Nebula(starter.param1, starter.param2, planet, this); 
                 } 
             }
         }

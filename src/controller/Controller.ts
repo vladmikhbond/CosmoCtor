@@ -51,13 +51,15 @@ export default class Controller
 
         // saveSceneButton: save space.planets
         page.saveSceneButton.addEventListener('click', () => {
-            let json = serialization(this.space.planets);
+            let json = serialization(this.space);
             page.sceneArea.innerHTML = json;
         });
 
         // loadSceneButton: load space.planets
         page.loadSceneButton.addEventListener('click', () => {
-            this.space.planets = deserialization(page.sceneArea.value);
+            let o = deserialization(page.sceneArea.value);
+            this.space.planets = o.planets;
+            this.space.starters = o.starters;
             this.stopTimer();
             this.view.draw();
         });
@@ -138,10 +140,10 @@ export default class Controller
         page.okButton.addEventListener('click', () => {
             this.space.starters.push({
                 kind: mode, 
-                param1:+page.field1.value, 
-                param2:+page.field2.value, 
-                startStep:+page.field3.value + glo.stepsCount, 
-                planet: this.space.selectedPlanet! 
+                param1: +page.field1.value, 
+                param2: +page.field2.value, 
+                startStep: +page.field3.value + glo.stepsCount, 
+                planetName: this.space.selectedPlanet ? this.space.selectedPlanet.name : ''
             });
             page.actionBoard.style.display = 'none';
         });

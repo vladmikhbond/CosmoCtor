@@ -2,12 +2,14 @@
 import {PlanetData} from '../data/data.js';
 
 import Planet from "../model/Planet.js";
+import Space from '../model/Space.js';
+import { Starter } from '../model/Starter.js';
 
 // Serialize true planets only (not rockets, not nebulas)
 //
-export function serialization(planets: Planet[]): string 
+export function serialization(space: Space): string 
 {
-    let objects = planets
+    let planetDatas = space.planets
         .filter(p => !p.name.startsWith('_'))
         .map(p => {
             return { name: p.name, 
@@ -19,15 +21,22 @@ export function serialization(planets: Planet[]): string
                 vy: (p.vy * 1000 | 0) / 1000, 
                 color: p.color };
         });
-    let json = JSON.stringify(objects);
+
+    let json = JSON.stringify({planets: planetDatas, starters: space.starters});
     // insert newlines
     return json.replaceAll('},', '},\n');
 }
 
-export function deserialization(json: string): Planet[] 
+export function deserialization(json: string)
 {
-    let datas: PlanetData[] = JSON.parse(json);
-    return planetsFromData(datas);
+    let x: any = JSON.parse(json);
+    if (!("planets" in x)) {
+        json = `{"planets":  ${json} , "starters":[]}`;
+    }
+
+    let o: {planets: PlanetData[]; starters: Starter[]} = JSON.parse(json);
+    return {planets: planetsFromData(o.planets), 
+            starters: o.starters};
 }
 
 export function planetsFromData(objects: PlanetData[]): Planet[] 
