@@ -1,6 +1,6 @@
 import { page, glo } from '../globals/globals.js';
 import {data} from '../data/data.js';
-import { serialization, deserialization} from '../serialize/serialize.js';
+import { serialization, deserialization, TaskData} from '../serialize/serialize.js';
 
 import Nebula from '../model/Nebula.js';
 import Planet from '../model/Planet.js';
@@ -50,21 +50,6 @@ export default class Controller
                 page.dashboard.style.display = 'none';
         });
 
-        // saveSceneButton: save space.planets
-        page.saveSceneButton.addEventListener('click', () => {
-            let json = serialization(this.space);
-            page.sceneArea.innerHTML = json;
-        });
-
-        // loadSceneButton: load space.planets
-        page.loadSceneButton.addEventListener('click', () => {
-            let o = deserialization(page.sceneArea.value);
-            this.space.planets = o.planets;
-            this.space.starters = o.starters;
-            this.stopTimer();
-            this.view.draw();
-        });
-
         // runButton_click
         page.runButton.addEventListener('click', () => {
             if (!this.stepTimer) {
@@ -86,6 +71,17 @@ export default class Controller
             this.view.trackMode = !this.view.trackMode;
             page.trackButton.innerHTML = this.view.trackMode ? '●' : 'O';
             this.view.draw();
+        });
+
+        // saveSceneButton: save space.planets
+        page.saveSceneButton.addEventListener('click', () => {
+            let json = serialization(this.space);
+            page.sceneArea.innerHTML = json;
+        });
+
+        // loadSceneButton: load space.planets
+        page.loadSceneButton.addEventListener('click', () => {
+            this.clearAll(page.sceneArea.value);
         });
 
         // Get standard or copy selected planet
@@ -271,7 +267,7 @@ export default class Controller
 
     private bindTaskEvents()  
     {
-        let final: {planets: Planet[], starters: Starter[]};
+        let final: string;
         
         page.openHelpButton.addEventListener('click', () => {
             page.helpDiv.style.display='block'; 
@@ -281,12 +277,7 @@ export default class Controller
         page.openSolvButton.addEventListener('click', () => {
             page.solvDiv.style.display='block'; 
             page.openSolvButton.style.display='none';
-            this.space.planets = final.planets;
-            this.space.starters = final.starters;
-             
-            glo.stepsCount = 0;
-            this.stopTimer();
-            this.view.draw();           
+            this.clearAll(final);          
         });
 
         page.closeTaskButton.addEventListener('click', () => {
@@ -301,25 +292,17 @@ export default class Controller
             
             // Обробник натискання на кнопку завдання
             menuButton.addEventListener('click', () => {
-                let o = deserialization(task.planets);
-                this.space.planets = o.planets;
-                this.space.starters = o.starters;
-                final = deserialization(task.final);
+                this.clearAll(task.planets);
+                final = task.final;
 
                 page.openHelpButton.style.display = page.openSolvButton.style.display = 'block';
                 page.taskDiv.style.display = 'block';
+                page.helpDiv.style.display = 'none';
+                page.solvDiv.style.display = 'none';
 
                 (<HTMLDivElement>page.condDiv.firstElementChild).innerHTML = task.cond;
                 (<HTMLDivElement>page.helpDiv.firstElementChild).innerHTML = task.help;
                 (<HTMLDivElement>page.solvDiv.firstElementChild).innerHTML = task.solv;
-                //page.solvDiv.innerHTML = task.solv;
-
-                page.helpDiv.style.display = 'none';
-                page.solvDiv.style.display = 'none';
-
-                glo.stepsCount = 0;
-                this.stopTimer();
-                this.view.draw();
 
                 // Математичні формули у динамічному контенті
                 (new Function("","MathJax.typeset()"))();            
@@ -330,6 +313,19 @@ export default class Controller
         }
     }
 
+    clearAll(data: string) {
+        this.space.planets = [];
+        this.space.starters = [];
+        if (data) {
+            let o = deserialization(data);
+            this.space.planets = o.planets;
+            this.space.starters = o.starters;
+        }
+        this.stopTimer();
+        glo.stepsCount = 0;
+        this.view.draw();
+        this.view.displayInfo();
+    }
 
     static applyParamsHandler(me: Controller) {
         let planet = me.space.selectedPlanet;
