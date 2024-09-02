@@ -25,16 +25,17 @@ export function serialization(space: Space): string
             return { name: p.name, 
                 m: p.m, 
                 r: p.r, 
-                x: (p.x * 1000 | 0) / 1000, 
-                y: (p.y * 1000 | 0) / 1000,
-                vx: (p.vx * 1000 | 0) / 1000,
-                vy: (p.vy * 1000 | 0) / 1000, 
+                x: +p.x.toFixed(3),     
+                y: +p.y.toFixed(3),
+                vx: +p.vx.toFixed(3),
+                vy: +p.vy.toFixed(3), 
                 color: p.color };
         });
 
     let json = JSON.stringify({planets: planetDatas, starters: space.starters});
-    // insert newlines
-    return json.replaceAll('},', '},\n');
+
+    // insert newlines 
+    return json.replaceAll('},', '},\n').replaceAll('],', '],\n');
 }
 
 export function deserialization(json: string): TaskData
