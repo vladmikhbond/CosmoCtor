@@ -292,7 +292,7 @@ export default class Controller
             
             // Обробник натискання на кнопку завдання
             menuButton.addEventListener('click', () => {
-                this.clearAll(task.planets);
+                this.clearAll(task.init);
                 final = task.final;
 
                 page.openHelpButton.style.display = page.openSolvButton.style.display = 'block';

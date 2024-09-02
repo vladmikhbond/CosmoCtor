@@ -2,7 +2,7 @@ import Planet from "../model/Planet.js";
 type TaskData = {
     id: string;
     title: string;
-    planets: string;
+    init: string;
     cond: string;
     help: string;
     solv: string;
@@ -13,7 +13,7 @@ export const data: TaskData[] = [
     {   
 id: 'task1',
 title: 'Зірка з планетою на круговій орбіті',
-planets: 
+init: 
 `[{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
             {"name":"Earth","m":10,"r":8,"x":400,"y":0,"vx":0,"vy":0,"color":"lightblue"}]`,
 cond: 
@@ -39,7 +39,7 @@ final:
     {   
 id: 'task2',
 title: 'Зірка з планетою на еліптичній орбіті',
-planets: 
+init: 
 `[{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
     {"name":"Earth","m":10,"r":8,"x":400,"y":0,"vx":0,"vy":5,"color":"lightblue"}]`,
 cond: 
@@ -71,7 +71,7 @@ final:
     {   
 id: 'task3',
 title: 'Подвійна зірка',
-planets: `[{"name":"Sun1","m":10000,"r":20,"x":-300,"y":0,"vx":0,"vy":0,"color":"yellow"},
+init: `[{"name":"Sun1","m":10000,"r":20,"x":-300,"y":0,"vx":0,"vy":0,"color":"yellow"},
                   {"name":"Sun2","m":10000,"r":20,"x": 300,"y":0,"vx":0,"vy":0,"color":"coral"}]`,
 cond: 
 `Створити систему подвійної зірки.Обидві зірки мають однакові маси m, відстанню між їх центрами – r.
@@ -102,7 +102,7 @@ final:
     {   
 id: 'task4',
 title: 'Зірка - планета - супутник',
-planets: `[{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
+init: `[{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
             {"name":"Earth","m":10,"r":5,"x":400,"y":0,"vx":0,"vy":0,"color":"lightblue"},
             {"name":"Moon","m":0.1,"r":2,"x":410,"y":0,"vx":0,"vy":0,"color":"white"}]` ,
 cond: 
@@ -126,7 +126,7 @@ final: `[{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yello
     {   
 id: 'task5',
 title: 'Перша космічна швидкість',
-planets: `[{"name":"Earth","m":10000,"r":300,"x":0,"y":0,"vx":0,"vy":0,"color":"green"},
+init: `[{"name":"Earth","m":10000,"r":300,"x":0,"y":0,"vx":0,"vy":0,"color":"green"},
     {"name":"Noname","m":0.001,"r":5,"x":0,"y":320,"vx":5,"vy":0,"color":"white"}]`,
 cond: 
 `Задана планета і висота над поверхнею планети. 
@@ -148,7 +148,7 @@ final:
     {   
 id: 'taskX',
 title: 'Ракета від Землі до Сонця',
-planets: 
+init: 
 `[{"name":"Sun","m":1000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
     {"name":"Earth","m":0.01,"r":8,"x":400,"y":0,"vx":0,"vy":1.581,"color":"lightblue"}]`,
    
