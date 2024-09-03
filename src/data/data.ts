@@ -146,7 +146,7 @@ export const data: TaskData[] = [
     },
 
     {
-        id: 'taskX',
+        id: 'task6',
         title: 'Ракета від Землі до Сонця',
         init:
             `[{"name":"Sun","m":1000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
@@ -174,7 +174,7 @@ export const data: TaskData[] = [
     },
 
     {   
-        id: 'taskX',
+        id: 'task7',
         title: 'Подорож не Марс',
         init: `            [{"name":"Sun","m":1000,"r":20,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
              {"name":"Earth","m":0.01,"r":7,"x":300,"y":0,"vx":0,"vy":1.826,"color":"lightblue"},

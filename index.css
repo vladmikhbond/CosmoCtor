@@ -1,45 +1,14 @@
 body {
-    width: 1000px;
+    width: 1000px;    
 }
-
-#taskDiv {
-    position: absolute;
-    z-index: 2;
-    display: none;
-
-    top: 61px;
-    left: 324px;
-    width: 450px;
-    border: solid black 1px;
-    background-color:darkblue;
-    box-shadow: 10px 10px 15px rgba(135, 130, 130, 0.5);
-    user-select: none; /* Стандартний синтаксис */
-}
-
-#condDiv, #helpDiv, #solvDiv  {
-    text-align: left;
-    padding: 10px;
-    margin:2px;
-}
-
-#condDiv {
-    background-color: greenyellow;
-}
-
-#helpDiv {
-    background-color: yellow;
-}
-
-#solvDiv {
-    background-color:lightpink;
+.cont {
+    position: relative;
 }
 
 #menuDiv {
     border: solid black 1px;
     margin-bottom: 5px;
-    padding: 4px;
-
-    
+    padding: 4px;   
 }
 
 #menuDiv span {
@@ -49,27 +18,19 @@ body {
 }
 
 #menuDiv button {
-    width: 30px; 
-    height: 30px; 
+    width: 40px; 
+    height: 40px; 
     background-size:contain;
     border: none; 
     cursor: pointer; 
     margin-left: 8px;
 }
 
-
 #canvas {
     border: solid black 1px;
 }
 
-#hideButton {
-    font-weight: 800;
-    font-family: monospace;
-    font-size: x-large;
-    padding-top: -5px;
-    height: 24px;
-    border: none;
-}
+
 
 .dash-btn {
     font-weight: 800;
@@ -99,18 +60,25 @@ body {
 
 #dashboard, #hideButton {
     position: absolute;
-    top: 61px;
-    left: 10px;
+    top: 4px;
+    left: 4px;
 }
 
 #hideButton {
     color: white;
     background-color: rgba(0, 0, 0, 0);
     z-index: 2; 
+
+    font-weight: 800;
+    font-family: monospace;
+    font-size: x-large;
+    padding-top: -5px;
+    height: 24px;
+    border: none;
 }
 
 #dashboard {
-    width: 300px;
+    width: 290px;
     border: solid black 1px;
     font-family: monospace;
     font-weight: 800;
@@ -124,9 +92,8 @@ body {
 
 #planetBoard {
     position: absolute;
-    top: 61px;
-    left: 695px;
-    width: 300px;
+    top: 4px;
+    right: 4px;
     border: solid black 1px;
     font-family: monospace;
     font-weight: 800;
@@ -138,9 +105,8 @@ body {
 
 #actionBoard {
     position: absolute;
-    top: 212px;
-    left: 845px;
-    width: 150px;
+    top: 166px;
+    right: 4px;
     border: solid black 1px;
     font-family: monospace;
     font-weight: 800;
@@ -150,20 +116,48 @@ body {
     display: none; 
 }
 
+#taskDiv {
+    position: absolute;
+    z-index: 2;
+    display: none;
+
+    top: 112px;
+    left: 4px;
+    width: 450px;
+    border: solid black 1px;
+    background-color:darkblue;
+    box-shadow: 10px 10px 15px rgba(135, 130, 130, 0.5);
+    user-select: none; /* Стандартний синтаксис */
+}
+
+#condDiv, #helpDiv, #solvDiv  {
+    text-align: left;
+    padding: 10px;
+    margin:2px;
+}
+
+#condDiv {
+    background-color: greenyellow;
+}
+
+#helpDiv {
+    background-color: yellow;
+}
+
+#solvDiv {
+    background-color:lightpink;
+}
 
 
 #sceneArea {
     margin-top: 4px;
     width: 187px;
-}
-
-select {
-    width: 80px;
-    padding: 2px;
-    font-size: 14px;
-}
-
-#sceneArea{
     width: 1000px;
     height: 100px;
 }
+
+/* select {
+    width: 80px;
+    padding: 2px;
+    font-size: 14px;
+} */

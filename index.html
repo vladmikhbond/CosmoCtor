@@ -5,104 +5,105 @@
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>    
         <link rel="stylesheet" href="./index.css" />
     </head>
-<body">
+<body>
+
 <div id="menuDiv">
-    <span>Cosmos Ctor</span>
+    <span>CosmoCtor</span>
 </div>
-
-<div id="taskDiv">
-    <button id="closeTaskButton" style="position: absolute; top: 2px; right: 2px;"> X </button>
-    <div id="condDiv">  
-        <div></div>
-        <button id="openHelpButton" >Help</button>
-    </div>
-    <div id="helpDiv">
-        <div></div>
-        <button id="openSolvButton" >Solve</button>
-    </div>
-    <div id="solvDiv"> 
-        <div></div>
-    </div>
-    
-</div>
-
-
-<div>
-    <button id="hideButton" >≡</button>
-    <div id="dashboard">
-        <div>
-            <button id="runButton" class="dash-btn" style="margin-left: 30px; background-color:aquamarine;" title="Run-Stop toggle"> ► </button>
-            <button id="stepButton" class="dash-btn" title="One step">1</button>
-            <button id="trackButton" class="dash-btn" title="Orbits toggle">●</button> |
-            <button id="saveSceneButton" class="dash-btn" title="Scene Save">▼</button>
-            <button id="loadSceneButton" class="dash-btn" title="Scene Restore">Ͻ</button> | 
-            <button id="planetButton" class="dash-btn" title="Create standard or copy selected planet">+Planet</button> 
+<div class="cont">
+    <div id="taskDiv">
+        <button id="closeTaskButton" style="position: absolute; top: 2px; right: 2px;"> X </button>
+        <div id="condDiv">  
+            <div></div>
+            <button id="openHelpButton" >Help</button>
         </div>
-
-        <div>
-            <input type="range" id="scopeRange" min="-15" max="1" value="0" step="1" title="Телескоп" list="markers"/>
-            <datalist id="markers" >
-                <option value="0" ></option>
-            </datalist>
-        </div> 
-        Total: <span id="stepsCountSpan"></span> |  
-        Speed: <span id="stepsPerSecSpan"></span> |
-        Planets: <span id="planetsCount"></span> 
-
-
-    </div>
-
-    <div id="planetBoard">
-        <div> 
-            <span class="dash-label">Name </span>  <input id="nameText" class="dash-text" title="Name"/>
-            <span class="dash-label">Massa </span>  <input id="massaText" class="dash-text" title="Massa"/>
+        <div id="helpDiv">
+            <div></div>
+            <button id="openSolvButton" >Solve</button>
         </div>
-        <div>
-            <span class="dash-label">Radius </span>  <input id="radiusText" class="dash-text" title="Radius"/>
-            <span class="dash-label">Color </span>  <input id="colorText" class="dash-text" title="Color"/>
-        </div>       
-        <p>
-        <div>
-            <span class="dash-label">X </span>  <input id="xText" class="dash-text" title="X coordinate"/>
-            <span class="dash-label">Y </span>  <input id="yText" class="dash-text" title="Y coordinate"/>
+        <div id="solvDiv"> 
+            <div></div>
         </div>
-        <div>
-            <span class="dash-label">Vx </span>  <input id="vxText" class="dash-text" title="Vx velocity"/>
-            <span class="dash-label">Vy </span>  <input id="vyText" class="dash-text" title="Vy velocity"/>
-        </div>
-        <hr>
-        <button id="rocketButton" class="dash-btn" >Rocket</button>
-        <button id="nebulaButton" class="dash-btn" >Nebula</button>
-        &nbsp;
-        <button id="delButton" class="dash-btn" title="Remove selected planet">Del</button> 
         
     </div>
+
+
+    <div>
+        <button id="hideButton" >≡</button>
+        <div id="dashboard">
+            <div>
+                <button id="runButton" class="dash-btn" style="margin-left: 30px; background-color:aquamarine;" title="Run-Stop toggle"> ► </button>
+                <button id="stepButton" class="dash-btn" title="One step">1</button>
+                <button id="trackButton" class="dash-btn" title="Orbits toggle">●</button> |
+                <button id="saveSceneButton" class="dash-btn" title="Scene Save">▼</button>
+                <button id="loadSceneButton" class="dash-btn" title="Scene Restore">Ͻ</button> | 
+                <button id="planetButton" class="dash-btn" title="Create standard or copy selected planet">+Planet</button> 
+            </div>
+
+            <div>
+                <input type="range" id="scopeRange" min="-15" max="1" value="0" step="1" title="Телескоп" list="markers"/>
+                <datalist id="markers" >
+                    <option value="0" ></option>
+                </datalist>
+            </div> 
+            Total: <span id="stepsCountSpan"></span> |  
+            Speed: <span id="stepsPerSecSpan"></span> |
+            Planets: <span id="planetsCount"></span> 
+
+
+        </div>
+
+        <div id="planetBoard">
+            <div> 
+                <span class="dash-label">Name </span>  <input id="nameText" class="dash-text" title="Name"/>
+                <span class="dash-label">Massa </span>  <input id="massaText" class="dash-text" title="Massa"/>
+            </div>
+            <div>
+                <span class="dash-label">Radius </span>  <input id="radiusText" class="dash-text" title="Radius"/>
+                <span class="dash-label">Color </span>  <input id="colorText" class="dash-text" title="Color"/>
+            </div>       
+            <p>
+            <div>
+                <span class="dash-label">X </span>  <input id="xText" class="dash-text" title="X coordinate"/>
+                <span class="dash-label">Y </span>  <input id="yText" class="dash-text" title="Y coordinate"/>
+            </div>
+            <div>
+                <span class="dash-label">Vx </span>  <input id="vxText" class="dash-text" title="Vx velocity"/>
+                <span class="dash-label">Vy </span>  <input id="vyText" class="dash-text" title="Vy velocity"/>
+            </div>
+            <hr>
+            <button id="rocketButton" class="dash-btn" >Rocket</button>
+            <button id="nebulaButton" class="dash-btn" >Nebula</button>
+            &nbsp;
+            <button id="delButton" class="dash-btn" title="Remove selected planet">Del</button> 
+            
+        </div>
+        
+        <div id="actionBoard">
+            <div><span id="span1" class="dash-label"></span>  <input id="field1" class="dash-text"/></div>
+            <div><span id="span2" class="dash-label"></span>  <input id="field2" class="dash-text"/></div>
+            <div><span id="span3" class="dash-label"></span>  <input id="field3" class="dash-text"/></div>
+            <div>
+                <button id="okButton" class="dash-btn"">OK</button> 
+                <button id="cancelButton" class="dash-btn"">Cancel</button>
+            </div>
+        </div>
+
+
+        <canvas id="canvas" width="1000" height="1000" tabindex="0"></canvas>
+
+        <div id="footer">
+            <textarea id="sceneArea">
+                {"planets":[{"name":"Earth","m":10,"r":8,"x":400,"y":0,"vx":0,"vy":5,"color":"lightblue"},
+                {"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"}],
+                "starters":[]}
     
-    <div id="actionBoard">
-        <div><span id="span1" class="dash-label"></span>  <input id="field1" class="dash-text"/></div>
-        <div><span id="span2" class="dash-label"></span>  <input id="field2" class="dash-text"/></div>
-        <div><span id="span3" class="dash-label"></span>  <input id="field3" class="dash-text"/></div>
-        <div>
-            <button id="okButton" class="dash-btn"">OK</button> 
-            <button id="cancelButton" class="dash-btn"">Cancel</button>
+
+                                    
+            </textarea> 
         </div>
     </div>
-
-
-    <canvas id="canvas" width="1000" height="1000" tabindex="0"></canvas>
-
-    <div id="footer">
-        <textarea id="sceneArea">
-            {"planets":[{"name":"Earth","m":10,"r":8,"x":400,"y":0,"vx":0,"vy":5,"color":"lightblue"},
-            {"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"}],
-            "starters":[]}
-  
-
-                                
-        </textarea> 
-    </div>
 </div>
-
 <script type="module" src="./js/main.js"></script>
 </body>
 </html>
