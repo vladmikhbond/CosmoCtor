@@ -38,6 +38,7 @@ body {
     border: solid black 1px;
     margin-bottom: 5px;
     padding: 4px;
+
     
 }
 
@@ -48,8 +49,8 @@ body {
 }
 
 #menuDiv button {
-    width: 36px; 
-    height: 36px; 
+    width: 30px; 
+    height: 30px; 
     background-size:contain;
     border: none; 
     cursor: pointer; 

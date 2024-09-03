@@ -17,11 +17,14 @@ export default class Controller
 
     constructor(public space: Space, public view: View) {
         this.bindClickEvents();
-        this.canvasMouseEvents();
-        this.taskDivMouseEvents();
+        this.bindCanvasMouseEvents();
+        this.bindTaskDivMouseEvents();
         this.bindChangeEvents();
         this.bindTaskEvents();
+        this.bindCustomEvents();
+    }
 
+    private bindCustomEvents() {
         this.space.addEventListener('selectPlanetEvent', e => {
             let planet = <Planet|null>(<CustomEvent>e).detail;
             if (planet) {
@@ -37,8 +40,9 @@ export default class Controller
             let planet = <Planet>(<CustomEvent>e).detail;
             this.view.anime(planet);
         })
-        
+
     }
+
 
     private bindClickEvents() 
     {
@@ -157,7 +161,7 @@ export default class Controller
 
     }
     
-    private canvasMouseEvents() {
+    private bindCanvasMouseEvents() {
 
         let isPlanetDragging = false;
         let cursor: {x: number, y: number} | null = null;
@@ -204,7 +208,7 @@ export default class Controller
    
     }
 
-    private taskDivMouseEvents() {
+    private bindTaskDivMouseEvents() {
 
         let cursor: {x: number, y: number} | null = null;
    
