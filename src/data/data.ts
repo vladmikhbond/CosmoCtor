@@ -200,10 +200,10 @@ export const data: TaskData[] = [
     {   
         id: 'task8',
         title: '',
-        init: `{"planets":[{"name":"Mars","m":0.001,"r":6,"x":400,"y":0,"vx":0,"vy":1.581,"color":"orange"},
-        {"name":"Earth","m":0.001,"r":7,"x":300,"y":0,"vx":0,"vy":1.826,"color":"lightblue"},
+        init: `{"planets":[{"name":"Mars","m":0.001,"r":6,"x":400,"y":0,"vx":0,"vy":1.5811388300841898,"color":"orange"},
+        {"name":"Earth","m":0.001,"r":7,"x":300,"y":0,"vx":0,"vy":1.8257418583505538,"color":"lightblue"},
         {"name":"Sun","m":1000,"r":20,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"}],
-        "starters":[{"kind":1,"param1":0.128,"param2":0,"startStep":2677,"planetName":"Earth"}]}`,
+        "starters":[{"kind":1,"param1":0.126,"param2":0,"startStep":2945,"planetName":"Earth"}]}`,
         cond: `Чисте небо - робіть, що хочте.`,
         help: ``,
         solv: ``,
