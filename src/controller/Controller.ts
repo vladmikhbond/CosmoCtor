@@ -354,15 +354,6 @@ export default class Controller
             this.view.displayInfo();
             this.view.displaySelectedPlanetParams();
         }
-        this.debug();
-    }
-
-    debug() {
-        let e = this.space.planetByName("Earth")!;
-        let m = this.space.planetByName("Mars")!;
-        let cos = (e.x*m.x + e.y*m.y) / (300*400);
-        let fi = Math.acos(cos);
-        document.getElementById('debug')!.innerHTML = fi.toFixed(3);
     }
 
     private startTimer() {

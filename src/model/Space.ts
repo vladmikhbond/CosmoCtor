@@ -67,7 +67,13 @@ export default class Space extends EventTarget
         for (let p0 of this.planets) {
             let ax = 0, ay = 0;
             for (let p of this.planets) {
-                if (p == p0) continue;
+                if (p == p0) {
+                    continue;
+                }
+                // рокета і її рідна планета
+                if (p0 instanceof Rocket && p0.native === p){
+                    continue;
+                }                   
                 let rr = (p.x - p0.x)**2 + (p.y - p0.y)**2;
                 let r = Math.sqrt(rr);
                 if (rr) { 
@@ -91,6 +97,12 @@ export default class Space extends EventTarget
             let big = this.planets[i];
             for (let j = i + 1; j < planets.length; j++) {
                 let small = this.planets[j];
+
+                // рокета і її рідна планета
+                if (small instanceof Rocket && small.native === big){
+                    continue;
+                }                   
+
                 if (small.m == 0)
                     continue;
                 let near = (big.x - small.x)**2 + (big.y - small.y)**2 < (big.r + small.r)**2;
