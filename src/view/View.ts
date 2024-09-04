@@ -159,7 +159,7 @@ export default class View
 
     // display to panelBoard
     //
-    displaySelectedPlanet() {
+    displaySelectedPlanetParams() {
         let planet = this.space.selectedPlanet;
         if (planet) {
             page.xText.value = planet.x.toFixed(5);

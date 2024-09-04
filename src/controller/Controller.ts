@@ -28,7 +28,7 @@ export default class Controller
         this.space.addEventListener('selectPlanetEvent', e => {
             let planet = <Planet|null>(<CustomEvent>e).detail;
             if (planet) {
-                this.view.displaySelectedPlanet(); 
+                this.view.displaySelectedPlanetParams(); 
                 page.planetBoard.style.display = 'block';
             } else {
                 page.planetBoard.style.display = 'none';
@@ -171,7 +171,7 @@ export default class Controller
             cursor = glo.retransformXY(e.offsetX, e.offsetY);
             isPlanetDragging = this.space.trySelectPlanet(cursor.x, cursor.y);
             this.view.draw();
-            this.view.displaySelectedPlanet();
+            this.view.displaySelectedPlanetParams();
         });
 
         page.canvas.addEventListener('mousemove', (e: MouseEvent) => {
@@ -183,7 +183,7 @@ export default class Controller
                 this.space.selectedPlanet!.y += point.y - cursor!.y;
                 cursor = point;
                 this.view.draw();
-                this.view.displaySelectedPlanet();
+                this.view.displaySelectedPlanetParams();
 
             } 
             else if (cursor != null) 
@@ -352,10 +352,18 @@ export default class Controller
         this.view.draw();
         if (glo.stepsCount % View.DISPLAY_INTERVAL == 0) {
             this.view.displayInfo();
-            this.view.displaySelectedPlanet();
+            this.view.displaySelectedPlanetParams();
         }
+        this.debug();
     }
 
+    debug() {
+        let e = this.space.planetByName("Earth")!;
+        let m = this.space.planetByName("Mars")!;
+        let cos = (e.x*m.x + e.y*m.y) / (300*400);
+        let fi = Math.acos(cos);
+        document.getElementById('debug')!.innerHTML = fi.toFixed(3);
+    }
 
     private startTimer() {
         this.stepTimer = setInterval(() => {

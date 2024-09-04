@@ -23,13 +23,19 @@ const T_m = 2 * Math.PI * r_m / v_m
 const omega_m = 2 * Math.PI /T_m
 
 const r_ro = 350
-const T_r = T_e * (r_ro/r_e)**(3/2)
+const T_ro = T_e * (r_ro/r_e)**(3/2)
+const v_ro = Math.sqrt(2*M * 400 / 700 / 300) - v_e;  // v_ro = 0.126
+//--- расчетній угол отставания З от М
+const fi = Math.PI - omega_m * T_ro / 2       // fi=0.5702381689093876
 
-const fi = Math.PI - omega_m * T_m / 2
+console.log('fi=' + fi)     
 
-// console.log('T T T:', T_e, T_r, T_m) 
-console.log('fi=' + fi)     // fi=0.5702381689093876
-console.log('v_e v_m: ', v_e, v_m )
+//---
+
+
+console.log('v_e v_m  v_ro: ', v_e, v_m, v_ro )
 const omega_em = omega_e - omega_m;
+console.log('omega_e omega_m  omega_em: ', omega_e, omega_m, omega_em )
+
 const t_start = (2 * Math.PI - fi) / omega_em
-console.log('t_start: ', t_start)
+console.log('t_start: ', t_start)  // 2678.413799214397
