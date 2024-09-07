@@ -5,13 +5,17 @@ import Space from '../model/Space.js';
 
 export default class View 
 {
+    private static ANIME_DURATION = 300;
+    private static MAX_TRACK_NOMBER = 20;
+    static DISPLAY_INTERVAL = 500 / glo.STEP_PERIOD | 0; //  = 2 times/sec
+
     anime (planet: Planet) {
         
         let oldColor = planet.color;
         planet.color = 'red';
         setTimeout(() => {
             planet.color = oldColor;
-        }, 300); 
+        }, View.ANIME_DURATION); 
         
     }
     
@@ -48,13 +52,13 @@ export default class View
         ctx.scale(glo.scale, -glo.scale);
     
         // all planets
-        //for (let i = 0; i < space.planets.length; i++)
-        for (const planet of space.planets) { 
+        for (let i = 0; i < space.planets.length; i++) {
+            const planet = space.planets[i];
             if (planet === space.selectedPlanet) {
                 this.drawSelectedPlanet(planet);
             } else {
-                let withTrack = this.trackMode && 
-                this.drawPlanet(planet, false, this.trackMode);
+                let withTrack = this.trackMode && i < View.MAX_TRACK_NOMBER; 
+                this.drawPlanet(planet, false, withTrack);
             }
         }
 
@@ -75,7 +79,7 @@ export default class View
         ctx.strokeStyle = planet.color;
 
         // track
-        if (this.trackMode) 
+        if (withTrack) 
         {
             ctx.lineWidth = 1;
             ctx.beginPath();
@@ -121,7 +125,7 @@ export default class View
     } 
 
     drawSelectedPlanet(p: Planet) {
-        // gray rect
+        // gray rectangle
         this.ctx.strokeStyle = 'gray';
         let r = p.r + 5;
         this.ctx.strokeRect(p.x - r, p.y - r, r * 2, r * 2)
@@ -144,7 +148,6 @@ export default class View
    
     // display the info
     //
-    static DISPLAY_INTERVAL = 500 / glo.STEP_PERIOD | 0; // 2 times per second
     timeStamp = Date.now();
 
     displayInfo() 
