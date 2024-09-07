@@ -78,7 +78,6 @@ body {
 }
 
 #dashboard {
-    width: 290px;
     border: solid black 1px;
     font-family: monospace;
     font-weight: 800;

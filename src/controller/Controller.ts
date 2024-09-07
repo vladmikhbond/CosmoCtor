@@ -38,7 +38,10 @@ export default class Controller
         
         this.space.addEventListener('mergePlanetEvent', e => {            
             let planet = <Planet>(<CustomEvent>e).detail;
-            this.view.anime(planet);
+            if (planet.name[0] != '_') {
+                this.view.anime(planet);
+            }
+            
         })
 
     }

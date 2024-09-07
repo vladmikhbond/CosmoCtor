@@ -14,12 +14,14 @@ export default class Nebula
         // static pieces
         let pieces: Array<Piece> = [];
 
-        for (let i = 0; i < n; i++) {
+        for (let i = 0; i < n/2; i++) {
             let r = Math.random() * nebulaR;
             let angle = Math.random() * 2 * Math.PI;
             let x = r * Math.cos(angle);
             let y = r * Math.sin(angle);
-            pieces.push({x, y, ax: 0, ay: 0, angle, r}); 
+            pieces.push({x, y, ax: 0, ay: 0, angle, r});
+            x = -x; y = -y; angle += Math.PI;
+            pieces.push({x, y, ax: 0, ay: 0, angle, r});
         }
         
         // count acceleration 
@@ -31,24 +33,22 @@ export default class Nebula
                 p0.ax += (p.x - p0.x) / rr / r;
                 p0.ay += (p.y - p0.y) / rr / r;
             }        
-            p0.ax *= glo.G;
-            p0.ay *= glo.G;
+            p0.ax *= 0.0001;
+            p0.ay *= 0.0001;
         }
+
         // velo
         let m = planet.m / n;
         let r = planet.r / n**0.5;
 
-        for (let i = 0; i < n; i++) {
-            let piece = pieces[i];
+        for (let piece of pieces) {
             let a = Math.sqrt(piece.ax**2 + piece.ay**2);
             let v = 1 * Math.sqrt(a * piece.r);     
             let vx = planet.vx + v * (Math.cos(piece.angle + Math.PI / 2));
             let vy = planet.vy + v * (Math.sin(piece.angle + Math.PI / 2));
-
-            space.planets.push(new Planet(`_`+i, m, r, 
-                piece.x + planet.x, 
-                piece.y + planet.y, 
-                vx, vy, planet.color));
+            let x = piece.x + planet.x
+            let y = piece.y + planet.y
+            space.planets.push(new Planet(`_`, m, r, x, y, vx, vy, planet.color));
         }
         // 
         space.removePlanet(planet);

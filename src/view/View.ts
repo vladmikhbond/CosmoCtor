@@ -48,11 +48,14 @@ export default class View
         ctx.scale(glo.scale, -glo.scale);
     
         // all planets
+        //for (let i = 0; i < space.planets.length; i++)
         for (const planet of space.planets) { 
-            if (planet === space.selectedPlanet)   
+            if (planet === space.selectedPlanet) {
                 this.drawSelectedPlanet(planet);
-            else
-                this.drawPlanet(planet);
+            } else {
+                let withTrack = this.trackMode && 
+                this.drawPlanet(planet, false, this.trackMode);
+            }
         }
 
         // center of mass
@@ -66,7 +69,7 @@ export default class View
         ctx.restore();        
     }
 
-    drawPlanet(planet: Planet, withVelo: boolean = false) {
+    drawPlanet(planet: Planet, withVelo: boolean = false, withTrack: boolean = false) {
         const ctx = this.ctx;
         ctx.fillStyle = planet.color; 
         ctx.strokeStyle = planet.color;
@@ -123,7 +126,7 @@ export default class View
         let r = p.r + 5;
         this.ctx.strokeRect(p.x - r, p.y - r, r * 2, r * 2)
         // planet
-        this.drawPlanet(p, true);        
+        this.drawPlanet(p, true, this.trackMode);        
     } 
 
     drawCursorCoords(point: { x: number; y: number; }) {
