@@ -6,7 +6,7 @@ import Space from '../model/Space.js';
 export default class View 
 {
     private static ANIME_DURATION = 300;
-    private static MAX_TRACK_NOMBER = 20;
+    private static MAX_TRACK_NOMBER = 100;
     static DISPLAY_INTERVAL = 500 / glo.STEP_PERIOD | 0; //  = 2 times/sec
 
     anime (planet: Planet) {
@@ -81,7 +81,7 @@ export default class View
         // track
         if (withTrack) 
         {
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 0.5/glo.scale;
             ctx.beginPath();
             let len = planet.track.points.length;
             let point = planet.track.points[len - 1];

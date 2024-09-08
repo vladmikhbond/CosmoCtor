@@ -7,7 +7,7 @@ import Planet from '../model/Planet.js';
 import Rocket from '../model/Rocket.js';
 import Space from '../model/Space.js';
 import View from '../view/View.js';
-import { Starter } from '../model/Starter.js';
+import { Starter, StarterKind } from '../model/Starter.js';
 
 export default class Controller 
 {
@@ -142,8 +142,11 @@ export default class Controller
         
         // actionButton_click  
         page.okButton.addEventListener('click', () => {
+            let kind = mode == CreateMode.Rocket ? StarterKind.Rocket : 
+                       mode == CreateMode.Nebula ? StarterKind.Nebula : 
+                       StarterKind.Empty;
             this.space.starters.push({
-                kind: mode, 
+                kind, 
                 param1: +page.field1.value, 
                 param2: +page.field2.value, 
                 startStep: +page.field3.value + glo.stepsCount, 
@@ -315,7 +318,7 @@ export default class Controller
                 (new Function("","MathJax.typeset()"))();            
             })
 
-            page.menuDiv.appendChild(menuButton); 
+            page.menuSpan.append(menuButton); 
 
         }
     }
@@ -353,6 +356,7 @@ export default class Controller
     private step() {
         this.space.step();
         this.view.draw();
+        // display info 
         if (glo.stepsCount % View.DISPLAY_INTERVAL == 0) {
             this.view.displayInfo();
             this.view.displaySelectedPlanetParams();

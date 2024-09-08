@@ -19,6 +19,8 @@ export const glo =
 
 export const page = { 
     menuDiv: <HTMLDivElement>document.getElementById('menuDiv')!,
+    menuSpan: <HTMLSpanElement>document.getElementById('menuSpan')!,
+    helpButton: <HTMLButtonElement>document.getElementById('helpButton')!,
     taskDiv: <HTMLDivElement>document.getElementById('taskDiv')!,
     condDiv: <HTMLDivElement>document.getElementById('condDiv')!,
     helpDiv: <HTMLDivElement>document.getElementById('helpDiv')!,

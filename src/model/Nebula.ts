@@ -13,7 +13,10 @@ export default class Nebula
         
         // static pieces
         let pieces: Array<Piece> = [];
+        let m = planet.m / n;
+        let r = planet.r / n**0.5;
 
+        // Розподіл рівномірний по куту (від 0 до 2PI) і по радіусу (від 0 до nebulaR) 
         for (let i = 0; i < n/2; i++) {
             let r = Math.random() * nebulaR;
             let angle = Math.random() * 2 * Math.PI;
@@ -24,32 +27,33 @@ export default class Nebula
             pieces.push({x, y, ax: 0, ay: 0, angle, r});
         }
         
-        // count acceleration 
+        // acceleration of pieces
+
         for (let p0 of pieces) {
             for (let p of pieces) {
                 if (p == p0) continue;
                 let rr = (p.x - p0.x)**2 + (p.y - p0.y)**2;
+                
                 let r = Math.sqrt(rr);
                 p0.ax += (p.x - p0.x) / rr / r;
                 p0.ay += (p.y - p0.y) / rr / r;
             }        
-            p0.ax *= 0.0001;
-            p0.ay *= 0.0001;
+            p0.ax *= glo.G * m;
+            p0.ay *= glo.G * m;
         }
 
-        // velo
-        let m = planet.m / n;
-        let r = planet.r / n**0.5;
+        // set init velocities
 
         for (let piece of pieces) {
             let a = Math.sqrt(piece.ax**2 + piece.ay**2);
-            let v = 1 * Math.sqrt(a * piece.r);     
-            let vx = planet.vx + v * (Math.cos(piece.angle + Math.PI / 2));
-            let vy = planet.vy + v * (Math.sin(piece.angle + Math.PI / 2));
+            let v = 0.1 * Math.sqrt(a * piece.r);   
+            let vx = planet.vx + v * (Math.cos(piece.angle + Math.PI / 2))    + Math.random()*0.001 - 0.0005;
+            let vy = planet.vy + v * (Math.sin(piece.angle + Math.PI / 2))    + Math.random()*0.001 - 0.0005;
             let x = piece.x + planet.x
             let y = piece.y + planet.y
             space.planets.push(new Planet(`_`, m, r, x, y, vx, vy, planet.color));
         }
+
         // 
         space.removePlanet(planet);
 

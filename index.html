@@ -9,7 +9,10 @@
 
 <div id="menuDiv">
     <span>CosmoCtor</span>
+    <span id="menuSpan"></span>
+    <button id="helpButton" onclick="window.open('help.html', '_blank');">Help</button>  
 </div>
+
 <div class="cont">
     <div id="taskDiv">
         <button id="closeTaskButton" style="position: absolute; top: 2px; right: 2px;"> X </button>
@@ -36,7 +39,7 @@
                 <button id="stepButton" class="dash-btn" title="One step">1</button>
                 <button id="trackButton" class="dash-btn" title="Orbits toggle">●</button> |
                 <button id="saveSceneButton" class="dash-btn" title="Scene Save">▼</button>
-                <button id="loadSceneButton" class="dash-btn" title="Scene Restore">Ͻ</button> | 
+                <button id="loadSceneButton" class="dash-btn" title="Scene Restore">▲</button> | 
                 <button id="planetButton" class="dash-btn" title="Create standard or copy selected planet">+Planet</button> 
             </div>
 
@@ -96,10 +99,8 @@
 
         <div id="footer">
             <textarea id="sceneArea">
-                {"planets":[{"name":"Noname","m":10,"r":10,"x":0,"y":0,"vx":0,"vy":0,"color":"white"}],
-                "starters":[{"kind":2,"param1":1000,"param2":400,"startStep":0,"planetName":"Noname"}]} 
-                
-                                    
+                {"planets":[{"name":"Noname1","m":20,"r":10,"x":0,"y":0,"vx":0,"vy":0,"color":"white"}],
+                "starters":[{"kind":2,"param1":1000,"param2":400,"startStep":0,"planetName":"Noname1"}]}                                    
             </textarea> 
         </div>
     </div>
