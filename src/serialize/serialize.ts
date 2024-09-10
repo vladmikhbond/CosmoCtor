@@ -53,8 +53,6 @@ export function deserialization(json: string): TaskData
 function planetsFromData(objects: PlanetData[]): Planet[] 
 {
     return objects.map(o => {
-        let p = new Planet();
-        Object.assign(p, o);
-        return p;
+        return new Planet(o.name, o.m, o.r, o. x, o.y, o.vx, o.vy, o.color);
     })
 }

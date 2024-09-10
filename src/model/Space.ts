@@ -4,9 +4,6 @@ import Rocket from './Rocket.js';
 import Nebula from './Nebula.js';
 import { Starter, StarterKind } from './Starter.js';
 
-
-
-
 export default class Space extends EventTarget 
 {
 
@@ -73,15 +70,15 @@ export default class Space extends EventTarget
                 if (p == p0) {
                     continue;
                 }
-                // рокета і її рідна планета
+                // рідна планета не впливає на ракету
                 if (p0 instanceof Rocket && p0.native === p){
                     continue;
                 }                   
                 let rr = (p.x - p0.x)**2 + (p.y - p0.y)**2;
-                let r = Math.sqrt(rr);
+                let rrr = Math.sqrt(rr) * rr;
                 if (rr) { 
-                    ax += p.m * (p.x - p0.x) / rr / r;
-                    ay += p.m * (p.y - p0.y) / rr / r;
+                    ax += p.m * (p.x - p0.x) / rrr;
+                    ay += p.m * (p.y - p0.y) / rrr;
                 }
             }        
             p0.ax = glo.G * ax;
@@ -101,7 +98,7 @@ export default class Space extends EventTarget
             for (let j = i + 1; j < planets.length; j++) {
                 let small = this.planets[j];
 
-                // рокета і її рідна планета
+                // ракета і її рідна планета
                 if (small instanceof Rocket && small.native === big){
                     continue;
                 }                   
@@ -186,6 +183,22 @@ export default class Space extends EventTarget
             return true;
         }
         return false;
+    }
+
+    graviTension(point: {x: number, y: number}): [ax: number, ay: number] {
+        let ax = 0, ay = 0;
+        for (let planet of this.planets) {  
+            let rr = (planet.x - point.x)**2 + (planet.y - point.y)**2;
+            let rrr = Math.sqrt(rr) * rr;
+
+            if (rr) { 
+                ax += planet.m * (planet.x - point.x) / rrr;
+                ay += planet.m * (planet.y - point.y) / rrr;
+            }
+        }        
+        ax = glo.G * ax;
+        ay = glo.G * ay;
+        return [ax, ay];
     }
 
 }

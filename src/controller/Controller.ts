@@ -16,7 +16,7 @@ export default class Controller
     timeStamp = Date.now();
 
     constructor(public space: Space, public view: View) {
-        this.bindClickEvents();
+        this.bindButtonClickEvents();
         this.bindCanvasMouseEvents();
         this.bindTaskDivMouseEvents();
         this.bindChangeEvents();
@@ -47,7 +47,7 @@ export default class Controller
     }
 
 
-    private bindClickEvents() 
+    private bindButtonClickEvents() 
     {
         // hideButton
         page.hideButton.addEventListener('click', () => {
@@ -203,7 +203,10 @@ export default class Controller
 
             // draw cursor coords
             if (!this.stepTimer) {
-                this.view.drawCursorCoords(point);
+
+                let [gx, gy] = this.space.graviTension(point);
+                this.view.drawCursorCoords(point, gx, gy);
+
             }
         });
 
@@ -247,7 +250,7 @@ export default class Controller
     private bindChangeEvents() {
         // telescope
         page.scopeRange.addEventListener('change', () => {
-            glo.scale = 1.2 ** page.scopeRange.valueAsNumber;
+            glo.scale = 2**(page.scopeRange.valueAsNumber/2);
             this.view.draw();
         });
 

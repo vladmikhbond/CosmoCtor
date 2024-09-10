@@ -5,6 +5,7 @@ export default class Planet
 {
     static TRACK_INTERVAL = 5;
 
+   
     ax = 0;
     ay = 0;
     track: Track;
@@ -19,6 +20,9 @@ export default class Planet
     ) 
     { 
         this.track = new Track(this);
+        // effective radius
+        let re = Math.round(Math.sqrt(m/4));       
+        this.r = r > re ? r : re;
     }
 
     step() {
@@ -49,5 +53,6 @@ export default class Planet
         return[ex, ey];
     }
     
+
 }
 

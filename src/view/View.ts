@@ -10,7 +10,8 @@ export default class View
     static DISPLAY_INTERVAL = 500 / glo.STEP_PERIOD | 0; //  = 2 times/sec
 
     anime (planet: Planet) {
-        
+        if (planet.color == 'red')
+            return;
         let oldColor = planet.color;
         planet.color = 'red';
         setTimeout(() => {
@@ -108,8 +109,12 @@ export default class View
         } 
         else  // planet
         {            
+            // щоб планета не виглядала дуже малою
+            let r = planet.r > 1 ? planet.r : 1;
+            r /= glo.scale**0.5;
+
             ctx.beginPath();
-            ctx.arc(planet.x, planet.y, planet.r, 0, Math.PI * 2);
+            ctx.arc(planet.x, planet.y, r, 0, Math.PI * 2);
             ctx.fill();
         }
     
@@ -133,16 +138,18 @@ export default class View
         this.drawPlanet(p, true, this.trackMode);        
     } 
 
-    drawCursorCoords(point: { x: number; y: number; }) {
+    drawCursorCoords(point: { x: number; y: number; }, gx: number, gy: number) {
         let left = 310;
         let top = 5;
         
         this.ctx.fillStyle = 'darkblue';
-        this.ctx.fillRect(left, top, 150, 20);
+        this.ctx.fillRect(left, top, 200, 40);
         
         this.ctx.font = '14px';
         this.ctx.fillStyle = 'lightgray';
         this.ctx.fillText(`x: ${point.x.toFixed(2)}   y: ${point.y.toFixed(2)}`, left + 5, top + 15);
+        let g = Math.sqrt(gx**2 + gy**2);  
+        this.ctx.fillText(`gx: ${gx.toFixed(2)}   gy: ${gy.toFixed(2)}  g: ${g.toFixed(2)}`, left + 5, top + 25);
     }
 
    
