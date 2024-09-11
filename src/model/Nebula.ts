@@ -7,53 +7,89 @@ export default class Nebula
  
     constructor(n: number, nebulaR: number, proto: Planet, space: Space)
     { 
-        space.removeSelectedPlanet();
-
-        type Piece = {x: number, y: number, ax: number, ay: number, angle: number, r: number};
-        
+        //space.removeSelectedPlanet();   //// ????????
+           
         // static pieces
-        let pieces: Array<Piece> = [];
+        let pieces: Array<Planet> = [];
         let m = proto.m / n;
         let r = proto.r / n**0.5;
 
         // Розподіл рівномірний по куту (від 0 до 2PI) і по відстані (від 0 до nebulaR) 
-        for (let i = 0; i < n/2; i++) {
-            let r = Math.random() * nebulaR;
+        for (let i = 0; i < n; i++) {
+            let dist = Math.random() * nebulaR;
             let angle = Math.random() * 2 * Math.PI;
-            let x = r * Math.cos(angle);
-            let y = r * Math.sin(angle);
-            pieces.push({x, y, ax: 0, ay: 0, angle, r});
-            x = -x; y = -y; angle += Math.PI;
-            pieces.push({x, y, ax: 0, ay: 0, angle, r});
+            let x = dist * Math.cos(angle);
+            let y = dist * Math.sin(angle);
+            let piece = new Planet(`_`, m, r, x, y, 0, 0, proto.color);
+            pieces.push(piece);   
         }
         
+        // // Розподіл рівномірний по площині круга 
+        // for (let i = 0; i < n; i++) {
+        //     let x = Math.random() * 2 * nebulaR - nebulaR;
+        //     let y = Math.random() * 2 * nebulaR - nebulaR;
+        //     let dist = Math.sqrt(x*x + y*y);
+        //     if (dist > nebulaR) {i--; continue;}
+        //     let piece = new Planet(`_`, m, r, x, y, 0, 0, proto.color);
+        //     pieces.push(piece);   
+        // }
+
         // acceleration of pieces
 
+        // count acceleration for all pieces
         for (let p0 of pieces) {
+            let ax = 0, ay = 0;
             for (let p of pieces) {
-                if (p == p0) continue;
+                if (p == p0) {
+                    continue;
+                }                   
                 let rr = (p.x - p0.x)**2 + (p.y - p0.y)**2;
-                
-                let r = Math.sqrt(rr);
-                p0.ax += (p.x - p0.x) / rr / r;
-                p0.ay += (p.y - p0.y) / rr / r;
+                let rrr = Math.sqrt(rr) * rr;
+                if (rr) { 
+                    ax += p.m * (p.x - p0.x) / rrr;
+                    ay += p.m * (p.y - p0.y) / rrr;
+                }
             }        
-            p0.ax *= glo.G * m;
-            p0.ay *= glo.G * m;
+            p0.ax = glo.G * ax;
+            p0.ay = glo.G * ay;
         }
 
+
         // set init velocities
-        const K = 0.5;
+        const K = 0.25;
         for (let piece of pieces) {
             let a = Math.sqrt(piece.ax**2 + piece.ay**2);
-            let v = K * Math.sqrt(a * piece.r);   
-            let vx = v * (Math.cos(piece.angle + Math.PI / 2))     + Math.random()*0.001 - 0.0005;
-            let vy = v * (Math.sin(piece.angle + Math.PI / 2))    + Math.random()*0.001 - 0.0005;
-            let x = piece.x + proto.x;
-            let y = piece.y + proto.y;
-            let particle = new Planet(`_`, m, r, x, y, proto.vx + vx, proto.vy + vy, proto.color);
-            space.planets.push(particle);
+            let dist = Math.sqrt(piece.x**2 + piece.y**2);
+            let v = K * Math.sqrt(a * dist);  
+            
+            let angle = Math.atan2(piece.y, piece.x) + Math.PI / 2; 
+            piece.vx = v * (Math.cos(angle)); //    + Math.random()*0.001 - 0.0005;
+            piece.vy = v * (Math.sin(angle)); //    + Math.random()*0.001 - 0.0005;
         }
+
+        // center of mass
+        let msum = 0, mx = 0, my = 0, mvx = 0, mvy = 0; 
+        for (let p of pieces) {
+            mx += p.x * p.m;
+            my += p.y * p.m;
+            mvx += p.vx * p.m;
+            mvy += p.vy * p.m;
+            msum += p.m;
+
+        }
+        mx /= msum;
+        my /= msum;
+        mvx /= msum;
+        mvy /= msum;
+         
+        for (let piece of pieces) {
+            piece.x += proto.x - mx;  
+            piece.y += proto.y - my;
+            piece.vx += proto.vx - mvx;  
+            piece.vy += proto.vy - mvy;
+            space.planets.push(piece);
+        }
+
 
         // 
         space.removePlanet(proto);
