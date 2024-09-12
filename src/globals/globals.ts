@@ -65,17 +65,20 @@ export const page = {
     nebulaButton: document.getElementById('nebulaButton')!,
     delButton: document.getElementById('delButton')!,
 
-    // action
-    actionBoard: document.getElementById('actionBoard')!,
-    span1: <HTMLSpanElement>document.getElementById('span1')!,
-    span2: <HTMLSpanElement>document.getElementById('span2')!,
-    span3: <HTMLSpanElement>document.getElementById('span3')!,
-    field1: <HTMLInputElement>document.getElementById('field1')!,
-    field2: <HTMLInputElement>document.getElementById('field2')!,
-    field3: <HTMLInputElement>document.getElementById('field3')!,
-    okButton: document.getElementById('okButton')!,
-    cancelButton: document.getElementById('cancelButton')!,
-    
+    // rocket starter board
+    rocketBoard: document.getElementById('rocketBoard')!,
+    velo: <HTMLInputElement>document.getElementById('velo')!,
+    interval1: <HTMLInputElement>document.getElementById('interval1')!,
+    okButton1: document.getElementById('okButton1')!,
+    cancelButton1: document.getElementById('cancelButton1')!,
+
+    // nebula starter board
+    nebulaBoard: document.getElementById('nebulaBoard')!,
+    count: <HTMLInputElement>document.getElementById('count')!,
+    size: <HTMLInputElement>document.getElementById('size')!,
+    interval2: <HTMLInputElement>document.getElementById('interval2')!,
+    okButton2: document.getElementById('okButton2')!,
+    cancelButton2: document.getElementById('cancelButton2')!,
 
     // on footer
     sceneArea: <HTMLTextAreaElement>document.getElementById('sceneArea')!,

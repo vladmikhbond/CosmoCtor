@@ -21,6 +21,7 @@ export default class Controller
         this.bindTaskDivMouseEvents();
         this.bindChangeEvents();
         this.bindTaskEvents();
+        this.bindStarterEvents()
         this.bindCustomEvents();
     }
 
@@ -32,7 +33,7 @@ export default class Controller
                 page.planetBoard.style.display = 'block';
             } else {
                 page.planetBoard.style.display = 'none';
-                page.actionBoard.style.display = 'none';
+                page.nebulaBoard.style.display = 'none';
             }
         })
         
@@ -106,58 +107,6 @@ export default class Controller
             this.view.draw();          
         });
 
-        enum CreateMode { Planet, Rocket, Nebula };
-
-        let mode: CreateMode = CreateMode.Planet;        
-
-        page.rocketButton.addEventListener('click', () => {
-            if (this.space.selectedPlanet) {
-                page.span1.style.display = page.field1.style.display = 'inline';
-                page.span2.style.display = page.field2.style.display = 'none';
-                page.span3.style.display = page.field3.style.display = 'inline';
-
-                page.span1.innerHTML = 'Velo ';
-                page.span3.innerHTML = 'Time '; 
-                page.actionBoard.style.display='block';                    
-                this.view.draw();
-                mode = CreateMode.Rocket;
-            }
-        
-        });
-
-        page.nebulaButton.addEventListener('click', () => {
-            if (this.space.selectedPlanet) {
-                page.span1.style.display = page.field1.style.display = 'inline';
-                page.span2.style.display = page.field2.style.display = 'inline';
-                page.span3.style.display = page.field3.style.display = 'inline';
-
-                page.span1.innerHTML = 'Number ';
-                page.span2.innerHTML = 'Radius '; 
-                page.span3.innerHTML = 'Time&nbsp;&nbsp;';  
-                page.actionBoard.style.display='block';
-                this.view.draw();
-                mode = CreateMode.Nebula;
-            } 
-        });
-        
-        // actionButton_click  
-        page.okButton.addEventListener('click', () => {
-            let kind = mode == CreateMode.Rocket ? StarterKind.Rocket : 
-                       mode == CreateMode.Nebula ? StarterKind.Nebula : 
-                       StarterKind.Empty;
-            this.space.starters.push({
-                kind, 
-                param1: +page.field1.value, 
-                param2: +page.field2.value, 
-                startStep: +page.field3.value + glo.stepsCount, 
-                planetName: this.space.selectedPlanet ? this.space.selectedPlanet.name : ''
-            });
-            page.actionBoard.style.display = 'none';
-        });
-
-        page.cancelButton.addEventListener('click', () => {
-            page.actionBoard.style.display = 'none';
-        });
 
         // delButton_click: remove selected planet
         page.delButton.addEventListener('click', () => {
@@ -167,6 +116,60 @@ export default class Controller
 
     }
     
+    private bindStarterEvents() {       
+
+        page.rocketButton.addEventListener('click', () => {
+            if (this.space.selectedPlanet) { 
+                page.rocketBoard.style.display='block';                    
+                this.view.draw();
+            }
+        
+        });
+
+        page.nebulaButton.addEventListener('click', () => {
+            if (this.space.selectedPlanet) {  
+                page.nebulaBoard.style.display='block';
+                this.view.draw();
+            } 
+        });
+        
+
+        page.okButton1.addEventListener('click', () => {
+
+            this.space.starters.push({
+                kind:  StarterKind.Rocket, 
+                velo: +page.velo.value, 
+                count: 0, 
+                size:0,
+                startStep: +page.interval1.value + glo.stepsCount, 
+                planetName: this.space.selectedPlanet!.name
+            });
+            page.rocketBoard.style.display = 'none';
+        });
+
+        page.okButton2.addEventListener('click', () => {
+            this.space.starters.push({
+                kind: StarterKind.Nebula,
+                velo: 0, 
+                count: +page.count.value, 
+                size: +page.size.value, 
+                startStep: +page.interval2.value + glo.stepsCount, 
+                planetName: this.space.selectedPlanet!.name
+            });
+            page.nebulaBoard.style.display = 'none';
+        });
+
+
+        page.cancelButton1.addEventListener('click', () => {
+            page.rocketBoard.style.display = 'none';
+        });
+
+        page.cancelButton2.addEventListener('click', () => {
+            page.nebulaBoard.style.display = 'none';
+        });
+
+    }
+
     private bindCanvasMouseEvents() {
 
         let isPlanetDragging = false;

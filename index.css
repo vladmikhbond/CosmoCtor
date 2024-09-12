@@ -108,7 +108,7 @@ body {
     display: none; 
 }
 
-#actionBoard {
+.start-board {
     position: absolute;
     top: 166px;
     right: 4px;

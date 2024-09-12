@@ -128,18 +128,17 @@ export default class Space extends EventTarget
         
         // check starters 
         for (let starter of this.starters) {
-            // if (!starter.planetName)
-            //     continue;
+
             let planet = this.planetByName(starter.planetName);
 
             if (starter.startStep == glo.stepsCount && planet) {          
                 if (starter.kind == StarterKind.Rocket) {
                     // rocket
-                    let rocket = new Rocket(starter.param1, planet);
+                    let rocket = new Rocket(starter.velo, planet);
                     this.planets.push(rocket);
                 } else if (starter.kind == StarterKind.Nebula) {
                     // nebula
-                    new Nebula(starter.param1, starter.param2, planet, this); 
+                    new Nebula(starter.count, starter.size, planet, this); 
                 }
                 starter.kind = StarterKind.Empty; 
             }
