@@ -85,17 +85,18 @@
         </div>
         
         <div id="rocketBoard" class="start-board">
-            <div><span class="dash-label"></span>  <input id="velo" class="dash-text"/></div>
-            <div><span class="dash-label">Steps</span>  <input id="interval1" class="dash-text"/></div>
+            <div><span class="dash-label"></span>  <input id="velo" class="dash-text" value="0"/></div>
+            <div><span class="dash-label">Steps</span>  <input id="interval1" class="dash-text" value="0"/></div>
             <div>
                 <button id="okButton1" class="dash-btn"">OK</button> 
                 <button id="cancelButton1" class="dash-btn"">Cancel</button>
             </div>
         </div>
         <div id="nebulaBoard" class="start-board">
-            <div><span class="dash-label">Count</span>  <input id="count" class="dash-text"/></div>
-            <div><span class="dash-label">Size</span>  <input id="size" class="dash-text"/></div>
-            <div><span class="dash-label">Steps</span>  <input id="interval2" class="dash-text"/></div>
+            <div><span class="dash-label">Count</span>  <input id="count" class="dash-text" value="1000"/></div>
+            <div><span class="dash-label">Size</span>  <input id="size" class="dash-text" value="200"/></div>
+            <div><span class="dash-label">Moment</span>  <input id="moment" class="dash-text" value="0.25"/></div>
+            <div><span class="dash-label">Steps</span>  <input id="interval2" class="dash-text" value="0"/></div>
             <div>
                 <button id="okButton2" class="dash-btn"">OK</button> 
                 <button id="cancelButton2" class="dash-btn"">Cancel</button>
@@ -108,7 +109,7 @@
         <div id="footer">
             <textarea id="sceneArea">
                 {"planets":[{"name":"Noname1","m":40,"r":10,"x":0,"y":0,"vx":0,"vy":0,"color":"white"}],
-                "starters":[{"kind":2,"param1":1000,"param2":400,"startStep":0,"planetName":"Noname1"}]}                                    
+                "starters":[{"kind":2,"count":1000,"size":400,"velo":0.25, "startStep":100,"planetName":"Noname1"}]}                                    
             </textarea> 
         </div>
     </div>
@@ -118,34 +119,6 @@
 </html>
 
 <!------------------------------------
-A star and a planet in a circular orbit
-    [{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},{"name":"Earth","m":10,"r":8,"x":400,"y":0,"vx":0,"vy":5,"color":"lightblue"}]            
-
-A star and a planet in a elliptic orbit
-[{"name":"Sun","m":10000,"r":20,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},{"name":"Earth","m":1,"r":6,"x":300,"y":0,"vx":0,"vy":5.164,"color":"lightblue"}]
-
-Binary Star (circular orbits)
-            [{"name":"Sun1","m":10000,"r":6,"x":-300,"y":0,"vx":0,"vy":0.617,"color":"yellow"},
-            {"name":"Sun2","m":10000,"r":6,"x": 300,"y":0,"vx":0,"vy":-0.617,"color":"aquamarine"}]
-            (extremal  orbits)
-            [{"name":"Sun1","m":10000,"r":6,"x":-300,"y":0,"vx":0,"vy":1.231,"color":"yellow"},
-            {"name":"Sun2","m":10000,"r":6,"x": 300,"y":0,"vx":0,"vy":-1.231,"color":"aquamarine"}]
-
-Sun + Earth + Moon   7.5 / 1
-            [{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
-            {"name":"Earth","m":10,"r":5,"x":400,"y":0,"vx":0,"vy":5,"color":"lightblue"},
-            {"name":"Moon","m":0.1,"r":2,"x":410,"y":0,"vx":0,"vy":6,"color":"white"} ]            
-
-             12 / 1  &  reverse spin
-            [{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":-0.005,"color":"yellow"},
-            {"name":"Earth","m":10,"r":4,"x":400,"y":0,"vx":0,"vy":5,"color":"lightblue"},
-            {"name":"Moon","m":0.1,"r": 2,"x":407.31,"y":0,"vx":0,"vy":3.83,"color":"white"} ]            
-
-
-Newton picture
-[{"name":"Earth","m":1,"r":6,"x":0,"y":320,"vx":5.75,"vy":0,"color":"lightblue"},{"name":"Sun","m":10000,"r":300,"x":0,"y":0,"vx":0,"vy":0,"color":"green"}]
-
-
 Sun System
             [{"name":"Sun","m":1000,"r":20,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
             {"name":"Earth","m":1,"r":6,"x":300,"y":1,"vx":0,"vy":1.82574,"color":"lightblue"},

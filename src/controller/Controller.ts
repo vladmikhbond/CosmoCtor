@@ -150,7 +150,7 @@ export default class Controller
         page.okButton2.addEventListener('click', () => {
             this.space.starters.push({
                 kind: StarterKind.Nebula,
-                velo: 0, 
+                velo: +page.moment.value,
                 count: +page.count.value, 
                 size: +page.size.value, 
                 startStep: +page.interval2.value + glo.stepsCount, 

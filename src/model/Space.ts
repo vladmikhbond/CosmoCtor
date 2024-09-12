@@ -138,13 +138,14 @@ export default class Space extends EventTarget
                     this.planets.push(rocket);
                 } else if (starter.kind == StarterKind.Nebula) {
                     // nebula
-                    new Nebula(starter.count, starter.size, planet, this); 
+                    new Nebula(starter.count, starter.size, starter.velo, planet, this); 
                 }
                 starter.kind = StarterKind.Empty; 
             }
-            this.starters = this.starters.filter(s => s.kind != StarterKind.Empty);
+            
         }
-
+        // remove used starters
+        this.starters = this.starters.filter(s => s.kind != StarterKind.Empty);
         // increment step counter
         glo.stepsCount++;    
     }

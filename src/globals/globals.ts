@@ -76,6 +76,7 @@ export const page = {
     nebulaBoard: document.getElementById('nebulaBoard')!,
     count: <HTMLInputElement>document.getElementById('count')!,
     size: <HTMLInputElement>document.getElementById('size')!,
+    moment: <HTMLInputElement>document.getElementById('moment')!,
     interval2: <HTMLInputElement>document.getElementById('interval2')!,
     okButton2: document.getElementById('okButton2')!,
     cancelButton2: document.getElementById('cancelButton2')!,

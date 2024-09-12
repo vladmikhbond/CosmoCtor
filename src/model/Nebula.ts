@@ -5,7 +5,7 @@ import Space from "./Space.js";
 export default class Nebula
 {
  
-    constructor(n: number, nebulaR: number, proto: Planet, space: Space)
+    constructor(n: number, nebulaR: number, veloK: number, proto: Planet, space: Space)
     { 
         //space.removeSelectedPlanet();   //// ????????
            
@@ -56,15 +56,15 @@ export default class Nebula
 
 
         // set init velocities
-        const K = 0.25;
+        // const K = 0.25;
         for (let piece of pieces) {
             let a = Math.sqrt(piece.ax**2 + piece.ay**2);
             let dist = Math.sqrt(piece.x**2 + piece.y**2);
-            let v = K * Math.sqrt(a * dist);  
+            let v = veloK * Math.sqrt(a * dist);  
             
             let angle = Math.atan2(piece.y, piece.x) + Math.PI / 2; 
-            piece.vx = v * (Math.cos(angle)); //    + Math.random()*0.001 - 0.0005;
-            piece.vy = v * (Math.sin(angle)); //    + Math.random()*0.001 - 0.0005;
+            piece.vx = v * (Math.cos(angle)); 
+            piece.vy = v * (Math.sin(angle)); 
         }
 
         // center of mass
