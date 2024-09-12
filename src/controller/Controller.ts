@@ -136,7 +136,7 @@ export default class Controller
 
         page.okButton1.addEventListener('click', () => {
 
-            this.space.starters.push({
+            this.space.starters.unshift({
                 kind:  StarterKind.Rocket, 
                 velo: +page.velo.value, 
                 count: 0, 
@@ -148,7 +148,7 @@ export default class Controller
         });
 
         page.okButton2.addEventListener('click', () => {
-            this.space.starters.push({
+            this.space.starters.unshift({
                 kind: StarterKind.Nebula,
                 velo: +page.moment.value,
                 count: +page.count.value, 
