@@ -13,7 +13,7 @@ export type PlanetData = {
     color: string;
 }
 
-export type TaskData = {planets: Planet[], starters: Starter[]};
+type TaskData = {planets: Planet[], starters: Starter[]};
 
 // Serialize true planets only (not rockets, not nebulas)
 //

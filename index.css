@@ -154,7 +154,7 @@ body {
 }
 
 
-#sceneArea {
+#sceneArea, #dataArea {
     margin-top: 4px;
     width: 187px;
     width: 1000px;

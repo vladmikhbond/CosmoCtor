@@ -83,7 +83,6 @@ export const page = {
 
     // on footer
     sceneArea: <HTMLTextAreaElement>document.getElementById('sceneArea')!,
-
-
+    dataArea: <HTMLTextAreaElement>document.getElementById('dataArea')!,
 
 }

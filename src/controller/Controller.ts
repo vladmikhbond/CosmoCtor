@@ -1,13 +1,10 @@
 import { page, glo } from '../globals/globals.js';
-import {data} from '../data/data.js';
-import { serialization, deserialization, TaskData} from '../serialize/serialize.js';
-
-import Nebula from '../model/Nebula.js';
+import {TaskData} from '../data/data.js';
+import { serialization, deserialization} from '../serialize/serialize.js';
 import Planet from '../model/Planet.js';
-import Rocket from '../model/Rocket.js';
 import Space from '../model/Space.js';
 import View from '../view/View.js';
-import { Starter, StarterKind } from '../model/Starter.js';
+import { StarterKind } from '../model/Starter.js';
 
 export default class Controller 
 {
@@ -280,11 +277,11 @@ export default class Controller
             };
         });
     }
+    
 
+    
     private bindTaskEvents()  
     {
-        let final: string;
-        
         page.openHelpButton.addEventListener('click', () => {
             page.helpDiv.style.display='block'; 
             page.openHelpButton.style.display='none';
@@ -293,14 +290,28 @@ export default class Controller
         page.openSolvButton.addEventListener('click', () => {
             page.solvDiv.style.display='block'; 
             page.openSolvButton.style.display='none';
-            this.clearAll(final);          
+            this.clearAll(this.currentTask!.final);          
         });
 
         page.closeTaskButton.addEventListener('click', () => {
             page.taskDiv.style.display = 'none';
         });
 
-        // Створює кнопки завдання і саджає не кожну свій обробник.
+        page.dataArea.addEventListener('dblclick', () => this.taskButtonsMaker());
+        // this.taskButtonsMaker();
+    }
+
+
+    currentTask: TaskData | null = null; 
+
+    // Створює кнопки завдання і саджає не кожну свій обробник.
+    //
+    taskButtonsMaker() {
+        const value = page.dataArea.value;
+        const loaderFunction = new Function("", `return [${value}];`);
+        const data: TaskData[] = loaderFunction();
+        
+        page.menuSpan.innerHTML = '';
         for (let task of data) {
             let menuButton = document.createElement('Button');
             menuButton.style.backgroundImage = `url('/assets/${task.id}.png')`;
@@ -308,8 +319,8 @@ export default class Controller
             
             // Обробник натискання на кнопку завдання
             menuButton.addEventListener('click', () => {
+                this.currentTask = task;
                 this.clearAll(task.init);
-                final = task.final;
 
                 page.openHelpButton.style.display = page.openSolvButton.style.display = 'block';
                 page.taskDiv.style.display = 'block';
@@ -323,11 +334,12 @@ export default class Controller
                 // Математичні формули у динамічному контенті
                 (new Function("","MathJax.typeset()"))();            
             })
-
             page.menuSpan.append(menuButton); 
 
         }
+
     }
+
 
     clearAll(data: string) {
         this.space.planets = [];
