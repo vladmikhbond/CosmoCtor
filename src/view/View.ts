@@ -138,20 +138,34 @@ export default class View
         this.drawPlanet(p, true, this.trackMode);        
     } 
 
-    drawCursorCoords(point: { x: number; y: number; }, gx: number, gy: number) {
+    drawCursorCoords(point: {x: number; y: number}, gx: number, gy: number) {
         let left = 310;
         let top = 5;
-        
-        this.ctx.fillStyle = 'darkblue';
-        this.ctx.fillRect(left, top, 200, 40);
-        
+        this.ctx.fillStyle = 'darkblue';    
         this.ctx.font = '14px';
         this.ctx.fillStyle = 'lightgray';
         this.ctx.fillText(`x: ${point.x.toFixed(2)}   y: ${point.y.toFixed(2)}`, left + 5, top + 15);
-        let g = Math.sqrt(gx**2 + gy**2);  
-        this.ctx.fillText(`gx: ${gx.toFixed(2)}   gy: ${gy.toFixed(2)}  g: ${g.toFixed(2)}`, left + 5, top + 25);
-    }
 
+        let g = Math.sqrt(gx**2 + gy**2);  
+        this.ctx.fillText(`gx: ${gx.toFixed(4)}   gy: ${gy.toFixed(4)}  g: ${g.toFixed(4)}`, left + 5, top + 25);
+    }
+    
+    // line from mouse cursor 
+    //
+    drawGraviTension(point: { x: number; y: number; }, gx: number, gy: number) {
+        const K = 100;
+        // transform
+        this.ctx.save();
+        this.ctx.translate(glo.shiftX, glo.shiftY);
+        this.ctx.scale(glo.scale, -glo.scale);
+        
+        this.ctx.beginPath()
+        this.ctx.moveTo(point.x, point.y);
+        this.ctx.lineTo(point.x + K*gx, point.y + K*gy);    
+        this.ctx.stroke();
+        
+        this.ctx.restore();
+    }
    
     // display the info
     //

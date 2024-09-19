@@ -195,7 +195,10 @@ export default class Controller
             if (!this.stepTimer) {
 
                 let [gx, gy] = this.space.graviTension(point);
+                this.view.draw();
                 this.view.drawCursorCoords(point, gx, gy);
+                //this.view.drawGraviTension(point, gx, gy);
+                
 
             }
         });
