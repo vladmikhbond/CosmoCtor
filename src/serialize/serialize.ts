@@ -13,7 +13,7 @@ export type PlanetData = {
     color: string;
 }
 
-type TaskData = {planets: Planet[], starters: Starter[]};
+type SceneData = {planets: Planet[], starters: Starter[]};
 
 // Serialize true planets only (not rockets, not nebulas)
 //
@@ -38,14 +38,14 @@ export function serialization(space: Space): string
     return json.replaceAll('},', '},\n').replaceAll('],', '],\n');
 }
 
-export function deserialization(json: string): TaskData
+export function deserialization(json: string): SceneData
 {
     let x: any = JSON.parse(json);
     if (!("planets" in x)) {
         json = `{"planets":  ${json} , "starters":[]}`;
     }
 
-    let o: TaskData = JSON.parse(json);
+    let o: SceneData = JSON.parse(json);
     return {planets: planetsFromData(o.planets), 
             starters: o.starters};
 }

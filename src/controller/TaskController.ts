@@ -1,9 +1,6 @@
 import { page, glo } from '../globals/globals.js';
 import { deserialization} from '../serialize/serialize.js';
-
-import Space from '../model/Space.js';
-import View from '../view/View.js';
-;
+import Controller from './Controller.js';
 
 type TaskData = {
     id: string;
@@ -20,11 +17,27 @@ export default class TaskController
 
     selectedTask: TaskData | null = null; 
 
-    constructor(public space: Space, public view: View) {
+    constructor(public controller: Controller) {
         this.bindTaskDivMouseEvents();
         this.bindTaskEvents();
+
+
+        page.loadSceneButton.addEventListener('click', () => {            
+            this.taskButtonsMaker();
+            this.loadScene(page.sceneArea.value);
+        });
+
+        page.dataArea.addEventListener('dblclick', () => {
+            if (page.dataArea.style.height != '600px')
+                page.dataArea.style.height = '600px';
+            else
+            page.dataArea.style.height = '60px';
+        });
+        
     }
 
+    // to grag task panels 
+    //
     private bindTaskDivMouseEvents() {
 
         let cursor: {x: number, y: number} | null = null;
@@ -112,21 +125,22 @@ export default class TaskController
 
 
     loadScene(data: string) {
-        this.space.planets = [];
-        this.space.starters = [];
+        const space = this.controller.space;
+        const view = this.controller.view;
+
+
+        
+        space.planets = [];
+        space.starters = [];
         if (data) {
             let o = deserialization(data);
-            this.space.planets = o.planets;
-            this.space.starters = o.starters;
+            space.planets = o.planets;
+            space.starters = o.starters;
         }
-        //this.stopTimer();
+        this.controller.stopTimer();
         glo.stepsCount = 0;
-        this.view.draw();
-        this.view.displayInfo();
+        view.draw();
+        view.displayInfo();
     }
-
  
 }
-
-
-
