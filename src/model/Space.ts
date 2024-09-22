@@ -110,10 +110,17 @@ export default class Space extends EventTarget
                     let m = big.m + small.m;
                     let vx = (big.m * big.vx + small.m * small.vx) / m;
                     let vy = (big.m * big.vy + small.m * small.vy) / m;
-                    big.vx = vx;
-                    big.vy = vy;
+
+                    let x = (big.m * big.x + small.m * small.x) / m;
+                    let y = (big.m * big.y + small.m * small.y) / m;
+
                     big.m = m;
                     big.r = Math.sqrt(big.r ** 2 + small.r ** 2);
+                    big.vx = vx;
+                    big.vy = vy;
+                    big.x = x;
+                    big.y = y;
+
                     small.m = 0; 
                     this.mergePlanetEvent(big); 
                 }
