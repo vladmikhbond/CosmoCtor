@@ -97,7 +97,7 @@ export default class TaskController
         page.menuSpan.innerHTML = '';
         for (let task of data) {
             let taskButton = document.createElement('Button');
-            taskButton.style.backgroundImage = `url('/assets/${task.id}.png')`;
+            taskButton.style.backgroundImage = `url('./assets/${task.id}.png')`;
             taskButton.title = task.title;
             
             // Обробник натискання на кнопку завдання
