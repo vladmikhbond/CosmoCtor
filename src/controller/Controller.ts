@@ -164,8 +164,12 @@ export default class Controller
         
         // canvas_mousedown: select planet
         page.canvas.addEventListener('mousedown', (e: MouseEvent) => {
+            // save params for selected planet
+            Controller.applyParamsHandler(this);
+            // select a planet
             cursor = glo.retransformXY(e.offsetX, e.offsetY);
             isPlanetDragging = this.space.trySelectPlanet(cursor.x, cursor.y);
+            // show
             this.view.draw();
             this.view.displaySelectedPlanetParams();
         });
