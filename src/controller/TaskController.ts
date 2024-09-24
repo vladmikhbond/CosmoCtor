@@ -3,7 +3,7 @@ import { deserialization} from '../serialize/serialize.js';
 import Controller from './Controller.js';
 
 type TaskData = {
-    id: string;
+    imurl: string;
     title: string;
     init: string;
     cond: string;
@@ -97,7 +97,8 @@ export default class TaskController
         page.menuSpan.innerHTML = '';
         for (let task of data) {
             let taskButton = document.createElement('Button');
-            taskButton.style.backgroundImage = `url('./assets/${task.id}.png')`;
+            taskButton.style.backgroundImage = `url('${task.imurl}')`;
+            // taskButton.style.backgroundImage = `url('./assets/${task.id}.png')`;
             taskButton.title = task.title;
             
             // Обробник натискання на кнопку завдання

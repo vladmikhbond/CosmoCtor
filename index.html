@@ -77,16 +77,16 @@
                 <span class="dash-label">Vy </span>  <input id="vyText" class="dash-text" title="Vy velocity"/>
             </div>
             <hr>
-            <button id="rocketButton" class="dash-btn" >Rocket</button>
-            <button id="nebulaButton" class="dash-btn" >Nebula</button>
+            <button id="rocketButton" class="dash-btn" >+Rocket</button>
+            <button id="nebulaButton" class="dash-btn" >+Nebula</button>
             &nbsp;
             <button id="delButton" class="dash-btn" title="Remove selected planet">Del</button> 
             
         </div>
         
         <div id="rocketBoard" class="start-board">
-            <div><span class="dash-label"></span>  <input id="velo" class="dash-text" value="0"/></div>
-            <div><span class="dash-label">Steps</span>  <input id="interval1" class="dash-text" value="0"/></div>
+            <div><span class="dash-label">Velo</span>  <input id="velo" class="dash-text" value="0"/></div>
+            <div><span class="dash-label">Delay</span>  <input id="interval1" class="dash-text" value="0"/></div>
             <div>
                 <button id="okButton1" class="dash-btn"">OK</button> 
                 <button id="cancelButton1" class="dash-btn"">Cancel</button>
@@ -96,7 +96,7 @@
             <div><span class="dash-label">Count</span>  <input id="count" class="dash-text" value="1000"/></div>
             <div><span class="dash-label">Size</span>  <input id="size" class="dash-text" value="200"/></div>
             <div><span class="dash-label">Moment</span>  <input id="moment" class="dash-text" value="0.25"/></div>
-            <div><span class="dash-label">Steps</span>  <input id="interval2" class="dash-text" value="0"/></div>
+            <div><span class="dash-label">Delay</span>  <input id="interval2" class="dash-text" value="0"/></div>
             <div>
                 <button id="okButton2" class="dash-btn"">OK</button> 
                 <button id="cancelButton2" class="dash-btn"">Cancel</button>
@@ -114,7 +114,7 @@
 
             <textarea id="dataArea">
     {
-        id: 'task1',
+        imurl: './assets/task1.png',
         title: 'Зірка з планетою на круговій орбіті',
         init:
             `[{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
@@ -140,7 +140,7 @@
 
 
     {
-        id: 'task2',
+        imurl: './assets/task2.png',
         title: 'Зірка з планетою на еліптичній орбіті',
         init:
             `[{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
@@ -171,7 +171,7 @@
     },
 
     {
-        id: 'task3',
+        imurl: './assets/task3.png',
         title: 'Подвійна зірка',
         init: 
             `[{"name":"Sun1","m":10000,"r":20,"x":-300,"y":0,"vx":0,"vy":0,"color":"yellow"},
@@ -200,7 +200,7 @@
 
 
     {
-        id: 'task4',
+        imurl: './assets/task4.png',
         title: 'Зірка - планета - супутник',
         init: 
             `[{"name":"Sun","m":10000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
@@ -227,7 +227,7 @@
 
 
     {
-        id: 'task5',
+        imurl: './assets/task5.png',
         title: 'Перша космічна швидкість',
         init: 
             `[{"name":"Earth","m":10000,"r":300,"x":0,"y":0,"vx":0,"vy":0,"color":"green"},
@@ -251,7 +251,7 @@
     },
 
     {
-        id: 'task6',
+        imurl: './assets/task6.png',
         title: 'Долетімо до самого Сонця',
         init:
             `[{"name":"Sun","m":1000,"r":25,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
@@ -276,7 +276,7 @@
     },
 
     {   
-        id: 'task7',
+        imurl: './assets/task7.png',
         title: 'До орбіти Марсу',
         init: 
             `[{"name":"Sun","m":1000,"r":20,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
@@ -307,7 +307,7 @@
 
 
     {   
-        id: 'task8',
+        imurl: './assets/task8.png',
         title: 'Подорож на Марс',
         init:
             `{"planets":[{"name":"Mars","m":0.001,"r":6,"x":400,"y":0,"vx":0,"vy":1.5811388300841898,"color":"orange"},
@@ -339,7 +339,25 @@
             {"name":"Earth","m":0.001,"r":7,"x":300,"y":0,"vx":0,"vy":1.826,"color":"lightblue"},
             {"name":"Sun","m":1000,"r":20,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"}],
             "starters":[{"kind":1,"velo":0.126,"count":0,"size":0,"startStep":2678,"planetName":"Earth"}]}`,
+    },
+
+    {   
+        imurl: 'https://esu.com.ua/images/article_images/A/Andromedi%20tumannisty.jpg',
+        title: 'Туманність',
+        init:
+            `{"planets":[{"name":"Noname1","m":50,"r":10,"x":0,"y":0,"vx":0,"vy":0,"color":"white"}],
+            "starters":[{"kind":2,"count":1000,"size":400,"velo":0.25, "startStep":100,"planetName":"Noname1"}]}`,
+        cond:
+            `Створити туманність, яка під впливом тяжіння перетвориться в планетну систему, яка збере не менше, ніж 90% первинної маси туманності.`,
+        help: 
+            ``,
+        solv: 
+            ``,
+        final:
+            `{"planets":[{"name":"Noname1","m":50,"r":10,"x":0,"y":0,"vx":0,"vy":0,"color":"white"}],
+            "starters":[{"kind":2,"count":1000,"size":400,"velo":0.25, "startStep":100,"planetName":"Noname1"}]}  `,
     },                                 
+
             </textarea> 
 
         </div>
@@ -356,5 +374,6 @@ Sun System
             {"name":"Venus","m":1,"r":6,"x":200,"y":0,"vx":0,"vy":2.23607,"color":"orange"},
             {"name":"Jupiter","m":1,"r":10,"x":490,"y":0,"vx":0,"vy":1.41421,"color":"pink"}]
 
+            
 ------------------------------------>
 
