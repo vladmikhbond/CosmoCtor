@@ -8,7 +8,7 @@
 <body>
 
 <div id="menuDiv">
-    <span>CosmoCtor (G = 1)</span>
+    <span>Planets (G = 1)</span>
     <span id="menuSpan"></span>
     <button id="helpButton" onclick="window.open('help.pdf', '_blank');">Help</button>  
 </div>
@@ -92,10 +92,11 @@
                 <button id="cancelButton1" class="dash-btn"">Cancel</button>
             </div>
         </div>
+
         <div id="nebulaBoard" class="start-board">
             <div><span class="dash-label">Count</span>  <input id="count" class="dash-text" value="1000"/></div>
             <div><span class="dash-label">Size</span>  <input id="size" class="dash-text" value="200"/></div>
-            <div><span class="dash-label">Moment</span>  <input id="moment" class="dash-text" value="0.25"/></div>
+            <div><span class="dash-label">Kω</span>  <input id="moment" class="dash-text" value="0.25"/></div>
             <div><span class="dash-label">Delay</span>  <input id="interval2" class="dash-text" value="0"/></div>
             <div>
                 <button id="okButton2" class="dash-btn"">OK</button> 
@@ -109,7 +110,7 @@
         <div id="footer">
             <textarea id="sceneArea">
                 {"planets":[{"name":"Noname1","m":50,"r":10,"x":0,"y":0,"vx":0,"vy":0,"color":"white"}],
-                "starters":[{"kind":2,"count":1000,"size":400,"velo":0.25, "startStep":100,"planetName":"Noname1"}]}                                    
+                "starters":[{"kind":2,"count":1000,"size":400,"velo":0.5, "startStep":10,"planetName":"Noname1"}]}                                    
             </textarea> 
 
             <textarea id="dataArea">
@@ -346,16 +347,17 @@
         title: 'Туманність',
         init:
             `{"planets":[{"name":"Noname1","m":50,"r":10,"x":0,"y":0,"vx":0,"vy":0,"color":"white"}],
-            "starters":[{"kind":2,"count":1000,"size":400,"velo":0.25, "startStep":100,"planetName":"Noname1"}]}`,
+            "starters":[{"kind":2,"count":1000,"size":400,"velo":1, "startStep":100,"planetName":"Noname1"}]}`,
         cond:
-            `Створити туманність, яка під впливом тяжіння перетвориться в планетну систему, яка збере не менше, ніж 90% первинної маси туманності.`,
+            `Створити туманність, яка під впливом тяжіння перетвориться в планетну систему,
+            в якій зосередиться не менше, ніж 90% первинної маси туманності.`,
         help: 
-            ``,
+            `Треба зменшувати швидкість обертання часток.`,
         solv: 
-            ``,
+            `Kω = 0.15`,
         final:
             `{"planets":[{"name":"Noname1","m":50,"r":10,"x":0,"y":0,"vx":0,"vy":0,"color":"white"}],
-            "starters":[{"kind":2,"count":1000,"size":400,"velo":0.25, "startStep":100,"planetName":"Noname1"}]}  `,
+            "starters":[{"kind":2,"count":1000,"size":400,"velo":0.15, "startStep":100,"planetName":"Noname1"}]}  `,
     },                                 
 
             </textarea> 

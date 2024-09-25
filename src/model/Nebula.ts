@@ -6,9 +6,7 @@ export default class Nebula
 {
  
     constructor(n: number, nebulaR: number, veloK: number, proto: Planet, space: Space)
-    { 
-        //space.removeSelectedPlanet();   //// ????????
-           
+    {            
         // static pieces
         let pieces: Array<Planet> = [];
         let m = proto.m / n;
@@ -56,13 +54,14 @@ export default class Nebula
 
 
         // set init velocities
-        // const K = 0.25;
+
         for (let piece of pieces) {
             let a = Math.sqrt(piece.ax**2 + piece.ay**2);
-            let dist = Math.sqrt(piece.x**2 + piece.y**2);
-            let v = veloK * Math.sqrt(a * dist);  
+            let r = Math.sqrt(piece.x**2 + piece.y**2);
+            let v = veloK * Math.sqrt(a * r);  
             
-            let angle = Math.atan2(piece.y, piece.x) + Math.PI / 2; 
+            let angle = Math.atan2(piece.ay, piece.ax) + Math.PI / 2; 
+            // let angle = Math.atan2(piece.y, piece.x) + Math.PI / 2; 
             piece.vx = v * (Math.cos(angle)); 
             piece.vy = v * (Math.sin(angle)); 
         }
