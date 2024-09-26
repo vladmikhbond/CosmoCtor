@@ -107,7 +107,8 @@ export default class Controller
 
         page.rocketButton.addEventListener('click', () => {
             if (this.space.selectedPlanet) { 
-                page.rocketBoard.style.display='block';                    
+                page.rocketBoard.style.display='block'; 
+                page.nebulaBoard.style.display='none';                   
                 this.view.draw();
             }
         
@@ -116,6 +117,7 @@ export default class Controller
         page.nebulaButton.addEventListener('click', () => {
             if (this.space.selectedPlanet) {  
                 page.nebulaBoard.style.display='block';
+                page.rocketBoard.style.display='none'; 
                 this.view.draw();
             } 
         });
