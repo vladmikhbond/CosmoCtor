@@ -4,6 +4,8 @@
         <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> -->
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>    
         <link rel="stylesheet" href="./index.css" />
+        <link rel="icon" href="./favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     </head>
 <body>
 
@@ -109,8 +111,18 @@
 
         <div id="footer">
             <textarea id="sceneArea">
-                {"planets":[{"name":"Noname1","m":50,"r":10,"x":0,"y":0,"vx":0,"vy":0,"color":"white"}],
-                "starters":[{"kind":2,"count":1000,"size":400,"velo":0.5, "startStep":10,"planetName":"Noname1"}]}                                    
+                {"planets":[
+                {"name":"Sun","m":1000,"r":30,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
+                {"name":"Mercury","m":0.1,"r":4,"x":101,"y":0,"vx":0,"vy":3.1467,"color":"yellow"},
+                {"name":"Venus","m":0.1,"r":6,"x":187,"y":0,"vx":0,"vy":2.3125,"color":"orange"},
+                {"name":"Earth","m":0.1,"r":7,"x":260,"y":0,"vx":0,"vy":1.9612,"color":"lightblue"},
+                {"name":"Mars","m":0.1,"r":5,"x":390,"y":0,"vx":0,"vy":1.6013,"color":"red"},
+                {"name":"Jupiter","m":0.1,"r":12,"x":1310,"y":0,"vx":0,"vy":0.8737,"color":"pink"},
+
+                {"name":"Saturn","m":0.1,"r":9,"x":2503,"y":0,"vx":0,"vy":0.6321,"color":"white"},
+                {"name":"Uran","m":0.1,"r":8,"x":5072,"y":0,"vx":0,"vy":0.4440,"color":"white"},
+                {"name":"Neptun","m":0.1,"r":7,"x":7751,"y":0,"vx":0,"vy":0.3592,"color":"white"}],
+                "starters":[]}                                    
             </textarea> 
 
             <textarea id="dataArea">
@@ -368,14 +380,3 @@
 <script type="module" src="./js/main.js"></script>
 </body>
 </html>
-
-<!------------------------------------
-Sun System
-            [{"name":"Sun","m":1000,"r":20,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
-            {"name":"Earth","m":1,"r":6,"x":300,"y":1,"vx":0,"vy":1.82574,"color":"lightblue"},
-            {"name":"Venus","m":1,"r":6,"x":200,"y":0,"vx":0,"vy":2.23607,"color":"orange"},
-            {"name":"Jupiter","m":1,"r":10,"x":490,"y":0,"vx":0,"vy":1.41421,"color":"pink"}]
-
-            
------------------------------------->
-
