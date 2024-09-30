@@ -85,6 +85,11 @@ body {
     border: none;
 }
 
+#clearAllButton {
+    background-color: red;
+    color: white;
+}
+
 #dashboard {
     border: solid black 1px;
     font-family: monospace;

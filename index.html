@@ -51,12 +51,12 @@
                     <option value="0" ></option>
                 </datalist>
             </div> 
-            Time: <span id="stepsCountSpan"></span> |  
-            Speed: <span id="stepsPerSecSpan"></span> |
-            Bodies: <span id="planetsCount"></span> 
-            <hr>
-            <span id="debug"></span> 
-
+            <div>
+                <button id="clearAllButton">C</button> 
+                Time: <span id="stepsCountSpan"></span> |  
+                Speed: <span id="stepsPerSecSpan"></span> |
+                Bodies: <span id="planetsCountSpan"></span>
+            </div>
 
         </div>
 
@@ -112,7 +112,7 @@
         <div id="footer">
             <textarea id="sceneArea">
                 {"planets":[
-                {"name":"Sun","m":1000,"r":30,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
+                {"name":"Sun","m":1000,"r":30,"x":0,"y":0,"vx":-0.00008,"vy":-0.00104,"color":"yellow"},
                 {"name":"Mercury","m":0.1,"r":4,"x":101,"y":0,"vx":0,"vy":3.1467,"color":"yellow"},
                 {"name":"Venus","m":0.1,"r":6,"x":187,"y":0,"vx":0,"vy":2.3125,"color":"orange"},
                 {"name":"Earth","m":0.1,"r":7,"x":260,"y":0,"vx":0,"vy":1.9612,"color":"lightblue"},

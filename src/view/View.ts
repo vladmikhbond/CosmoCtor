@@ -139,18 +139,17 @@ export default class View
     } 
 
     drawCursorCoords(point: {x: number; y: number}, gx: number, gy: number) {
-        let left = 310;
-        let top = 5;
+        let left = 0;
+        let top = 100;
         this.ctx.fillStyle = 'darkblue';    
         this.ctx.font = '14px';
         this.ctx.fillStyle = 'lightgray';
-        this.ctx.fillText(`x: ${point.x.toFixed(2)}   y: ${point.y.toFixed(2)}`, left + 5, top + 15);
-
         let g = Math.sqrt(gx**2 + gy**2);  
-        this.ctx.fillText(`gx: ${gx.toFixed(4)}   gy: ${gy.toFixed(4)}  g: ${g.toFixed(4)}`, left + 5, top + 25);
+        this.ctx.fillText(`gx: ${gx.toFixed(4)}   gy: ${gy.toFixed(4)}  g: ${g.toFixed(4)}`, left + 5, top + 15);
+        this.ctx.fillText(`x: ${point.x.toFixed(2)}   y: ${point.y.toFixed(2)}`, left + 5, top + 25);
     }
     
-    // line from mouse cursor 
+    // line from mouse cursor (NOT USED)
     //
     drawGraviTension(point: { x: number; y: number; }, gx: number, gy: number) {
         const K = 100;
@@ -167,7 +166,7 @@ export default class View
         this.ctx.restore();
     }
    
-    // display the info
+    // display info
     //
     timeStamp = Date.now();
 
@@ -181,7 +180,7 @@ export default class View
         // display
         page.stepsPerSecSpan.innerHTML = stepsPerSec.toFixed(0);
         page.stepsCountSpan.innerHTML = glo.stepsCount.toString(); 
-        page.planetsCount.innerHTML = planetsCount.toString();      
+        page.planetsCountSpan.innerHTML = planetsCount.toString();      
     }
 
     // display to panelBoard

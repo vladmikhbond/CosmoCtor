@@ -50,6 +50,15 @@ export default class Controller
                 page.dashboard.style.display = 'none';
         });
 
+        // clearAllSpan
+        page.clearAllButton.addEventListener('click', () => {
+            if (confirm("Clear all?\nAre you serious?")) {
+                this.space.planets = [];
+                this.space.starters = [];
+                this.view.draw();
+            }
+        });
+
         // runButton_click
         page.runButton.addEventListener('click', () => {
             if (!this.stepTimer) {

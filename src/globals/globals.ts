@@ -45,9 +45,10 @@ export const page = {
     //
     scopeRange: <HTMLInputElement>document.getElementById('scopeRange')!,
     //
+    clearAllButton: document.getElementById('clearAllButton')!,
     stepsCountSpan: document.getElementById('stepsCountSpan')!,
     stepsPerSecSpan: document.getElementById('stepsPerSecSpan')!,
-    planetsCount: document.getElementById('planetsCount')!,
+    planetsCountSpan: document.getElementById('planetsCountSpan')!,
 
     // on planet board
     nameText: <HTMLInputElement>document.getElementById('nameText')!,
