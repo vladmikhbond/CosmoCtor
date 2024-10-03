@@ -12,8 +12,8 @@ export default class Rocket extends Planet
         // радіус ракети
         let r = 1;
         // коорд ракети
-        let x = planet.x //+ (planet.r + r + 1) * Math.sign(velo) * ex;
-        let y = planet.y //+ (planet.r + r + 1) * Math.sign(velo) * ey;
+        let x = planet.x; 
+        let y = planet.y;
         // до швидкості докладається швидкість планети 
         velo += planet.v;
         

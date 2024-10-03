@@ -5,34 +5,42 @@ import Space from "./Space.js";
 export default class Nebula
 {
  
-    constructor(n: number, nebulaR: number, veloK: number, proto: Planet, space: Space)
-    {            
-        // static pieces
+    static splitOnPieces(n: number, nebulaR: number, proto: Planet): Array<Planet> {
         let pieces: Array<Planet> = [];
         let m = proto.m / n;
         let r = proto.r / n**0.5;
 
         // Розподіл рівномірний по куту (від 0 до 2PI) і по відстані (від 0 до nebulaR) 
-        for (let i = 0; i < n; i++) {
+        let protector = 0;
+        while (n && protector < 1000000 ) {
             let dist = Math.random() * nebulaR;
             let angle = Math.random() * 2 * Math.PI;
             let x = dist * Math.cos(angle);
             let y = dist * Math.sin(angle);
-            let piece = new Planet(`_`, m, r, x, y, 0, 0, proto.color);
-            pieces.push(piece);   
+            if (isValid(x, y)) {
+                let piece = new Planet(`_`, m, r, x, y, 0, 0, proto.color);
+                pieces.push(piece);
+                n--; 
+            }
+            protector++;    
+        }
+        return pieces;
+
+        function isValid(x: number, y: number) {
+            for(let p of pieces) {
+                let dd = (p.x - x)**2 + (p.y - y)**2;
+                let e = m / dd;
+                if (e > 0.001) 
+                    return false;
+            }
+            return true;
         }
         
-        // // Розподіл рівномірний по площині круга 
-        // for (let i = 0; i < n; i++) {
-        //     let x = Math.random() * 2 * nebulaR - nebulaR;
-        //     let y = Math.random() * 2 * nebulaR - nebulaR;
-        //     let dist = Math.sqrt(x*x + y*y);
-        //     if (dist > nebulaR) {i--; continue;}
-        //     let piece = new Planet(`_`, m, r, x, y, 0, 0, proto.color);
-        //     pieces.push(piece);   
-        // }
+    }
 
-        // acceleration of pieces
+    constructor(n: number, nebulaR: number, veloK: number, proto: Planet, space: Space)
+    {            
+        let pieces = Nebula.splitOnPieces(n, nebulaR, proto);
 
         // count acceleration for all pieces
         for (let p0 of pieces) {
@@ -58,7 +66,8 @@ export default class Nebula
         for (let piece of pieces) {
             let a = Math.sqrt(piece.ax**2 + piece.ay**2);
             let r = Math.sqrt(piece.x**2 + piece.y**2);
-            let v = veloK * Math.sqrt(a * r);  
+            let k =  veloK * (0.5 + 0.5 * r / nebulaR);
+            let v = k * Math.sqrt(a * r) ;  
             
             let angle = Math.atan2(piece.ay, piece.ax) + Math.PI / 2; 
             // let angle = Math.atan2(piece.y, piece.x) + Math.PI / 2; 
