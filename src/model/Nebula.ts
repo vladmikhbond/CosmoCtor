@@ -55,9 +55,11 @@ export default class Nebula
                     ax += p.m * (p.x - p0.x) / rrr;
                     ay += p.m * (p.y - p0.y) / rrr;
                 }
-            }        
-            p0.ax = glo.G * ax;
-            p0.ay = glo.G * ay;
+            } 
+            // velo direction
+            let dir = Math.random() > veloK ? 1 : -1;       
+            p0.ax = dir * glo.G * ax;
+            p0.ay = dir * glo.G * ay;
         }
 
 
@@ -66,11 +68,13 @@ export default class Nebula
         for (let piece of pieces) {
             let a = Math.sqrt(piece.ax**2 + piece.ay**2);
             let r = Math.sqrt(piece.x**2 + piece.y**2);
-            let k =  veloK * (0.5 + 0.5 * r / nebulaR);
-            let v = k * Math.sqrt(a * r) ;  
+            let k = 0.9; 
+            
+            let v = k * Math.sqrt(a * r) ;
+
             
             let angle = Math.atan2(piece.ay, piece.ax) + Math.PI / 2; 
-            // let angle = Math.atan2(piece.y, piece.x) + Math.PI / 2; 
+ 
             piece.vx = v * (Math.cos(angle)); 
             piece.vy = v * (Math.sin(angle)); 
         }
