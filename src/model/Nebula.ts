@@ -57,7 +57,7 @@ export default class Nebula
                 }
             } 
             // velo direction
-            let dir = Math.random() > veloK ? 1 : -1;       
+            let dir = 1//.random() > veloK ? 1 : -1;       
             p0.ax = dir * glo.G * ax;
             p0.ay = dir * glo.G * ay;
         }
