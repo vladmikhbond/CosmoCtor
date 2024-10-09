@@ -11,27 +11,26 @@ export default class Nebula
         let r = proto.r / n**0.5;
 
         // Розподіл рівномірний по куту (від 0 до 2PI) і по відстані (від 0 до nebulaR) 
-        let protector = 0;
-        while (n && protector < 1000000 ) {
+        
+        for (let guarantee = 0; n && guarantee < 1000000; guarantee++ ) 
+        { 
             let dist = Math.random() * nebulaR;
             let angle = Math.random() * 2 * Math.PI;
             let x = dist * Math.cos(angle);
             let y = dist * Math.sin(angle);
-            if (isValid(x, y)) {
+            if (notTooClose(x, y)) {
                 let piece = new Planet(`_`, m, r, x, y, 0, 0, proto.color);
                 pieces.push(piece);
-                n--; 
+                n--;      
             }
-            protector++;    
         }
         return pieces;
 
-        function isValid(x: number, y: number) {
+        function notTooClose(x: number, y: number) {
             for(let p of pieces) {
                 let dd = (p.x - x)**2 + (p.y - y)**2;
                 let e = m / dd;
-                if (e > 0.001) 
-                    return false;
+                if (e > 0.001) return false;
             }
             return true;
         }
@@ -42,41 +41,18 @@ export default class Nebula
     {            
         let pieces = Nebula.splitOnPieces(n, nebulaR, proto);
 
-        // count acceleration for all pieces
-        for (let p0 of pieces) {
-            let ax = 0, ay = 0;
-            for (let p of pieces) {
-                if (p == p0) {
-                    continue;
-                }                   
-                let rr = (p.x - p0.x)**2 + (p.y - p0.y)**2;
-                let rrr = Math.sqrt(rr) * rr;
-                if (rr) { 
-                    ax += p.m * (p.x - p0.x) / rrr;
-                    ay += p.m * (p.y - p0.y) / rrr;
-                }
-            } 
-            // velo direction
-            let dir = 1//.random() > veloK ? 1 : -1;       
-            p0.ax = dir * glo.G * ax;
-            p0.ay = dir * glo.G * ay;
-        }
-
-
         // set init velocities
-
         for (let piece of pieces) {
-            let a = Math.sqrt(piece.ax**2 + piece.ay**2);
+            
             let r = Math.sqrt(piece.x**2 + piece.y**2);
-            let k = 0.9; 
-            
-            let v = k * Math.sqrt(a * r) ;
 
-            
-            let angle = Math.atan2(piece.ay, piece.ax) + Math.PI / 2; 
- 
-            piece.vx = v * (Math.cos(angle)); 
-            piece.vy = v * (Math.sin(angle)); 
+            // velo direction
+            let dir = Math.random() > veloK ? 1 : -1;   
+            let k = 2; 
+            let v = k * Math.sqrt(proto.m * r / nebulaR**2);
+            let angle = Math.atan2(piece.y, piece.x) + Math.PI / 2; 
+            piece.vx = dir * v * (Math.cos(angle)); 
+            piece.vy = dir * v * (Math.sin(angle)); 
         }
 
         // center of mass
