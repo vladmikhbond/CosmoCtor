@@ -38,7 +38,7 @@ export default class Nebula
                 } 
             } 
             // NOTE: negative values are forbidden (they are possible when n is too small)
-            return force > 0 ? force * 2 * M / R : 0;
+            return force > 0 ? force * 2 * M * glo.G / R : 0;
         }
 
     }
@@ -83,8 +83,6 @@ export default class Nebula
 
         // set init velocities
         let accels = Nebula.calcAccelerations(proto.m, nebulaR);
-
-        // console.log(accels)    ///////////////////////
 
         for (let piece of pieces) {            
             let r = Math.sqrt(piece.x**2 + piece.y**2);
