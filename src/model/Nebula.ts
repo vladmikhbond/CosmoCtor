@@ -5,43 +5,81 @@ import Space from "./Space.js";
 export default class Nebula
 {
  
-    static calcAccelerations(M:number, R:number):number[] 
+    static calcAccelPolar(M:number, R:number):number[] 
     {
         let arr = new Array(R|0 + 1).fill(0);
         const N = 200;
         for (let a = 1; a <= R; a += 1) {
-            arr[a] = doubleIntegral(M, R, a, N);
+            arr[a] = doubleIntegralPolar(M, R, a, N);
         }
         return arr;
 
         // --------------- local function -------------------
 
-        function doubleIntegral(M:number, R:number, a:number, n:number):number 
+        function doubleIntegralPolar(M:number, R:number, p:number, n:number):number 
         {
             const dw = Math.PI / n, 
                   dz = R / n,  
                   dm = M / (n**2),
-                  aa = a * a;
+                  aa = p * p;
             let force = 0;
 
             for (let w = 0; w < Math.PI; w += dw) 
             {
                 let cosW = Math.cos(w + dw/2); 
-                let a2cosW = 2 * a * cosW; 
+                let a2cosW = 2 * p * cosW; 
 
                 for (let z = 1; z < R; z += dz) {
                     let r = Math.sqrt(z * z + aa - z * a2cosW);
                     if (r) {
-                        let rx = a - z * cosW;
-                        force += dm * rx / r**3;
+                        let rx = z - z * cosW;
+                        force += rx / r**3;
                     }
                 } 
             } 
+            force *= 2 * dm;
             // NOTE: negative values are forbidden (they are possible when n is too small)
-            return force > 0 ? force * 2 * M * glo.G / R : 0;
+            return force > 0 ? force : 0;
         }
 
     }
+
+    static calcAccelDecart(M:number, R:number):number[] 
+    {
+        let arr = new Array(R|0 + 1).fill(0);
+        const N = 200;
+        for (let a = 1; a <= R; a += 1) {
+            arr[a] = doubleIntegralDecart(M, R, a, N);
+        }
+        return arr;
+
+        // --------------- local function -------------------
+
+        function doubleIntegralDecart(M:number, R:number, p:number, n:number):number 
+        {
+            const dx = 2*R / n, 
+                  dy = 2*R / n,
+                  dm = (M / n**2) * (4 / Math.PI);
+            let force = 0;
+
+            for (let x = -R; x < R; x += dx) 
+            {                
+                for (let y = 0; y < R; y += dy) {
+                    let r = Math.sqrt((p - x)**2 + y**2);
+                    if (r) {
+                        let rx = x**2 + y**2 < R**2 ? p - x : 0;
+                        force += rx / r**3;
+                    }
+                } 
+            } 
+            force *= 2 * dm;
+            // NOTE: negative values are forbidden (they are possible when n is too small)
+            return force > 0 ? force : 0;
+        }
+
+    }
+
+
 
     static splitOnPieces(n: number, nebulaR: number, proto: Planet): Array<Planet> {
         let pieces: Array<Planet> = [];
@@ -55,11 +93,9 @@ export default class Nebula
         //     let angle = Math.random() * 2 * Math.PI;
         //     let x = dist * Math.cos(angle);
         //     let y = dist * Math.sin(angle);
-        //     //if (notTooClose(x, y)) {
-        //         let piece = new Planet(`_`, m, r, x, y, 0, 0, proto.color);
-        //         pieces.push(piece);
-        //         n--;      
-        //     //}
+        //     let piece = new Planet(`_`, m, r, x, y, 0, 0, proto.color);
+        //     pieces.push(piece);
+        //     n--;      
         // }
 
         // Розподіл рівномірний по декартовим координатам         
@@ -95,7 +131,7 @@ export default class Nebula
         let pieces = Nebula.splitOnPieces(n, nebulaR, proto);
 
         // set init velocities
-        let accels = Nebula.calcAccelerations(proto.m, nebulaR);
+        let accels = Nebula.calcAccelDecart(proto.m, nebulaR);
 
         for (let piece of pieces) {            
             let r = Math.sqrt(piece.x**2 + piece.y**2);
