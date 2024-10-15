@@ -48,20 +48,33 @@ export default class Nebula
         let m = proto.m / n;
         let r = proto.r / n**0.5;
 
-        // Розподіл рівномірний по куту (від 0 до 2PI) і по відстані (від 0 до nebulaR) 
-        
+        // Розподіл рівномірний по куту (від 0 до 2PI) і по відстані (від 0 до nebulaR)         
+        // while (n) 
+        // { 
+        //     let dist = Math.random() * nebulaR;
+        //     let angle = Math.random() * 2 * Math.PI;
+        //     let x = dist * Math.cos(angle);
+        //     let y = dist * Math.sin(angle);
+        //     //if (notTooClose(x, y)) {
+        //         let piece = new Planet(`_`, m, r, x, y, 0, 0, proto.color);
+        //         pieces.push(piece);
+        //         n--;      
+        //     //}
+        // }
+
+        // Розподіл рівномірний по декартовим координатам         
         while (n) 
         { 
-            let dist = Math.random() * nebulaR;
-            let angle = Math.random() * 2 * Math.PI;
-            let x = dist * Math.cos(angle);
-            let y = dist * Math.sin(angle);
-            //if (notTooClose(x, y)) {
+            let x = (2 * Math.random() - 1) * nebulaR;
+            let y = (2 * Math.random() - 1) * nebulaR;
+            let rr = x*x + y*y;
+            if (rr < nebulaR**2 && notTooClose(x, y)) {
                 let piece = new Planet(`_`, m, r, x, y, 0, 0, proto.color);
                 pieces.push(piece);
                 n--;      
-            //}
+            }
         }
+    
         return pieces;
 
         // --------------- local function -------------------
