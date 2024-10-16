@@ -4,12 +4,12 @@ import Space from "./Space.js";
 
 export default class Nebula
 {
-    static calcAccelerate(M:number, R:number, distrib: number):number[] 
+    static calcAccelerate(M:number, R:number, distr: string):number[] 
     {
         let arr = new Array(R|0 + 1).fill(0);
         const n = 200;
         for (let p = 1; p <= R; p += 1) {
-            arr[p] = distrib == 0 ? doubleIntegralPolar(p) : doubleIntegralDecart(p);
+            arr[p] = distr == "polar" ? doubleIntegralPolar(p) : doubleIntegralDecart(p);
             //console.log(`polar\t${p}\t${arr[p]}`); ///////////////// DEBUG /////////
         }
         return arr;
@@ -72,12 +72,12 @@ export default class Nebula
 
     }
 
-    static splitOnPieces(n: number, nebulaR: number, proto: Planet, distrib: number): Array<Planet> {
+    static splitOnPieces(n: number, nebulaR: number, proto: Planet, distr: string): Array<Planet> {
         let pieces: Array<Planet> = [];
         let m = proto.m / n;
         let r = proto.r / n**0.5;
         
-        if (distrib == 0) {
+        if (distr === 'polar') {
             // Розподіл рівномірний по куту (від 0 до 2PI) і по відстані (від 0 до nebulaR)         
             while (n) 
             { 
@@ -120,12 +120,12 @@ export default class Nebula
         
     }
 
-    constructor(n: number, nebulaR: number, veloK: number, proto: Planet, space: Space, distrib = 1)
+    constructor(n: number, nebulaR: number, veloK: number, proto: Planet, space: Space, distr: string)
     {            
-        let pieces = Nebula.splitOnPieces(n, nebulaR, proto, distrib);
+        let pieces = Nebula.splitOnPieces(n, nebulaR, proto, distr);
 
         // set init velocities
-        let accels = Nebula.calcAccelerate(proto.m, nebulaR, distrib);
+        let accels = Nebula.calcAccelerate(proto.m, nebulaR, distr);
 
         for (let piece of pieces) {            
             let r = Math.sqrt(piece.x**2 + piece.y**2);

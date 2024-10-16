@@ -145,8 +145,7 @@ export default class Space extends EventTarget
                     this.planets.push(rocket);
                 } else if (starter.kind == StarterKind.Nebula) {
                     // nebula
-                    let distrib = starter.count % 2;
-                    new Nebula(starter.count, starter.size, starter.velo, planet, this, distrib); 
+                    new Nebula(starter.count, starter.size, starter.velo, planet, this, starter.distr); 
                 }
                 starter.kind = StarterKind.Empty; 
             }

@@ -140,19 +140,22 @@ export default class Controller
                 count: 0, 
                 size:0,
                 startStep: +page.interval1.value + glo.stepsCount, 
-                planetName: this.space.selectedPlanet!.name
+                planetName: this.space.selectedPlanet!.name,
+                distr: "",
             });
             page.rocketBoard.style.display = 'none';
         });
 
         page.okButton2.addEventListener('click', () => {
+            
             this.space.starters.unshift({
                 kind: StarterKind.Nebula,
                 velo: +page.moment.value,
                 count: +page.count.value, 
                 size: +page.size.value, 
                 startStep: +page.interval2.value + glo.stepsCount, 
-                planetName: this.space.selectedPlanet!.name
+                planetName: this.space.selectedPlanet!.name,
+                distr: page.distr.value,
             });
             page.nebulaBoard.style.display = 'none';
         });
