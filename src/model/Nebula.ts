@@ -2,29 +2,26 @@ import {glo} from '../globals/globals.js';
 import Planet from "./Planet.js";
 import Space from "./Space.js";
 
-const mode = 1;
-
 export default class Nebula
 {
-    static calcAccelPolar(M:number, R:number):number[] 
+    static calcAccelerate(M:number, R:number, distrib: number):number[] 
     {
         let arr = new Array(R|0 + 1).fill(0);
-        const N = 200;
+        const n = 200;
         for (let p = 1; p <= R; p += 1) {
-            arr[p] = doubleIntegralPolar(M, R, p, N);
+            arr[p] = distrib == 0 ? doubleIntegralPolar(p) : doubleIntegralDecart(p);
             //console.log(`polar\t${p}\t${arr[p]}`); ///////////////// DEBUG /////////
         }
         return arr;
 
         // --------------- local function -------------------
 
-        function doubleIntegralPolar(M:number, R:number, p:number, n:number):number 
+        function doubleIntegralPolar(p:number):number 
         {
             const dw = Math.PI / n, 
-                  dz = R / n,
-                  dm = (M/2) / n**2;
-            let force = 0;
+                  dz = R / n;
 
+            let force = 0;
             for (let w = 0; w < Math.PI; w += dw) 
             {
                 let cosW = Math.cos(w + dw/2); 
@@ -38,32 +35,19 @@ export default class Nebula
                     }
                 } 
             } 
-            force *= 2 * dm * glo.G;
+            const dm = M / n**2;    // тут dm збільшено вдвічі
+            force *= dm * glo.G;
+
             // NOTE: negative values are forbidden (they are possible when n is too small)
             return force > 0 ? force : 0;
         }
 
-    }
-
-    static calcAccelDecart(M:number, R:number):number[] 
-    {
-        let arr = new Array(R|0 + 1).fill(0);
-        const N = 200;
-        for (let p = 1; p <= R; p += 1) {
-            arr[p] = doubleIntegralDecart(M, R, p, N);
-            //console.log(`decart\t${p}\t${arr[p]}`); ///////////////// DEBUG /////////
-        }
-        return arr;
-
-        // --------------- local function -------------------
-
-        function doubleIntegralDecart(M:number, R:number, p:number, n:number):number 
+        function doubleIntegralDecart(p:number):number 
         {
             const dx = R / n, 
-                  dy = R / n,
-                  dm = (M / 2 / n**2) * (4 / Math.PI);
-            let force = 0;
+                  dy = R / n;
 
+            let force = 0;
             for (let x = -R; x < R; x += dx) 
             {      
                 let xx = x**2
@@ -79,21 +63,21 @@ export default class Nebula
                     }
                 } 
             } 
-            force *= 2 * dm * glo.G / 10;
+            const dm = (M / n**2) * (4 / Math.PI);    // тут dm збільшено вдвічі
+            force *= dm * glo.G;
+
             // NOTE: negative values are forbidden (they are possible when n is too small)
             return force > 0 ? force : 0;
         }
 
     }
 
-
-
-    static splitOnPieces(n: number, nebulaR: number, proto: Planet): Array<Planet> {
+    static splitOnPieces(n: number, nebulaR: number, proto: Planet, distrib: number): Array<Planet> {
         let pieces: Array<Planet> = [];
         let m = proto.m / n;
         let r = proto.r / n**0.5;
         
-        if (!mode) {
+        if (distrib == 0) {
             // Розподіл рівномірний по куту (від 0 до 2PI) і по відстані (від 0 до nebulaR)         
             while (n) 
             { 
@@ -121,8 +105,6 @@ export default class Nebula
                 }
             }
         }
-
-    
         return pieces;
 
         // --------------- local function -------------------
@@ -138,15 +120,12 @@ export default class Nebula
         
     }
 
-    constructor(n: number, nebulaR: number, veloK: number, proto: Planet, space: Space)
+    constructor(n: number, nebulaR: number, veloK: number, proto: Planet, space: Space, distrib = 1)
     {            
-        let pieces = Nebula.splitOnPieces(n, nebulaR, proto);
+        let pieces = Nebula.splitOnPieces(n, nebulaR, proto, distrib);
 
         // set init velocities
-        let accels = !mode ? 
-            Nebula.calcAccelPolar(proto.m, nebulaR) :
-            Nebula.calcAccelDecart(proto.m, nebulaR); 
-            
+        let accels = Nebula.calcAccelerate(proto.m, nebulaR, distrib);
 
         for (let piece of pieces) {            
             let r = Math.sqrt(piece.x**2 + piece.y**2);
