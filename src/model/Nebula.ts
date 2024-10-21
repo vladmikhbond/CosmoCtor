@@ -50,7 +50,7 @@ export default class Nebula
             let force = 0;
             for (let x = -R; x < R; x += dx) 
             {      
-                let xx = x**2
+                let xx = x**2;
                 let x1 = x + dx/2;
                 for (let y = 0; y < R; y += dy) {
                     let y1 = y + dy/2;
@@ -98,7 +98,7 @@ export default class Nebula
                 let x = (2 * Math.random() - 1) * nebulaR;
                 let y = (2 * Math.random() - 1) * nebulaR;
                 let rr = x*x + y*y;
-                if (rr < nebulaR**2 && notTooClose(x, y)) {
+                if (rr < nebulaR**2) {
                     let piece = new Planet(`_`, m, r, x, y, 0, 0, proto.color);
                     pieces.push(piece);
                     n--;      
@@ -106,17 +106,6 @@ export default class Nebula
             }
         }
         return pieces;
-
-        // --------------- local function -------------------
-        
-        function notTooClose(x: number, y: number) {
-            for(let p of pieces) {
-                let dd = (p.x - x)**2 + (p.y - y)**2;
-                let e = m / dd;
-                if (e > 0.001) return false;
-            }
-            return true;
-        }
         
     }
 
