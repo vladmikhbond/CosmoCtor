@@ -50,7 +50,7 @@ export default class Controller
                 page.dashboard.style.display = 'none';
         });
 
-        // clearAllSpan
+        // clearAllButton
         page.clearAllButton.addEventListener('click', () => {
             if (confirm("Clear all?\nAre you serious?")) {
                 this.space.planets = [];
@@ -59,7 +59,7 @@ export default class Controller
             }
         });
 
-        // runButton_click
+        // runButton
         page.runButton.addEventListener('click', () => {
             if (!this.stepTimer) {
                 page.saveSceneButton.dispatchEvent(new Event("click"));
@@ -69,15 +69,18 @@ export default class Controller
             }
         });
 
-        // stepButton_click
+        // stepButton
         page.stepButton.addEventListener('click', () => {
             this.step();
             this.view.displayInfo();
         });
-
-        // trackButton_click  
+            
+        // trackButton
         page.trackButton.addEventListener('click', () => {
             this.view.trackMode = !this.view.trackMode;
+            if (!this.view.trackMode) {
+                this.space.clearAllTracks();
+            }
             page.trackButton.innerHTML = this.view.trackMode ? '●' : 'O';
             this.view.draw();
         });

@@ -3,9 +3,15 @@ import {glo} from '../globals/globals.js';
 import Rocket from './Rocket.js';
 import Nebula from './Nebula.js';
 import { Starter, StarterKind } from './Starter.js';
+import Track from './Track.js';
 
 export default class Space extends EventTarget 
 {
+    clearAllTracks() {
+        for(const planet of this.planets) {
+            planet.track = new Track(planet);
+        }
+    }
 
     // Метод для виклику події 'selectPlanetEvent'
     //
