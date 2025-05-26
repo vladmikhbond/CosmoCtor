@@ -32,28 +32,28 @@
         
         <button id="runButton" class="btn btn-sm panel-button"  title="Run-Stop toggle"> ► </button>
         <button id="stepButton" class="btn btn-sm panel-button" title="One step">1</button>
-        <button id="trackButton" class="btn btn-sm panel-button" title="Orbits toggle">●</button> |
+        <button id="trackButton" class="btn btn-sm panel-button" title="Orbits toggle">●</button>
 
         <button id="helpButton" class="btn btn-sm panel-button" onclick="window.open('help.pdf', '_blank');">Help</button>  
         
-        <div id="menuDiv">
-            <span id="menuSpan"></span>
-        </div>
-
+    
         <!---------------------- top panel (sliders row) ---------------------->
 
-        <div id="rangesDiv" style="margin: 10px 0px 0px 0px ;">
-            
-                <input type="range" id="scopeRange" min="-15" max="1" value="0" step="1" title="Телескоп" list="markers"/>
-                <datalist id="markers" >
-                    <option value="0" ></option>
-                </datalist>
-          
-                <button id="clearAllButton">C</button> 
-                Time: <span id="stepsCountSpan"></span> |  
-                Speed: <span id="stepsPerSecSpan"></span> |
-                Bodies: <span id="planetsCountSpan"></span>
-            
+ 
+        <div>
+            <input type="range" id="scopeRange" min="-15" max="1" value="0" step="1" title="Телескоп" list="markers"/>
+            <datalist id="markers" >
+                <option value="0" ></option>
+            </datalist>
+        
+            <button id="clearAllButton">C</button> 
+            Time: <span id="stepsCountSpan"></span> |  
+            Speed: <span id="stepsPerSecSpan"></span> |
+            Bodies: <span id="planetsCountSpan"></span>
+        </div>    
+
+    <div id="menuDiv">
+            <span id="menuSpan"></span>
         </div>
 
 
