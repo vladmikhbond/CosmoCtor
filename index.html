@@ -33,7 +33,7 @@
         <button id="trackButton" class="btn btn-sm panel-button" title="Orbits toggle">●</button>
 
         <button id="helpButton" class="btn btn-sm panel-button" onclick="window.open('help.pdf', '_blank');">Help</button> 
-         
+
         <select class="form-select-sm" id="sceneSelect" title="Select problem">
         </select>
         <!---------------------- top panel (sliders row) ---------------------->
@@ -74,6 +74,17 @@
             </div>
  
         </div>
+
+      <!-- Problem Board -->
+      <div id="problemBoard" class="canvas-item" style="right: unset; left: 0">
+        <!-- <span style="position: absolute; right: 0; color: blue"><></span> -->
+        <div id="condDiv" style="color: rgb(0 0 0 / 75%);"></div>
+        <input id="answerText"  placeholder="відповідь" autocomplete="off">
+        <button id="answerButton" class="board-button">Ready</button>
+      </div>
+
+
+
 
         <div id="planetBoard" class="canvas-item">
             <div> 

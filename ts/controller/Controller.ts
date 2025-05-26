@@ -39,16 +39,12 @@ export default class Controller
 
     }
 
-
     private bindButtonClickEvents() 
     {
-
         // clearAllButton
         doc.clearAllButton.addEventListener('click', () => {
             if (confirm("Clear all?\nAre you serious?")) {
-                this.space.planets = [];
-                this.space.starters = [];
-                this.view.draw();
+                this.clearScene();
             }
         });
 
@@ -309,6 +305,12 @@ export default class Controller
         this.stepTimer = 0;
         doc.runButton.innerHTML = '►';
         this.view.displayInfo();
+    }
+
+    public clearScene() {
+        this.space.planets = [];
+        this.space.starters = [];
+        this.view.draw();
     }
 
 }

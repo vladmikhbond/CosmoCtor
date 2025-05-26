@@ -35,6 +35,39 @@ export default class TaskController
             doc.dataArea.style.height = '60px';
         });
         
+        // завантажує сцену і умову обраної задачі
+        const loadProblemInitScene = () => {
+            // 
+            let idx = +doc.sceneSelect.value;
+            if (idx == 0) {
+                this.controller.clearScene();
+                doc.taskDiv.style.display = 'none';
+                return;
+            }    
+            let problem = this.problems[idx];
+            this.loadScene(problem.init);
+
+            // UI & view 
+            
+            doc.condDiv.innerHTML = problem.cond;
+            doc.problemBoard.style.display = 'block'; 
+            doc.problemBoard.style.backgroundColor = 'rgba(241, 241, 10, 0.1)';
+            doc.answerText.style.display = problem.isAnswerNumber ? 'inline' : 'none';
+            
+
+
+
+            // doc.openHelpButton.style.display = doc.openSolvButton.style.display = 'block';
+            // doc.taskDiv.style.display = 'block';
+            // doc.helpDiv.style.display = 'none';
+            // doc.solvDiv.style.display = 'none';
+            // (<HTMLDivElement>doc.condDiv.firstElementChild).innerHTML = problem.cond;
+        }
+
+        doc.sceneSelect.addEventListener("change", loadProblemInitScene);
+
+        doc.sceneSelect.addEventListener("click", loadProblemInitScene);
+
         this.loadProblems();
     }
 
@@ -140,7 +173,7 @@ export default class TaskController
                 doc.helpDiv.style.display = 'none';
                 doc.solvDiv.style.display = 'none';
 
-                (<HTMLDivElement>doc.condDiv.firstElementChild).innerHTML = task.cond;
+                // (<HTMLDivElement>doc.condDiv.firstElementChild).innerHTML = task.cond;
                 (<HTMLDivElement>doc.helpDiv.firstElementChild).innerHTML = task.help;
                 (<HTMLDivElement>doc.solvDiv.firstElementChild).innerHTML = task.solv;
 

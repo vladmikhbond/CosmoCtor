@@ -70,7 +70,7 @@ body {
 
 /* -----------------  Board Styles -------------------------- */
 
-#planetBoard {
+#planetBoard, #problemBoard {
     border: none;
     
     border-radius: 1px 1px 4px 4px;
@@ -85,6 +85,17 @@ body {
     z-index: 3;
     left: auto;  
     right: 0;     
+}
+
+#problemBoard {
+    background-color: rgba(241, 241, 10, 0.1);
+    width: 500px;
+    left: 0;
+}
+
+#answerText {
+    width: 100px; 
+    background-color: rgba(255,255,255, 0);
 }
 
 .start-board {
@@ -114,14 +125,10 @@ body {
     user-select: none; /* Стандартний синтаксис */
 }
 
-#condDiv, #helpDiv, #solvDiv  {
+#helpDiv, #solvDiv  {
     text-align: left;
     padding: 10px;
     margin:2px;
-}
-
-#condDiv {
-    background-color: greenyellow;
 }
 
 #helpDiv {

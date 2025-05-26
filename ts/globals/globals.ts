@@ -22,7 +22,7 @@ export const doc = {
     menuSpan: <HTMLSpanElement>document.getElementById('menuSpan')!,
     helpButton: <HTMLButtonElement>document.getElementById('helpButton')!,
     taskDiv: <HTMLDivElement>document.getElementById('taskDiv')!,
-    condDiv: <HTMLDivElement>document.getElementById('condDiv')!,
+    // condDiv: <HTMLDivElement>document.getElementById('condDiv')!,
     helpDiv: <HTMLDivElement>document.getElementById('helpDiv')!,
     solvDiv: <HTMLDivElement>document.getElementById('solvDiv')!,
 
@@ -35,7 +35,7 @@ export const doc = {
     dashboard: document.getElementById('dashboard')!,
     planetBoard: document.getElementById('planetBoard')!,
 
-    // on dashboard
+    // on top panel
     runButton: document.getElementById('runButton')!,
     stepButton: document.getElementById('stepButton')!,
     trackButton: document.getElementById('trackButton')!,
@@ -49,6 +49,14 @@ export const doc = {
     stepsCountSpan: document.getElementById('stepsCountSpan')!,
     stepsPerSecSpan: document.getElementById('stepsPerSecSpan')!,
     planetsCountSpan: document.getElementById('planetsCountSpan')!,
+
+    // on problem board
+    problemBoard: <HTMLDivElement>document.getElementById("problemBoard"),
+    condDiv: <HTMLDivElement>document.getElementById("condDiv"),
+    answerText: <HTMLInputElement>document.getElementById("answerText"),
+    answerButton: <HTMLButtonElement>document.getElementById("answerButton"),
+
+
 
     // on planet board
     nameText: <HTMLInputElement>document.getElementById('nameText')!,
