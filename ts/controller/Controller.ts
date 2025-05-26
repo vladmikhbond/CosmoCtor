@@ -88,7 +88,7 @@ export default class Controller
         // saveSceneButton: save space.planets
         page.saveSceneButton.addEventListener('click', () => {
             let json = serialization(this.space);
-            page.sceneArea.innerHTML = json;
+            page.savedSceneArea.innerHTML = json;
         });
 
         // Get standard or copy selected planet

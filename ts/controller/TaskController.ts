@@ -24,7 +24,7 @@ export default class TaskController
 
         page.loadSceneButton.addEventListener('click', () => {            
             this.taskButtonsMaker();
-            this.loadScene(page.sceneArea.value);
+            this.loadScene(page.savedSceneArea.value);
         });
 
         page.dataArea.addEventListener('dblclick', () => {

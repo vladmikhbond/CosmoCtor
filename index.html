@@ -28,13 +28,13 @@
     <!---------------------- top panel (buttons row) ---------------------->
 
     <div class="topPanel">
-        <button id="runButton" class="dash-btn" style="margin-left: 30px; background-color:aquamarine;" title="Run-Stop toggle"> ► </button>
-        <button id="stepButton" class="dash-btn" title="One step">1</button>
-        <button id="trackButton" class="dash-btn" title="Orbits toggle">●</button> |
-        <button id="saveSceneButton" class="dash-btn" title="Scene Save">▼</button>
-        <button id="loadSceneButton" class="dash-btn" title="Scene Restore">▲</button> | 
-        <button id="planetButton" class="dash-btn" title="Create standard or copy selected planet">+Planet</button>
-        <button id="helpButton" onclick="window.open('help.pdf', '_blank');">Help</button>  
+        <button id="planetButton" btn-primary class="btn btn-light" title="Create standard or copy selected planet">+Planet</button>
+        
+        <button id="runButton" class="btn btn-sm panel-button"  title="Run-Stop toggle"> ► </button>
+        <button id="stepButton" class="btn btn-sm panel-button" title="One step">1</button>
+        <button id="trackButton" class="btn btn-sm panel-button" title="Orbits toggle">●</button> |
+
+        <button id="helpButton" class="btn btn-sm panel-button" onclick="window.open('help.pdf', '_blank');">Help</button>  
         
         <div id="menuDiv">
             <span id="menuSpan"></span>
@@ -78,15 +78,9 @@
         
     </div>
 
-
+  <button id="hideButton" >≡</button>
     <div>
-        <button id="hideButton" >≡</button>
-        <div id="dashboard">
-
-
-
-
-        </div>
+      
 
         <div id="planetBoard">
             <div> 
@@ -135,34 +129,34 @@
             </div>
         </div>
 
+        <canvas id="canvas2" width="800" height="800" class="canvas-item"></canvas>
+        <canvas id="canvas" width="800" height="800" tabindex="0"></canvas>
 
-        <canvas id="canvas" width="1000" height="1000" tabindex="0"></canvas>
+    <!------------------ bottom panel ---------------->
+
+
+    <div class="bottom-panel">
+
+      <button id="saveSceneButton" class="btn btn-sm btn-primary scene-btn" title="Export scene">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-down-right" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M8.636 12.5a.5.5 0 0 1-.5.5H1.5A1.5 1.5 0 0 1 0 11.5v-10A1.5 1.5 0 0 1 1.5 0h10A1.5 1.5 0 0 1 13 1.5v6.636a.5.5 0 0 1-1 0V1.5a.5.5 0 0 0-.5-.5h-10a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h6.636a.5.5 0 0 1 .5.5"/>
+          <path fill-rule="evenodd" d="M16 15.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1 0-1h3.793L6.146 6.854a.5.5 0 1 1 .708-.708L15 14.293V10.5a.5.5 0 0 1 1 0z"/>
+        </svg>
+      </button>
+
+      <textarea id="savedSceneArea" rows="1"></textarea>
+
+      <button id="loadSceneButton" class="zzz btn btn-sm btn-primary scene-btn" title="Import scene">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-up-right" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M6.364 13.5a.5.5 0 0 0 .5.5H13.5a1.5 1.5 0 0 0 1.5-1.5v-10A1.5 1.5 0 0 0 13.5 1h-10A1.5 1.5 0 0 0 2 2.5v6.636a.5.5 0 1 0 1 0V2.5a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-.5.5H6.864a.5.5 0 0 0-.5.5"/>
+          <path fill-rule="evenodd" d="M11 5.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793l-8.147 8.146a.5.5 0 0 0 .708.708L10 6.707V10.5a.5.5 0 0 0 1 0z"/>
+        </svg>
+      </button>
+
+    </div>
+
 
         <div id="footer">
-            <!-- <textarea id="sceneArea">
-                {"planets":[
-                {"name":"Sun","m":1000,"r":30,"x":0,"y":0,"vx":-0.00008,"vy":-0.00104,"color":"yellow"},
-                {"name":"Mercury","m":0.1,"r":4,"x":101,"y":0,"vx":0,"vy":3.1467,"color":"yellow"},
-                {"name":"Venus","m":0.1,"r":6,"x":187,"y":0,"vx":0,"vy":2.3125,"color":"orange"},
-                {"name":"Earth","m":0.1,"r":7,"x":260,"y":0,"vx":0,"vy":1.9612,"color":"lightblue"},
-                {"name":"Mars","m":0.1,"r":5,"x":390,"y":0,"vx":0,"vy":1.6013,"color":"red"},
-                {"name":"Jupiter","m":0.1,"r":12,"x":1310,"y":0,"vx":0,"vy":0.8737,"color":"pink"},
-
-                {"name":"Saturn","m":0.1,"r":9,"x":2503,"y":0,"vx":0,"vy":0.6321,"color":"white"},
-                {"name":"Uran","m":0.1,"r":8,"x":5072,"y":0,"vx":0,"vy":0.4440,"color":"white"},
-                {"name":"Neptun","m":0.1,"r":7,"x":7751,"y":0,"vx":0,"vy":0.3592,"color":"white"}],
-                "starters":[]}                                    
-            </textarea>  -->
-
-            <textarea id="sceneArea">
-                {"planets":[{"name":"Noname1","m":100,"r":20,"x":0,"y":0,"vx":0,"vy":0,"color":"white"}],
-                "starters":[{"kind":2,"count":2000,"size":200,"velo":0.0, "startStep":1, "distr": "flat", "planetName":"Noname1"}]}
-       
-            </textarea>
-
-
-
-
             <textarea id="dataArea">
     {
         imurl: './assets/task1.png',

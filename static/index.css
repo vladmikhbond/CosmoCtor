@@ -46,10 +46,46 @@ body {
     background-color:  rgb(200, 240, 255);
     color: var(--deep-blue-color);
 }
+/* ----------------- Canvas Containeer -------------------------- */
+
+.canvas-cont {
+    position: relative;
+    width: var(--canvas-width);
+    height: var(--canvas-height);
+    background-color:var(--canvas-color);
+}
+
+.canvas-item {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#canvas {
+    z-index: 2;
+}
+#canvas2 {
+    z-index: 1;
+}
 
 
+/* ------------------ bottom panel ---------------- */
+.bottom-panel {
+   margin-top: 4px;
+   width: var(--canvas-width);
+} 
+#savedSceneArea
+{
+    width: 720px;
+    background-color: var(--deep-blue-color);
+    color: white;
+}
 
+.scene-btn {
+    vertical-align: top;
+}
 
+/* ---------------------------------------------------------------------------------------------------------------------------------- */
 #menuDiv {
     border: solid black 1px;
     margin-bottom: 5px;
@@ -78,13 +114,6 @@ body {
 }
 
 
-#canvas {
-    border: solid black 1px;
-    border-radius: 4px;
-}
-
-
-
 .dash-btn {
     font-weight: 800;
     font-family: monospace;
@@ -111,41 +140,13 @@ body {
     color: white;
 }
 
-#dashboard, #hideButton {
-    position: absolute;
-    top: 4px;
-    left: 4px;
-}
-
-#hideButton {
-    color: white;
-    background-color: rgba(0, 0, 0, 0);
-    z-index: 2; 
-
-    font-weight: 800;
-    font-family: monospace;
-    font-size: x-large;
-    padding-top: -5px;
-    height: 24px;
-    border: none;
-}
 
 #clearAllButton {
     background-color: red;
     color: white;
 }
 
-#dashboard {
-    border: solid black 1px;
-    font-family: monospace;
-    font-weight: 800;
-    color: white;
-    padding: 5px;
-    background-color: rgb(117 190 218 / 50%);
 
-    z-index: 1;   
-    display: 'block'; 
-}
 
 #planetBoard {
     position: absolute;

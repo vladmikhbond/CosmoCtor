@@ -84,7 +84,7 @@ export const page = {
     cancelButton2: document.getElementById('cancelButton2')!,
 
     // on footer
-    sceneArea: <HTMLTextAreaElement>document.getElementById('sceneArea')!,
+    savedSceneArea: <HTMLTextAreaElement>document.getElementById('savedSceneArea')!,
     dataArea: <HTMLTextAreaElement>document.getElementById('dataArea')!,
 
 }
