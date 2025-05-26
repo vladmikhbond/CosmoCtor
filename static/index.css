@@ -1,6 +1,6 @@
 :root {
     --canvas-width: 800px;
-    --canvas-height: 600px;
+    --canvas-height: 800px;
     --deep-blue-color: #4335a7;
     --gray-blue-color: rgb(203, 215, 236);
     --canvas-color:rgb(255, 246, 233);
@@ -68,6 +68,86 @@ body {
     z-index: 1;
 }
 
+/* -----------------  Board Styles -------------------------- */
+
+#planetBoard {
+    border: none;
+    
+    border-radius: 1px 1px 4px 4px;
+    border-color: rgb(117 190 218 / 70%);
+    font-family: monospace;
+    font-weight: 800;
+    color: #ff7f3e;
+    padding: 5px;
+    background-color: #9adcff00 ;
+    background-image: linear-gradient(180deg, #9adcffc7, #9adcff46 );
+    display: none; 
+    z-index: 3;
+    left: auto;  
+    right: 0;     
+}
+
+/* #taskDiv {
+    width: 500px;
+    left: 0; 
+} */
+
+.start-board {
+    position: absolute;
+    top: 166px;
+    right: 4px;
+    border: solid black 1px;
+    font-family: monospace;
+    font-weight: 800;
+    color: white;
+    padding: 5px;
+    background-color: rgb(117 190 218 / 50%);
+    display: none; 
+}
+
+#taskDiv {
+    position: absolute;
+    z-index: 3;
+    display: none;
+    top: 0px;
+    left: 4px;
+    width: 450px;
+    border: solid black 1px;
+    background-color:darkblue;
+    box-shadow: 10px 10px 15px rgba(135, 130, 130, 0.5);
+    user-select: none; /* Стандартний синтаксис */
+}
+
+#condDiv, #helpDiv, #solvDiv  {
+    text-align: left;
+    padding: 10px;
+    margin:2px;
+}
+
+#condDiv {
+    background-color: greenyellow;
+}
+
+#helpDiv {
+    background-color: yellow;
+}
+
+#solvDiv {
+    background-color:lightpink;
+}
+
+
+#sceneArea, #dataArea {
+    margin-top: 4px;
+    width: 187px;
+    width: 1000px;
+    height: 60px;
+}
+
+
+
+
+
 
 /* ------------------ bottom panel ---------------- */
 .bottom-panel {
@@ -114,25 +194,6 @@ body {
 }
 
 
-.dash-btn {
-    font-weight: 800;
-    font-family: monospace;
-    font-size: larger;
-}
-
-.dash-text {
-    width: 70px;
-    text-align: right;
-    margin-bottom: 3px;
-}
-
-.dash-label {
-    width: 55px;
-    display:inline-block;
-    text-align: right;
-    margin-right: 4px;
-}
-
 #scopeRange {
     width: 250px;
     margin-top: 5px;
@@ -148,69 +209,5 @@ body {
 
 
 
-#planetBoard {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    border: solid black 1px;
-    font-family: monospace;
-    font-weight: 800;
-    color: white;
-    padding: 5px;
-    background-color: rgb(117 190 218 / 50%);  
-    display: none; 
-}
 
-.start-board {
-    position: absolute;
-    top: 166px;
-    right: 4px;
-    border: solid black 1px;
-    font-family: monospace;
-    font-weight: 800;
-    color: white;
-    padding: 5px;
-    background-color: rgb(117 190 218 / 50%);
-    display: none; 
-}
-
-#taskDiv {
-    position: absolute;
-    z-index: 2;
-    display: none;
-
-    top: 112px;
-    left: 4px;
-    width: 450px;
-    border: solid black 1px;
-    background-color:darkblue;
-    box-shadow: 10px 10px 15px rgba(135, 130, 130, 0.5);
-    user-select: none; /* Стандартний синтаксис */
-}
-
-#condDiv, #helpDiv, #solvDiv  {
-    text-align: left;
-    padding: 10px;
-    margin:2px;
-}
-
-#condDiv {
-    background-color: greenyellow;
-}
-
-#helpDiv {
-    background-color: yellow;
-}
-
-#solvDiv {
-    background-color:lightpink;
-}
-
-
-#sceneArea, #dataArea {
-    margin-top: 4px;
-    width: 187px;
-    width: 1000px;
-    height: 60px;
-}
 

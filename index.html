@@ -24,9 +24,7 @@
           </svg>
       </button>
     </h3>
-
     <!---------------------- top panel (buttons row) ---------------------->
-
     <div class="topPanel">
         <button id="planetButton" btn-primary class="btn btn-light" title="Create standard or copy selected planet">+Planet</button>
         
@@ -35,11 +33,8 @@
         <button id="trackButton" class="btn btn-sm panel-button" title="Orbits toggle">●</button>
 
         <button id="helpButton" class="btn btn-sm panel-button" onclick="window.open('help.pdf', '_blank');">Help</button>  
-        
     
         <!---------------------- top panel (sliders row) ---------------------->
-
- 
         <div>
             <input type="range" id="scopeRange" min="-15" max="1" value="0" step="1" title="Телескоп" list="markers"/>
             <datalist id="markers" >
@@ -52,36 +47,33 @@
             Bodies: <span id="planetsCountSpan"></span>
         </div>    
 
-    <div id="menuDiv">
+        <div id="menuDiv">
             <span id="menuSpan"></span>
         </div>
-
-
     </div>
 
 
+    <!----------------------------- Canvas Containeer --------------------------------->
+    
+    <div class="canvas-cont">
 
-
-    <div id="taskDiv">
-        <button id="closeTaskButton" style="position: absolute; top: 2px; right: 2px;"> X </button>
-        <div id="condDiv">  
-            <div></div>
-            <button id="openHelpButton" >Help</button>
+        <div id="taskDiv" class="canvas-item">
+            <button id="closeTaskButton" style="position: absolute; top: 2px; right: 2px;"> X </button>
+            <div id="condDiv">  
+                <div></div>
+                <button id="openHelpButton" >Help</button>
+            </div>
+            <div id="helpDiv">
+                <div></div>
+                <button id="openSolvButton" >Solve</button>
+            </div>
+            <div id="solvDiv"> 
+                <div></div>
+            </div>
+ 
         </div>
-        <div id="helpDiv">
-            <div></div>
-            <button id="openSolvButton" >Solve</button>
-        </div>
-        <div id="solvDiv"> 
-            <div></div>
-        </div>
-        
-    </div>
 
-    <div>
-      
-
-        <div id="planetBoard">
+        <div id="planetBoard" class="canvas-item">
             <div> 
                 <span class="dash-label">Name </span>  <input id="nameText" class="dash-text" title="Name"/>
                 <span class="dash-label">Massa </span>  <input id="massaText" class="dash-text" title="Massa"/>
@@ -107,7 +99,7 @@
             
         </div>
         
-        <div id="rocketBoard" class="start-board">
+        <div id="rocketBoard" class="start-board ">
             <div><span class="dash-label">Velo</span>  <input id="velo" class="dash-text" value="0"/></div>
             <div><span class="dash-label">Delay</span>  <input id="interval1" class="dash-text" value="0"/></div>
             <div>
@@ -128,31 +120,31 @@
             </div>
         </div>
 
-        <canvas id="canvas2" width="800" height="800" class="canvas-item"></canvas>
-        <canvas id="canvas" width="800" height="800" tabindex="0"></canvas>
-
-    <!------------------ bottom panel ---------------->
-
-
-    <div class="bottom-panel">
-
-      <button id="saveSceneButton" class="btn btn-sm btn-primary scene-btn" title="Export scene">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-down-right" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M8.636 12.5a.5.5 0 0 1-.5.5H1.5A1.5 1.5 0 0 1 0 11.5v-10A1.5 1.5 0 0 1 1.5 0h10A1.5 1.5 0 0 1 13 1.5v6.636a.5.5 0 0 1-1 0V1.5a.5.5 0 0 0-.5-.5h-10a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h6.636a.5.5 0 0 1 .5.5"/>
-          <path fill-rule="evenodd" d="M16 15.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1 0-1h3.793L6.146 6.854a.5.5 0 1 1 .708-.708L15 14.293V10.5a.5.5 0 0 1 1 0z"/>
-        </svg>
-      </button>
-
-      <textarea id="savedSceneArea" rows="1"></textarea>
-
-      <button id="loadSceneButton" class="zzz btn btn-sm btn-primary scene-btn" title="Import scene">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-up-right" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M6.364 13.5a.5.5 0 0 0 .5.5H13.5a1.5 1.5 0 0 0 1.5-1.5v-10A1.5 1.5 0 0 0 13.5 1h-10A1.5 1.5 0 0 0 2 2.5v6.636a.5.5 0 1 0 1 0V2.5a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-.5.5H6.864a.5.5 0 0 0-.5.5"/>
-          <path fill-rule="evenodd" d="M11 5.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793l-8.147 8.146a.5.5 0 0 0 .708.708L10 6.707V10.5a.5.5 0 0 0 1 0z"/>
-        </svg>
-      </button>
-
+        <!-- <canvas id="canvas2" width="800" height="800" class="canvas-item"></canvas> -->
+        <canvas id="canvas" width="800" height="800" tabindex="0" class="canvas-item"></canvas>
     </div>
+            <!------------------ bottom panel ---------------->
+
+
+        <div class="bottom-panel">
+
+            <button id="saveSceneButton" class="btn btn-sm btn-primary scene-btn" title="Export scene">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-down-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8.636 12.5a.5.5 0 0 1-.5.5H1.5A1.5 1.5 0 0 1 0 11.5v-10A1.5 1.5 0 0 1 1.5 0h10A1.5 1.5 0 0 1 13 1.5v6.636a.5.5 0 0 1-1 0V1.5a.5.5 0 0 0-.5-.5h-10a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h6.636a.5.5 0 0 1 .5.5"/>
+                <path fill-rule="evenodd" d="M16 15.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1 0-1h3.793L6.146 6.854a.5.5 0 1 1 .708-.708L15 14.293V10.5a.5.5 0 0 1 1 0z"/>
+                </svg>
+            </button>
+
+            <textarea id="savedSceneArea" rows="1"></textarea>
+
+            <button id="loadSceneButton" class="zzz btn btn-sm btn-primary scene-btn" title="Import scene">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-up-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M6.364 13.5a.5.5 0 0 0 .5.5H13.5a1.5 1.5 0 0 0 1.5-1.5v-10A1.5 1.5 0 0 0 13.5 1h-10A1.5 1.5 0 0 0 2 2.5v6.636a.5.5 0 1 0 1 0V2.5a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-.5.5H6.864a.5.5 0 0 0-.5.5"/>
+                <path fill-rule="evenodd" d="M11 5.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793l-8.147 8.146a.5.5 0 0 0 .708.708L10 6.707V10.5a.5.5 0 0 0 1 0z"/>
+                </svg>
+            </button>
+
+        </div>
 
 
         <div id="footer">
@@ -406,7 +398,6 @@
             </textarea> 
 
         </div>
-    </div>
 </div>
 <script type="module" src="./static/build/main.js"></script>
 </body>
