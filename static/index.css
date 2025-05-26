@@ -98,6 +98,7 @@ body {
     padding: 5px;
     background-color: rgb(117 190 218 / 50%);
     display: none; 
+    z-index: 4;
 }
 
 #taskDiv {
