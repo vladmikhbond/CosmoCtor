@@ -49,9 +49,6 @@
             Bodies: <span id="planetsCountSpan"></span>
         </div>    
 
-        <div id="menuDiv">
-            <span id="menuSpan"></span>
-        </div>
     </div>
 
 
@@ -59,31 +56,13 @@
     
     <div class="canvas-cont">
 
-        <div id="taskDiv" class="canvas-item">
-            <button id="closeTaskButton" style="position: absolute; top: 2px; right: 2px;"> X </button>
-            <div id="condDiv">  
-                <div></div>
-                <button id="openHelpButton" >Help</button>
-            </div>
-            <div id="helpDiv">
-                <div></div>
-                <button id="openSolvButton" >Solve</button>
-            </div>
-            <div id="solvDiv"> 
-                <div></div>
-            </div>
- 
+        <!-- Problem Board -->
+        <div id="problemBoard" class="canvas-item" style="right: unset; left: 0">
+            <!-- <span style="position: absolute; right: 0; color: blue"><></span> -->
+            <div id="condDiv" style="color: rgb(0 0 0 / 75%);"></div>
+            <input id="answerText"  placeholder="відповідь" autocomplete="off">
+            <button id="answerButton" class="board-button">Ready</button>
         </div>
-
-      <!-- Problem Board -->
-      <div id="problemBoard" class="canvas-item" style="right: unset; left: 0">
-        <!-- <span style="position: absolute; right: 0; color: blue"><></span> -->
-        <div id="condDiv" style="color: rgb(0 0 0 / 75%);"></div>
-        <input id="answerText"  placeholder="відповідь" autocomplete="off">
-        <button id="answerButton" class="board-button">Ready</button>
-      </div>
-
-
 
 
         <div id="planetBoard" class="canvas-item">
