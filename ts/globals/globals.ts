@@ -32,7 +32,6 @@ export const page = {
 
 
     canvas: _canvas,
-    hideButton: document.getElementById('hideButton')!,
     dashboard: document.getElementById('dashboard')!,
     planetBoard: document.getElementById('planetBoard')!,
 

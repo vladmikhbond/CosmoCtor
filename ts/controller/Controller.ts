@@ -42,13 +42,6 @@ export default class Controller
 
     private bindButtonClickEvents() 
     {
-        // hideButton
-        page.hideButton.addEventListener('click', () => {
-            if (page.dashboard.style.display == 'none')
-                page.dashboard.style.display = 'block';
-            else
-                page.dashboard.style.display = 'none';
-        });
 
         // clearAllButton
         page.clearAllButton.addEventListener('click', () => {
