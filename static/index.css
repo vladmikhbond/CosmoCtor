@@ -87,11 +87,6 @@ body {
     right: 0;     
 }
 
-/* #taskDiv {
-    width: 500px;
-    left: 0; 
-} */
-
 .start-board {
     position: absolute;
     top: 166px;
@@ -146,7 +141,34 @@ body {
 
 
 
+.board-text {
+    width: 70px;
+    text-align: right;
+    margin-bottom: 3px;
+    
+    border-radius: 4px;
+    background-color: rgb(117 190 218 / 0%); 
+    border-color: #4235a748;
+}
 
+.board-button {
+    width: 70px;
+    border: none;
+    background-color: #fed1ac;
+    border-radius: 4px;
+    color: var(--deep-blue-color);
+}
+.board-button:hover {
+    background-color: #f8b177;
+}
+
+.board-label {
+    width: 55px;
+    display:inline-block;
+    text-align: right;
+    margin-right: 4px;
+    color: var(--deep-blue-color);
+}
 
 
 /* ------------------ bottom panel ---------------- */
