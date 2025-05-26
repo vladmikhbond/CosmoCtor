@@ -32,8 +32,10 @@
         <button id="stepButton" class="btn btn-sm panel-button" title="One step">1</button>
         <button id="trackButton" class="btn btn-sm panel-button" title="Orbits toggle">●</button>
 
-        <button id="helpButton" class="btn btn-sm panel-button" onclick="window.open('help.pdf', '_blank');">Help</button>  
-    
+        <button id="helpButton" class="btn btn-sm panel-button" onclick="window.open('help.pdf', '_blank');">Help</button> 
+         
+        <select class="form-select-sm" id="sceneSelect" title="Select problem">
+        </select>
         <!---------------------- top panel (sliders row) ---------------------->
         <div>
             <input type="range" id="scopeRange" min="-15" max="1" value="0" step="1" title="Телескоп" list="markers"/>

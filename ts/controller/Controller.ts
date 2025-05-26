@@ -1,4 +1,4 @@
-import { page, glo } from '../globals/globals.js';
+import { doc, glo } from '../globals/globals.js';
 import { serialization, deserialization} from '../serialize/serialize.js';
 import Planet from '../model/Planet.js';
 import Space from '../model/Space.js';
@@ -22,10 +22,10 @@ export default class Controller
             let planet = <Planet|null>(<CustomEvent>e).detail;
             if (planet) {
                 this.view.displaySelectedPlanetParams(); 
-                page.planetBoard.style.display = 'block';
+                doc.planetBoard.style.display = 'block';
             } else {
-                page.planetBoard.style.display = 'none';
-                page.nebulaBoard.style.display = 'none';
+                doc.planetBoard.style.display = 'none';
+                doc.nebulaBoard.style.display = 'none';
             }
         })
         
@@ -44,7 +44,7 @@ export default class Controller
     {
 
         // clearAllButton
-        page.clearAllButton.addEventListener('click', () => {
+        doc.clearAllButton.addEventListener('click', () => {
             if (confirm("Clear all?\nAre you serious?")) {
                 this.space.planets = [];
                 this.space.starters = [];
@@ -53,9 +53,9 @@ export default class Controller
         });
 
         // runButton
-        page.runButton.addEventListener('click', () => {
+        doc.runButton.addEventListener('click', () => {
             if (!this.stepTimer) {
-                page.saveSceneButton.dispatchEvent(new Event("click"));
+                doc.saveSceneButton.dispatchEvent(new Event("click"));
                 this.startTimer();
             } else {
                 this.stopTimer();    
@@ -63,30 +63,30 @@ export default class Controller
         });
 
         // stepButton
-        page.stepButton.addEventListener('click', () => {
+        doc.stepButton.addEventListener('click', () => {
             this.step();
             this.view.displayInfo();
         });
             
         // trackButton
-        page.trackButton.addEventListener('click', () => {
+        doc.trackButton.addEventListener('click', () => {
             this.view.trackMode = !this.view.trackMode;
             if (!this.view.trackMode) {
                 this.space.clearAllTracks();
             }
-            page.trackButton.innerHTML = this.view.trackMode ? '●' : 'O';
+            doc.trackButton.innerHTML = this.view.trackMode ? '●' : 'O';
             this.view.draw();
         });
 
         // saveSceneButton: save space.planets
-        page.saveSceneButton.addEventListener('click', () => {
+        doc.saveSceneButton.addEventListener('click', () => {
             let json = serialization(this.space);
-            page.savedSceneArea.innerHTML = json;
+            doc.savedSceneArea.innerHTML = json;
         });
 
         // Get standard or copy selected planet
         //
-        page.planetButton.addEventListener('click', () => {
+        doc.planetButton.addEventListener('click', () => {
             
             let planet = new Planet();
             if (this.space.selectedPlanet) {                
@@ -101,7 +101,7 @@ export default class Controller
 
 
         // delButton_click: remove selected planet
-        page.delButton.addEventListener('click', () => {
+        doc.delButton.addEventListener('click', () => {
             this.space.removeSelectedPlanet();
             this.view.draw();
         });
@@ -110,59 +110,59 @@ export default class Controller
     
     private bindStarterEvents() {       
 
-        page.rocketButton.addEventListener('click', () => {
+        doc.rocketButton.addEventListener('click', () => {
             if (this.space.selectedPlanet) { 
-                page.rocketBoard.style.display='block'; 
-                page.nebulaBoard.style.display='none';                   
+                doc.rocketBoard.style.display='block'; 
+                doc.nebulaBoard.style.display='none';                   
                 this.view.draw();
             }
         
         });
 
-        page.nebulaButton.addEventListener('click', () => {
+        doc.nebulaButton.addEventListener('click', () => {
             if (this.space.selectedPlanet) {  
-                page.nebulaBoard.style.display='block';
-                page.rocketBoard.style.display='none'; 
+                doc.nebulaBoard.style.display='block';
+                doc.rocketBoard.style.display='none'; 
                 this.view.draw();
             } 
         });
         
 
-        page.okButton1.addEventListener('click', () => {
+        doc.okButton1.addEventListener('click', () => {
 
             this.space.starters.unshift({
                 kind:  StarterKind.Rocket, 
-                velo: +page.velo.value, 
+                velo: +doc.velo.value, 
                 count: 0, 
                 size:0,
-                startStep: +page.interval1.value + glo.stepsCount, 
+                startStep: +doc.interval1.value + glo.stepsCount, 
                 planetName: this.space.selectedPlanet!.name,
                 distr: "",
             });
-            page.rocketBoard.style.display = 'none';
+            doc.rocketBoard.style.display = 'none';
         });
 
-        page.okButton2.addEventListener('click', () => {
+        doc.okButton2.addEventListener('click', () => {
             
             this.space.starters.unshift({
                 kind: StarterKind.Nebula,
-                velo: +page.moment.value,
-                count: +page.count.value, 
-                size: +page.size.value, 
-                startStep: +page.interval2.value + glo.stepsCount, 
+                velo: +doc.moment.value,
+                count: +doc.count.value, 
+                size: +doc.size.value, 
+                startStep: +doc.interval2.value + glo.stepsCount, 
                 planetName: this.space.selectedPlanet!.name,
-                distr: page.distr.value,
+                distr: doc.distr.value,
             });
-            page.nebulaBoard.style.display = 'none';
+            doc.nebulaBoard.style.display = 'none';
         });
 
 
-        page.cancelButton1.addEventListener('click', () => {
-            page.rocketBoard.style.display = 'none';
+        doc.cancelButton1.addEventListener('click', () => {
+            doc.rocketBoard.style.display = 'none';
         });
 
-        page.cancelButton2.addEventListener('click', () => {
-            page.nebulaBoard.style.display = 'none';
+        doc.cancelButton2.addEventListener('click', () => {
+            doc.nebulaBoard.style.display = 'none';
         });
 
     }
@@ -173,7 +173,7 @@ export default class Controller
         let cursor: {x: number, y: number} | null = null;
         
         // canvas_mousedown: select planet
-        page.canvas.addEventListener('mousedown', (e: MouseEvent) => {
+        doc.canvas.addEventListener('mousedown', (e: MouseEvent) => {
             // save params for selected planet
             Controller.applyParamsHandler(this);
             // select a planet
@@ -184,7 +184,7 @@ export default class Controller
             this.view.displaySelectedPlanetParams();
         });
 
-        page.canvas.addEventListener('mousemove', (e: MouseEvent) => {
+        doc.canvas.addEventListener('mousemove', (e: MouseEvent) => {
             let point = glo.retransformXY(e.offsetX, e.offsetY); 
             if (isPlanetDragging) 
             { 
@@ -217,7 +217,7 @@ export default class Controller
             }
         });
 
-        page.canvas.addEventListener('mouseup', (e: MouseEvent) => {
+        doc.canvas.addEventListener('mouseup', (e: MouseEvent) => {
             isPlanetDragging = false;
             cursor = null;
         });
@@ -226,8 +226,8 @@ export default class Controller
 
     private bindChangeEvents() {
         // telescope
-        page.scopeRange.addEventListener('change', () => {
-            glo.scale = 2**(page.scopeRange.valueAsNumber/2);
+        doc.scopeRange.addEventListener('change', () => {
+            glo.scale = 2**(doc.scopeRange.valueAsNumber/2);
             this.view.draw();
         });
 
@@ -235,17 +235,17 @@ export default class Controller
         // textfields_changed
         const handler = () => { Controller.applyParamsHandler(this); };
 
-        page.xText.addEventListener('change', handler);
-        page.yText.addEventListener('change', handler);
-        page.vxText.addEventListener('change', handler);
-        page.vyText.addEventListener('change', handler);
-        page.nameText.addEventListener('change', handler);
-        page.colorText.addEventListener('change', handler);
-        page.massaText.addEventListener('change', handler);
-        page.radiusText.addEventListener('change', handler);
+        doc.xText.addEventListener('change', handler);
+        doc.yText.addEventListener('change', handler);
+        doc.vxText.addEventListener('change', handler);
+        doc.vyText.addEventListener('change', handler);
+        doc.nameText.addEventListener('change', handler);
+        doc.colorText.addEventListener('change', handler);
+        doc.massaText.addEventListener('change', handler);
+        doc.radiusText.addEventListener('change', handler);
 
         // canvas_keydown
-        page.canvas.addEventListener('keydown', (e: KeyboardEvent) => {
+        doc.canvas.addEventListener('keydown', (e: KeyboardEvent) => {
             switch (e.key) {
                 case 'Delete':
                     this.space.removeSelectedPlanet()
@@ -273,15 +273,15 @@ export default class Controller
     static applyParamsHandler(me: Controller) {
         let planet = me.space.selectedPlanet;
         if (planet) {
-            planet.x = +page.xText.value;
-            planet.y = +page.yText.value;
-            planet.vx = +page.vxText.value;
-            planet.vy = +page.vyText.value;
+            planet.x = +doc.xText.value;
+            planet.y = +doc.yText.value;
+            planet.vx = +doc.vxText.value;
+            planet.vy = +doc.vyText.value;
 
-            planet.m = +page.massaText.value;
-            planet.r = +page.radiusText.value;
-            planet.name = page.nameText.value;
-            planet.color = page.colorText.value;
+            planet.m = +doc.massaText.value;
+            planet.r = +doc.radiusText.value;
+            planet.name = doc.nameText.value;
+            planet.color = doc.colorText.value;
             me.view.draw();
         }
     }
@@ -301,13 +301,13 @@ export default class Controller
         this.stepTimer = setInterval(() => {
             this.step();
         }, glo.STEP_PERIOD);
-        page.runButton.innerHTML = '■';
+        doc.runButton.innerHTML = '■';
     }
 
     public stopTimer() {
         clearInterval(this.stepTimer);
         this.stepTimer = 0;
-        page.runButton.innerHTML = '►';
+        doc.runButton.innerHTML = '►';
         this.view.displayInfo();
     }
 

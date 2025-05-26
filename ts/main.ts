@@ -1,4 +1,4 @@
-import {page} from './globals/globals.js';
+import {doc} from './globals/globals.js';
 import Space from './model/Space.js';
 import View from './view/View.js';
 import Controller from './controller/Controller.js';
@@ -11,4 +11,4 @@ new TaskController(cont);
 view.draw();
 
 // load a scene from sceneArea and tasks from dataArea
-page.loadSceneButton.dispatchEvent(new MouseEvent('click'));
+doc.loadSceneButton.dispatchEvent(new MouseEvent('click'));

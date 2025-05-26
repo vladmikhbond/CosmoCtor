@@ -1,4 +1,4 @@
-import {glo, page} from '../globals/globals.js';
+import {glo, doc} from '../globals/globals.js';
 import Planet from '../model/Planet.js';
 import Rocket from '../model/Rocket.js';
 import Space from '../model/Space.js';
@@ -25,7 +25,7 @@ export default class View
     trackMode = true; 
 
     constructor(public space: Space) {   
-        this.ctx = page.canvas.getContext("2d")!;                 
+        this.ctx = doc.canvas.getContext("2d")!;                 
     }
 
     draw() {   
@@ -33,11 +33,11 @@ export default class View
         const space = this.space;
 
         ctx.fillStyle = 'darkblue';
-        ctx.fillRect(0, 0, page.canvas.width, page.canvas.height);
+        ctx.fillRect(0, 0, doc.canvas.width, doc.canvas.height);
 
         // axes
         ctx.strokeStyle = 'gray';
-        let h = page.canvas.height / 2, w = page.canvas.width / 2;
+        let h = doc.canvas.height / 2, w = doc.canvas.width / 2;
         ctx.beginPath();
         // hor
         ctx.moveTo(0, h);
@@ -178,9 +178,9 @@ export default class View
         this.timeStamp = Date.now();
         let stepsPerSec = View.DISPLAY_INTERVAL * 1000 / milliseconds;
         // display
-        page.stepsPerSecSpan.innerHTML = stepsPerSec.toFixed(0);
-        page.stepsCountSpan.innerHTML = glo.stepsCount.toString(); 
-        page.planetsCountSpan.innerHTML = planetsCount.toString();      
+        doc.stepsPerSecSpan.innerHTML = stepsPerSec.toFixed(0);
+        doc.stepsCountSpan.innerHTML = glo.stepsCount.toString(); 
+        doc.planetsCountSpan.innerHTML = planetsCount.toString();      
     }
 
     // display to panelBoard
@@ -188,15 +188,15 @@ export default class View
     displaySelectedPlanetParams() {
         let planet = this.space.selectedPlanet;
         if (planet) {
-            page.xText.value = planet.x.toFixed(5);
-            page.yText.value = planet.y.toFixed(5);
-            page.vxText.value = planet.vx.toFixed(5);
-            page.vyText.value = planet.vy.toFixed(5);
+            doc.xText.value = planet.x.toFixed(5);
+            doc.yText.value = planet.y.toFixed(5);
+            doc.vxText.value = planet.vx.toFixed(5);
+            doc.vyText.value = planet.vy.toFixed(5);
 
-            page.nameText.value = planet.name;
-            page.colorText.value = planet.color;
-            page.massaText.value = planet.m.toFixed(3);
-            page.radiusText.value = planet.r.toFixed(0);            
+            doc.nameText.value = planet.name;
+            doc.colorText.value = planet.color;
+            doc.massaText.value = planet.m.toFixed(3);
+            doc.radiusText.value = planet.r.toFixed(0);            
         }
 
        

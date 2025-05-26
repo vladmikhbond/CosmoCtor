@@ -17,7 +17,7 @@ export const glo =
 }
 
 
-export const page = { 
+export const doc = { 
     menuDiv: <HTMLDivElement>document.getElementById('menuDiv')!,
     menuSpan: <HTMLSpanElement>document.getElementById('menuSpan')!,
     helpButton: <HTMLButtonElement>document.getElementById('helpButton')!,
@@ -41,6 +41,7 @@ export const page = {
     trackButton: document.getElementById('trackButton')!,
     saveSceneButton: document.getElementById('saveSceneButton')!,
     loadSceneButton: document.getElementById('loadSceneButton')!,
+    sceneSelect: <HTMLSelectElement>document.getElementById("sceneSelect"),
     //
     scopeRange: <HTMLInputElement>document.getElementById('scopeRange')!,
     //

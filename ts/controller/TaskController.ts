@@ -1,4 +1,5 @@
-import { page, glo } from '../globals/globals.js';
+import { doc, glo } from '../globals/globals.js';
+import { Problem } from '../model/Problem.js';
 import { deserialization} from '../serialize/serialize.js';
 import Controller from './Controller.js';
 
@@ -22,19 +23,47 @@ export default class TaskController
         this.bindTaskEvents();
 
 
-        page.loadSceneButton.addEventListener('click', () => {            
+        doc.loadSceneButton.addEventListener('click', () => {            
             this.taskButtonsMaker();
-            this.loadScene(page.savedSceneArea.value);
+            this.loadScene(doc.savedSceneArea.value);
         });
 
-        page.dataArea.addEventListener('dblclick', () => {
-            if (page.dataArea.style.height != '600px')
-                page.dataArea.style.height = '600px';
+        doc.dataArea.addEventListener('dblclick', () => {
+            if (doc.dataArea.style.height != '600px')
+                doc.dataArea.style.height = '600px';
             else
-            page.dataArea.style.height = '60px';
+            doc.dataArea.style.height = '60px';
         });
         
+        this.loadProblems();
     }
+
+    problems: Problem[] = [];
+
+    async loadProblems() {
+        try {
+            const response = await fetch('opened_probs');
+            if (!response.ok) {
+                throw new Error(`Помилка завантаження файлу: ${response.statusText}`);
+            }
+            const text = await response.text();
+            const regex = /TITLE:((.|\r|\n)*?)COND:((.|\r|\n)*?)INIT:((.|\r|\n)*?)ANSWER:((.|\r|\n)*?)---/gm
+            const matches = [...text.matchAll(regex)];
+            this.problems = matches.map(m => new Problem(m));
+
+            // UI
+            const options: HTMLOptionElement[] = this.problems.map((p, i) => new Option(p.title, i.toString()));
+            doc.sceneSelect.innerHTML = '';
+            doc.sceneSelect.append(...options); 
+            doc.sceneSelect.selectedIndex = 0; 
+            doc.sceneSelect.dispatchEvent(new Event('change'));
+        } 
+        catch (error: any) {
+            console.error('Помилка:', error.message);
+        }
+    }
+
+
 
     // to grag task panels 
     //
@@ -42,27 +71,27 @@ export default class TaskController
 
         let cursor: {x: number, y: number} | null = null;
    
-        page.taskDiv.addEventListener('mousedown', (e: MouseEvent) => {
+        doc.taskDiv.addEventListener('mousedown', (e: MouseEvent) => {
             cursor = {x: e.screenX, y: e.screenY};
         });
 
-        page.taskDiv.addEventListener('mousemove', (e: MouseEvent) => { 
+        doc.taskDiv.addEventListener('mousemove', (e: MouseEvent) => { 
             if (cursor) {                              
                 let dx = e.screenX - cursor.x;
                 let dy = e.screenY - cursor.y;
-                let style = window.getComputedStyle(page.taskDiv);
+                let style = window.getComputedStyle(doc.taskDiv);
 
                 let left = parseFloat(style.left) + dx;
-                page.taskDiv.style.left = left + 'px';
+                doc.taskDiv.style.left = left + 'px';
 
                 let top = parseFloat(style.top) + dy;
-                page.taskDiv.style.top = top + 'px';
+                doc.taskDiv.style.top = top + 'px';
 
                 cursor = {x: e.screenX, y: e.screenY};
             }    
         });
 
-        page.taskDiv.addEventListener('mouseup', (e: MouseEvent) => {
+        doc.taskDiv.addEventListener('mouseup', (e: MouseEvent) => {
             cursor = null;
         });
 
@@ -70,19 +99,19 @@ export default class TaskController
 
     private bindTaskEvents()  
     {
-        page.openHelpButton.addEventListener('click', () => {
-            page.helpDiv.style.display='block'; 
-            page.openHelpButton.style.display='none';
+        doc.openHelpButton.addEventListener('click', () => {
+            doc.helpDiv.style.display='block'; 
+            doc.openHelpButton.style.display='none';
         });
 
-        page.openSolvButton.addEventListener('click', () => {
-            page.solvDiv.style.display='block'; 
-            page.openSolvButton.style.display='none';
+        doc.openSolvButton.addEventListener('click', () => {
+            doc.solvDiv.style.display='block'; 
+            doc.openSolvButton.style.display='none';
             this.loadScene(this.selectedTask!.final);          
         });
 
-        page.closeTaskButton.addEventListener('click', () => {
-            page.taskDiv.style.display = 'none';
+        doc.closeTaskButton.addEventListener('click', () => {
+            doc.taskDiv.style.display = 'none';
         });
 
     }
@@ -90,11 +119,11 @@ export default class TaskController
     // Створює кнопки завдання і саджає не кожну свій обробник.
     //
     taskButtonsMaker() {
-        const value = page.dataArea.value;
+        const value = doc.dataArea.value;
         const loaderFunction = new Function("", `return [${value}];`);
         const data: TaskData[] = loaderFunction();
         
-        page.menuSpan.innerHTML = '';
+        doc.menuSpan.innerHTML = '';
         for (let task of data) {
             let taskButton = document.createElement('Button');
             taskButton.style.backgroundImage = `url('${task.imurl}')`;
@@ -106,19 +135,19 @@ export default class TaskController
                 this.selectedTask = task;
                 this.loadScene(task.init);
 
-                page.openHelpButton.style.display = page.openSolvButton.style.display = 'block';
-                page.taskDiv.style.display = 'block';
-                page.helpDiv.style.display = 'none';
-                page.solvDiv.style.display = 'none';
+                doc.openHelpButton.style.display = doc.openSolvButton.style.display = 'block';
+                doc.taskDiv.style.display = 'block';
+                doc.helpDiv.style.display = 'none';
+                doc.solvDiv.style.display = 'none';
 
-                (<HTMLDivElement>page.condDiv.firstElementChild).innerHTML = task.cond;
-                (<HTMLDivElement>page.helpDiv.firstElementChild).innerHTML = task.help;
-                (<HTMLDivElement>page.solvDiv.firstElementChild).innerHTML = task.solv;
+                (<HTMLDivElement>doc.condDiv.firstElementChild).innerHTML = task.cond;
+                (<HTMLDivElement>doc.helpDiv.firstElementChild).innerHTML = task.help;
+                (<HTMLDivElement>doc.solvDiv.firstElementChild).innerHTML = task.solv;
 
                 // Математичні формули у динамічному контенті
                 (new Function("","MathJax.typeset()"))();            
             })
-            page.menuSpan.append(taskButton); 
+            doc.menuSpan.append(taskButton); 
 
         }
 
