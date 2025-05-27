@@ -20,15 +20,8 @@ export default class TaskController
 
     constructor(public controller: Controller) {
 
-        doc.loadSceneButton.addEventListener('click', () => {            
+        doc.restoreSceneButton.addEventListener('click', () => {            
             this.loadScene(doc.savedSceneArea.value);
-        });
-
-        doc.dataArea.addEventListener('dblclick', () => {
-            if (doc.dataArea.style.height != '600px')
-                doc.dataArea.style.height = '600px';
-            else
-            doc.dataArea.style.height = '60px';
         });
         
         // завантажує сцену і умову обраної задачі

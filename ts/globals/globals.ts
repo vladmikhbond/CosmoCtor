@@ -39,8 +39,6 @@ export const doc = {
     runButton: document.getElementById('runButton')!,
     stepButton: document.getElementById('stepButton')!,
     trackButton: document.getElementById('trackButton')!,
-    saveSceneButton: document.getElementById('saveSceneButton')!,
-    loadSceneButton: document.getElementById('loadSceneButton')!,
     sceneSelect: <HTMLSelectElement>document.getElementById("sceneSelect"),
     //
     scopeRange: <HTMLInputElement>document.getElementById('scopeRange')!,
@@ -89,9 +87,9 @@ export const doc = {
     interval2: <HTMLInputElement>document.getElementById('interval2')!,
     okButton2: document.getElementById('okButton2')!,
     cancelButton2: document.getElementById('cancelButton2')!,
-
-    // on footer
+    
+    // bottom 
+    saveSceneButton: document.getElementById('saveSceneButton')!,
     savedSceneArea: <HTMLTextAreaElement>document.getElementById('savedSceneArea')!,
-    dataArea: <HTMLTextAreaElement>document.getElementById('dataArea')!,
-
+    restoreSceneButton: document.getElementById('restoreSceneButton')!,
 }

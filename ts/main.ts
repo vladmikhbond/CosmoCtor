@@ -11,4 +11,4 @@ new TaskController(cont);
 view.draw();
 
 // load a scene from sceneArea and tasks from dataArea
-doc.loadSceneButton.dispatchEvent(new MouseEvent('click'));
+doc.restoreSceneButton.dispatchEvent(new MouseEvent('click'));
