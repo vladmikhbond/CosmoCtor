@@ -1,5 +1,5 @@
 import { doc, glo } from '../globals/globals.js';
-import { serialization, deserialization} from '../serialize/serialize.js';
+import { deserialization} from '../serialize/serialize.js';
 import Planet from '../model/Planet.js';
 import Space from '../model/Space.js';
 import View from '../view/View.js';
@@ -17,7 +17,8 @@ export default class Controller
         this.bindCustomEvents();
     }
 
-    private bindCustomEvents() {
+    private bindCustomEvents() 
+    {
         this.space.addEventListener('selectPlanetEvent', e => {
             let planet = <Planet|null>(<CustomEvent>e).detail;
             if (planet) {
@@ -67,11 +68,6 @@ export default class Controller
             this.view.draw();
         });
 
-        // saveSceneButton: save space.planets
-        doc.saveSceneButton.addEventListener('click', () => {
-            let json = serialization(this.space);
-            doc.savedSceneArea.innerHTML = json;
-        });
 
         // Get standard or copy selected planet
         //
@@ -244,21 +240,6 @@ export default class Controller
         });
     }
 
-
-    loadScene(data: string) {
-        this.space.planets = [];
-        this.space.starters = [];
-        if (data) {
-            let o = deserialization(data);
-            this.space.planets = o.planets;
-            this.space.starters = o.starters;
-        }
-        this.stopTimer();
-        glo.stepsCount = 0;
-        this.view.draw();
-        this.view.displayInfo();
-    }
-
     static applyParamsHandler(me: Controller) {
         let planet = me.space.selectedPlanet;
         if (planet) {
@@ -303,6 +284,9 @@ export default class Controller
     public clearScene() {
         this.space.planets = [];
         this.space.starters = [];
+        this.stopTimer();
+        glo.stepsCount = 0;
+        doc.canvas.style.backgroundColor = 'darkblue';
         this.view.draw();
     }
 

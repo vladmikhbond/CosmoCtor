@@ -101,10 +101,9 @@ body {
 
 #canvas {
     z-index: 2;
+    background-color: darkblue;
 }
-#canvas2 {
-    z-index: 1;
-}
+
 
 /* -----------------  Board Styles -------------------------- */
 

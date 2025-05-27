@@ -21,6 +21,7 @@ export default class View
     }
     
     ctx: CanvasRenderingContext2D;
+
     // tracks
     trackMode = true; 
 
@@ -32,8 +33,7 @@ export default class View
         const ctx = this.ctx;
         const space = this.space;
 
-        ctx.fillStyle = 'darkblue';
-        ctx.fillRect(0, 0, doc.canvas.width, doc.canvas.height);
+        ctx.clearRect(0, 0, doc.canvas.width, doc.canvas.height);
 
         // axes
         ctx.strokeStyle = 'gray';

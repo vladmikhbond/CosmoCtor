@@ -1,59 +1,85 @@
 import { doc, glo } from '../globals/globals.js';
 import { Problem } from '../model/Problem.js';
-import { deserialization} from '../serialize/serialize.js';
+import { serialization, deserialization} from '../serialize/serialize.js';
 import Controller from './Controller.js';
 
-type TaskData = {
-    imurl: string;
-    title: string;
-    init: string;
-    cond: string;
-    help: string;
-    solv: string;
-    final: string;
-}
 
 export default class TaskController 
 {
+    problems: Problem[] = [];
+    controller: Controller;
 
-    selectedTask: TaskData | null = null; 
-
-    constructor(public controller: Controller) {
-
-        doc.restoreSceneButton.addEventListener('click', () => {            
-            this.loadScene(doc.savedSceneArea.value);
-        });
-        
-        // завантажує сцену і умову обраної задачі
-        const loadProblemInitScene = () => {
-            // 
-            let idx = +doc.sceneSelect.value;
-            if (idx == 0) {
-                this.controller.clearScene();
-                return;
-            }    
-            let problem = this.problems[idx];
-            this.loadScene(problem.init);
-
-            // UI & view 
-            
-            doc.condDiv.innerHTML = problem.cond;
-            doc.problemBoard.style.display = 'block'; 
-            doc.problemBoard.style.backgroundColor = 'rgba(241, 241, 10, 0.1)';
-            doc.answerText.style.display = problem.isAnswerNumber ? 'inline' : 'none';
-
-        }
-
-        doc.sceneSelect.addEventListener("change", loadProblemInitScene);
-
-        doc.sceneSelect.addEventListener("click", loadProblemInitScene);
-
-        this.loadProblems();
+    constructor(controller: Controller) 
+    {
+        this.controller = controller;
+        this.addEventListeners();
+        this.loadAllProblems();
     }
 
-    problems: Problem[] = [];
 
-    async loadProblems() {
+    addEventListeners() 
+    {
+        doc.saveSceneButton.addEventListener('click', () => {
+            let json = serialization(this.controller.space);
+            doc.savedSceneArea.innerHTML = json;
+        });
+
+        doc.restoreSceneButton.addEventListener('click', () => {            
+            this.restoreSceneFromJson(doc.savedSceneArea.value);
+        });
+        
+        doc.sceneSelect.addEventListener("change", () => { 
+            this.loadSelectedProblem(); 
+        });
+
+        doc.sceneSelect.addEventListener("click", () => { 
+            this.loadSelectedProblem(); 
+        });
+
+        doc.answerButton.addEventListener('click', () => {
+            this.checkAnswer();   
+        });
+    }
+
+
+    checkAnswer() {
+        const id = +doc.sceneSelect.value;
+        const problem = this.problems[id];
+        const planets = this.controller.space.planets;
+        const answer = problem.answer;
+        let testOk = false;
+        // 
+        if (problem.isAnswerNumber) 
+        {
+            const MAX_ERROR = 0.03;  // 3%               
+            let epsilon = Math.abs((+doc.answerText.value - +problem.answer) / +problem.answer);
+            testOk = doc.answerText.value == problem.answer || epsilon < MAX_ERROR
+        } 
+        else 
+        {
+            const testFunction = new Function('t, p, canvas_height', `
+                return ${answer};
+            `);
+
+            let sceneJson = serialization(this.controller.space);  
+            
+            for (let t = 0; t <= 1000; t++) {
+                if (testFunction(t, planets, doc.canvas.height)) {
+                    testOk = true;
+                    break;
+                }
+                this.controller.space.step();
+            }
+            this.restoreSceneFromJson(sceneJson) 
+            this.controller.view.draw();
+        }
+
+        doc.canvas.style.backgroundColor = testOk ? 'green' : 'darkblue';
+    }
+
+    // Завантажує усі відкриті задачі
+    //
+    async loadAllProblems() {
         try {
             const response = await fetch('opened_probs');
             if (!response.ok) {
@@ -76,14 +102,33 @@ export default class TaskController
         }
     }
 
-    loadScene(data: string) {
+    // завантажує сцену і умову обраної задачі
+    //
+    loadSelectedProblem() {
+        let idx = +doc.sceneSelect.value;
+        this.controller.clearScene();
+        if (idx == 0) {
+            return;
+        }    
+        let problem = this.problems[idx];
+        this.restoreSceneFromJson(problem.init);
+
+        // UI & view 
+        
+        doc.condDiv.innerHTML = problem.cond;
+        doc.problemBoard.style.display = 'block'; 
+        doc.problemBoard.style.backgroundColor = 'rgba(241, 241, 10, 0.1)';
+        doc.answerText.style.display = problem.isAnswerNumber ? 'inline' : 'none';
+    }
+
+
+    restoreSceneFromJson(json: string) {
         const space = this.controller.space;
         const view = this.controller.view;
 
-        space.planets = [];
-        space.starters = [];
-        if (data) {
-            let o = deserialization(data);
+        this.controller.clearScene();
+        if (json) {
+            let o = deserialization(json);
             space.planets = o.planets;
             space.starters = o.starters;
         }
