@@ -165,20 +165,12 @@ export default class View
         
         this.ctx.restore();
     }
-   
-    // display info
-    //
-    timeStamp = Date.now();
+
 
     displayInfo() 
     {
         let planetsCount = this.space.planets.length;
-        // speedometer
-        let milliseconds = Date.now() - this.timeStamp;
-        this.timeStamp = Date.now();
-        let stepsPerSec = View.DISPLAY_INTERVAL * 1000 / milliseconds;
         // display
-        doc.stepsPerSecSpan.innerHTML = stepsPerSec.toFixed(0);
         doc.stepsCountSpan.innerHTML = glo.stepsCount.toString(); 
         doc.planetsCountSpan.innerHTML = planetsCount.toString();      
     }

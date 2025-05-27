@@ -36,6 +36,7 @@
 
         <select class="form-select-sm" id="sceneSelect" title="Select problem">
         </select>
+        T = <span id="stepsCountSpan"></span> N = <span id="planetsCountSpan"></span>
         <!---------------------- top panel (sliders row) ---------------------->
         <div>
             <input type="range" id="scopeRange" min="-15" max="1" value="0" step="1" title="Телескоп" list="markers"/>
@@ -43,10 +44,8 @@
                 <option value="0" ></option>
             </datalist>
         
-            <button id="clearAllButton">C</button> 
-            Time: <span id="stepsCountSpan"></span> |  
-            Speed: <span id="stepsPerSecSpan"></span> |
-            Bodies: <span id="planetsCountSpan"></span>
+
+            
         </div>    
 
     </div>

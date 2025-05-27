@@ -45,9 +45,8 @@ export const doc = {
     //
     scopeRange: <HTMLInputElement>document.getElementById('scopeRange')!,
     //
-    clearAllButton: document.getElementById('clearAllButton')!,
     stepsCountSpan: document.getElementById('stepsCountSpan')!,
-    stepsPerSecSpan: document.getElementById('stepsPerSecSpan')!,
+
     planetsCountSpan: document.getElementById('planetsCountSpan')!,
 
     // on problem board

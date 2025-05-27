@@ -41,13 +41,6 @@ export default class Controller
 
     private bindButtonClickEvents() 
     {
-        // clearAllButton
-        doc.clearAllButton.addEventListener('click', () => {
-            if (confirm("Clear all?\nAre you serious?")) {
-                this.clearScene();
-            }
-        });
-
         // runButton
         doc.runButton.addEventListener('click', () => {
             if (!this.stepTimer) {

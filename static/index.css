@@ -46,6 +46,44 @@ body {
     background-color:  rgb(200, 240, 255);
     color: var(--deep-blue-color);
 }
+
+#planetButton {
+    color: blue;   
+    border: blue solid 2px;
+    font-weight: 600; 
+    margin-left:    8px;
+    height: 36px; 
+    width: 60px;
+}
+
+#runButton {
+    background-image: image('./assets/icons/play-fill.svg');
+    background-color: rgb(0, 160, 0)
+}
+#runButton:hover {
+    background-color:  rgb(0, 220, 20)
+}
+
+#sceneSelect {
+    margin-top: 12px;
+    margin-left: 8px;
+    display: inline-block; 
+    max-width: 280px;
+    border: none;
+    border-radius: 4px;
+    transition-duration: 0.15s;
+    background-color: #fff6e9;
+    color: var(--deep-blue-color);
+    
+    font-size: 17px;
+    box-shadow: 0 2px #fff6e956;
+}
+#sceneSelect:hover {
+    background-color: #fed1ac;
+    color: var(--deep-blue-color);
+}
+
+
 /* ----------------- Canvas Containeer -------------------------- */
 
 .canvas-cont {
