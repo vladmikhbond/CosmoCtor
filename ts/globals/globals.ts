@@ -53,8 +53,6 @@ export const doc = {
     answerText: <HTMLInputElement>document.getElementById("answerText"),
     answerButton: <HTMLButtonElement>document.getElementById("answerButton"),
 
-
-
     // on planet board
     nameText: <HTMLInputElement>document.getElementById('nameText')!,
     colorText: <HTMLInputElement>document.getElementById('colorText')!,
@@ -87,7 +85,7 @@ export const doc = {
     interval2: <HTMLInputElement>document.getElementById('interval2')!,
     okButton2: document.getElementById('okButton2')!,
     cancelButton2: document.getElementById('cancelButton2')!,
-    
+
     // bottom 
     saveSceneButton: document.getElementById('saveSceneButton')!,
     savedSceneArea: <HTMLTextAreaElement>document.getElementById('savedSceneArea')!,
