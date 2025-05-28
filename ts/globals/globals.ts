@@ -30,6 +30,9 @@ export const doc = {
     openSolvButton: <HTMLButtonElement>document.getElementById('openSolvButton')!,
     closeTaskButton: <HTMLButtonElement>document.getElementById('closeTaskButton')!,
 
+    mousePosSpan: <HTMLSpanElement>document.getElementById("mousePosSpan"),
+
+
 
     canvas: _canvas,
     dashboard: document.getElementById('dashboard')!,

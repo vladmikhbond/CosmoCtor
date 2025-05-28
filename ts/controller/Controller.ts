@@ -245,11 +245,19 @@ export default class Controller
         doc.radiusText.addEventListener('change', handler);
 
         // canvas_keydown
-        doc.canvas.addEventListener('keydown', (e: KeyboardEvent) => {
+        document.addEventListener('keydown', (e: KeyboardEvent) => {
             switch (e.key) {
                 case 'Delete':
                     this.space.removeSelectedPlanet()
                     this.view.draw();               
+                    break;
+                // step execution
+                case 's': case 'S': case 'і': case 'І':
+                    doc.stepButton.dispatchEvent(new Event("click"));
+                    break;
+                // step execution
+                case 't': case 'T': case 'е': case 'Е':
+                    doc.trackButton.dispatchEvent(new Event("click"));
                     break;
             };
         });

@@ -89,6 +89,17 @@ body {
     color: white;
 }
 
+
+#mousePosSpan  {
+    /* position: absolute;
+    right: 10px;
+    top: 10px; */
+    font-size: 14px;
+    color: var(--gray-blue-color);  
+    font-size: 12px;
+}
+
+
 /* ----------------- Canvas Containeer -------------------------- */
 
 .canvas-cont {
