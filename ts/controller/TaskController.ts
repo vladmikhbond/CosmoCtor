@@ -42,41 +42,6 @@ export default class TaskController
     }
 
 
-    checkAnswer() {
-        const id = +doc.sceneSelect.value;
-        const problem = this.problems[id];
-        const planets = this.controller.space.planets;
-        const answer = problem.answer;
-        let testOk = false;
-        // 
-        if (problem.isAnswerNumber) 
-        {
-            const MAX_ERROR = 0.03;  // 3%               
-            let epsilon = Math.abs((+doc.answerText.value - +problem.answer) / +problem.answer);
-            testOk = doc.answerText.value == problem.answer || epsilon < MAX_ERROR
-        } 
-        else 
-        {
-            const testFunction = new Function('t, p, canvas_height', `
-                return ${answer};
-            `);
-
-            let sceneJson = serialization(this.controller.space);  
-            
-            for (let t = 0; t <= 1000; t++) {
-                if (testFunction(t, planets, doc.canvas.height)) {
-                    testOk = true;
-                    break;
-                }
-                this.controller.space.step();
-            }
-            this.restoreSceneFromJson(sceneJson) 
-            this.controller.view.draw();
-        }
-
-        doc.canvas.style.backgroundColor = testOk ? 'green' : 'darkblue';
-    }
-
     // Завантажує усі відкриті задачі
     //
     async loadAllProblems() {
@@ -138,4 +103,39 @@ export default class TaskController
         view.displayInfo();
     }
  
+
+    checkAnswer() {
+        const id = +doc.sceneSelect.value;
+        const problem = this.problems[id];
+        const answer = problem.answer;
+        let testOk = false;
+        // 
+        if (problem.isAnswerNumber) 
+        {
+            const MAX_ERROR = 0.03;  // 3%               
+            let epsilon = Math.abs((+doc.answerText.value - +problem.answer) / +problem.answer);
+            testOk = doc.answerText.value == problem.answer || epsilon < MAX_ERROR
+        } 
+        else 
+        {
+            const testFunction = new Function('t, p, canvas_height', `
+                return ${answer};
+            `);
+
+            let sceneJson = serialization(this.controller.space);  
+            
+            for (let t = 0; t <= 1000; t++) {
+                if (testFunction(t, this.controller.space.planets, doc.canvas.height)) {
+                    testOk = true;
+                    break;
+                }
+                this.controller.space.step();
+            }
+            this.restoreSceneFromJson(sceneJson) 
+            this.controller.view.draw();
+        }
+
+        doc.canvas.style.backgroundColor = testOk ? 'green' : 'darkblue';
+    }
+
 }

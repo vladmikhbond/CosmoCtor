@@ -37,6 +37,7 @@ export const doc = {
 
     // on top panel
     runButton: document.getElementById('runButton')!,
+    restartButton: document.getElementById('restartButton')!,
     stepButton: document.getElementById('stepButton')!,
     trackButton: document.getElementById('trackButton')!,
     sceneSelect: <HTMLSelectElement>document.getElementById("sceneSelect"),

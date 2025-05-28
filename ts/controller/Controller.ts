@@ -1,5 +1,5 @@
 import { doc, glo } from '../globals/globals.js';
-import { deserialization} from '../serialize/serialize.js';
+import { serialization, deserialization} from '../serialize/serialize.js';
 import Planet from '../model/Planet.js';
 import Space from '../model/Space.js';
 import View from '../view/View.js';
@@ -8,6 +8,7 @@ import { StarterKind } from '../model/Starter.js';
 export default class Controller 
 {
     stepTimer = 0;
+    savedSceneJson = '';
 
     constructor(public space: Space, public view: View) {
         this.bindButtonClickEvents();
@@ -45,15 +46,29 @@ export default class Controller
         // runButton
         doc.runButton.addEventListener('click', () => {
             if (!this.stepTimer) {
-                doc.saveSceneButton.dispatchEvent(new Event("click"));
+                // doc.saveSceneButton.dispatchEvent(new Event("click"));
+                this.savedSceneJson = serialization(this.space);
                 this.startTimer();
             } else {
                 this.stopTimer();    
             }
         });
 
+        // restartButton
+        doc.restartButton.addEventListener('click', () => {
+            if (this.savedSceneJson) {
+                let d = deserialization(this.savedSceneJson);
+                this.space.planets = d.planets;
+                this.space.starters = d.starters;
+                   
+            }
+            this.stopTimer(); 
+            this.view.draw()
+        });
+
         // stepButton
         doc.stepButton.addEventListener('click', () => {
+            this.stopTimer(); 
             this.step();
             this.view.displayInfo();
         });
@@ -64,7 +79,7 @@ export default class Controller
             if (!this.view.trackMode) {
                 this.space.clearAllTracks();
             }
-            doc.trackButton.innerHTML = this.view.trackMode ? '●' : 'O';
+            doc.trackButton.innerHTML = this.view.trackMode ? 'N' : 'T';
             this.view.draw();
         });
 
@@ -85,11 +100,11 @@ export default class Controller
         });
 
 
-        // delButton_click: remove selected planet
-        doc.delButton.addEventListener('click', () => {
-            this.space.removeSelectedPlanet();
-            this.view.draw();
-        });
+        // // delButton_click: remove selected planet
+        // doc.delButton.addEventListener('click', () => {
+        //     this.space.removeSelectedPlanet();
+        //     this.view.draw();
+        // });
 
     }
     
@@ -271,13 +286,15 @@ export default class Controller
         this.stepTimer = setInterval(() => {
             this.step();
         }, glo.STEP_PERIOD);
-        doc.runButton.innerHTML = '■';
+        // '■'
+        (doc.runButton.children[0] as HTMLImageElement).src = "static/assets/icons/stop-fill.svg";
     }
 
     public stopTimer() {
         clearInterval(this.stepTimer);
         this.stepTimer = 0;
-        doc.runButton.innerHTML = '►';
+        // '►'
+        (doc.runButton.children[0] as HTMLImageElement).src = "static/assets/icons/play-fill.svg";
         this.view.displayInfo();
     }
 

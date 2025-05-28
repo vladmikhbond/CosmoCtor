@@ -138,7 +138,7 @@ export default class Space extends EventTarget
         if (this.selectedPlanet && this.planets.indexOf(this.selectedPlanet) === -1){
             this.selectedPlanet = null;
         }
-        
+
         // check starters 
         for (let starter of this.starters) {
 
@@ -167,7 +167,7 @@ export default class Space extends EventTarget
 
     trySelectPlanet(x: number, y: number) 
     {        
-        for (let p of this.planets.reverse()) {
+        for (let p of this.planets) {
             let dist = Math.sqrt((p.x - x)**2 + (p.y - y)**2);
             let r = Math.max(p.r, 5) / glo.scale; 
             if (dist <= r) {

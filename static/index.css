@@ -1,5 +1,5 @@
 :root {
-    --canvas-width: 800px;
+    --canvas-width: 900px;
     --canvas-height: 800px;
     --deep-blue-color: #4335a7;
     --gray-blue-color: rgb(203, 215, 236);
@@ -57,7 +57,6 @@ body {
 }
 
 #runButton {
-    background-image: image('./assets/icons/play-fill.svg');
     background-color: rgb(0, 160, 0)
 }
 #runButton:hover {
@@ -83,6 +82,12 @@ body {
     color: var(--deep-blue-color);
 }
 
+#scopeRange {
+    width: 150px;
+    margin-top: 5px;
+    margin-left: 15px;
+    color: white;
+}
 
 /* ----------------- Canvas Containeer -------------------------- */
 
@@ -223,7 +228,7 @@ body {
 } 
 #savedSceneArea
 {
-    width: 720px;
+    width: 820px;
     background-color: var(--deep-blue-color);
     color: white;
 }
@@ -233,7 +238,7 @@ body {
 }
 
 /* ---------------------------------------------------------------------------------------------------------------------------------- */
-#menuDiv {
+/* #menuDiv {
     border: solid black 1px;
     margin-bottom: 5px;
     padding: 4px 10px 0px 10px;
@@ -261,20 +266,11 @@ body {
 }
 
 
-#scopeRange {
-    width: 250px;
-    margin-top: 5px;
-    margin-left: 15px;
-    color: white;
-}
+
 
 
 #clearAllButton {
     background-color: red;
     color: white;
 }
-
-
-
-
-
+ */
