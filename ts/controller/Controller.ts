@@ -87,7 +87,6 @@ export default class Controller
         // Get standard or copy selected planet
         //
         doc.planetButton.addEventListener('click', () => {
-            
             let planet = new Planet();
             if (this.space.selectedPlanet) {                
                 Object.assign(planet, this.space.selectedPlanet);
@@ -100,11 +99,11 @@ export default class Controller
         });
 
 
-        // // delButton_click: remove selected planet
-        // doc.delButton.addEventListener('click', () => {
-        //     this.space.removeSelectedPlanet();
-        //     this.view.draw();
-        // });
+        // 
+        doc.applyButton.addEventListener('click', () => {
+            this.applyParams()
+            this.view.draw();
+        });
 
     }
     
@@ -175,7 +174,7 @@ export default class Controller
         // canvas_mousedown: select planet
         doc.canvas.addEventListener('mousedown', (e: MouseEvent) => {
             // save params for selected planet
-            Controller.applyParamsHandler(this);
+            this.applyParams();
             // select a planet
             cursor = glo.retransformXY(e.offsetX, e.offsetY);
             isPlanetDragging = this.space.trySelectPlanet(cursor.x, cursor.y);
@@ -233,7 +232,7 @@ export default class Controller
 
 
         // textfields_changed
-        const handler = () => { Controller.applyParamsHandler(this); };
+        const handler = () => { this.applyParams(); };
 
         doc.xText.addEventListener('change', handler);
         doc.yText.addEventListener('change', handler);
@@ -263,8 +262,8 @@ export default class Controller
         });
     }
 
-    static applyParamsHandler(me: Controller) {
-        let planet = me.space.selectedPlanet;
+    applyParams() {
+        let planet = this.space.selectedPlanet;
         if (planet) {
             planet.x = +doc.xText.value;
             planet.y = +doc.yText.value;
@@ -275,7 +274,6 @@ export default class Controller
             planet.r = +doc.radiusText.value;
             planet.name = doc.nameText.value;
             planet.color = doc.colorText.value;
-            me.view.draw();
         }
     }
 

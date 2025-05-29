@@ -69,7 +69,7 @@ export const doc = {
     planetButton: document.getElementById('planetButton')!,
     rocketButton: document.getElementById('rocketButton')!,
     nebulaButton: document.getElementById('nebulaButton')!,
-    delButton: document.getElementById('delButton')!,
+    applyButton: document.getElementById('applyButton')!,
 
     // rocket starter board
     rocketBoard: document.getElementById('rocketBoard')!,
