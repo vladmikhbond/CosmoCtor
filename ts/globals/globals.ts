@@ -30,7 +30,6 @@ export const doc = {
     openSolvButton: <HTMLButtonElement>document.getElementById('openSolvButton')!,
     closeTaskButton: <HTMLButtonElement>document.getElementById('closeTaskButton')!,
 
-    mousePosSpan: <HTMLSpanElement>document.getElementById("mousePosSpan"),
 
 
 
@@ -47,9 +46,8 @@ export const doc = {
     //
     scopeRange: <HTMLInputElement>document.getElementById('scopeRange')!,
     //
-    stepsCountSpan: document.getElementById('stepsCountSpan')!,
-
-    planetsCountSpan: document.getElementById('planetsCountSpan')!,
+    mousePosSpan: <HTMLSpanElement>document.getElementById("mousePosSpan"),
+    infoSpan: document.getElementById('infoSpan')!,
 
     // on problem board
     problemBoard: <HTMLDivElement>document.getElementById("problemBoard"),

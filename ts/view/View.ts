@@ -140,8 +140,8 @@ export default class View
 
     drawCursorCoords(point: {x: number; y: number}, gx: number, gy: number) {
         let g = Math.sqrt(gx**2 + gy**2);  
-        doc.mousePosSpan.innerHTML = `x: ${point.x.toFixed(2)}   y: ${point.y.toFixed(2)}` + 
-          ` |  gx: ${gx.toFixed(4)}   gy: ${gy.toFixed(4)}  g: ${g.toFixed(4)}`
+        doc.mousePosSpan.innerHTML = `x: ${point.x.toFixed(2)}   y: ${point.y.toFixed(2)}`;
+             // +` |  gx: ${gx.toFixed(4)}   gy: ${gy.toFixed(4)}  g: ${g.toFixed(4)}`
     }
     
     // line from mouse cursor (NOT USED)
@@ -164,10 +164,8 @@ export default class View
 
     displayInfo() 
     {
-        let planetsCount = this.space.planets.length;
-        // display
-        doc.stepsCountSpan.innerHTML = glo.stepsCount.toString(); 
-        doc.planetsCountSpan.innerHTML = planetsCount.toString();      
+        doc.infoSpan.innerHTML = 
+           `T=${glo.stepsCount} &nbsp; N=${this.space.planets.length}`;      
     }
 
     // display to panelBoard

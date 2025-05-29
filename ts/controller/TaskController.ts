@@ -13,6 +13,7 @@ export default class TaskController
     {
         this.controller = controller;
         this.addEventListeners();
+        this.addProblemBoardMouseEvents()
         this.loadAllProblems();
     }
 
@@ -81,8 +82,9 @@ export default class TaskController
         // UI & view 
         
         doc.condDiv.innerHTML = problem.cond;
+        (window as any).MathJax.typesetPromise([doc.condDiv]);  // мат.формули
         doc.problemBoard.style.display = 'block'; 
-        doc.problemBoard.style.backgroundColor = 'rgba(241, 241, 10, 0.1)';
+        
         doc.answerText.style.display = problem.isAnswerNumber ? 'inline' : 'none';
     }
 
@@ -138,4 +140,35 @@ export default class TaskController
         doc.canvas.style.backgroundColor = testOk ? 'green' : 'darkblue';
     }
 
+
+
+    private addProblemBoardMouseEvents() {
+
+        let cursor: {x: number, y: number} | null = null;
+   
+        doc.problemBoard.addEventListener('mousedown', (e: MouseEvent) => {
+            cursor = {x: e.clientX, y: e.clientY}; 
+        });
+
+        doc.problemBoard.addEventListener('mousemove', (e: MouseEvent) => { 
+            if (cursor) {                              
+                let dx = e.clientX - cursor.x;
+                let dy = e.clientY - cursor.y;
+                let style = window.getComputedStyle(doc.problemBoard);
+
+                let left = parseFloat(style.left) + dx;
+                doc.problemBoard.style.left = left + 'px';
+
+                let top = parseFloat(style.top) + dy;
+                doc.problemBoard.style.top = top + 'px';
+
+                cursor = {x: e.clientX, y: e.clientY};
+            }    
+        });
+
+        doc.problemBoard.addEventListener('mouseup', (e: MouseEvent) => {
+            cursor = null;
+        });
+
+    }
 }

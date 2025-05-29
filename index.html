@@ -68,9 +68,9 @@
             <path fill-rule="evenodd" d="M3 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5"/>
         </svg>
 
-        <div>
-            T = <span id="stepsCountSpan"></span> N = <span id="planetsCountSpan"></span>
-            <span id="mousePosSpan">mousePosSpan</span>
+        <div style="display: flex; align-items: center;">
+            <span id="mousePosSpan"></span>
+            <span id="infoSpan"></span>
         </div>    
     </div>
 
@@ -79,10 +79,9 @@
     
     <div class="canvas-cont">
 
-        <!-- Problem Board -->
-        <div id="problemBoard" class="canvas-item" style="right: unset; left: 0">
+        <div id="problemBoard" class="canvas-item" >
             <!-- <span style="position: absolute; right: 0; color: blue"><></span> -->
-            <div id="condDiv" style="color: rgb(0 0 0 / 75%);"></div>
+            <div id="condDiv"></div>
             <input id="answerText"  placeholder="відповідь" autocomplete="off">
             <button id="answerButton" class="board-button">Check</button>
         </div>
