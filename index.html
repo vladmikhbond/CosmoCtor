@@ -50,10 +50,7 @@
             <img src="static/assets/icons/info.svg" width="20" height="20">
         </button>
 
-
-        <select class="form-select-sm" id="sceneSelect" title="Select problem">
-        </select>
-
+        <select class="form-select-sm" id="sceneSelect" title="Select problem"> </select>
         
         <input type="range" id="scopeRange" min="-15" max="1" value="0" step="1" title="Телескоп" list="markers"/>
         <datalist id="markers" >
@@ -68,7 +65,6 @@
         </div>    
     </div>
 
-
     <!----------------------------- Canvas Containeer --------------------------------->
     
     <div class="canvas-cont">
@@ -79,7 +75,6 @@
             <input id="answerText"  placeholder="відповідь" autocomplete="off">
             <button id="answerButton" class="board-button">Check</button>
         </div>
-
 
         <div id="planetBoard" class="canvas-item">
             <div> 
@@ -98,35 +93,46 @@
                 <span class="board-label">Vx </span>  <input id="vxText" class="board-text" title="Vx velocity"/>
                 <span class="board-label">Vy </span>  <input id="vyText" class="board-text" title="Vy velocity"/>
             </div>
-            <button id="rocketButton" class="board-button" >+Rocket</button>
-            <button id="nebulaButton" class="board-button" >+Nebula</button>
-            &nbsp;
-            <button id="applyButton" class="board-button" title="Remove selected planet">Apply</button> 
-            
-        </div>
         
-        <div id="rocketBoard" class="start-board ">
-            <div><span class="board-label">Velo</span>  <input id="velo" class="board-text" value="0"/></div>
-            <div><span class="board-label">Delay</span>  <input id="interval1" class="board-text" value="0"/></div>
-            <div>
-                <button id="okButton1" class="board-buton"">OK</button> 
-                <button id="cancelButton1" class="board-buton"">Cancel</button>
+            <button id="applyButton" class="board-button" title="Remove selected planet">Apply</button>   
+
+            <button id="nebulaButton" class="btn btn-sm btn-primary scene-btn" title="Add a nebula">
+               <img src="static/assets/icons/bullseye.svg" width="20" height="20"> 
+            </button>
+            <button id="rocketButton" class="btn btn-sm btn-primary scene-btn" title="Add a rocket">
+               <img src="static/assets/icons/rocket-fill.svg" width="20" height="20"> 
+            </button>
+        
+            <!-- ----- -->
+            <div id="rocketBoard" style="display: none;">
+                <div>
+                    <span class="board-label">Velo</span>  <input id="velo" class="board-text" value="0"/>
+                    <span class="board-label">Delay</span>  <input id="interval1" class="board-text" value="0"/>
+                </div>
+                <div>
+                    <button id="okButton1" class="board-buton"">OK</button> 
+                </div>
+            </div>
+
+            <!-- ----- --> 
+            <div id="nebulaBoard"  style="display: none;">
+                <div>
+                    <span class="board-label">Count</span>  <input id="count" class="board-text" value="1000"/>
+                    <span class="board-label">Size</span>  <input id="size" class="board-text" value="200"/>
+                </div>
+                <div>
+                    <span class="board-label">Kω</span>  <input id="moment" class="board-text" value="0.25"/>
+                    <span class="board-label">Distr</span>  <input id="distr" class="board-text" value="polar" title="polar | flat">
+                </div>
+                <div>
+                    <span class="board-label">Delay</span>  <input id="interval2" class="board-text" value="0"/>  
+                </div>
+                <div>
+                    <button id="okButton2" class="board-buton"">OK</button>
+                </div>
             </div>
         </div>
 
-        <div id="nebulaBoard" class="start-board">
-            <div><span class="board-label">Count</span>  <input id="count" class="board-text" value="1000"/></div>
-            <div><span class="board-label">Size</span>  <input id="size" class="board-text" value="200"/></div>
-            <div><span class="board-label">Kω</span>  <input id="moment" class="board-text" value="0.25"/></div>
-            <div><span class="board-label">Distr</span>  <input id="distr" class="board-text" value="polar" title="polar | flat"></div>
-            <div><span class="board-label">Delay</span>  <input id="interval2" class="board-text" value="0"/></div>
-            <div>
-                <button id="okButton2" class="board-buton"">OK</button> 
-                <button id="cancelButton2" class="board-buton"">Cancel</button>
-            </div>
-        </div>
-
-        <!-- <canvas id="canvas2" width="800" height="800" class="canvas-item"></canvas> -->
         <canvas id="canvas" width="900" height="800" tabindex="0" class="canvas-item"></canvas>
     </div>
         
@@ -142,7 +148,6 @@
 
         <button id="restoreSceneButton" class="zzz btn btn-sm btn-primary scene-btn" title="Import scene">
             <img src="static/assets/icons/box-arrow-in-up-right.svg" width="16" height="16">
-
         </button>
 
     </div>

@@ -108,20 +108,25 @@ export default class Controller
     }
     
     private bindStarterEvents() {       
-
+        
         doc.rocketButton.addEventListener('click', () => {
             if (this.space.selectedPlanet) { 
-                doc.rocketBoard.style.display='block'; 
-                doc.nebulaBoard.style.display='none';                   
+                if (doc.rocketBoard.style.display == 'block') {
+                    doc.rocketBoard.style.display='none'; 
+                } else {
+                    doc.rocketBoard.style.display = 'block';
+                }
                 this.view.draw();
             }
-        
         });
 
         doc.nebulaButton.addEventListener('click', () => {
-            if (this.space.selectedPlanet) {  
-                doc.nebulaBoard.style.display='block';
-                doc.rocketBoard.style.display='none'; 
+            if (this.space.selectedPlanet) { 
+                if (doc.nebulaBoard.style.display == 'block') {
+                    doc.nebulaBoard.style.display='none'; 
+                } else {
+                    doc.nebulaBoard.style.display = 'block';
+                } 
                 this.view.draw();
             } 
         });
@@ -155,14 +160,6 @@ export default class Controller
             doc.nebulaBoard.style.display = 'none';
         });
 
-
-        doc.cancelButton1.addEventListener('click', () => {
-            doc.rocketBoard.style.display = 'none';
-        });
-
-        doc.cancelButton2.addEventListener('click', () => {
-            doc.nebulaBoard.style.display = 'none';
-        });
 
     }
 

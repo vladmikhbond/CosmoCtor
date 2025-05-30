@@ -76,7 +76,7 @@ export const doc = {
     velo: <HTMLInputElement>document.getElementById('velo')!,
     interval1: <HTMLInputElement>document.getElementById('interval1')!,
     okButton1: document.getElementById('okButton1')!,
-    cancelButton1: document.getElementById('cancelButton1')!,
+
 
     // nebula starter board
     nebulaBoard: document.getElementById('nebulaBoard')!,
@@ -86,7 +86,7 @@ export const doc = {
     distr: <HTMLInputElement>document.getElementById('distr')!,
     interval2: <HTMLInputElement>document.getElementById('interval2')!,
     okButton2: document.getElementById('okButton2')!,
-    cancelButton2: document.getElementById('cancelButton2')!,
+
 
     // bottom 
     saveSceneButton: document.getElementById('saveSceneButton')!,
