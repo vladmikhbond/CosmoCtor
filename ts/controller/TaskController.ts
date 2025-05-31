@@ -78,14 +78,14 @@ export default class TaskController
         }    
         let problem = this.problems[idx];
         this.restoreSceneFromJson(problem.init);
-
-        // UI & view 
         
+        // UI & view 
         doc.condDiv.innerHTML = problem.cond;
         (window as any).MathJax.typesetPromise([doc.condDiv]);  // мат.формули
-        doc.problemBoard.style.display = 'block'; 
-        
+        doc.problemBoard.style.display = 'block';         
         doc.answerText.style.display = problem.isAnswerNumber ? 'inline' : 'none';
+        doc.checkmarkImg.style.display = 'none';
+        doc.crossmarkImg.style.display = 'none';
     }
 
 
@@ -108,8 +108,7 @@ export default class TaskController
 
     checkAnswer() {
         const id = +doc.sceneSelect.value;
-        const problem = this.problems[id];
-        const answer = problem.answer;
+        const problem = this.problems[id]; 
         let testOk = false;
         // 
         if (problem.isAnswerNumber) 
@@ -120,24 +119,51 @@ export default class TaskController
         } 
         else 
         {
-            const testFunction = new Function('t, p, canvas_height', `
+            let STEP_COUNT = 1000;
+            let answer = problem.answer;
+            let forAll = false;            
+            if (problem.answer.startsWith('ALL')) {
+                answer = problem.answer.slice(3).trim();
+                forAll = true;
+            }
+            let savedScene = serialization(this.controller.space);  
+
+            const FUN = new Function('t, p', `
+                const E = (a, b, c=0.01) => Math.abs(a - b) < c;
                 return ${answer};
             `);
-
-            let sceneJson = serialization(this.controller.space);  
-            
-            for (let t = 0; t <= 1000; t++) {
-                if (testFunction(t, this.controller.space.planets, doc.canvas.height)) {
-                    testOk = true;
-                    break;
+                    
+            if (forAll) 
+            {
+                testOk = true;
+                for (let t = 0; t <= STEP_COUNT; t++) {
+                    if (!FUN(t, this.controller.space.planets)) {
+                        testOk = false;
+                        break;
+                    }
+                    this.controller.space.step();
                 }
-                this.controller.space.step();
+            } 
+            else 
+            {
+                testOk = false;
+                for (let t = 0; t <= STEP_COUNT; t++) {
+                    if (FUN(t, this.controller.space.planets)) {
+                        testOk = true;
+                        break;
+                    }
+                    this.controller.space.step();
+                }
             }
-            this.restoreSceneFromJson(sceneJson) 
+
+
+
+            this.restoreSceneFromJson(savedScene) 
             this.controller.view.draw();
         }
-
-        doc.canvas.style.backgroundColor = testOk ? 'green' : 'darkblue';
+        // show success  
+        doc.checkmarkImg.style.display = testOk ? 'inline' : 'none';
+        doc.crossmarkImg.style.display = testOk ? 'none' : 'inline';
     }
 
 

@@ -138,7 +138,6 @@ body {
 }
 
 #problemBoard {
-
     color: black;   
     width: 500px;
     left: 0;
@@ -147,6 +146,12 @@ body {
 #answerText {
     width: 100px; 
     background-color: white;
+}
+
+#crossmark, #checkmark {
+    display: none;
+    width: 100px;
+    height: 100px;
 }
 
 .start-board {
@@ -194,8 +199,6 @@ body {
 .board-button:hover {
     background-color: #f8b177;
 }
-
-
 
 /* ------------------ bottom panel ---------------- */
 .bottom-panel {

@@ -30,9 +30,6 @@ export const doc = {
     openSolvButton: <HTMLButtonElement>document.getElementById('openSolvButton')!,
     closeTaskButton: <HTMLButtonElement>document.getElementById('closeTaskButton')!,
 
-
-
-
     canvas: _canvas,
     dashboard: document.getElementById('dashboard')!,
     planetBoard: document.getElementById('planetBoard')!,
@@ -54,6 +51,8 @@ export const doc = {
     condDiv: <HTMLDivElement>document.getElementById("condDiv"),
     answerText: <HTMLInputElement>document.getElementById("answerText"),
     answerButton: <HTMLButtonElement>document.getElementById("answerButton"),
+    checkmarkImg: <HTMLImageElement>document.getElementById("checkmark"),
+    crossmarkImg: <HTMLImageElement>document.getElementById("crossmark"),
 
     // on planet board
     nameText: <HTMLInputElement>document.getElementById('nameText')!,
