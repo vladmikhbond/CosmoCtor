@@ -8,7 +8,7 @@ import { StarterKind } from '../model/Starter.js';
 export default class Controller 
 {
     stepTimer = 0;
-    savedSceneJson = '';
+    savedScene = '';
 
     constructor(public space: Space, public view: View) {
         this.bindButtonClickEvents();
@@ -46,8 +46,7 @@ export default class Controller
         // runButton
         doc.runButton.addEventListener('click', () => {
             if (!this.stepTimer) {
-                // doc.saveSceneButton.dispatchEvent(new Event("click"));
-                this.savedSceneJson = serialization(this.space);
+                this.savedScene = serialization(this.space);
                 this.startTimer();
             } else {
                 this.stopTimer();    
@@ -56,8 +55,8 @@ export default class Controller
 
         // restartButton
         doc.restartButton.addEventListener('click', () => {
-            if (this.savedSceneJson) {
-                let d = deserialization(this.savedSceneJson);
+            if (this.savedScene) {
+                let d = deserialization(this.savedScene);
                 this.space.planets = d.planets;
                 this.space.starters = d.starters;
                    
@@ -139,7 +138,7 @@ export default class Controller
                 velo: +doc.velo.value, 
                 count: 0, 
                 size:0,
-                startStep: +doc.interval1.value + glo.stepsCount, 
+                startStep: +doc.interval1.value + glo.chronos, 
                 planetName: this.space.selectedPlanet!.name,
                 distr: "",
             });
@@ -153,7 +152,7 @@ export default class Controller
                 velo: +doc.moment.value,
                 count: +doc.count.value, 
                 size: +doc.size.value, 
-                startStep: +doc.interval2.value + glo.stepsCount, 
+                startStep: +doc.interval2.value + glo.chronos, 
                 planetName: this.space.selectedPlanet!.name,
                 distr: doc.distr.value,
             });
@@ -279,7 +278,7 @@ export default class Controller
         this.view.draw();
 
         // display info 
-        if (glo.stepsCount % View.DISPLAY_INTERVAL == 0) {
+        if (glo.chronos % View.DISPLAY_INTERVAL == 0) {
             this.view.displayInfo();
             this.view.displaySelectedPlanetParams();
         }
@@ -305,7 +304,7 @@ export default class Controller
         this.space.planets = [];
         this.space.starters = [];
         this.stopTimer();
-        glo.stepsCount = 0;
+        glo.chronos = 0;
         doc.canvas.style.backgroundColor = 'darkblue';
         this.view.draw();
     }

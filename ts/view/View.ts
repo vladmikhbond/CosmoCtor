@@ -165,7 +165,7 @@ export default class View
     displayInfo() 
     {
         doc.infoSpan.innerHTML = 
-           `T=${glo.stepsCount} &nbsp; N=${this.space.planets.length}`;      
+           `T=${glo.chronos} &nbsp; N=${this.space.planets.length}`;      
     }
 
     // display to panelBoard

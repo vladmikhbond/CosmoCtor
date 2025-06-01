@@ -144,7 +144,7 @@ export default class Space extends EventTarget
 
             let planet = this.planetByName(starter.planetName);
 
-            if (starter.startStep == glo.stepsCount && planet) {          
+            if (starter.startStep == glo.chronos && planet) {          
                 if (starter.kind == StarterKind.Rocket) {
                     // rocket
                     let rocket = new Rocket(starter.velo, planet);
@@ -160,7 +160,7 @@ export default class Space extends EventTarget
         // remove used starters
         this.starters = this.starters.filter(s => s.kind != StarterKind.Empty);
         // increment step counter
-        glo.stepsCount++;    
+        glo.chronos++;    
     }
 
     

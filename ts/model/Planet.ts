@@ -32,7 +32,7 @@ export default class Planet
         this.y += this.vy;
 
         // add point to track
-        if (glo.stepsCount % Planet.TRACK_INTERVAL == 0) {
+        if (glo.chronos % Planet.TRACK_INTERVAL == 0) {
             this.track.addPoint(this.x, this.y)
         }
     }

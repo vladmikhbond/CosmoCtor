@@ -100,7 +100,7 @@ export default class TaskController
             space.starters = o.starters;
         }
         this.controller.stopTimer();
-        glo.stepsCount = 0;
+        glo.chronos = 0;
         view.draw();
         view.displayInfo();
     }

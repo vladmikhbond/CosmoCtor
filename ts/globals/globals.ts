@@ -7,7 +7,7 @@ export const glo =
     scale: 1,             // телескоп
     shiftX: _canvas.width / 2,
     shiftY: _canvas.height / 2,
-    stepsCount: 0,        // кількість кроків
+    chronos: 0,        // кількість кроків
 
     retransformXY(x: number, y:number) {
         let x1 = (x - this.shiftX) / this.scale;
