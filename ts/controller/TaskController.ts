@@ -119,13 +119,22 @@ export default class TaskController
         } 
         else 
         {
-            let STEP_COUNT = 1000;
-            let answer = problem.answer;
-            let forAll = false;            
-            if (problem.answer.startsWith('ALL')) {
-                answer = problem.answer.slice(3).trim();
-                forAll = true;
+            let answer = problem.answer;            
+            let ALL = false; 
+            let T = 1000;
+
+            let match = answer.match(/([AE]):(\d+)/);
+            if (match) {
+                if (match[1] == 'A') ALL = true;
+                if (match[1] == 'E') ALL = false;
+                T = +match[2];
+                answer = problem.answer.slice(match[0].length).trim();
             }
+                       
+            // if (problem.answer.startsWith('ALL')) {
+            //     answer = problem.answer.slice(3).trim();
+            //     ALL = true;
+            // }
             let savedScene = serialization(this.controller.space);  
 
             const FUN = new Function('t, p', `
@@ -133,10 +142,10 @@ export default class TaskController
                 return ${answer};
             `);
                     
-            if (forAll) 
+            if (ALL) 
             {
                 testOk = true;
-                for (let t = 0; t <= STEP_COUNT; t++) {
+                for (let t = 0; t <= T; t++) {
                     if (!FUN(t, this.controller.space.planets)) {
                         testOk = false;
                         break;
@@ -147,7 +156,7 @@ export default class TaskController
             else 
             {
                 testOk = false;
-                for (let t = 0; t <= STEP_COUNT; t++) {
+                for (let t = 0; t <= T; t++) {
                     if (FUN(t, this.controller.space.planets)) {
                         testOk = true;
                         break;

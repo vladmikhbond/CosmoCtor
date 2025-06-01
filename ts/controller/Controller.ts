@@ -9,6 +9,7 @@ export default class Controller
 {
     stepTimer = 0;
     savedScene = '';
+    savedChronos = 0;
 
     constructor(public space: Space, public view: View) {
         this.bindButtonClickEvents();
@@ -47,6 +48,7 @@ export default class Controller
         doc.runButton.addEventListener('click', () => {
             if (!this.stepTimer) {
                 this.savedScene = serialization(this.space);
+                this.savedChronos = glo.chronos;
                 this.startTimer();
             } else {
                 this.stopTimer();    
@@ -59,7 +61,7 @@ export default class Controller
                 let d = deserialization(this.savedScene);
                 this.space.planets = d.planets;
                 this.space.starters = d.starters;
-                   
+                glo.chronos = this.savedChronos;                   
             }
             this.stopTimer(); 
             this.view.draw()
