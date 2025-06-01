@@ -131,10 +131,6 @@ export default class TaskController
                 answer = problem.answer.slice(match[0].length).trim();
             }
                        
-            // if (problem.answer.startsWith('ALL')) {
-            //     answer = problem.answer.slice(3).trim();
-            //     ALL = true;
-            // }
             let savedScene = serialization(this.controller.space);  
 
             const FUN = new Function('t, p', `
@@ -164,9 +160,6 @@ export default class TaskController
                     this.controller.space.step();
                 }
             }
-
-
-
             this.restoreSceneFromJson(savedScene) 
             this.controller.view.draw();
         }

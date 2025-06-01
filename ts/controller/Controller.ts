@@ -3,7 +3,7 @@ import { serialization, deserialization} from '../serialize/serialize.js';
 import Planet from '../model/Planet.js';
 import Space from '../model/Space.js';
 import View from '../view/View.js';
-import { StarterKind } from '../model/Starter.js';
+import { Starter, StarterKind } from '../model/Starter.js';
 
 export default class Controller 
 {
@@ -134,7 +134,7 @@ export default class Controller
         
 
         doc.okButton1.addEventListener('click', () => {
-
+            // let starter = new Starter( StarterKind.Rocket, +doc.velo.value)
             this.space.starters.unshift({
                 kind:  StarterKind.Rocket, 
                 velo: +doc.velo.value, 
