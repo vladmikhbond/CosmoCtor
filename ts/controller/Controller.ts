@@ -134,8 +134,7 @@ export default class Controller
         
 
         doc.okButton1.addEventListener('click', () => {
-            // let starter = new Starter( StarterKind.Rocket, +doc.velo.value)
-            this.space.starters.unshift({
+            let starter: Starter = {
                 kind:  StarterKind.Rocket, 
                 velo: +doc.velo.value, 
                 count: 0, 
@@ -143,7 +142,8 @@ export default class Controller
                 startStep: +doc.interval1.value + glo.chronos, 
                 planetName: this.space.selectedPlanet!.name,
                 distr: "",
-            });
+            }
+            this.space.starters.unshift(starter);
             doc.rocketBoard.style.display = 'none';
         });
 
