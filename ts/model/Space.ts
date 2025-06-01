@@ -7,26 +7,6 @@ import Track from './Track.js';
 
 export default class Space extends EventTarget 
 {
-    clearAllTracks() {
-        for(const planet of this.planets) {
-            planet.track = new Track(planet);
-        }
-    }
-
-    // Метод для виклику події 'selectPlanetEvent'
-    //
-    emitSelectPlanetEvent(detail: any) {
-      const event = new CustomEvent<Planet|null>('selectPlanetEvent', {detail});
-      this.dispatchEvent(event);
-    }
-
-    // Метод для виклику події 'mergePlanetEvent'
-    //
-    mergePlanetEvent(detail: any) {
-        const event = new CustomEvent<Planet>('mergePlanetEvent', {detail});
-        this.dispatchEvent(event);
-    }
-  
     planets: Planet[];
 
     starters: Starter[] = [];
@@ -42,29 +22,9 @@ export default class Space extends EventTarget
         this.emitSelectPlanetEvent(planet);       
     }
 
-    planetByName(name: string): Planet | null {
-        let filtered = this.planets.filter(p => p.name == name);
-        return filtered.length == 0 ? null : filtered[0];
-    }
-
     constructor(...planets: Planet[]) { 
         super();
         this.planets = planets;  
-    }
-
-    massCenter(): [number, number] {
-        let mx = 0; 
-        let my = 0;
-        let m = 0;
-        
-        for (let p of this.planets) {
-            m += p.m;
-            mx += p.x * p.m;
-            my += p.y * p.m;
-        }
-        if (m == 0)
-            return [0, 0];
-        return [mx / m, my / m];
     }
 
     step() 
@@ -128,7 +88,7 @@ export default class Space extends EventTarget
                     big.y = y;
 
                     small.m = 0; 
-                    this.mergePlanetEvent(big); 
+                    this.emitMergePlanetEvent(big); 
                 }
             }    
         }
@@ -159,11 +119,17 @@ export default class Space extends EventTarget
         }
         // remove used starters
         this.starters = this.starters.filter(s => s.kind != StarterKind.Empty);
+        
         // increment step counter
         glo.chronos++;    
     }
 
-    
+//#region planet suit
+
+    planetByName(name: string): Planet | null {
+        let filtered = this.planets.filter(p => p.name == name);
+        return filtered.length == 0 ? null : filtered[0];
+    }    
 
     trySelectPlanet(x: number, y: number) 
     {        
@@ -198,6 +164,39 @@ export default class Space extends EventTarget
         return false;
     }
 
+//#endregion planet suit
+
+//#region auxilary
+
+    // Метод для виклику події 'selectPlanetEvent'
+    //
+    emitSelectPlanetEvent(detail: any) {
+        const event = new CustomEvent<Planet|null>('selectPlanetEvent', {detail});
+        this.dispatchEvent(event);
+    }
+
+    // Метод для виклику події 'mergePlanetEvent'
+    //
+    emitMergePlanetEvent(detail: any) {
+        const event = new CustomEvent<Planet>('mergePlanetEvent', {detail});
+        this.dispatchEvent(event);
+    }
+  
+    massCenter(): [number, number] {
+        let mx = 0; 
+        let my = 0;
+        let m = 0;
+        
+        for (let p of this.planets) {
+            m += p.m;
+            mx += p.x * p.m;
+            my += p.y * p.m;
+        }
+        if (m == 0)
+            return [0, 0];
+        return [mx / m, my / m];
+    }
+
     graviTension(point: {x: number, y: number}): [ax: number, ay: number] {
         let ax = 0, ay = 0;
         for (let planet of this.planets) {  
@@ -214,5 +213,16 @@ export default class Space extends EventTarget
         return [ax, ay];
     }
 
+    clearAllTracks() {
+        for(const planet of this.planets) {
+            planet.track = new Track(planet);
+        }
+    }
+
+//#endregion auxilary
+
+   addStarter(starter: Starter) {
+      this.starters.unshift(starter);
+   }
 }
 

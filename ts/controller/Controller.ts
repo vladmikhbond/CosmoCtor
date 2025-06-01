@@ -143,13 +143,12 @@ export default class Controller
                 planetName: this.space.selectedPlanet!.name,
                 distr: "",
             }
-            this.space.starters.unshift(starter);
+            this.space.addStarter(starter);
             doc.rocketBoard.style.display = 'none';
         });
 
         doc.okButton2.addEventListener('click', () => {
-            
-            this.space.starters.unshift({
+            let starter: Starter = {
                 kind: StarterKind.Nebula,
                 velo: +doc.moment.value,
                 count: +doc.count.value, 
@@ -157,7 +156,8 @@ export default class Controller
                 startStep: +doc.interval2.value + glo.chronos, 
                 planetName: this.space.selectedPlanet!.name,
                 distr: doc.distr.value,
-            });
+            }
+            this.space.addStarter(starter);
             doc.nebulaBoard.style.display = 'none';
         });
 
