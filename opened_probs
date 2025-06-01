@@ -56,7 +56,7 @@ INIT: [{"name":"Sun","m":1000,"r":20,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"}
             {"name":"Mars","m":0.001,"r":6,"x":400,"y":0,"vx":0,"vy":1.5811,"color":"orange"}]
 ANSWER: E:1 t == 1 && E(p[3].vy, 0.126 + 1.826) 
 ---
-TITLE: Подорож на Марс
+TITLE: 8 Подорож на Марс
 COND: Щоб висадитися на Марс, ракета повинна досягти його орбіти в той самий час,
             коли Марс опиниться в точці досягнення. Тому треба обрати не лише швидкість ракети, а і час її запуску.
 INIT: {"planets":[ {"name":"Sun","m":1000,"r":20,"x":0,"y":0,"vx":0,"vy":0,"color":"yellow"},
@@ -65,10 +65,10 @@ INIT: {"planets":[ {"name":"Sun","m":1000,"r":20,"x":0,"y":0,"vx":0,"vy":0,"colo
 "starters":[]}
 ANSWER: E:4000 p[2].m > 0.001   
 ---
-TITLE: Туманність
+TITLE: 9 Туманність
 COND: Створити туманність, яка під впливом тяжіння перетвориться в планетну систему,
             в якій зосередиться не менше, ніж 80% первинної маси туманності.
 INIT: {"planets":[{"name":"Noname1","m":50,"r":10,"x":0,"y":0,"vx":0,"vy":0,"color":"white"}],
-            "starters":[{"kind":2,"count":1000,"size":400,"velo":0, "startStep":100, "distr": "polar", "planetName":"Noname1"}]}
-ANSWER: 1
+            "starters":[{"kind":2,"count":1000,"size":400,"velo":0.25, "startStep":100, "distr": "polar", "planetName":"Noname1"}]}
+ANSWER: E:10000 t > 100 && p.length < 70
 ---

@@ -9,8 +9,6 @@ export default class Space extends EventTarget
 {
     planets: Planet[];
 
-    starters: Starter[] = [];
-
     private _selectedPlanet: Planet | null = null;
 
     get selectedPlanet(): Planet | null {
@@ -124,7 +122,7 @@ export default class Space extends EventTarget
         glo.chronos++;    
     }
 
-//#region planet suit
+//#region planets suit
 
     planetByName(name: string): Planet | null {
         let filtered = this.planets.filter(p => p.name == name);
@@ -164,7 +162,7 @@ export default class Space extends EventTarget
         return false;
     }
 
-//#endregion planet suit
+//#endregion planets suit
 
 //#region auxilary
 
@@ -221,8 +219,22 @@ export default class Space extends EventTarget
 
 //#endregion auxilary
 
-   addStarter(starter: Starter) {
-      this.starters.unshift(starter);
-   }
+//#region starters suit
+
+    starters: Starter[] = [];
+
+    // Додає лише один стартер на планету
+    //
+    addStarter(starter: Starter) {
+        this.starters = this.starters.filter(s => s.planetName != starter.planetName); 
+        this.starters.unshift(starter);
+    }
+
+    getStarterByPlanetName(planetName: string): Starter | undefined {
+       return this.starters.find(s => s.planetName == planetName) 
+    }
+
+//#endregion starters suit
+
 }
 

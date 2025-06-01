@@ -115,6 +115,11 @@ export default class Controller
                 if (doc.rocketBoard.style.display == 'block') {
                     doc.rocketBoard.style.display='none'; 
                 } else {
+                    let starter = this.space.getStarterByPlanetName(this.space.selectedPlanet.name);
+                    if (starter) {
+                        doc.velo.value = starter.velo.toFixed(0);
+                        doc.interval1.value = (starter.startStep - glo.chronos).toFixed(0);
+                    }
                     doc.rocketBoard.style.display = 'block';
                 }
                 this.view.draw();
@@ -126,6 +131,14 @@ export default class Controller
                 if (doc.nebulaBoard.style.display == 'block') {
                     doc.nebulaBoard.style.display='none'; 
                 } else {
+                    let starter = this.space.getStarterByPlanetName(this.space.selectedPlanet.name);
+                    if (starter) {
+                        doc.moment.value = starter.velo.toFixed(2);
+                        doc.count.value = starter.count.toFixed(0);
+                        doc.size.value = starter.size.toFixed(0);
+                        doc.interval2.value = (starter.startStep - glo.chronos).toFixed(0);
+                        doc.distr.value = starter.distr;
+                    }
                     doc.nebulaBoard.style.display = 'block';
                 } 
                 this.view.draw();
