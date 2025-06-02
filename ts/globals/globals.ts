@@ -49,7 +49,6 @@ export const doc = {
     // on problem board
     problemBoard: <HTMLDivElement>document.getElementById("problemBoard"),
     condDiv: <HTMLDivElement>document.getElementById("condDiv"),
-    answerText: <HTMLInputElement>document.getElementById("answerText"),
     answerButton: <HTMLButtonElement>document.getElementById("answerButton"),
     checkmarkImg: <HTMLImageElement>document.getElementById("checkmark"),
     crossmarkImg: <HTMLImageElement>document.getElementById("crossmark"),

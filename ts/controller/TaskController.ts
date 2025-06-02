@@ -85,7 +85,6 @@ export default class TaskController
         doc.condDiv.innerHTML = problem.cond;
         (window as any).MathJax.typesetPromise([doc.condDiv]);  // мат.формули
         doc.problemBoard.style.display = 'block';         
-        doc.answerText.style.display = problem.isAnswerNumber ? 'inline' : 'none';
         doc.checkmarkImg.style.display = 'none';
         doc.crossmarkImg.style.display = 'none';
     }
@@ -113,58 +112,51 @@ export default class TaskController
         const problem = this.problems[id]; 
         let testOk = false;
         // 
-        if (problem.isAnswerNumber) 
+
+        let answer = problem.answer;            
+        let ALL = false; 
+        let T = 1000;
+
+        let match = answer.match(/([AE]):(\d+)/);
+        if (match) {
+            if (match[1] == 'A') ALL = true;
+            if (match[1] == 'E') ALL = false;
+            T = +match[2];
+            answer = problem.answer.slice(match[0].length).trim();
+        }
+                    
+        let savedScene = serialization(this.controller.space);  
+
+        const FUN = new Function('t, p', `
+            const E = (a, b, c=0.01) => Math.abs(a - b) < c;
+            return ${answer};
+        `);
+                
+        if (ALL) 
         {
-            const MAX_ERROR = 0.03;  // 3%               
-            let epsilon = Math.abs((+doc.answerText.value - +problem.answer) / +problem.answer);
-            testOk = doc.answerText.value == problem.answer || epsilon < MAX_ERROR
+            testOk = true;
+            for (let t = 0; t <= T; t++) {
+                if (!FUN(t, this.controller.space.planets)) {
+                    testOk = false;
+                    break;
+                }
+                this.controller.space.step();
+            }
         } 
         else 
         {
-            let answer = problem.answer;            
-            let ALL = false; 
-            let T = 1000;
-
-            let match = answer.match(/([AE]):(\d+)/);
-            if (match) {
-                if (match[1] == 'A') ALL = true;
-                if (match[1] == 'E') ALL = false;
-                T = +match[2];
-                answer = problem.answer.slice(match[0].length).trim();
-            }
-                       
-            let savedScene = serialization(this.controller.space);  
-
-            const FUN = new Function('t, p', `
-                const E = (a, b, c=0.01) => Math.abs(a - b) < c;
-                return ${answer};
-            `);
-                    
-            if (ALL) 
-            {
-                testOk = true;
-                for (let t = 0; t <= T; t++) {
-                    if (!FUN(t, this.controller.space.planets)) {
-                        testOk = false;
-                        break;
-                    }
-                    this.controller.space.step();
+            testOk = false;
+            for (let t = 0; t <= T; t++) {
+                if (FUN(t, this.controller.space.planets)) {
+                    testOk = true;
+                    break;
                 }
-            } 
-            else 
-            {
-                testOk = false;
-                for (let t = 0; t <= T; t++) {
-                    if (FUN(t, this.controller.space.planets)) {
-                        testOk = true;
-                        break;
-                    }
-                    this.controller.space.step();
-                }
+                this.controller.space.step();
             }
-            this.restoreSceneFromJson(savedScene) 
-            this.controller.view.draw();
         }
+        this.restoreSceneFromJson(savedScene) 
+        this.controller.view.draw();
+    
         // show success  
         doc.checkmarkImg.style.display = testOk ? 'inline' : 'none';
         doc.crossmarkImg.style.display = testOk ? 'none' : 'inline';

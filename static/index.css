@@ -142,11 +142,6 @@ body {
     left: 0;
 }
 
-#answerText {
-    width: 100px; 
-    background-color: white;
-}
-
 #crossmark, #checkmark {
     display: none;
     width: 100px;
@@ -206,7 +201,7 @@ body {
    width: var(--canvas-width);
 } 
 
-#savedSceneArea
+.bottom-area
 {
     width: 820px;
     background-color: var(--panel-color);

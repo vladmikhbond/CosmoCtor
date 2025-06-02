@@ -11,7 +11,4 @@ export class Problem {
         this.answer = a[7].trim();
     }
 
-    get isAnswerNumber() {
-        return !isNaN(+this.answer);
-    }
 }
