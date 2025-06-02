@@ -129,7 +129,6 @@ body {
     font-family: monospace;
     font-weight: 800; 
     padding: 5px;
-    /* background-image: linear-gradient(180deg, #9adcffc7, #9adcff46 ); */
     background-color: aliceblue;
     display: none; 
     z-index: 3;
@@ -167,13 +166,6 @@ body {
     z-index: 4;
 }
 
-#sceneArea, #dataArea {
-    margin-top: 4px;
-    width: 187px;
-    width: 1000px;
-    height: 60px;
-}
-
 .board-label {
     width: 55px;
     display:inline-block;
@@ -194,17 +186,26 @@ body {
     border: none;
     background-color: #fed1ac;
     border-radius: 4px;
-    color: var(--panel-color);
+    color: black    ;
 }
 .board-button:hover {
     background-color: #f8b177;
 }
+
+.starter-button {
+    color:aliceblue;
+    vertical-align: top;
+    float: right;
+    margin-left: 10px;
+}
+
 
 /* ------------------ bottom panel ---------------- */
 .bottom-panel {
    margin-top: 4px;
    width: var(--canvas-width);
 } 
+
 #savedSceneArea
 {
     width: 820px;
@@ -215,7 +216,6 @@ body {
 .scene-btn {
     color:aliceblue;
     vertical-align: top;
-    float: right;
-    margin-left: 10px;
+    
 }
 

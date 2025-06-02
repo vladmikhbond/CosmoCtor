@@ -72,8 +72,10 @@ export default class TaskController
     //
     loadSelectedProblem() {
         let idx = +doc.sceneSelect.value;
-        this.controller.clearScene();
+        this.controller.clearSpace();
         if (idx == 0) {
+            doc.problemBoard.style.display = 'none';
+            doc.planetBoard.style.display = 'none';
             return;
         }    
         let problem = this.problems[idx];
@@ -93,7 +95,7 @@ export default class TaskController
         const space = this.controller.space;
         const view = this.controller.view;
 
-        this.controller.clearScene();
+        this.controller.clearSpace();
         if (json) {
             let o = deserialization(json);
             space.planets = o.planets;

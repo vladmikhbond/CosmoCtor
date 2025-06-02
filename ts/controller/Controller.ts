@@ -315,12 +315,11 @@ export default class Controller
         this.view.displayInfo();
     }
 
-    public clearScene() {
+    public clearSpace() {
         this.space.planets = [];
         this.space.starters = [];
         this.stopTimer();
         glo.chronos = 0;
-        doc.canvas.style.backgroundColor = 'darkblue';
         this.view.draw();
     }
 
