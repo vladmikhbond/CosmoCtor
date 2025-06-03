@@ -13,7 +13,8 @@ export default class TaskController
     {
         this.controller = controller;
         this.addEventListeners();
-        this.addProblemBoardMouseEvents()
+        this.addProblemBoardMouseEvents();
+        this.addPlanetBoardMouseEvents();
         this.loadAllProblems();
     }
 
@@ -166,16 +167,16 @@ export default class TaskController
 
     private addProblemBoardMouseEvents() {
 
-        let cursor: {x: number, y: number} | null = null;
+        let cursorPos: {x: number, y: number} | null = null;
    
         doc.problemBoard.addEventListener('mousedown', (e: MouseEvent) => {
-            cursor = {x: e.clientX, y: e.clientY}; 
+            cursorPos = {x: e.clientX, y: e.clientY}; 
         });
 
         doc.problemBoard.addEventListener('mousemove', (e: MouseEvent) => { 
-            if (cursor) {                              
-                let dx = e.clientX - cursor.x;
-                let dy = e.clientY - cursor.y;
+            if (cursorPos) {                              
+                let dx = e.clientX - cursorPos.x;
+                let dy = e.clientY - cursorPos.y;
                 let style = window.getComputedStyle(doc.problemBoard);
 
                 let left = parseFloat(style.left) + dx;
@@ -184,13 +185,46 @@ export default class TaskController
                 let top = parseFloat(style.top) + dy;
                 doc.problemBoard.style.top = top + 'px';
 
-                cursor = {x: e.clientX, y: e.clientY};
+                cursorPos = {x: e.clientX, y: e.clientY};
             }    
         });
 
         doc.problemBoard.addEventListener('mouseup', (e: MouseEvent) => {
-            cursor = null;
+            cursorPos = null;
         });
 
     }
+
+
+    private addPlanetBoardMouseEvents() {
+
+        let cursorPos: {x: number, y: number} | null = null;
+   
+        doc.planetBoard.addEventListener('mousedown', (e: MouseEvent) => {
+            cursorPos = {x: e.clientX, y: e.clientY}; 
+        });
+
+        doc.planetBoard.addEventListener('mousemove', (e: MouseEvent) => { 
+            if (cursorPos) {                              
+                let dx = e.clientX - cursorPos.x;
+                let dy = e.clientY - cursorPos.y;
+                let style = window.getComputedStyle(doc.planetBoard);
+
+                let right = parseFloat(style.right) - dx;
+                doc.planetBoard.style.right = right + 'px';
+
+                let top = parseFloat(style.top) + dy;
+                doc.planetBoard.style.top = top + 'px';
+
+                cursorPos = {x: e.clientX, y: e.clientY};
+            }    
+        });
+
+        doc.planetBoard.addEventListener('mouseup', (e: MouseEvent) => {
+            cursorPos = null;
+        });
+        
+    }
+
+
 }
