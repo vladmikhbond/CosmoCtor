@@ -41,9 +41,12 @@ export function serialization(space: Space): string
 export function deserialization(json: string): SceneData
 {
     let x: any = JSON.parse(json);
+
+    // узгоджуе старий формат деяких збережених задач -------
     if (!("planets" in x)) {
         json = `{"planets":  ${json} , "starters":[]}`;
     }
+    // ------------------------------------------------------
 
     let o: SceneData = JSON.parse(json);
     return {planets: planetsFromData(o.planets), 
