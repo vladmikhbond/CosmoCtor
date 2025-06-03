@@ -173,10 +173,10 @@ export default class View
     displaySelectedPlanetParams() {
         let planet = this.space.selectedPlanet;
         if (planet) {
-            doc.xText.value = planet.x.toFixed(5);
-            doc.yText.value = planet.y.toFixed(5);
-            doc.vxText.value = planet.vx.toFixed(5);
-            doc.vyText.value = planet.vy.toFixed(5);
+            doc.xText.value = planet.x.toFixed(3);
+            doc.yText.value = planet.y.toFixed(3);
+            doc.vxText.value = planet.vx.toFixed(3);
+            doc.vyText.value = planet.vy.toFixed(3);
 
             doc.nameText.value = planet.name;
             doc.colorText.value = planet.color;

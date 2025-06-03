@@ -164,7 +164,6 @@ export default class TaskController
     }
 
 
-
     private addProblemBoardMouseEvents() {
 
         let cursorPos: {x: number, y: number} | null = null;
@@ -195,12 +194,15 @@ export default class TaskController
 
     }
 
-
     private addPlanetBoardMouseEvents() {
 
         let cursorPos: {x: number, y: number} | null = null;
    
         doc.planetBoard.addEventListener('mousedown', (e: MouseEvent) => {
+            const target = e.target as HTMLElement;
+            if (target.tagName === 'INPUT') {
+                return;
+            }
             cursorPos = {x: e.clientX, y: e.clientY}; 
         });
 

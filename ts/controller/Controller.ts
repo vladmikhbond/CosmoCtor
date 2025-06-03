@@ -117,7 +117,7 @@ export default class Controller
                 } else {
                     let starter = this.space.getStarterByPlanetName(this.space.selectedPlanet.name);
                     if (starter) {
-                        doc.velo.value = starter.velo.toFixed(0);
+                        doc.velo.value = starter.velo.toFixed(3);
                         doc.interval1.value = (starter.startStep - glo.chronos).toFixed(0);
                     }
                     doc.rocketBoard.style.display = 'block';
