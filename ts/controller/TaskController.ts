@@ -129,7 +129,7 @@ export default class TaskController
         let savedScene = serialization(this.controller.space);  
 
         const FUN = new Function('t, p', `
-            const E = (a, b, c=0.01) => Math.abs(a - b) < c;
+            const $ = (a, b, c=0.01) => Math.abs(a - b) < c;
             return ${answer};
         `);
                 

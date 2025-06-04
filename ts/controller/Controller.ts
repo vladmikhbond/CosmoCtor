@@ -106,6 +106,11 @@ export default class Controller
             this.view.draw();
         });
 
+                // help
+        doc.helpButton.addEventListener("click", () => {
+            window.open("help.html");            
+        });
+
     }
     
     private bindStarterEvents() {       
