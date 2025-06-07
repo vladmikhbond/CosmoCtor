@@ -130,15 +130,21 @@ export default class View
     } 
 
     drawSelectedPlanet(p: Planet) {
-        // gray rectangle
-        this.ctx.strokeStyle = 'gray';
-        let r = p.r + 5;
-        this.ctx.strokeRect(p.x - r, p.y - r, r * 2, r * 2)
+        
+        let r = (p.r + 5) / glo.scale**0.5;  // щоб планета не виглядала дуже малою
+        this.ctx.save();
+        this.ctx.strokeStyle = 'lightgray';
+        this.ctx.lineWidth = 2 ;
+        this.ctx.beginPath()
+        this.ctx.moveTo(p.x + r, p.y);
+        this.ctx.arc(p.x, p.y, r, 0, 2 * Math.PI)
+        this.ctx.stroke();
+        this.ctx.restore();
         // planet
         this.drawPlanet(p, true, this.trackMode);        
     } 
 
-    drawCursorCoords(point: {x: number; y: number}, gx: number, gy: number) {
+    displayCursorCoords(point: {x: number; y: number}, gx: number, gy: number) {
         let g = Math.sqrt(gx**2 + gy**2);  
         doc.mousePosSpan.innerHTML = `x: ${point.x.toFixed(2)}   y: ${point.y.toFixed(2)}`;
              // +` |  gx: ${gx.toFixed(4)}   gy: ${gy.toFixed(4)}  g: ${g.toFixed(4)}`
@@ -162,13 +168,13 @@ export default class View
     }
 
 
-    displayInfo() 
+    displayTime_n_Number() 
     {
         doc.infoSpan.innerHTML = 
            `T=${glo.chronos} &nbsp; N=${this.space.planets.length}`;      
     }
 
-    // display to panelBoard
+    // display planetBoard for selected planet
     //
     displaySelectedPlanetParams() {
         let planet = this.space.selectedPlanet;

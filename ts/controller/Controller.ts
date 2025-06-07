@@ -71,7 +71,7 @@ export default class Controller
         doc.stepButton.addEventListener('click', () => {
             this.stopTimer(); 
             this.step();
-            this.view.displayInfo();
+            this.view.displayTime_n_Number();
         });
             
         // trackButton
@@ -225,7 +225,7 @@ export default class Controller
 
                 let [gx, gy] = this.space.graviTension(point);
                 this.view.draw();
-                this.view.drawCursorCoords(point, gx, gy);
+                this.view.displayCursorCoords(point, gx, gy);
                 //this.view.drawGraviTension(point, gx, gy);
                 
 
@@ -299,7 +299,7 @@ export default class Controller
 
         // display info 
         if (glo.chronos % View.DISPLAY_INTERVAL == 0) {
-            this.view.displayInfo();
+            this.view.displayTime_n_Number();
             this.view.displaySelectedPlanetParams();
         }
     }
@@ -317,7 +317,7 @@ export default class Controller
         this.stepTimer = 0;
         // '►'
         (doc.runButton.children[0] as HTMLImageElement).src = "static/assets/icons/play-fill.svg";
-        this.view.displayInfo();
+        this.view.displayTime_n_Number();
     }
 
     public clearSpace() {

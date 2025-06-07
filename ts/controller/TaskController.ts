@@ -104,7 +104,7 @@ export default class TaskController
         this.controller.stopTimer();
         glo.chronos = 0;
         view.draw();
-        view.displayInfo();
+        view.displayTime_n_Number();
     }
  
 
